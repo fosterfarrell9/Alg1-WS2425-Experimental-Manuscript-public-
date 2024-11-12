@@ -1,0 +1,1975 @@
+\RequirePackage{hyphsubst}%
+\HyphSubstIfExists{ngerman-x-latest}{\HyphSubstLet{ngerman}{ngerman-x-latest}}{} 
+\listfiles
+\documentclass[a4paper, twoside, 11pt, ngerman]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amssymb, amsthm, eucal, dsfont, stmaryrd, mathtools, arcs, longtable}
+\usepackage{xpatch}
+\makeatletter
+\providecommand\@gobblethree[3]{}
+\xpatchcmd{\over@under@arc}
+          {\let \rs@size@warning = \@gobbletwo}
+          {\let\rs@size@warning\@gobblethree}
+          {}{}
+\makeatother
+\usepackage[all, cmtip]{xy}
+\usepackage{mathpazo, courier}
+\usepackage[scaled=.95]{helvet}
+\usepackage[greek, german]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{color, graphicx, float, parskip, enumitem}
+\usepackage{fancyhdr, titlesec}
+%\usepackage[on,german]{mampf}
+%\setmampfurl{https://mampf.mathi.uni-heidelberg.de}
+
+\sloppy
+\allowdisplaybreaks
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Optik
+\renewcommand{\thechapter}{\Roman{chapter}}
+\renewcommand{\thesection}{\arabic{section}}
+
+
+\usepackage{titlesec}
+
+% Customize section title format to include "§" symbol only in headers
+\titleformat{\section}
+  {\normalfont\Large\bfseries} % Section title style
+  {\S\thesection}              % Display format for section number with "§"
+  {1em}                        % Spacing between number and title
+  {}
+
+\pagestyle{fancy}
+
+\setlength{\marginparwidth}{1.7cm}
+\setlength{\hoffset}{0cm}
+\setlength{\headwidth}{16cm}
+\setlength{\headheight}{0.6cm}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\textwidth}{16cm}
+\setlength{\textheight}{21.5cm}
+
+\fancyhf{}
+\fancyhead[RE,LO]{\textbf{\thepage}}
+\fancyhead[RO]{\nouppercase{\sf \leftmark}}
+\fancyhead[LE]{\nouppercase{\sf \rightmark}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{8pt plus 2pt minus 2pt}
+\setlength{\listparindent}{\parindent}
+
+\titleformat{\chapter}[display]
+  {\sffamily\bfseries\Large}
+  {\filleft\MakeUppercase{\chaptertitlename} \huge\thechapter}
+  {4ex}
+  {\titlerule
+   \vspace{2ex}%
+   \filright}
+  [\vspace{2ex}%
+   \titlerule]
+\titleformat*{\section}{\sffamily \large \bfseries}
+\titleformat{\subsection}{\sffamily \bfseries}{\thesubsection}{1em}{}
+
+\RequirePackage{hyperref}
+\definecolor{ochsenblut}{rgb}{0.56,0.06,0.08}
+\hypersetup{
+colorlinks=true,
+linkcolor=ochsenblut,
+citecolor=ochsenblut,
+urlcolor=ochsenblut,
+plainpages=false,}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Buchstaben
+
+\renewcommand{\AA}{\mathds A}
+\newcommand{\BB}{\mathds B}
+\newcommand{\CC}{\mathds C}
+\newcommand{\DD}{\mathds D}
+\newcommand{\EE}{\mathds E}
+\newcommand{\FF}{\mathds F}
+\newcommand{\GG}{\mathds G}
+\newcommand{\HH}{\mathds H}
+\newcommand{\KK}{\mathds K}
+\newcommand{\MM}{\mathds M}
+\newcommand{\NN}{\mathds N}
+\newcommand{\PP}{\mathds P}
+\newcommand{\QQ}{\mathds Q}
+\newcommand{\RR}{\mathds R}
+\renewcommand{\SS}{\mathds S}
+\newcommand{\WW}{\mathds W}
+\newcommand{\ZZ}{\mathds Z}
+
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\bfP}{\mathbf{P}}
+\newcommand{\bfS}{\mathbf{S}}
+\newcommand{\bfW}{\mathbf{W}}
+
+\newcommand{\calA}{\mathcal A}
+\newcommand{\calB}{\mathcal B}
+\newcommand{\calC}{\mathcal C}
+\newcommand{\calD}{\mathcal D}
+\newcommand{\calE}{\mathcal E}
+\newcommand{\calF}{\mathcal F}
+\newcommand{\calG}{\mathcal G}
+\newcommand{\calH}{\mathcal H}
+\newcommand{\calK}{\mathcal K}
+\newcommand{\calL}{\mathcal L}
+\newcommand{\calM}{\mathcal M}
+\newcommand{\calO}{\mathcal O}
+\newcommand{\calP}{\mathcal P}
+\newcommand{\calR}{\mathcal R}
+\newcommand{\calS}{\mathcal S}
+\newcommand{\calT}{\mathcal T}
+\newcommand{\calU}{\mathcal U}
+\newcommand{\calV}{\mathcal V}
+\newcommand{\calW}{\mathcal W}
+
+\newcommand{\fraka}{\mathfrak a}
+\newcommand{\frakb}{\mathfrak b}
+\newcommand{\frakA}{\mathfrak A}
+\newcommand{\frakd}{\mathfrak d}
+\newcommand{\frakf}{\mathfrak f}
+\newcommand{\frakg}{\mathfrak g}
+\newcommand{\frakm}{\mathfrak m}
+\newcommand{\frakp}{\mathfrak p}
+\newcommand{\frakM}{\mathfrak M}
+\newcommand{\frakN}{\mathfrak N}
+\newcommand{\frakS}{\mathfrak S}
+\newcommand{\frakU}{\mathfrak U}
+
+\renewcommand{\setminus}{\smallsetminus}
+
+%Neue Operatoren
+
+\DeclareMathOperator{\Aff}{Aff}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Bew}{Bew}
+\DeclareMathOperator{\Bild}{Bild}
+\DeclareMathOperator{\charpoly}{charpoly}
+\DeclareMathOperator{\charact}{char}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\diff}{d\!}
+\DeclareMathOperator{\Diff}{Diff}
+\DeclareMathOperator{\Div}{Div}
+\DeclareMathOperator{\DV}{DV}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\ggT}{ggT}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\ident}{id}
+\DeclareMathOperator{\image}{im}
+\DeclareMathOperator{\intern}{int}
+\DeclareMathOperator{\kgV}{kgV}
+\DeclareMathOperator{\mdeg}{mdeg}
+\DeclareMathOperator{\Orb}{Orb}
+\DeclareMathOperator{\Orth}{O}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\pr}{pr}
+\DeclareMathOperator{\Quot}{Quot}
+\DeclareMathOperator{\rel}{\, rel}
+\DeclareMathOperator{\res}{res}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\TV}{TV}
+\DeclareMathOperator{\vol}{vol}
+\renewcommand{\Re}{\textup{Re}}
+\renewcommand{\Im}{\textup{Im}}
+\renewcommand{\cap}{\;\rotatebox{90}{\reflectbox{\rotatebox{270}{$\cup$}}}\;}
+
+
+\newcommand{\teilt}{\mid}
+\newcommand{\kongruent}{\equiv}
+\newcommand{\dom}{\backslash}
+\newcommand{\gdw}{\Longleftrightarrow}
+\newcommand{\folgt}{\Longrightarrow}
+\newcommand{\formal}[2]{#1 [\![ #2 ]\!]}
+\newcommand{\bigcupdot}[2]{\mbox{$\hspace{0.95em} \cdot \hspace{-0.95em} \bigcup \limits_{#1}^{#2}$}}
+\DeclareMathOperator{\dotcup}{\ensuremath{\mathaccent\cdot\cup}}
+\DeclareMathOperator{\Indexpunkte}{\,:\,}
+\newcommand{\mathindex}[2]{\bigl[ #1 \Indexpunkte #2 \bigr]}
+\newcommand{\qrs}[2]{\genfrac{(}{)}{}{}{#1}{#2}}
+\newcommand{\Moebius}[2]{#1\langle#2\rangle}
+\newcommand{\kreuz}[2]{\sideset{_{#1\!}}{_{\!#2}}{\mathop{\times}}}
+\newcommand{\lang}[1]{\ensuremath{\left|#1\right|_e}}
+\newcommand{\scp}[2]{\langle #1 \mid #2 \rangle}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\makeatletter
+\newcommand{\overleftrightsmallarrow}{\mathpalette{\overarrowsmall@\leftrightarrowfill@}}
+\newcommand{\overrightsmallarrow}{\mathpalette{\overarrowsmall@\rightarrowfill@}}
+\newcommand{\overleftsmallarrow}{\mathpalette{\overarrowsmall@\leftarrowfill@}}
+\newcommand{\overarrowsmall@}[3]{%
+  \vbox{%
+    \ialign{%
+      ##\crcr
+      #1{\smaller@style{#2}}\crcr
+      \noalign{\nointerlineskip}%
+      $\m@th\hfil#2#3\hfil$\crcr
+    }%
+  }%
+}
+\def\smaller@style#1{%
+  \ifx#1\displaystyle\scriptstyle\else
+    \ifx#1\textstyle\scriptstyle\else
+      \scriptscriptstyle
+    \fi
+  \fi
+}
+\makeatother
+
+\newcommand{\disjointunion}{\dot{\cup}}
+\newcommand{\bigdisjointunion}{\dot{\bigcup}}
+
+
+%Neue Umgebungen und Theoreme
+
+\newtheoremstyle{definistyle}{8pt plus 2pt minus 2pt}{8pt plus 2pt minus 2pt}{\itshape}{}{\bfseries}{.}{.5em}{}
+\theoremstyle{definistyle}
+\newtheorem{satz}{Satz}[section]
+\newtheorem{lemm}[satz]{Lemma}
+\newtheorem{defini}[satz]{Definition}
+\newtheorem{prop}[satz]{Proposition}
+\newtheorem{bem}[satz]{Bemerkung}
+\newtheorem{anm}[satz]{Anmerkung}
+\newtheorem{folgerung}[satz]{Folgerung}
+\newtheorem{bsp}[satz]{Beispiel}
+\theoremstyle{remark}
+\newtheorem*{notation}{Notation}
+% \usepackage{chngcntr}
+% \counterwithin*{section}{chapter}
+
+% % Theorem numbering by section only
+% \numberwithin{satz}{section}
+
+\newenvironment{citetheorem}[1]%
+	{\par{\bf #1 \nopagebreak}\it}%
+	{\par}
+
+\newenvironment{Teilaufgaben}%
+  {\begin{enumerate}[label=\textup{(\alph*)}, align=left, leftmargin=*, itemsep=0em]}%
+  {\end{enumerate}}
+
+\newenvironment{Aufzaehlung}%
+  {\begin{enumerate}[label=\textup{(\roman*)}, align=left, leftmargin=*, itemsep=0em]}%
+  {\end{enumerate}}
+	
+\newenvironment{Axiome}%
+  {\begin{itemize}[label=(AB), align=left, leftmargin=*, listparindent=0em, itemsep=0em]}%
+  {\end{itemize}}
+  
+\newenvironment{denn}%
+  {\par\textit{denn:}}%
+  {\hfill\#\par}
+  
+\newcommand{\defn}[1]{\textit{\bfseries #1}}
+\newcommand{\idefn}[1]{\textit{\bfseries #1}\index{#1}}
+
+%Bib-Tex Struktur
+
+%Titel
+
+\title{\sffamily {\Huge Algebra 1}\\[1em]
+Wintersemester 2024/25\\[1em]
+(Experimentelles) Vorlesungsskript}
+\author{\sffamily Dr. Denis Vogel}
+\date{\sffamily \today}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+\addtocounter{page}{1}
+\titlepage
+
+\newpage
+\section*{Vorbemerkung}
+Dieses Vorlesungsskript hat experimentellen Charakter. Es entsteht dadurch, dass ChatGPT meine
+handschriftlichen Notizen in \LaTeX überträgt und diese in einen Text umwandelt, der Merkmale meiner eigenen Texte aufweist, die ich der KI antrainiert habe. Ich lese den Text gegen, überarbeite ihn und entferne insbesondere gröberen Unfug. Nichtsdesotrotz ist die Wahrscheinlichkeit hoch, dasss noch viele Fehler drin sind. Diese können Sie mir gerne per Mail melden. Die offizielle Referenz für die Vorlesung ist und bleibt für den Moment der handschriftliche Aufschrieb aus der Vorlesung.
+
+Bedanken möchte ich mich bei den Personen, die in den letzten Jahren viel Feedback zu meinem handschriftlichen Skript gegeben haben. Namentlich sei hier insbesondere Luka Thom\'{e} erwähnt,
+der hartnäckig sehr viele Neuerungen angeregt hat, die im Lauf der Zeit Eingang in das Skript gefunden haben.
+\newpage
+
+\tableofcontents
+
+\chapter{Elementare Gruppentheorie}
+\section{Monoide und Gruppen}
+
+\begin{defini}[Monoid]\label{def:monoid}
+Ein \defn{Monoid} ist ein Tupel $ (M, \cdot) $, bestehend aus einer Menge $ M $ und einer Verknüpfung $ \cdot $
+\[
+\cdot : M \times M \rightarrow M, \quad (a, b) \mapsto a \cdot b
+\]
+sodass gilt:
+\begin{itemize}
+    \item[(M1)] \textbf{Assoziativität:} $ (a \cdot b) \cdot c = a \cdot (b \cdot c) $ für alle $ a, b, c \in M $.
+    \item[(M2)] \textbf{Existenz eines neutralen Elements:} Es existiert ein $ e \in M $, sodass
+    \[
+    e \cdot m = m = m \cdot e \quad \text{für alle } m \in M.
+    \]
+\end{itemize}
+Ein Monoid $ (M, \cdot) $ heißt \defn{kommutativ}, falls für alle $ a, b \in M $ gilt: $ a \cdot b = b \cdot a $.
+\end{defini}
+
+\begin{anm}\label{anm:monoid_notation}
+Wir werden im Folgenden meistens kurz „$ M $ Monoid” statt „$ (M, \cdot) $ Monoid” schreiben und für $ a \cdot b $ häufig nur $ ab $.
+\end{anm}
+
+\begin{bsp}\label{bsp:monoid_beispiele}
+\begin{enumerate}
+    \item[(a)] $ (\NN_0, +) $ ist ein Monoid mit neutralem Element $ 0 $. Wenn wir im Folgenden von „dem Monoid $ \NN_0 $” sprechen, ist dieses gemeint.
+    \item[(b)] $ (\ZZ, +) $, $ (\ZZ, \cdot) $ sind Monoide.
+    \item[(c)] Ist $ X $ eine Menge, dann ist $\operatorname{Abb}(X, X) $ ist Monoid bzgl. „$\circ$”.
+\end{enumerate}
+\end{bsp}
+
+\begin{bem}\label{bem:eindeutiges_neutrales_element}
+$ M $ Monoid. Dann gibt es in $ M $ genau ein neutrales Element.
+\end{bem}
+
+\begin{proof}
+Angenommen, es gibt zwei neutrale Elemente $ e $ und $ e' $ in $ M $. Da $ e $ neutral ist, muss gelten $ e \cdot e' = e' $. Andererseits ist auch $ e' $ neutral, also gilt $ e \cdot e' = e $. Daher folgt $ e = e' $, was zeigt, dass das neutrale Element in $ M $ eindeutig ist.
+\end{proof}
+
+
+\begin{anm}\label{anm:neutrales_element}
+Das nach \ref{bem:eindeutiges_neutrales_element} eindeutig bestimmte neutrale Element eines Monoids $ M $ bezeichnen wir im Folgenden meist mit $ e $ oder $ e_M $.
+\end{anm}
+
+\begin{defini}[Inverses]\label{def:inverses}
+$M$ Monoid, $ a \in M $.\\
+Ein Element $ b \in M $ heißt ein \defn{Inverses} zu $ a $, wenn gilt:
+\[
+a \cdot b = e = b \cdot a.
+\]
+\end{defini}
+
+\begin{bem}\label{bem:eindeutiges_inverses}
+$ M $ Monoid, $ a \in M $. Dann gilt: Besitzt $ a $ ein Inverses, so ist dieses eindeutig bestimmt.\\
+Wir bezeichnen dies im Folgenden mit $ a^{-1} $ und nennen dann $ a $ \defn{invertierbar}.
+\end{bem}
+
+\begin{proof}
+Angenommen, $ a $ besitzt zwei Inverse, $ b $ und $\tilde b$. Dann erhalten wir
+\[
+b = e \cdot b = (\tilde b \cdot a)\cdot b = \tilde b\cdot ( a\cdot b) = \tilde b \cdot e = \tilde b.
+\]
+\end{proof}
+
+
+\begin{defini}[Selbstinverses Element]\label{def:selbstinvers}
+Sei $ M $ ein Monoid und $ a $ ein Element von $ M $. Das Element $ a $ heißt \defn{selbstinvers} (auch als involutorisch oder Involution bezeichnet), wenn das Produkt $ a \cdot a $ das neutrale Element $ e $ von $ M $ ergibt, das heißt, wenn die Gleichung $ a \cdot a = e $ erfüllt ist.
+\end{defini}
+
+
+\begin{bsp}\label{bsp:invertierbar_involutorisch}
+\begin{itemize}
+    \item[(a)] $ X $ Menge. Es ist $ f \in \operatorname{Abb}(X, X) $ genau dann invertierbar, wenn $ f $ bijektiv ist.
+    \item[(b)] Achsenspiegelungen im $ \mathbb{R}^2 $ sind Involutionen in $ \operatorname{Abb}(\mathbb{R}^2, \mathbb{R}^2) $.
+\end{itemize}
+\end{bsp}
+
+\begin{bem}\label{bem:invertierbare_elemente}
+Sei $ M $ ein Monoid und seien $ a, b \in M $ invertierbare Elemente. Dann gilt:
+\begin{itemize}
+    \item[(a)] Das neutrale Element $ e $ von $ M $ ist invertierbar und es gilt $ e^{-1} = e $.
+    \item[(b)] Das Inverse $a^{-1}$ von $ a $ ist invertierbar und es ist $(a^{-1})^{-1} = a $.
+    \item[(c)] (Regel von Hemd und Jacke) Das Produkt $ a \cdot b $ ist invertierbar, und sein Inverses ist gegeben durch $ (a \cdot b)^{-1} = b^{-1} \cdot a^{-1} $.
+\end{itemize}
+\end{bem}
+
+\begin{proof}
+\begin{itemize}
+    \item[(a)] Die Gleichung $ e \cdot e = e $ zeigt, dass $ e $ sich selbst als Inverses hat.
+    \item[(b)] Aus $ a \cdot a^{-1} = e $ und $ a^{-1} \cdot a = e $ folgt mit \ref{bem:eindeutiges_inverses}, dass $ (a^{-1})^{-1} = a $ ist.
+    \item[(c)] Wir berechnen
+    \[
+    (b^{-1} \cdot a^{-1}) \cdot (a \cdot b) = b^{-1} \cdot (a^{-1} \cdot a) \cdot b = b^{-1} \cdot e \cdot b = b^{-1} \cdot b = e = \ldots (a\cdot b)\cdot(b^{-1}\cdot a^{-1}).
+    \]
+    Damit ist gezeigt, dass $ a \cdot b $ invertierbar ist und sein Inverses $ b^{-1} \cdot a^{-1} $ ist.
+\end{itemize}
+\end{proof}
+
+
+\begin{defini}[Gruppe]\label{def:gruppe}
+Eine \defn{Gruppe} ist ein Monoid $ M $, in dem jedes Element ein Inverses besitzt.\\
+Ist $ M $ zusätzlich kommutativ, so sprechen wir von einer \defn{abelschen Gruppe}.
+\end{defini}
+
+\begin{bem}\label{bem:einheitengruppe}
+Sei $ M $ ein Monoid. Dann ist die Menge
+\[
+M^{\times} := \{ a \in M \mid a \text{ ist invertierbar} \}
+\]
+eine Gruppe bezüglich der von $M$ eingeschränkten Verknüpfung, die \defn{Einheitengruppe} von $ M $.
+\end{bem}
+
+
+\begin{proof}
+Seien $ a, b \in M^{\times} $. Nach \ref{bem:invertierbare_elemente} (c) ist auch $ a \cdot b $ invertierbar mit $(a \cdot b)^{-1} = b^{-1} \cdot a^{-1}$. Somit liegt $ a \cdot b $ in $ M^{\times} $, und die Verknüpfung auf $M^\times$ ist wohldefiniert. Die Assoziativität der Verknüpfung auf $M$ überträgt sich auf $ M^{\times} $. Das neutrale Element $ e $ von $ M $ liegt nach \ref{bem:invertierbare_elemente} (a) auch in $ M^{\times} $ und fungiert dort als neutrales Element.
+Zum Schluss zeigen wir, dass jedes Element $a\in M^{\times} $ ein Inverses in $M^\times$ besitzt. In $M$ besitzt $a$ das Inverse $ a^{-1}\in M$. Nach \ref{bem:invertierbare_elemente} (b) liegt $ a^{-1} $ in $ M^{\times} $ und fungiert dort ebenfalls als Inverses von $a$.
+\end{proof}
+
+
+\begin{bsp}\label{bsp:einheitengruppe_weiter}
+\begin{itemize}
+    \item[(a)] $ (\NN_0, +)^{\times} = \{ 0 \} $
+    \item[(b)] $ (\ZZ, +)^{\times} = \{ \pm 1 \} $
+    \item[(c)] $ (\ZZ, +) $ ist eine abelsche Gruppe. Wenn wir in diesem Kapitel von „der Gruppe $\ZZ$” sprechen, so ist diese gemeint.
+    \item[(d)] Ist $ R $ Ring, dann ist $ (M_{n \times n}(R), \cdot)^{\times} = \operatorname{GL}_n(R) $ (\defn{allgemeine lineare Gruppe}).
+    \item[(e)] Sei $ M $ eine Menge. Dann heißt
+    \[ S(M) := \operatorname{Abb}(M, M)^{\times} := \{ f: M \to M \mid f \text{ bijektiv} \} \] die \defn{symmetrische Gruppe} auf $ M $. $ S(M) $ ist nichtabelsch für $ |M| \geq 3 $. Wir setzen
+\[
+S_n := S(\{ 1, \dots, n \}) \quad \text{für } n \in \NN
+\]
+$ \pi \in S_n $ kann man explizit durch Angabe der Bilder $ \pi(1), \dots, \pi(n) $ beschreiben:
+\[
+\begin{pmatrix} 1 & 2 & \cdots & n \\ \pi(1) & \pi(2) & \cdots & \pi(n) \end{pmatrix}
+\]
+Alternative: Zyklenschreibweise (vgl. Übungen)
+\end{itemize}
+\end{bsp}
+
+\begin{defini}\label{def:monoidhom}
+Seien $ M $ und $ N $ Monoide und $ \varphi: M \to N $ eine Abbildung.\\
+Dann heißt $ \varphi $ ein \defn{Monoidhomomorphismus}, falls gilt:
+\[
+\varphi(e_M) = e_N \quad \text{und} \quad \varphi(a \cdot b) = \varphi(a) \cdot \varphi(b) \quad \text{für alle } a, b \in M.
+\]
+Sind $ G $ und $ H $ Gruppen und $ \varphi: G \to H $ eine Abbildung, so heißt $ \varphi $ ein \defn{Gruppenhomomorphismus}, wenn $\varphi$ ein Monoidhomomorphismus der Monoide $G$, $H$ ist.
+\end{defini}
+
+
+\begin{bem}\label{bem:gruppenhom_aequiv}
+Seien $ G $, $ H $ Gruppen und $ \varphi: G \to H $ eine Abbildung. Dann sind folgende Aussagen äquivalent:
+\begin{itemize}
+    \item[(i)] $ \varphi $ ist ein Gruppenhomomorphismus.
+    \item[(ii)] Für alle $ a, b \in G $ gilt $ \varphi(a \cdot b) = \varphi(a) \cdot \varphi(b) $.
+\end{itemize}
+Insbesondere erfüllt jeder Gruppenhomomorphismus automatisch $ \varphi(e_G) = e_H $.
+\end{bem}
+
+\begin{proof}
+\textit{(i) $\Rightarrow$ (ii):} Diese Implikation ist trivial.
+
+\textit{(ii) $\Rightarrow$ (i):} Es gelte (ii). Dann zeigt 
+\[
+\varphi(e_G) = \varphi(e_G \cdot e_G) = \varphi(e_G) \cdot \varphi(e_G),
+\]
+dass $\varphi(e_G) = e_H$ ist. Somit ist $ \varphi $ ein Gruppenhomomorphismus.
+\end{proof}
+
+
+
+\begin{bsp}\label{bsp:gruppenhom_beispiele}
+\begin{itemize}
+    \item[(a)] $ \exp: (\mathbb{R}, +) \to (\mathbb{R}_{>0}, \cdot) $ ist ein Gruppenhomomorphismus wegen \[\exp(a + b) = \exp(a) \exp(b) \] für alle $ a, b \in \mathbb{R} $.
+    \item[(b)] $ \operatorname{sgn}: S_n \to \{ \pm 1 \} $ ist ein Gruppenhomomomorphismus wegen \[\operatorname{sgn}(\sigma \circ \tau) = \operatorname{sgn}(\sigma) \cdot \operatorname{sgn}(\tau) \] für alle $ \sigma, \tau \in S_n $.
+\end{itemize}
+\end{bsp}
+
+\begin{bem}\label{bem:gruppenhom_universelle_eigenschaft}
+$ M, N $ Monoide, $ \varphi: M \to N $ Monoidhom. Dann gilt:
+\begin{itemize}
+    \item[(a)] Für alle $ a \in M^{\times} $ ist $ \varphi(a) \in N^{\times} $ und $ \varphi(a)^{-1} = \varphi(a^{-1}) $.
+    \item[(b)] $ \varphi $ induziert (durch Einschränkung) einen Gruppenhomomorphismus $ \varphi|_{M^{\times}}^{N^{\times}}: M^{\times} \to N^{\times} $.
+    \item[(c)] (Universelle Eigenschaft der Einheitengruppe) Ist $ G $ eine Gruppe, so schränkt sich jeder Monoidhomomorphismus $ \psi: G \to N $ zu einem Gruppenhomomorphismus $\psi|^{N^{\times}}\colon G\to N^{\times}$ ein. 
+\end{itemize}
+Insbesondere erfüllt jeder Gruppenhomomorphismus $ \varphi: G \to H $ automatisch $ \varphi(a^{-1}) = \varphi(a)^{-1} $ für alle $ a \in G $.
+\end{bem}
+
+\begin{proof}
+\begin{itemize}
+    \item[(a)] Es ist \[\varphi(a^{-1}) \varphi(a) = \varphi(a^{-1} \cdot a) = \varphi(e_M) = e_N=\varphi(a)\varphi(a^{-1}),\] also ist $\varphi(a)^{-1} = \varphi(a^{-1})$.
+    \item[(b)] folgt direkt aus (a)
+    \item[(c)] folgt aus (b) mit $M=G$.
+\end{itemize}
+\end{proof}
+
+
+\begin{defini}\label{def:monoid_endo_und_automorphismus}
+Seien $ M $ und $ N $ Monoide und $ \varphi: M \to N $ ein Monoidhomomorphismus.
+\begin{itemize}
+    \item $ \varphi $ heißt ein \defn{Monoid-Endomorphismus}, wenn $ M = N $ ist.
+    \item $ \varphi $ heißt ein \defn{Monoid-Isomorphismus}, wenn es einen Monoidhomomorphismus $ \psi: N \to M $ gibt, sodass $ \psi \circ \varphi = \operatorname{id}_M $ und $ \varphi \circ \psi = \operatorname{id}_N $ ist. In diesem Fall nennen wir $ M $ und $ N $ isomorph und schreiben $ M \cong N $ schreiben.
+    \item $ \varphi $ heißt ein \defn{Monoid-Automorphismus}, wenn $ \varphi $ sowohl ein Endomorphismus als auch ein Isomorphismus ist.
+\end{itemize}
+Die Menge der Endomorphismen von $ M $ wird mit $ \operatorname{End}(M) $ bezeichnet und bildet ein Monoid bezüglich der Verknüpfung $ \circ $. Die Menge der Automorphismen von $ M $ wird mit $ \operatorname{Aut}(M) $ bezeichnet und bildet eine Gruppe bezüglich $ \circ $. 
+
+Analoge Bezeichnungen kann man für Gruppenhomorphismen einführen.
+\end{defini}
+
+
+\begin{anm}\label{anm:verknuepfung_isomorph}
+\begin{itemize}
+\item Die Verknüpfung von zwei Isomorphismen ist wieder ein Isomorphismus.  
+\item Es ist $\operatorname{Aut}(M) = \operatorname{End}(M)^{\times}.$
+\end{itemize}
+\end{anm}
+
+
+\begin{bem}\label{bem:isomorph_bijektiv}
+Seien $ M $ und $ N $ Monoide und $ \varphi: M \to N $ ein Monoidhomomorphismus. Dann sind die folgenden Aussagen äquivalent:
+\begin{itemize}
+    \item[(i)] $ \varphi $ ist ein Isomorphismus.
+    \item[(ii)] $ \varphi $ ist bijektiv.
+\end{itemize}
+\end{bem}
+
+\begin{proof}
+Wir zeigen zunächst die Implikation von (i) nach (ii). Angenommen, $ \varphi $ ist ein Isomorphismus. Dann gibt es einen Monoidhomomorphismus $ \psi: N \to M $ mit $ \psi \circ \varphi = \operatorname{id}_M $ und $ \varphi \circ \psi = \operatorname{id}_N $. Diese Eigenschaft impliziert, dass $ \varphi $ bijektiv ist.
+
+Umgekehrt nehmen wir nun an, dass $ \varphi $ bijektiv ist und zeigen, dass $ \varphi $ dann ein Isomorphismus ist. Da $ \varphi $ bijektiv ist, existiert eine Abbildung von Mengen $ \psi: N \to M $, sodass $ \psi \circ \varphi = \operatorname{id}_M $ und $ \varphi \circ \psi = \operatorname{id}_N $. Es bleibt zu zeigen, dass $ \psi $ ebenfalls ein Homomorphismus ist.
+
+Seien dazu $ a, b \in N $. Da $ \varphi $ bijektiv ist, existieren eindeutig bestimmte Elemente $ \tilde{a}, \tilde{b} \in M $ mit $ a = \varphi(\tilde{a}) $ und $ b = \varphi(\tilde{b}) $. Dann folgt:
+\[
+\psi(a \cdot b) = \psi(\varphi(\tilde{a}) \cdot \varphi(\tilde{b})) = \psi(\varphi(\tilde{a} \cdot \tilde{b})) = \tilde{a} \cdot \tilde{b} = \psi(a) \cdot \psi(b).
+\]
+Somit ist $ \psi $ ein Homomorphismus. Außerdem gilt $ \psi(e_N) = e_M $, da $ \varphi(e_M) = e_N $ ist.
+\end{proof}
+
+
+\begin{satz}[Universelle Eigenschaft des Monoids $\mathbb{N}_0$ und der Gruppe $\mathbb{Z}$]\label{satz:universelle_eigenschaft_z}
+\begin{itemize}
+    \item[(a)] Für jedes Monoid $M$ und jedes $x \in M$ gibt es genau einen Monoidhomomorphismus 
+    \[
+    \varphi_x: \mathbb{N}_0 \to M \quad \text{mit} \quad \varphi_x(1) = x.
+    \]
+    Dieser ist explizit gegeben durch $\varphi_x(n) := x^n$ mit
+    \[
+    x^n := 
+    \begin{cases} 
+      e & \text{für } n = 0, \\[10pt]
+      \underbrace{x \cdot \ldots \cdot x}_{\text{$n$-mal}} & \text{für } n > 0 
+    \end{cases}
+    \]
+    
+    \item[(b)] Für jede Gruppe $G$ und jedes $x \in G$ gibt es genau einen Gruppenhomomorphismus 
+    \[
+    \varphi_x: \mathbb{Z} \to G \quad \text{mit} \quad \varphi_x(1) = x.
+    \]
+    Dieser ist explizit gegeben durch $\varphi_x(n) := x^n$ mit
+    \[
+    x^n := 
+    \begin{cases} 
+      e & \text{für } n = 0, \\[10pt]
+      \underbrace{x \cdot \ldots \cdot x}_{\text{$n$-mal}} & \text{für } n > 0, \\[10pt]
+      \underbrace{x^{-1} \cdot \ldots \cdot x^{-1}}_{\text{($-n$)-mal}} & \text{für } n < 0 
+    \end{cases}
+    \]
+\end{itemize}
+\end{satz}
+
+
+
+
+\begin{proof}
+(a) \textbf{Existenz}: Die Abbildung $\varphi_x: \mathbb{N}_0 \to M$, definiert durch $n \mapsto x^n$, ist ein Monoidhomomorphismus mit $\varphi_x(1) = x$ wegen $\varphi_x(0)=e$ und
+\[\varphi_x(n + m) = x^{n+m} = x^n \cdot x^m = \varphi_x(n) \cdot \varphi_x(m)\]
+für alle $n, m \in \mathbb{N}_0$.
+
+\textbf{Eindeutigkeit}: Sei $\psi: \mathbb{N}_0 \to M$ ein Monoidhomomorphismus mit $\psi(1) = x$. Per Definition gilt $\psi(0) = e$. Für $n \in \mathbb{N}$ erhalten wir, dass \[\psi(n) = \psi(1 + \cdots + 1) = \psi(1)^n = x^n = \varphi_x(n)\] ist, womit die Eindeutigkeit gezeigt ist.
+
+(b) \textbf{Existenz}: Man kann nachrechnen, dass  $\varphi_x(n + m) = \varphi_x(n) \cdot \varphi_x(m)$ für alle $n, m \in \mathbb{Z}$ gilt, insbesondere ist $\varphi_x$ ein Gruppenhomomorphismus.
+
+\textbf{Eindeutigkeit}: Sei $\psi: \mathbb{Z} \to G$ ein Gruppenhomomorphismus mit $\psi(1) = x$. Wir oben sehen wir, dass $\psi(n)=\varphi_x(n)$ für alle $n\in\NN_0$ gilt. Für $n < 0$ gilt $\psi(n) = \psi((-1) + \cdots + (-1)) = \psi(-1)^{-n} = x^{-n}$. Zudem ist $e = \psi(0) = \psi(1 + (-1)) = \psi(1) \psi(-1)$, also $\psi(-1) = x^{-1}$. Somit erhalten wir für alle $n < 0$, dass $\psi(n) = (x^{-1})^{-n} = \varphi_x(n)$ ist, was die Eindeutigkeit zeigt.
+
+\end{proof}
+
+
+\begin{defini}\label{def:untermonoid_und_untergruppe}
+Sei $M$ ein Monoid und $G$ eine Gruppe.
+\begin{itemize}
+    \item $U \subseteq M$ heißt \defn{Untermonoid} von $M$, wenn gilt:
+    \begin{itemize}
+        \item[(UM1)] $e \in U$
+        \item[(UM2)] $a, b \in U \Rightarrow a \cdot b \in U$
+    \end{itemize}
+    \item $U \subseteq G$ heißt \defn{Untergruppe} von $G$, wenn gilt:
+    \begin{itemize}
+        \item[(UG1)] $e \in U$
+        \item[(UG2)] $a, b \in U \Rightarrow a \cdot b \in U$ 
+        \item[(UG3)] $a \in U \Rightarrow a^{-1} \in U$
+    \end{itemize}
+\end{itemize}
+Die Notation für ein Untermonoid bzw. eine Untergruppe ist $U \leq M$ bzw. $U \leq G$.
+\end{defini}
+
+
+\begin{anm}\label{bem:inklusion_homomorphismus}
+In der Situation von \ref{def:untermonoid_und_untergruppe} ist die Inklusion $U \hookrightarrow M$ ein Monoidhomomorphismus, $U \hookrightarrow G$ ist Gruppenhomomorphismus.
+$U$ ist mit der eingeschränkten Verknüpfung selbst ein Monoid (bzw. eine Gruppe).
+\end{anm}
+
+\begin{bsp}\label{bsp:untermonoid_und_untergruppe}
+\begin{itemize}
+    \item[(a)] Sei $G$ eine Gruppe. Dann gilt $\{e\}\leq G$ und $G\leq G$.   
+    \item[(b)] Die Menge $\NN_0 \subseteq \ZZ$ bildet ein Untermonoid bezüglich der Addition, da $0 \in \NN_0$ ist und die Summe zweier nicht-negativer ganzer Zahlen ebenfalls nicht-negativ ist. Allerdings ist $\NN_0$ keine Untergruppe von $\ZZ$, da zum Beispiel die $1 \in \NN_0$ kein additiv inverses Element besitzt).   
+    \item[(c)] Sei $K$ ein Körper. Dann ist \[\operatorname{SL}_n(K) := \{ A \in \operatorname{GL}_n(K) \mid \det A = 1 \}\] die sogenannte \defn{spezielle lineare Gruppe}, eine Untergruppe von $\operatorname{GL}_n(K)$. Beachte dabei: Für die Determinante gilt $\det(A^{-1}) = \frac{1}{\det A}$, sodass $\det A^{-1} = 1$, wenn $\det A = 1$ ist.
+\end{itemize}
+\end{bsp}
+
+
+\begin{bem}[Untergruppen-Kriterium]\label{bem:untergruppen_kriterium}
+Sei $G$ eine Gruppe und $U \subseteq G$. Dann sind die folgenden Aussagen äquivalent:
+\begin{itemize}
+    \item[(i)] $U$ ist eine Untergruppe von $G$.
+    \item[(ii)] $U$ ist nichtleer und für alle $a, b \in U$ gilt $ab^{-1} \in U$.
+\end{itemize}
+\end{bem}
+
+
+\begin{proof}
+(i) $\Rightarrow$ (ii): Sei $U \leq G$. Dann ist $e \in U$, also $U \neq \emptyset$. Seien $a, b \in U$. Da $U$ eine Untergruppe ist, gilt $b^{-1} \in U$ und somit $ab^{-1} \in U$.
+
+(ii) $\Rightarrow$ (i): Es gelte (ii). Wegen $U \neq \emptyset$ existiert ein Element $c\in U$. Somit ist $e = c c^{-1} \in U$. Sei $a \in U$. Da $e, a \in U$, folgt aus (ii), dass $a^{-1} = e a^{-1} \in U$ ist. Schließlich gilt für $a, b \in U$ auch $ab \in U$, da $ab = a (b^{-1})^{-1} \in U$ nach (ii).
+\end{proof}
+
+\begin{satz}\label{satz:untergruppen_Z}
+Die Untergruppen von $\ZZ$ sind genau von der Form $n\ZZ$ für ein jeweils eindeutig bestimmtes $n \in \NN_0$. Ist $U \leq \ZZ$, dann ist $U = n\ZZ$ für
+\[
+n = 
+\begin{cases}
+\min(U \cap \NN) & \text{falls } U \neq \{0\} \\
+0 & \text{falls } U = \{0\}
+\end{cases}
+\]
+\end{satz}
+
+\begin{proof}
+Man rechnet leicht nach, dass  $n\ZZ \leq \ZZ$ für alle $n \in \NN_0$ gilt. Sei $U \leq \ZZ$.
+Ist $U = \{0\}= 0 \cdot \ZZ$, wählen wir $n = 0$, dies ist die einzige Möglichkeit.
+Im Folgenden sei $U \neq \{0\}$. Wir setzen $\tilde U := U \cap \NN$. Es ist $\tilde U \neq \emptyset$, denn mit $a \in U$ ist auch $-a \in U$. Wir setzen $n := \min \tilde U \in U$ und behaupten, dass $U = n \ZZ$ ist.
+
+Zum Nachweis der Inklusion $n \ZZ \subseteq U$ bemerken wir, dass für $k \in \NN_0$ gilt: $nk = n + \dots + n \in U$, ebenso $n(-k) = (-n)k \in U$. Somit gilt $n \ZZ \subseteq U$.
+
+Für die umgekehrte Inklusion sei $a \in U$. Wir dividieren $a$ mit Rest durch $n$ und erhalten $q, r \in \ZZ$ mit $0 \leq r < n$, sodass $a = qn + r$ ist. Dann folgt $r = a - qn \in U$ wegen $a \in U$ und $qn \in U$. Da $n$ minimal in $\tilde U$ ist und $0 \leq r < n$ gilt, muss $r = 0$ sein, also $a = qn \in n \ZZ$.
+
+Angenommen, es gilt $n\ZZ = m\ZZ$ für $m, n \in \NN$. Dann gibt es $a, b \in \NN$ mit $m \cdot a = n$ und $n \cdot b = m$. Daraus folgt $nab=n$, also $a = b = 1$ und somit $m = n$.
+\end{proof}
+
+\begin{anm}\label{anm:definitionen_128_131}
+Die folgenden Definitionen und Aussagen \ref{bem:schnitt_untergruppen} bis \ref{anm:kleinste_untergruppe} lassen sich sinngemäß auch für Monoide formulieren und beweisen.
+\end{anm}
+
+\begin{bem}\label{bem:schnitt_untergruppen}
+$G$ Gruppe, $(U_i)_{i \in I}$ Familie von Untergruppen von $G$.\\
+Dann ist $\bigcap_{i \in I} U_i$ eine Untergruppe.
+\end{bem}
+
+\begin{bem}\label{bem:erzeugte_untergruppe}
+$G$ Gruppe, $M \subseteq G$.\\
+Dann existiert eine eindeutig bestimmte Untergruppe $\langle M \rangle \leq G$ mit der universellen Eigenschaft:
+\begin{quote}
+(Erz): Für jede Untergruppe $U \leq G$ gilt:
+\[
+M \subseteq U \iff \langle M \rangle \subseteq U
+\]
+\end{quote}
+$\langle M \rangle$ heißt die von $M$ \defn{erzeugte Untergruppe}.
+
+Es ist \[\langle M \rangle = \bigcap_{H \leq G, M \subseteq H} H.\]
+
+Im Fall $M = \{a_1, \dots, a_r\}$ schreiben wir kurz $\langle a_1, \dots, a_r \rangle$ statt $\{a_1, \dots, a_r\}$.
+\end{bem}
+
+\begin{proof}
+Für den Nachweis der Existenz setzen wir
+\[
+\langle M \rangle := \bigcap_{H \leq G, M \subseteq H} H.
+\]
+Nach Bemerkung~\ref{bem:schnitt_untergruppen} ist $\langle M \rangle$ eine Untergruppe von $G$.
+Sei nun $U \leq G$. Wir zeigen, dass $M \subseteq U$ genau dann gilt, wenn $\langle M \rangle \subseteq U$ ist.
+
+Angenommen, $M \subseteq U$. Da $\langle M \rangle$ als Schnitt aller Untergruppen $H$ definiert ist, die $M$ enthalten, folgt, dass $\langle M \rangle \subseteq U$ ist, da $U$ eine dieser Untergruppen ist. Umgekehrt nehmen wir an, dass $\langle M \rangle \subseteq U$ sei. Da $M$ in $\langle M \rangle$ enthalten ist, folgt unmittelbar, dass $M \subseteq U$ ist.
+
+Für den Beweis der Eindeutigkeit sei $V \leq G$ eine Untergruppe von $G$, ebenfalls universelle Eigenschaft der von $M$ erzeugten Untergruppe erfüllt:
+\begin{quote}
+(Erz'): Für jede Untergruppe $U \leq G$ gilt:
+\[
+M \subseteq U \iff V \subseteq U
+\]
+\end{quote}
+Wir wählen in (Erz') zunächst $U=V$. Wegen $V\subseteq V$ erhalten wir $M\subseteq V$.
+Nun wählen wir in (Erz') $U=\langle M\rangle$. Wegen $M\subseteq\langle M\rangle$ folgt $V\subseteq\langle M\rangle$. Schließlich wählen wir in (Erz) $U=V$. Wegen $M\subseteq V$ folgt dann $\langle M\rangle\subseteq V$, also insgesamt $V=\langle M\rangle$. Damit ist die Eindeutigkeit gezeigt.
+\end{proof}
+
+\begin{anm}\label{anm:kleinste_untergruppe}
+Die universelle Eigenschaft von $\langle M \rangle$ besagt genau, dass $\langle M \rangle$ die kleinste Untergruppe von $G$ ist, die $M$ enthält. Im Beweis der Eindeutigkeit in \ref{bem:einheitengruppe} hätten wir also alternativ auch über die Eindeutigkeit von kleinsten Elementen in halbgeordneten Mengen argumentieren können (vgl. Lineare Algebra I, WS 16/17, 3.8).
+\end{anm}
+
+\begin{bem}\label{bem:erzeugnisse}
+Sei $G$ eine Gruppe und $M \subseteq G$. Dann gilt:
+\[
+\langle M \rangle = \left\{ x_1^{\varepsilon_1} \cdots x_n^{\varepsilon_n} \mid n \in \NN_0, \, \varepsilon_i \in \{\pm 1\}, \, x_1, \dots, x_n \in M \right\}.
+\]
+\end{bem}
+
+\begin{proof}
+Es bezeichne $P$ die rechte Seite der obigen Gleichung. Man rechnet leicht nach, dass $M \subseteq P$ gilt. Wir zeigen, dass $P$ die universelle Eigenschaft von $\langle M\rangle$ erfüllt. Zu zeigen ist also, dass für jede Untergruppe $U$ von $G$ gilt:
+\[
+M \subseteq U \iff P \subseteq U
+\]
+Angenommen, $M \subseteq U$. Da $U$ eine Untergruppe ist, muss auch $P \subseteq U$ gelten.
+Gilt umgekehrt $P \subseteq U$, so folgt unmittelbar $M \subseteq U$, da $M$ in $P$ enthalten ist.
+\end{proof}
+
+
+\begin{anm}\label{anm:erzeugte_untergruppe_mit_eins}
+Betrachtet man in \ref{bem:erzeugnisse} das anstelle der erzeugten Untergruppe das erzeugte Untermonoid, dann sind alle Exponenten $e_i = 1$.
+\end{anm}
+
+\begin{bsp}\label{bsp:erzeugte_untergruppe_Z}
+Es ist $\ZZ = \langle 1 \rangle$, denn jede Untergruppe von $\mathbb{Z}$, die das Element $1$ enthält, stimmt mit ganz $\ZZ$
+überein.
+\end{bsp}
+
+\begin{bem}\label{bem:vereinigung_untergruppen}
+Sei $G$ eine Gruppe und seien $U, V \leq G$. Wir definieren
+\[
+UV := \langle \{ uv \mid u \in U, v \in V \} \rangle.
+\]
+Dann gilt:
+\begin{itemize}
+    \item[(a)] $UV = \langle U \cup V \rangle$.
+    \item[(b)] (Universelle Eigenschaft) Für alle Untergruppen $W \leq G$ gilt:
+    \[
+    U \subseteq W \text{ und } V \subseteq W \Leftrightarrow UV \subseteq W.
+    \]
+\end{itemize}
+\end{bem}
+
+\begin{proof}
+(a) Nach Konstruktion ist $UV \leq G$. $UV$ erfüllt die universelle Eigenschaft von $\langle U \cup V \rangle$, 
+    \begin{denn}
+
+    Sei $W \leq G$. Zu zeigen ist
+    \[
+    U \cup V \subseteq W \iff UV \subseteq W.
+    \]
+    Sei $U \cup V \subseteq W$. Aufgrund der universellen Eigenschaft von $UV = \langle\{ uv \mid u \in U, v \in V \}\rangle$ genügt es zu zeigen, dass gilt
+    \[
+       \{uv \mid u \in U, v \in V \} \subseteq W.
+    \]
+    Dies folgt, da $W$ eine Untergruppe von $G$ ist. Ist $UV \subseteq W$, dann folgt
+    wegen $U \subseteq UV$ und $V \subseteq UV$, dass $U\cup V\subseteq W$ gilt.
+    \end{denn}
+    Damit ist $UV=\langle U\cup V\rangle$.
+    
+(b) Sei $W \leq G$. Es gelte zunächst $U \subseteq W$ und $V \subseteq W$. Dann folgt $U \cup V \subseteq W$, also $\langle U \cup V \rangle \subseteq W$ nach der universellen Eigenschaft des Erzeugnisses, d.h. $UV \subseteq W$.
+  Gilt umgekehrt $UV \subseteq W$, dann folgt wegen $U \subseteq UV $ und $V \subseteq UV$, dass $U \cup \subseteq W$ und $V \subseteq W$ ist.       
+\end{proof}
+
+
+
+\begin{anm}\label{anm:kleinste_untergruppe_enthaelt_vereinigung}
+$UV$ ist die kleinste Untergruppe von $G$, die sowohl $U$ als auch $V$ enthält. Satz \ref{bem:vereinigung_untergruppen} kann analog für Monoide formuliert werden.
+\end{anm}
+
+
+\begin{bem}\label{bem:gruppenhomomorphismus_bilder_und_urbilder}
+Seien $G$ und $H$ Gruppen und $\varphi: G \to H$ ein Gruppenhomomorphismus. Dann gilt:
+\begin{itemize}
+    \item[(a)] Ist $U \leq G$, so ist $\varphi(U) \leq H$.
+    \item[(b)] Ist $V \leq H$, so ist $\varphi^{-1}(V) \leq G$.
+    \item[(c)] Ist $M \subseteq G$, so gilt $\varphi(\langle M \rangle) = \langle \varphi(M) \rangle$.
+\end{itemize}
+\end{bem}
+
+\begin{proof}
+(a) und (b) rechnet man nach. 
+
+(c) Sei $M \subseteq G$. Da $\varphi(\langle M \rangle) $ nach (a) eine Untergruppe von $H$ ist, bleibt zu zeigen, dass $\varphi(\langle M \rangle)$ die universelle Eigenschaft von $\langle \varphi(M) \rangle$ erfüllt. Zu zeigen ist: Ist $W \leq H$, dann gilt:
+\[
+\varphi(M) \subseteq W \text{ genau dann, wenn } \varphi(\langle M \rangle) \subseteq W.
+\]
+Falls $\varphi(M) \subseteq W$, dann folgt $M \subseteq \varphi^{-1}(W)$ und deshalb $\langle M \rangle \subseteq \varphi^{-1}(W)$, was $\varphi(\langle M \rangle) \subseteq W$ zur Folge hat. Ist umgekehrt $\varphi(\langle M \rangle) \subseteq W$, dann folgt $\varphi(M) \subseteq \varphi(\langle M \rangle) \subseteq W$.
+\end{proof}
+
+\begin{anm}\label{anm:untergruppen_von_bildern}
+Für eine Untergruppe $N \leq H$ gilt im Allgemeinen nicht, dass $\varphi^{-1}(\langle N \rangle) = \langle \varphi^{-1}(N) \rangle$ ist. Betrachte zum Beispiel $\varphi: \mathbb{Z} \to \mathbb{Z}$, $a \mapsto 0$, und sei $N = \{1\}$. Dann ist
+\[
+\langle N \rangle = \langle \{1\} \rangle = \mathbb{Z}, \quad \varphi^{-1}(\langle N \rangle) = \varphi^{-1}(\ZZ)=\mathbb{Z}, \quad \text{aber} \quad \langle \varphi^{-1}(N) \rangle = \langle \varnothing \rangle = \{0\}.
+\]
+\end{anm}
+
+\begin{defini}\label{def:kern_und_bild}
+Seien $G$ und $H$ Gruppen und $\varphi: G \to H$ ein Gruppenhomomorphismus. Dann heißt
+\[
+\ker \varphi := \varphi^{-1}(\{e_H\}) = \{ a \in G \mid \varphi(a) = e_H \}
+\]
+der \defn{Kern} von $\varphi$ und
+\[
+\operatorname{im} \varphi := \varphi(G) = \{ \varphi(a) \mid a \in G \}
+\]
+das \defn{Bild} von $\varphi$.
+\end{defini}
+
+\begin{bem}\label{bem:kern_und_bild_eigenschaften}
+Seien $G, H$ Gruppen und $\varphi \colon G \to H$ ein Gruppenhomomorphismus. Dann gilt:
+\begin{itemize}
+    \item[(a)] $\ker \varphi \leq G$
+    \item[(b)] $\operatorname{im} \varphi \leq H$
+    \item[(c)] $\varphi$ ist genau dann injektiv, wenn $\ker \varphi = \{e_G\}$ ist.
+    \item[(d)] $\varphi$ ist genau dann surjektiv, wenn $\operatorname{im} \varphi = H$ ist.
+    \item[(e)] (Beschreibung der Fasern) Für $b \in H$ gilt
+    \[
+    \varphi^{-1}(b) = 
+    \begin{cases}
+      \emptyset & \text{falls } b \notin \operatorname{im} \varphi \\
+      a \ker \varphi = \{ay \mid y \in \ker \varphi \} & \text{falls } b \in \operatorname{im} \varphi, \text{ wobei } a \in G \text{ beliebig mit } \varphi(a) = b.
+    \end{cases}
+    \]
+\end{itemize}
+\end{bem}
+
+\begin{proof}
+\begin{itemize}
+    \item[(a)] Der Kern $\ker \varphi = \varphi^{-1}(\{e_H\})$ ist nach \ref{bem:gruppenhomomorphismus_bilder_und_urbilder} eine Untergruppe von $G$, da $\{e_H\} \leq H$.
+    
+    \item[(b)] Das Bild $\operatorname{im} \varphi = \varphi(G)$ ist nach \ref{bem:gruppenhomomorphismus_bilder_und_urbilder} eine Untergruppe von $H$, da $G \leq G$.
+    
+    \item[(c)] „$\Rightarrow$” Sei $\varphi$ injektiv und $a \in \ker \varphi$. Dann gilt $\varphi(a) = e_H = \varphi(e_G)$, also $a = e_G$, was zeigt, dass $\ker \varphi = \{e_G\}$.
+
+    „$\Leftarrow$” Sei $\ker \varphi = \{e_G\}$ und seien $a, b \in G$ mit $\varphi(a) = \varphi(b)$. Dann folgt $\varphi(a)\varphi(b)^{-1} = e_H$, also $ab^{-1} \in \ker \varphi = \{e_G\}$, womit $a = b$ und $\varphi$ injektiv ist.
+
+    \item[(d)] folgt aus der Definition des Bildes.
+
+    \item[(e)] Ist $b \notin \operatorname{im} \varphi$, dann ist $\varphi^{-1}(\{b\}) = \emptyset$.
+Im Folgenden sei $b \in \operatorname{im} \varphi$. Dann gibt es ein Element $a \in G$ mit $\varphi(a) = b$. Es gilt
+    \[
+    \varphi^{-1}(\{b\}) = a \ker \varphi,
+    \]
+    \begin{denn}
+    Sei zunächst $x \in \ker \varphi$, d.h. es existiert ein $y \in \ker \varphi$ mit $x = ay$. Dann gilt \[\varphi(x) = \varphi(a)\varphi(y) = \varphi(a)e_H = \varphi(a) = b,\]
+    also $x \in \varphi^{-1}(\{b\})$.
+    Sei nun $x \in \varphi^{-1}(\{b\})$, also $\varphi(x) = b = \varphi(a)$. Dann ist $\varphi(a^{-1} x) = e_H$, also $a^{-1} x \in \ker \varphi$ und somit $x \in a \ker \varphi$.
+    \end{denn}
+\end{itemize}
+\end{proof}
+
+\begin{anm}\label{anm:triviale_gruppe_schreibweise}
+\begin{itemize}
+    \item Anstelle von $\{e\}$ schreiben wir (in missverständlicher Schreibweise) kurz $e$ für „die triviale Gruppe,” die nur aus einem neutralen Element besteht.
+    
+    \item Will man eine Gleichung der Form $\varphi(x) = y$ lösen (mit $\varphi$ Gruppenhom.), so braucht man wegen (e) die Lösungsmenge der „homogenen Gleichung” $\varphi(x) = e_H$ (d.h. $\ker \varphi$) und eine spezielle Lösung $a$ von $\varphi(x) = y$ (vgl. LA1, Lineare Gleichungssysteme $Ax = b$).
+    
+    \item Man kann für Monoidhomomorphismen auch Kerne definieren; diese taugen jedoch nicht für ein Injektivitätskriterium.
+\end{itemize}
+\end{anm}
+
+
+\begin{defini}\label{def:ordnung_element}
+Sei $G$ eine Gruppe und $a \in G$. Die \defn{Ordnung} von $a$ ist definiert als
+\[
+\ord(a) := 
+\begin{cases}
+\min \{ n \in \NN \mid a^n = e \} & \text{falls ein solches } n \text{ existiert,} \\
+\infty & \text{sonst.}
+\end{cases}
+\]
+\end{defini}
+
+\begin{bem}\label{bem:ordnung_homomorphismus}
+Sei $G$ eine Gruppe, $a \in G$, und $\varphi_a \colon \ZZ \to G$, $n \mapsto a^n$, der durch die universelle Eigenschaft von $\ZZ$ bestimmte Gruppenhomomorphismus. Dann gilt:
+\begin{itemize}
+    \item[(a)] Das Bild von $\varphi_a$ ist gegeben durch $\{a^n \mid n \in \ZZ\} = \langle a \rangle$.
+    \item[(b)] Der Kern von $\varphi_a$ ist gegeben durch
+    \[
+    \ker \varphi_a = 
+    \begin{cases}
+    \ord(a) \ZZ & \text{falls } \ord(a) < \infty, \\
+    \{0\} & \text{falls } \ord(a) = \infty.
+    \end{cases}
+    \]
+    \item[(c)] Ist $\ord(a) < \infty$, so gilt für $k \in \ZZ$: 
+    \[
+    a^k = e \iff \ord(a) \mid k.
+    \]
+    In diesem Fall ist $\langle a \rangle = \{e, a, a^2, \dots, a^{\ord(a)-1} \}$.
+    \item[(d)] Es gilt $\ord(a) = |\langle a \rangle|$.
+\end{itemize}
+\end{bem}
+
+\begin{proof}
+\begin{itemize}
+    \item[(a)] Das Bild von $\varphi_a$ ist
+    \[
+    \{a^n \mid n \in \ZZ\} = \varphi_a(\ZZ) = \varphi_a(\langle 1 \rangle) \overset{\ref{bem:gruppenhomomorphismus_bilder_und_urbilder}}{=} \langle \varphi_a(1) \rangle = \langle a \rangle.
+    \]
+    
+    \item[(b)] Der Kern von $\varphi_a$ ist durch $\{ n \in \ZZ \mid a^n = e \} \subseteq \ZZ$ gegeben. Nach \ref{satz:untergruppen_Z} existiert genau ein $m \in \NN_0$ mit $\ker \varphi_a = m \ZZ$.
+    \begin{itemize}
+        \item[1. Fall:] $m = 0$. Dann existiert kein $n \in \NN$ mit $a^n = e$, was bedeutet, dass $\ord(a) = \infty$ ist.
+        \item[2. Fall:] $m \neq 0$. Dann folgt aus \ref{satz:untergruppen_Z}, dass 
+        \[
+        m = \min (\ker \varphi_a \cap \NN) = \min \{ n \in \NN \mid a^n = e \} = \ord(a).
+        \]
+    \end{itemize}
+    \item[(c)] Sei $\ord(a) < \infty$. Dann gilt:
+\[
+a^k = e \iff k\in\ker\varphi_a \iff k \in \ord(a) \ZZ \iff \ord(a) \mid k.
+\]
+Ist $n \in \ZZ$, dann existieren eindeutig bestimmte $q, r \in \ZZ$ mit $0 \leq r < \ord(a)$, sodass $n = q \cdot \ord(a) + r$. Daher folgt:
+\[
+a^n = \left(a^{\ord(a)}\right)^q a^r = e \cdot a^r = a^r.
+\]
+
+\item[(d)] Wir nehmen eine Fallunterscheidung nach der Ordnung von $a$ vor.
+\begin{itemize}
+    \item[1. Fall:] $\ord(a) < \infty$. Dann gilt wegen (c), dass $|\langle a \rangle| \leq \ord(a)$ ist. Wäre $a^i = a^j$ für $0 \leq i < j < \ord(a)$, dann folgte $a^{j-i} = e$, was im Widerspruch zu $\ord(a) = j - i$ stünde.
+    
+    \item[2. Fall:] $\ord(a) = \infty$. Dann ist $\ker \varphi_a = \{0\}$ und somit $\varphi_a$ injektiv. Daher gilt für alle $m, n \in \ZZ$ mit $m \neq n$, dass $a^m \neq a^n$ ist, was $|\langle a \rangle| = \infty$ zur Folge hat.
+\end{itemize}
+    
+\end{itemize}
+\end{proof}
+
+\section{Faktorgruppen}\label{sec:faktorgruppen}
+
+\textbf{Notation:} In diesem Abschnitt sei $G$ stets eine Gruppe.
+
+\begin{bem}\label{bem:linksaequivalenz_relation}
+Sei $U \leq G$. Durch
+\[
+a \sim_U b \iff b^{-1}a \in U
+\]
+wird eine Äquivalenzrelation auf $G$ definiert. Die Äquivalenzklasse von $a \in G$ ist durch
+\[
+aU := \{ au \mid u \in U \}
+\]
+gegeben. Insbesondere gilt für $a, b \in G$: Entweder $aU = bU$ oder $aU \cap bU = \emptyset$.
+\end{bem}
+
+\begin{proof}
+Die Relation $\sim_U$ ist reflexiv, denn für $a \in G$ ist $e = a^{-1}a \in U$, also $a \sim_U a$.
+
+Die Relation $\sim_U$ ist symmetrisch,
+\begin{denn}
+Sind $a, b \in G$ mit $a \sim_U b$, so ist $b^{-1}a \in U$. Da $U \leq G$, folgt $(b^{-1}a)^{-1} = a^{-1}b \in U$, also $b \sim_U a$.
+\end{denn}
+Die Relation $\sim_U$ ist transitiv,
+\begin{denn}
+Sind $a, b, c \in G$ mit $a \sim_U b$ und $b \sim_U c$, so gilt $b^{-1}a \in U$ und $c^{-1}b \in U$. Wegen $U \leq G$ folgt $(c^{-1}b)(b^{-1}a) = c^{-1}a \in U$, also $a \sim_U c$.
+\end{denn}
+Außerdem gilt: \[b \sim_U a \iff b^{-1}a \in U \iff \text{ Es existiert ein } u \in U \text{ mit } a^{-1}b = u \iff b \in aU.\]
+
+Der Rest folgt aus den Eigenschaften von Äquivalenzrelationen.
+\end{proof}
+
+\begin{defini}\label{def:linksklasse}
+Sei $U \leq G$. Eine \defn{Linksnebenklasse} von $U$ in $G$ ist eine Teilmenge von $G$ der Gestalt
+\[
+aU = \{ au \mid u \in U \},
+\]
+d.h., eine Äquivalenzklasse bezüglich $\sim_U$.
+
+Die Menge der Linksnebenklassen von $U$ in $G$ bezeichnen wir mit $G / U$.
+\end{defini}
+
+\begin{anm}\label{anm:eigenschaften_nebenklassen}
+Es gilt \[aU = U \iff aU = eU \iff a \sim_U e \iff a \in U.\] Für $a \notin U$ ist $aU \cap U = \emptyset$.
+\end{anm}
+
+\begin{satz}\label{satz:linksklassen_eigenschaften}
+Sei $U \leq G$. Dann gilt:
+\begin{itemize}
+    \item[(a)] Je zwei Linksnebenklassen von $U$ in $G$ sind gleichmächtig (und zwar zu $U$).
+    \item[(b)] Je zwei Linksnebenklassen von $U$ in $G$ sind entweder gleich oder disjunkt.
+    \item[(c)] $G$ ist die disjunkte Vereinigung der Linksnebenklassen von $U$ in $G$.
+\end{itemize}
+\end{satz}
+
+\begin{proof}
+(a) Sei $a \in G$. Die Abbildung $U=eU \to aU$, $u \mapsto au$, ist bijektiv. Die Surjektivität direkt nach Konstruktion. Die Injektivität ergibt sich daraus, dass aus$au_1 = au_2$ stets $u_1 = u_2$ folgt. Somit sind alle Linksnebenklassen von $U$ in $G$ gleichmächtig zu $U$.
+
+(b) folgt aus \ref{bem:linksaequivalenz_relation}.
+
+(c) ergibt sich aus Eigenschaften von Äquivalenzrelationen.
+\end{proof}
+
+\begin{anm}\label{anm:rechtsnebenklassen}
+In analoger Weise zu den Linksnebenklassen von $U$ in $G$ sind die Rechtsnebenklassen von $U$ in $G$ definiert als Teilmengen der Gestalt
+\[
+Ua := \{ ua \mid u \in U \} \quad \text{(bzgl. der Äquivalenzrelation: } a \sim b \iff ab^{-1} \in U\text{)}.
+\]
+Die Menge der Rechtsnebenklassen von $U$ in $G$ bezeichnen wir mit $U \backslash G$. 
+
+\ref{satz:linksklassen_eigenschaften} gilt analog für die Rechtsnebenklassen. Es ist im Allgemeinen $aU \neq Ua$. Man rechnet nach: Die Abbildung $G/U \to U \backslash G$, $aU \mapsto Ua^{-1}$, ist wohldefiniert und bijektiv. Beachte: Die Abbildung $G/U \to U \backslash G$, $aU \mapsto Ua$, wäre im Allgemeinen nicht wohldefiniert (siehe Bsp. \ref{bsp:linksklassen_rechtsklassen}).
+\end{anm}
+
+\begin{bsp}\label{bsp:linksklassen_rechtsklassen}
+Sei $G = S_3$, $U = \langle (1 \ 2) \rangle = \{ (), (1 \ 2) \}$.
+\begin{itemize}
+    \item Linksnebenklassen von $U$ in $G$:
+    \[
+    U = \{ (), (1 \ 2) \}, \quad (2 \ 3)U = \{ (2 \ 3), (1 \ 3 \ 2) \}, \quad (1 \ 3)U = \{ (1 \ 3), (1 \ 2 \ 3) \}
+    \]
+    \item Rechtsnebenklassen von $U$ in $G$:
+    \[
+    U = \{ (), (1 \ 2) \}, \quad U(2 \ 3) = \{ (2 \ 3), (1 \ 2 \ 3) \}, \quad U(1 \ 3) = \{ (1 \ 3), (1 \ 3 \ 2) \}
+    \]
+\end{itemize}
+Insbesondere gilt $(2 \ 3)U = (1 \ 3 \ 2)U$, aber $U(2 \ 3) \neq U(1 \ 3 \ 2)$.
+\end{bsp}
+
+\begin{defini}\label{def:ordnung_und_index}
+Sei $U \leq G$.
+\begin{itemize}
+    \item Die \defn{Ordnung} von $G$ ist die Anzahl der Elemente von $G$, falls diese endlich ist, sonst $\infty$. Bezeichnung: $\ord(G)$.
+    \item Der \defn{Index} von $U$ in $G$ ist die Anzahl der Linksnebenklassen von $U$ in $G$, falls diese endlich ist, sonst $\infty$. Bezeichnung: $(G : U)$.
+\end{itemize}
+\end{defini}
+
+\begin{anm}\label{anm:index_und_rechtsnebenklassen}
+Nach \ref{anm:rechtsnebenklassen} stimmt $(G : U)$ mit der Anzahl der Rechtsnebenklassen von $U$ in $G$ überein.
+\end{anm}
+
+\begin{satz}[Satz von Lagrange]\label{satz:lagrange}
+Sei $U \leq G$. Dann gilt:
+\[
+\ord(G) = \ord(U) \cdot (G : U)
+\]
+Insbesondere ist $\ord(U)$ ein Teiler von $\ord(G)$.
+\end{satz}
+
+\begin{proof}
+Jede Linksnebenklasse von $U$ in $G$ ist von derselben Mächtigkeit wie $U$, hat also $\ord(U)$ Elemente. Da $G$ die disjunkte Vereinigung der $(G : U)$ Linksnebenklassen ist, folgt die Behauptung.
+\end{proof}
+
+\textbf{Ziel:} Führe auf $G/U$ eine Gruppenstruktur ein, und zwar so, dass die natürliche Abbildung $\pi \colon G \to G/U$, $a \mapsto aU$, ein Gruppenhomomorphismus ist.
+
+Dies legt die Verknüpfung fest zu $aU \cdot bU = abU$.
+
+\textbf{Problem:} Dies ist im Allgemeinen nicht wohldefiniert; $U$ muss eine zusätzliche Bedingung erfüllen (Normalteilereigenschaft).
+
+\begin{defini}\label{def:normalteiler}
+Sei $U \leq G$. $U$ heißt ein \defn{Normalteiler} von $G$ (oder \defn{normale Untergruppe}), falls gilt:
+\[
+aba^{-1}\in U \text{ für alle } a\in G, b\in U.
+\]
+Bezeichnung: $U \trianglelefteq G$.
+\end{defini}
+
+\begin{bsp}\label{bsp:normalteiler}
+\begin{itemize}
+    \item[(a)] Sei $G$ eine Gruppe. Dann gilt $\{e\} \trianglelefteq G$ und $G \trianglelefteq G$.
+    \item[(b)] In einer abelschen Gruppe $G$ ist jede Untergruppe $U$ normal, denn für $a\in G$,
+    $b\in U$ gilt
+    \[
+    aba^{-1}=aa^{-1}b=b\in U.
+    \]
+    \item[(c)] Sei $U = \langle (1 \ 2) \rangle \leq S_3$. Dann gilt $U \ntrianglelefteq S_3$, da z.B. $(1 \ 3)^{-1} \cdot (1 \ 2) \cdot (1 \ 3) = (2 \ 3) \notin U$.
+\end{itemize}
+\end{bsp}
+
+\begin{bem}\label{bem:normalteiler_eigenschaften}
+Sei $U \leq G$. Dann sind äquivalent:
+\begin{itemize}
+    \item[(i)] $U \trianglelefteq G$
+    \item[(ii)] $aUa^{-1} \subseteq U$ für alle $a \in G$ (hierbei ist $aUa^{-1} = \{ aua^{-1} \mid u \in U \}$)
+    \item[(iii)] $aUa^{-1} = U$
+    \item[(iv)] $aU = Ua$
+\end{itemize}
+\end{bem}
+
+\begin{proof}
+(i) $\Leftrightarrow$ (ii), (iii)$\Rightarrow$(ii) und (iii)$\Leftrightarrow$(iv) sind klar.
+
+(ii) $\Rightarrow$ (iv): Sei $a \in G$. Dann gilt $aUa^{-1} \subseteq U$, was impliziert, dass $aU \subseteq Ua$ ist. Ebenso folgt $a^{-1}U(a^{-1})^{-1} \subseteq U$, woraus $Ua \subseteq aU$ folgt.
+\end{proof}
+
+\begin{bem}\label{bem:normalteiler_homomorphismus}
+Seien $G, H$ Gruppen und $\varphi \colon G \to H$ ein Homomorphismus.
+Dann gilt:
+\begin{itemize}
+    \item[(a)] $N \trianglelefteq H \Rightarrow \varphi^{-1}(N) \trianglelefteq G$
+    \item[(b)] $\operatorname{ker} \varphi \trianglelefteq G$
+    \item[(c)] $N \trianglelefteq G$ und $\varphi$ surjektiv $\Rightarrow \varphi(N) \trianglelefteq H$
+\end{itemize}
+\end{bem}
+
+\begin{proof}
+(a) Es ist $\varphi^{-1}(N) \leq G$ nach \ref{satz:untergruppen_Z}. Zu zeigen ist: Sind $a \in G, b \in \varphi^{-1}(N)$, dann ist $aba^{-1} \in \varphi^{-1}(N)$. Dies gilt, 
+\begin{denn}
+Es ist $\varphi(aba^{-1}) = \varphi(a)\varphi(b)\varphi(a)^{-1} \in N$, da $N \trianglelefteq H$.
+\end{denn}
+(b) folgt aus (a) mit $N = \{e_H\}$.
+
+(c) Es ist $\varphi(N) \leq H$ nach \ref{satz:untergruppen_Z}. Zu zeigen ist: Sind $a \in H, b \in \varphi(N) \Rightarrow aba^{-1} \in \varphi(N)$. Dies gilt, 
+\begin{denn}
+Es existiert ein $\tilde{b} \in N$ mit $b = \varphi(\tilde{b})$. Da $\varphi$ surjektiv ist, existiert ein $\tilde{a} \in G$ mit $\varphi(\tilde{a}) = a$. Somit gilt:
+\[
+aba^{-1} = \varphi(\tilde{a}) \varphi(\tilde{b}) \varphi(\tilde{a})^{-1} = \varphi(\tilde{a} \tilde{b} \tilde{a}^{-1}) \in \varphi(N)
+\]
+\end{denn}
+\end{proof}
+
+\begin{anm}\label{anm:normalteiler_homomorphismus_surjektiv}
+Aussage \ref{bem:normalteiler_homomorphismus} (c) gilt ohne die Voraussetzung, dass $\varphi$ surjektiv ist, im Allgemeinen nicht. Insbesondere ist  $\image\varphi$ i. Allg. kein Normalteiler von $H$.
+\end{anm}
+
+\begin{bsp}\label{bsp:alternierende_gruppe}
+Wir setzen \[A_n := \ker(\operatorname{sgn}) = \{ \sigma \in S_n \mid \operatorname{sgn}(\sigma) = 1 \}.\] 
+$A_n$ heißt die \defn{alternierende Gruppe}. Dann ist $A_n \trianglelefteq S_n$, da $\operatorname{sgn} \colon S_n \to \{\pm 1\}$ ein Gruppenhomomorphismus ist und $A_n$ den Kern dieses Homomorphismus bildet.
+\end{bsp}
+
+\begin{bem}\label{bem:ordnung_index_2_normalteiler}
+Sei $U \leq G$ mit $(G : U) = 2$. Dann ist $U \trianglelefteq G$.
+\end{bem}
+
+\begin{proof}
+Wir betrachten ein Element $a \in G$. Falls $a \in U$ ist, gilt $Ua = U = aU$ nach \ref{anm:eigenschaften_nebenklassen}. 
+
+Falls $a \notin U$ ist, dann zerfällt $G$ wegen $(G:U)=2$ in die beiden disjunkten Linksnebenklassen $U$ und $aU$ und ebenso in die beiden disjunkten Rechtsnebenklassen $U$ und $Ua$. Somit folgt $aU = Ua$. 
+
+In beiden Fällen ist also $aU = Ua$ erfüllt, was nach \ref{bem:normalteiler_homomorphismus} bedeutet, dass $U \trianglelefteq G$ ist.
+\end{proof}
+
+
+\begin{anm}\label{anm:kleinster_normalteiler}
+Ist $(N_i)_{i \in I}$ eine Familie von Normalteilern von $G$, dann ist auch
+\[
+\bigcap_{i \in I} N_i \trianglelefteq G.
+\]
+Insbesondere existiert für jede Teilmenge $M \subseteq G$ der "`von $M$ erzeugte Normalteiler"' 
+(= kleinster Normalteiler von $G$, der $M$ enthält).
+\end{anm}
+
+\begin{bem}\label{bem:produkt_normalteiler}
+Seien $U, V \leq G$. Dann gilt:
+\begin{itemize}
+    \item[(a)] Falls $U \trianglelefteq G$ oder $V \trianglelefteq G$, dann ist $UV = \{uv \mid u \in U, v \in V\}G$.
+    \item[(b)] Falls $U \trianglelefteq G$ und $V \trianglelefteq G$, dann gilt $UV \trianglelefteq G$.
+\end{itemize}
+\end{bem}
+
+\begin{proof}
+(a) Wir setzen $P := \{uv \mid u \in U, v \in V\}$. Wir betrachten nur den Fall $U \trianglelefteq G$ (der andere Fall ist analog zu behandeln). Dann ist $P \leq G$, denn:
+\begin{itemize}
+    \item $e\in P$ wegen $e = e \cdot e$.
+    \item Sind $u_1, u_2 \in U$ und $v_1, v_2 \in V$, so gilt
+    \[
+    (u_1 v_1)(u_2 v_2) = u_1 (v_1 u_2 v_1^{-1}) v_1 v_2 \in P,
+    \]
+    weil $v_1 u_2 v_1^{-1} \in U$ (wegen $U \trianglelefteq G$) und $v_1 v_2 \in V$.
+\end{itemize}
+(b) Sei $g\in G$ und $w\in UV$. Aufgrund von (a) existieren $u\in U,v\in V$ mit $w=uv$.
+Wir erhalten
+\[
+gwg^{-1}=guvg^{-1}=gug^{-1}gvg^{-1}\in UV.
+\]
+\end{proof}
+
+\begin{bem}\label{bem:definition_faktorgruppe}
+Sei $N \trianglelefteq G$. Dann wird die Menge der Linksnebenklassen $G / N$ mittels der Verknüpfung
+\[
+G / N \times G / N \to G / N, \quad (aN)(bN) := abN.
+\]
+zu einer Gruppe, der sogenannten \defn{Faktorgruppe} von $G$ modulo $N$.
+\end{bem}
+
+\begin{proof}
+Wir zeigen, dass die Verknüpfung wohldefiniert ist und dass $G / N$ mit dieser Verknüpfung die Gruppeneigenschaften erfüllt.
+
+Wir rechnen zunächst nach, dass die Verknüpfung wohldefiniert ist. Seien $a_1N = a_2N$ und $b_1N = b_2N$, das heißt, $a_1 \sim_N a_2$ und $b_1 \sim_N b_2$. Dann ist $a_2^{-1} a_1 \in N$ und $b_2^{-1} b_1 \in N$. Wir müssen zeigen, dass $a_1 b_1 N \sim_N a_2 b_2 N$ ist.
+
+Wir berechnen:
+\[
+(a_2 b_2)^{-1} (a_1 b_1) = b_2^{-1} a_2^{-1} a_1 b_1 = b_2^{-1} b_1 (b_1^{-1} (a_2^{-1} a_1) b_1).
+\]
+Da $N$ ein Normalteiler ist, ist $b_1^{-1} (a_2^{-1} a_1) b_1\in N$ und damit auch 
+$(a_2 b_2)^{-1} (a_1 b_1) \in N $, und daher gilt $a_1 b_1 N \sim_N a_2 b_2 N$. 
+
+Es ist $G / N$ ist eine Gruppe, denn:
+\begin{denn}
+Das neutrale Element ist $N$, denn für alle $a \in G$ gilt $aN \cdot N = aN = N \cdot aN$.
+Jedes $aN \in G / N$ hat ein Inverses, nämlich $a^{-1}N$, da
+    \[
+    aN \cdot a^{-1}N = a a^{-1} N = N.
+    \]
+Die Assoziativität der Verknüpfung wird von $G$ vererbt.
+\end{denn}
+\end{proof}
+
+\begin{bsp}\label{bsp:zyklische_faktorgruppe}
+\begin{itemize}
+    \item[(a)] Ist $G = N$, dann ist $G / N = \{N\}= e$.
+    
+    \item[(b)] $G = \ZZ$, $N = m\ZZ$. Dann ist $N \trianglelefteq G$ wegen $G$ abelsch.   
+    Die Faktorgruppe $\ZZ / m\ZZ$ heißt die \defn{Gruppe der Restklassen modulo $m$}.
+    Wir setzen $\overline{a} := a + m\ZZ$. Die Addition ist wie oben erklärt:
+    \[
+    \overline{a} + \overline{b} := a + b + m\ZZ.
+    \]
+    Das neutrale Element ist $\overline{0}$, und $\overline{-a}$ ist invers zu $\overline{a}$.
+    Es gilt: \[\overline{a} = \overline{b} \Leftrightarrow a - b \in m\ZZ \Leftrightarrow m \mid (a - b).\]
+    Für $\overline{a} = \overline{b}$ schreibt man auch $a \equiv b \pmod{m}$.
+    Es ist $\ZZ / m\ZZ = \{\overline{0}, \overline{1}, \dots, \overline{m-1}\}$ und $\ord(\ZZ / m\ZZ) = m$.
+    
+    Achtung: Wir schreiben nicht $\ZZ_m$ für $\ZZ / m\ZZ$.
+\end{itemize}
+\end{bsp}
+
+\begin{bem}\label{bem:kanonische_projektion}
+Sei $N \trianglelefteq G$. Dann ist die Abbildung $\pi \colon G \to G/N, \, a \mapsto aN$ ein surjektiver Homomorphismus mit $\operatorname{ker} \pi = N$. 
+
+$\pi$ heißt die \defn{kanonische Projektion} von $G$ nach $G/N$.
+\end{bem}
+
+\begin{proof}
+Wir zeigen zunächst, dass $\pi$ ein Homomorphismus ist. Für $a, b \in G$ gilt
+\[
+\pi(ab) = abN = (aN)(bN) = \pi(a) \pi(b),
+\]
+also ist $\pi$ tatsächlich ein Homomorphismus.
+
+Die Surjektivität von $\pi$ ergibt sich daraus, dass jedes Element in $G/N$ als $aN$ für ein $a \in G$ dargestellt werden kann. Somit ist $\pi(G) = \{aN \mid a \in G\} = G / N$.
+
+Zum Schluss zeigen wir, dass $\operatorname{ker} \pi = N$ ist. Es gilt \[\pi(a) = N \Leftrightarrow aN = N,\] was nach \ref{anm:triviale_gruppe_schreibweise} genau dann der Fall ist, wenn $a \in N$ ist.
+\end{proof}
+
+\begin{folgerung}\label{folgerung:normalteiler_faktorisierte_gruppe}
+Sei $N \leq G$. Dann sind äquivalent:
+\begin{itemize}
+    \item[(i)] $N \trianglelefteq G$.
+    \item[(ii)] Es existiert eine Gruppe $H$ und ein Homomorphismus $\varphi \colon G \to H$ mit $N = \operatorname{ker} \varphi$.
+\end{itemize}
+\end{folgerung}
+
+\begin{proof}
+(i) $\Rightarrow$ (ii): Wir setzen $H := G/N$ und $\varphi := \pi$, wobei $\pi \colon G \to G/N$ die kanonische Projektion ist. Nach \ref{bem:kanonische_projektion} gilt dann $\operatorname{ker} \pi = N$.
+
+(ii) $\Rightarrow$ (i): Dies folgt aus \ref{bem:normalteiler_homomorphismus}.
+\end{proof}
+
+
+\begin{bem}\label{bem:untergruppen_und_normalteiler_faktorisierte_gruppe}
+Sei $N \trianglelefteq G$ und $\pi \colon G \to G/N$ die kanonische Projektion. Dann sind die Abbildungen
+\[
+\Phi \colon \left\{\text{Untergruppen von } G/N\right\} \longrightarrow \left\{\text{Untergruppen } U \text{ von } G \text{ mit } U \supseteq N\right\}
+\]
+und
+\[
+\Psi \colon \left\{ \text{Untergruppen } U \text{ von } G \text{ mit } U \supseteq N \right\} \longrightarrow \left\{\text{Untergruppen von } G/N\right\},
+\]
+die durch
+\[
+\Phi(V) := \pi^{-1}(V) \quad \text{und} \quad \Psi(U) := U/N := \pi(U),
+\]
+gegeben sind, zueinander inverse inklusionserhaltende Bijektionen. Es gilt:
+\[
+V \trianglelefteq G/N \Leftrightarrow \pi^{-1}(V)=\Phi(V) \trianglelefteq G.
+\]
+\end{bem}
+
+\begin{proof}
+Zunächst zeigen wir, dass $\Phi$ wohldefiniert ist. Sei $V \leq G/N$. Dann folgt aus \ref{bem:gruppenhomomorphismus_bilder_und_urbilder} (a), dass $\pi^{-1}(V) \leq G$ ist. Weiterhin gilt $\pi^{-1}(V) \supseteq \pi^{-1}(\{e_{G/N}\}) = \operatorname{ker} \pi = N$.
+
+Ebenso ist $\Psi$ wohldefiniert, da $\pi(U) \leq G/N$ aufgrund von \ref{bem:gruppenhomomorphismus_bilder_und_urbilder} (c).
+
+Die Abbildung $\Phi$ ist offenischtlich inklusionserhaltend.
+
+Nun zeigen wir, dass $\Phi \circ \Psi = \operatorname{id}$. Sei dazu $U \leq G$ mit $U \supseteq N$. Setze $V := \Psi(U) = \pi(U)$. Wir behaupten, dass dann $\Phi(V) = U$ ist, d.h. $\pi^{-1}(V) = U$. Die Inklusion $\pi^{-1}(V) \supseteq U$ ergibt sich sofort, da $\pi^{-1}(V) = \pi^{-1}(\pi(U)) \supseteq U$. Für die umgekehrte Inklusion sei $u \in \pi^{-1}(V)$. Dann ist $\pi(u) \in V = \pi(U)$, sodass ein $\tilde u\in U$ mit $\pi(\tilde u) = \pi(u)$ existiert. Somit gilt $u \tilde u^{-1} \in \operatorname{ker} \pi = N$, und daher folgt $u = u \tilde u^{-1} \tilde u \in U$.
+
+Schließlich zeigen wir, dass $\Psi \circ \Phi = \operatorname{id}$ ist. Sei dazu $V \leq G/N$. Dann gilt
+\[
+\Psi(\Phi(V)) = \pi(\pi^{-1}(V)),
+\]
+was wegen der Surjektivität von $\pi$ mit $V$ übereinstimmt.
+Zum Schluss zeigen wir, dass Normalität unter der Bijektion erhalten bleibt, d.h.
+\[
+V \trianglelefteq G/N \Leftrightarrow \pi^{-1}(V)=\Phi(V) \trianglelefteq G.
+\]
+Die Implikation ''$\Rightarrow$'' folgt aus \ref{bem:normalteiler_homomorphismus}.
+Für die Umkehrung sei $\pi^{-1}(V)\trianglelefteq G$. Aus der Surjektivität von $\pi$ und \ref{bem:normalteiler_homomorphismus} folgt $V=\pi(\pi^{-1}(V))\trianglelefteq G/N$.
+
+\end{proof}
+
+\begin{satz}[Universelle Eigenschaft der Faktorgruppe]\label{satz:universelle_eigenschaft_faktorgruppe}
+Seien $G, H$ Gruppen und $\varphi \colon G \to H$ ein Homomorphismus und $N \trianglelefteq G$ mit $N \subseteq \operatorname{ker} \varphi$. Dann existiert ein eindeutig bestimmter Homomorphismus $\overline{\varphi} \colon G/N \to H$, sodass folgendes Diagramm kommutiert:
+\[
+\xymatrix{
+    G \ar[rr]^{\varphi} \ar[dr]_{\pi} & & H \\
+    & G/N \ar@{-->}[ur]_{\overline{\varphi}}
+}
+\]
+d.h. $\overline{\varphi} \circ \pi = \varphi$. Explizit ist $\overline{\varphi}$ gegeben durch 
+\[
+\overline{\varphi} \colon G/N \to H, \, aN \mapsto \varphi(a).
+\]
+Es gilt $\operatorname{ker}(\overline{\varphi}) = \operatorname{ker}(\varphi)/N$ und $\operatorname{im} \overline{\varphi} = \operatorname{im} \varphi$.
+\end{satz}
+
+\begin{proof}
+Zunächst zeigen wir die Existenz von $\overline{\varphi}$. Wir definieren $\overline{\varphi} \colon G / N \to H$ durch $\overline{\varphi}(aN) := \varphi(a)$. Diese Abbildung ist wohldefiniert, denn falls $a_1 N = a_2 N$, dann ist $a_2^{-1} a_1 \in N \subseteq \ker \varphi$, und somit gilt $\varphi(a_2^{-1} a_1) = e$, also $\varphi(a_1) = \varphi(a_2)$. 
+
+Die Abbildung $\overline{\varphi}$ ist ein Homomorphismus, denn für $a, b \in G$ gilt
+\[
+\overline{\varphi}((aN)(bN)) = \overline{\varphi}(abN) = \varphi(ab) = \varphi(a) \varphi(b) = \overline{\varphi}(aN) \cdot \overline{\varphi}(bN).
+\]
+Damit ist $\overline{\varphi}$ ein Homomorphismus.
+
+Es gilt $(\overline{\varphi} \circ \pi)(a) = \overline{\varphi}(aN) = \varphi(a)$ für alle $a \in G$, also $\overline{\varphi} \circ \pi = \varphi$.
+
+Nun zeigen wir die Eindeutigkeit von $\overline{\varphi}$.  Wegen $\overline{\varphi}\circ\pi=\varphi$ folgt $\overline{\varphi}(aN)=\varphi(a)$ für alle $a\in G$.
+Folglich ist $\overline{\varphi}$ eindeutig bestimmt.
+
+Schließlich zeigen wir, dass $\ker \overline{\varphi} = \ker \varphi / N$ und $\image \overline{\varphi} = \image \varphi$ ist. Für $a\in G$ gilt:
+\[aN \in \ker \overline{\varphi} \iff \overline{\varphi}(aN) = e \iff \varphi(a) = e \iff a \in \ker \varphi.\]
+Die Gleichheit $\image \overline{\varphi} = \image \varphi$ folgt aus der Konstruktion von $\overline{\varphi}$.
+\end{proof}
+
+\begin{folgerung}[Homomorphiesatz]\label{folgerung:homomorhiesatz}
+Seien $G$ und $H$ Gruppen und $\varphi \colon G \to H$ ein Homomorphismus. Dann gibt es einen eindeutig bestimmten Isomorphismus
+\[
+\Phi \colon G / \ker \varphi \to \image \varphi,
+\]
+sodass folgendes Diagramm kommutiert:
+\[
+\xymatrix{
+G \ar[r]^{\varphi} \ar[d]_{\pi} & H \\
+G / \ker \varphi \ar[r]^{\cong}_\Phi & \image \varphi \ar@{^{(}->}[u]_{i}
+}
+\]
+Hierbei ist $\pi$ die kanonische Projektion und $i$ die Inklusionsabbildung. Die Abbildung $\Phi$ ist explizit gegeben durch $\Phi(a \ker \varphi) = \varphi(a)$.
+\end{folgerung}
+
+\begin{proof}
+Aus der universellen Eigenschaft der Faktorgruppe erhalten wir einen Homomorphismus 
+\[
+\overline{\varphi} \colon G / \ker \varphi \to H, \quad a \ker \varphi \mapsto \varphi(a)
+\]
+mit $\overline{\varphi} \circ \pi = \varphi$, $\ker \overline{\varphi} = \ker \varphi / \ker \varphi = e$, und $\image \overline{\varphi} = \image \varphi$. Setzen wir
+\[
+\Phi := \overline{\varphi}|^{\image \varphi}\colon G/\ker\varphi \to\image\varphi,
+\]
+dann ist $\image \Phi = \image \varphi$ und $\ker \Phi = e$, also ist $\Phi$ ein Isomorphismus.
+Nach Konstruktion gilt \[\varphi = \Phi \circ \pi = i \circ \Phi \circ \pi.\] 
+Zum Nachweis der Eindeutigkeit von $\Phi$ bemerken wir, dass aus $i\circ\Phi\circ\pi=\varphi$
+bereits folgt, dass $\Phi(a\ker\varphi)=\varphi(a)$ alle $a\in G$ ist.
+\end{proof}
+
+\begin{anm}\label{anm:iso_ker_phi}
+Häufig verwendet man davon nur die Isomorphie $G / \ker \varphi \cong \image \varphi$.
+\end{anm}
+
+\begin{satz}[Erster Isomorphiesatz]\label{satz:erster_isomorphiesatz}
+Seien $U \leq G$ und $N \trianglelefteq G$. Dann gilt: Die Inklusion $i \colon U \to UN$ und die kanonische Projektion $\pi \colon UN \to UN / N$ induzieren einen Isomorphismus
+\[
+\varphi \colon U / U \cap N \to UN / N, \quad a(U \cap N) \mapsto aN.
+\]
+\end{satz}
+
+\begin{proof}
+Wir betrachten die Komposition
+\[
+\varphi := \pi \circ i \colon U \to UN \to UN / N, \quad u \mapsto uN.
+\]
+Diese Abbildung ist surjektiv, da für jedes $a \in UN$ nach \ref{bem:produkt_normalteiler} Elemente $u \in U$, $n\in N$ mit $a = u n$ existieren, also $\varphi(u) = uN = unN=aN$. 
+
+Der Kern von $\varphi$ ist $U \cap N$, denn für $u \in U$ gilt
+\[\varphi(u) = N \iff uN=N \iff u \in N.\]
+Die Behauptung folgt aus dem Homomorphiesatz.
+\end{proof}
+
+\begin{satz}[Zweiter Isomorphiesatz]\label{satz:zweiter_isomorphiesatz}
+Seien $N, U \trianglelefteq G$ mit $N \subseteq U$. Dann ist die Abbildung
+\[
+\psi \colon (G / N)/(U/N) \to G / U, \quad (aN)U/N \mapsto aU
+\]
+ein Isomorphismus.
+\end{satz}
+
+\begin{proof}
+Wir betrachten die Abbildung
+\[
+\psi \colon G / N \to G / U, \quad aN \mapsto aU.
+\]
+Diese Abbildung ist wohldefiniert, denn $aN = bN$ impliziert $b^{-1} a \in N \subseteq U$, also $aU = bU$.
+
+Dass $\psi$ ein surjektiver Homomorphismus ist, ist klar. Es ist $\ker \psi = U / N$, denn:
+\begin{itemize}
+    \item[''$\subseteq$''] Ist $aN \in \ker \psi$, dann ist $aU = U$ und somit $a \in U$, also $aN \in U / N$.
+    \item[''$\supseteq$''] Ist $uN \in U / N$ mit $u \in U$, dann ist $\psi(uN) = uU = U$ und deswegen $\in \ker \psi$.
+\end{itemize}
+Die Behauptung folgt aus dem Homomorphiesatz.
+\end{proof}
+
+\begin{defini}\label{def:zyklische_gruppe}
+Eine Gruppe $G$ heißt \defn{zyklisch}, falls es ein $a \in G$ gibt mit $G = \langle a \rangle$. In diesem Fall heißt $a$ ein \defn{Erzeuger} von $G$.
+\end{defini}
+
+\begin{bem}\label{bem:aequivalenz_zyklisch}
+Es sind äquivalent:
+\begin{itemize}
+    \item[(i)] $G$ ist zyklisch.
+    \item[(ii)] Es existiert ein surjektiver Homomorphismus $\varphi \colon \ZZ \to G$.
+\end{itemize}
+\end{bem}
+
+\begin{proof}
+(i) $\Rightarrow$ (ii): Sei $G$ zyklisch. Dann existiert $a \in G$ mit $G = \langle a \rangle$. Nach der universellen Eigenschaft \ref{satz:universelle_eigenschaft_z} von $\ZZ$ existiert ein Gruppenhomomorphismus $\varphi \colon \ZZ \to G$ mit $\varphi(1) = a$. Wegen \ref{bem:ordnung_homomorphismus} ist $\image \varphi = \langle a \rangle = G$, d.h. $\varphi$ ist surjektiv.
+
+(ii) $\Rightarrow$ (i): Sei $a := \varphi(1)$. Dann ist $G = \image \varphi = \varphi(\ZZ)=\varphi(\langle 1\rangle)\overset{\ref{bem:gruppenhomomorphismus_bilder_und_urbilder}}{=}\langle \varphi(1)\rangle=\langle a \rangle$, also ist $G$ zyklisch.
+\end{proof}
+
+
+\begin{folgerung}\label{folg:ordnung_zyklische_gruppe}
+Sei $G$ eine zyklische Gruppe. Dann gilt:
+\[
+G \cong \begin{cases}
+\ZZ, & \text{falls $\ord(G) = \infty$,} \\
+\ZZ / n \ZZ, & \text{falls $\ord(G) = n \in \NN$}.
+\end{cases}
+\]
+Insbesondere ist jede zyklische Gruppe abelsch.
+\end{folgerung}
+
+\begin{proof}
+Da $G$ zyklisch ist, existiert ein surjektiver Gruppenhomomorphismus $\varphi \colon \ZZ \to G$. Nach \ref{satz:untergruppen_Z} ist \[\ker \varphi = \begin{cases} \{0\} & \text{oder} \\ n \ZZ & \text{für ein } n\in\NN\end{cases}.\]
+
+Der Homomorphiesatz liefert $G \cong \ZZ$ oder $G \cong \ZZ / n \ZZ$ für ein $n \in \NN$. Die Behauptung folgt wegen $\ord(\ZZ / n \ZZ) = n$.
+\end{proof}
+
+\begin{anm}\label{anm:ordnung_zyklische_gruppen}
+Nach \ref{folg:ordnung_zyklische_gruppe} ist jede zyklische Gruppe isomorph zu einem $\ZZ / n \ZZ$ mit $n \in \NN_0$. In $\ZZ / n \ZZ$ gibt es mit $\overline{1}$ jeweils einen kanonischen Erzeuger. Die Wahl eines Isomorphismus $G \cong \ZZ / n \ZZ$ korrespondiert zur Wahl eines Erzeugers von $G$.
+\end{anm}
+
+\begin{satz}\label{satz:zykl_gruppen_quot}
+Sei $G$ eine zyklische Gruppe und $U \leq G$. Dann gilt:
+\begin{itemize}
+    \item[(a)] $U$ ist zyklisch.
+    \item[(b)] $G/U$ ist zyklisch.
+\end{itemize}
+\end{satz}
+
+\begin{proof}
+Da $G$ zyklisch ist, ist $G$ abelsch, insbesondere $U \trianglelefteq G$. Sei $\pi \colon G \to G/U$ die kanonische Projektion.
+
+Nach \ref{bem:aequivalenz_zyklisch} existiert ein surjektiver Homomorphismus $\varphi \colon \ZZ \to G$.
+
+(b) Die Verkettung $\pi \circ \varphi \colon \ZZ \to G \to G/U$ ist ein surjektiver Homomorphismus, also ist $G/U$ zyklisch nach \ref{bem:aequivalenz_zyklisch}
+
+(a) Wir setzen $V := \varphi^{-1}(U) \leq \ZZ$. Wir erhalten $V = n\ZZ$ für ein $n \in \NN_0$, also ist $V = \langle n \rangle$ zyklisch. Die Abbildung $\psi:=\varphi|_V^U \colon V = \varphi^{-1}(U) \to U$ ist ein surjektiver Homomorphismus (da $\varphi$ surjektiv ist). Nach dem Homomorphiesatz gilt $U \cong V / \ker \psi$, also ist $U$ zyklisch nach Teil (b).
+\end{proof}
+
+\begin{bem}\label{bem:ordnung_teilt_ordG}
+Sei $a \in G$. Dann gilt: $\ord(a) \mid \ord(G)$.
+\end{bem}
+
+\begin{proof}
+Aus dem Satz von Lagrange und \ref{bem:ordnung_homomorphismus} erhalten wir \[\ord(G) = (G : \langle a \rangle) \ord(\langle a\rangle)=(G : \langle a \rangle) \ord(a)\] und somit $\ord(a) \mid \ord(G)$.
+\end{proof}
+
+\begin{satz}\label{satz:endliche_zyklische_gruppe}
+Sei $G$ eine endliche Gruppe mit $\ord(G) = p$, wobei $p$ eine Primzahl ist. Dann ist $G$ zyklisch, insbesondere $G \cong \ZZ / p \ZZ$.
+\end{satz}
+
+\begin{proof}
+Sei $a \in G$, $a \neq e$. Dann gilt $\ord(a) > 1$, und $\ord(a) \mid p$. Da $p$ prim ist, folgt $\ord(a) = p$. Also ist $\langle a \rangle = G$, d.h. $G$ ist zyklisch. Nach \ref{folg:ordnung_zyklische_gruppe} folgt $G \cong \ZZ / p \ZZ$.
+\end{proof}
+
+\begin{satz}[Satz von Euler-Fermat]\label{satz:euler_fermat}
+Sei $G$ eine endliche Gruppe und $a \in G$. Dann gilt: $a^{\ord(G)} = e$.
+\end{satz}
+
+\begin{proof}
+Da $G$ endlich ist, hat $a$ eine endliche Ordnung. Nach \ref{bem:ordnung_homomorphismus} gilt für $k\in\NN$:
+\[
+a^k=e\iff \ord(a) \mid k
+\]
+Wegen \ref{bem:ordnung_teilt_ordG} gilt $\ord(a)\mid \ord(G)$, woraus sich die Behauptung ergibt.
+\end{proof}
+
+\begin{defini}\label{defi:produkt_von_gruppen}
+Sei $(G_i)_{i \in I}$ eine Familie von Gruppen.
+Das kartesische Produkt $\prod_{i \in I} G_i$ wird durch komponentenweise Verknüpfung zu einer Gruppe. 
+Diese bezeichnet man als das \defn{direkte Produkt} über die Familie $(G_i)_{i \in I}$.
+\end{defini}
+
+\begin{satz}\label{satz:elementarteilersatz}
+(Elementarteilerversion des Hauptsatzes über endlich erzeugte abelsche Gruppen) \\
+Sei $G$ eine endlich erzeugte abelsche Gruppe, d.h. $G$ ist abelsch und es existieren $m \in \NN$ und $x_1, \dots, x_m \in G$ mit $G = \langle x_1, \dots, x_m \rangle$.
+
+Dann existieren eindeutig bestimmte $r,s \in \NN_0$ und $d_1, \dots, d_s \in \NN_{>1}$ mit $d_1 \mid d_2 \mid \dots \mid d_s$, sodass
+\[
+G \cong \ZZ^r \times \ZZ / d_1 \ZZ \times \dots \times \ZZ / d_s \ZZ.
+\]
+\end{satz}
+
+\begin{proof}
+Siehe LA2.
+\end{proof}
+
+\begin{bsp}\label{bsp:abelsche_gruppen_ordnung_24}
+Bis auf Isomorphie gibt es folgende abelsche Gruppen der Ordnung $24$:
+\[
+\ZZ / 24 \ZZ, \quad \ZZ / 2 \ZZ \times \ZZ / 12 \ZZ, \quad \ZZ / 2 \ZZ \times \ZZ / 2 \ZZ\times \ZZ / 6 \ZZ.
+\]
+\end{bsp}
+
+\begin{defini}\label{defi:zentrum_einer_gruppe}
+Das \defn{Zentrum} von $G$ ist definiert durch
+\[
+Z(G) := \{ g \in G \mid gh = hg \text{ für alle } h \in G \}.
+\]
+\end{defini}
+
+\begin{bsp}\label{bsp:zentrum_symmetrische_gruppe}
+Für $n \geq 3$ gilt: $Z(S_n) = \{\ident\}$,
+\begin{denn}
+Sei $\sigma \in S_n$, $\sigma \neq \ident$. Dann existieren $i, k \in \{1, \dots, n\}$ mit $i \neq k$ und $\sigma(i) = k$. 
+Wegen $n \geq 3$ existiert ein $j \in \{1, \dots, n\} \setminus \{i, k\}$. Wir setzen $\tau := (j \; k)$. Dann gilt:
+\[
+(\sigma \circ \tau)(i) = \sigma(i) = k, \quad (\tau \circ \sigma)(i) = \tau(k) = j \neq k.
+\]
+Also ist $\sigma \circ \tau \neq \tau \circ \sigma$, d.h. $\sigma \notin Z(S_n)$.
+\end{denn}
+\end{bsp}
+
+
+\begin{bem}\label{bem:zentrum_eigenschaften}
+Es gilt:
+\begin{enumerate}[label=(\alph*)]
+    \item $Z(G) \trianglelefteq G$.
+    \item $Z(G)$ ist abelsch.
+    \item $G$ ist genau dann abelsch, wenn $Z(G) = G$.
+    \item $G / Z(G)$ ist zyklisch $\iff$ $G$ ist abelsch $\iff$ $G / Z(G) = e$.
+\end{enumerate}
+\end{bem}
+
+\begin{proof}
+Übung
+\end{proof}
+
+\section{Operationen}
+
+\textbf{Notation:} In diesem Abschnitt bezeichne $M$ stets ein Monoid und $G$ eine Gruppe (mit neutralem Element $e$).
+
+\begin{defini}\label{def:operation}
+Sei $X$ eine Menge.
+
+Eine \defn{Operation} (auch \defn{Wirkung} oder \defn{Aktion}) von $M$ auf $X$ ist eine Abbildung
+\[
+M \times X \to X, \quad (a, x) \mapsto a . x
+\]
+für die gilt:
+\begin{enumerate}[label=(O\arabic*)]
+    \item $e . x = x$ für alle $x \in X$
+    \item $(a b) . x = a . (b . x)$ für alle $a, b \in M$, $x \in X$
+\end{enumerate}
+
+Wir sagen dann auch, dass $X$ eine \defn{$M$-Menge} ist.
+\end{defini}
+
+\begin{anm}\label{anm:rechtsoperation}
+Man kann auch analog \glqq Rechtsoperationen\grqq{} definieren als Abbildungen $X \times M \to X$, $(x, a) \mapsto x . a$ mit $x . e = x$, $x . (a  b) = (x . a) . b $. Die Menge $X$ ist dann eine \defn{$M$-Rechtsmenge}.
+Obige Definition steht dann für \glqq Linksoperation\grqq{} bzw. eine \defn{$M$-Linksmenge}.
+
+Ist $M$ ein Monoid, so bezeichnet $M^{\text{op}}$ das Gegenmonoid zu $M$: selbe zugrundeliegende Menge, Verknüpfung umgedreht: $a\cdot_{\text{op}} b:=b\cdot a$.
+Ist $X$ eine $M$-Rechtsmenge, so wird $X$ zur $M^{\text{op}}$-Linksmenge via $M^{\text{op}} \times X \to X$, $a . x := x . a$. Es ist dann nämlich
+\[
+(a\cdot_{\text{op}} b) . x = (b a) . x = x . b a = (x . b) . a = a . (b . x))
+\]
+für alle $a,b\in M$. Zeigt man eine Aussage für alle $M$-Linksmengen, gilt sie damit auch für alle $M$-Rechtsmengen. Wir beschränken uns deshalb auf $M$-Linksmengen.
+
+Ist $G$ eine Gruppe, dann existiert ein kanonischer Isomorphismus $G \to G^{\text{op}}$, $g \mapsto g^{-1}$. 
+Damit können wir aus einer $G$-Rechtsoperation eine $G$-Linksoperation machen. Hierbei ist dann $a.x = x.a^{-1}$.
+Konstruktionen mit Inversionen deuten an, dass eigentlich Rechtsoperationen vorliegen. (Achtung: Der Inversionstrick funktioniert nur für Gruppen).
+
+Eine Möglichkeit, sich Operationen vorzustellen, ist, sich eine Art "`skalarer Multiplikation"' auf $X$ 
+vozustellen. Ist $V$ ein $K$-VR, dann ist die skalare Multiplikation $K \times V \to V$ eine Operation des multiplikativen Monoids $(K, \cdot)$ auf $V$; allerdings fordert man im Kontext von Vektorräumen noch ein paar mehr Verträglichkeiten.
+
+\end{anm}
+
+\begin{bsp}\label{bsp:operationen}
+\begin{enumerate}[label=(\alph*)]
+    \item Ist $X$ eine Menge, so operiert das Monoid $\operatorname{Abb}(X, X)$ auf $X$ durch $f . x := f(x)$. Ist $K$ ein Körper und $V$ ein $K$-Vektorraum, so operiert $\operatorname{End}_K(V)$ analog auf $V$.
+    \item Sind $X, Y$ Mengen, dann operiert das Monoid $\operatorname{Abb}(Y, Y)$  von links auf $\operatorname{Abb}(X, Y)$ durch $f . g := f \circ g$.
+    Das Monoid $\operatorname{Abb}(X, X)$ operiert von rechts auf $\operatorname{Abb}(X, Y)$ durch $g . f := g \circ f$.
+    \item Ist $X$ eine Menge, so operiert die symmetrische Gruppe $S(X)$ auf $X$ durch $\pi . a := \pi(a)$. Insbesondere operiert $S_n$ auf $\{1, \dots, n\}$.
+    \item $M$ operiert auf sich selbst durch Linksmultiplikation: $a . b := a b$.
+    Im Folgenden nennen wir das schlichtweg "`die"' $M$-Menge $M$. Die Rechtsmultiplikation liefert eine Rechtsoperation,
+    im Gruppenfall können wir daraus  durch $a . b := b a^{-1}$ eine Linksoperation machen.
+    \item Sei $U \leq M$ ein Untermonoid.
+    Dann wird jede $M$-Menge durch Einschränkung zu einer $U$-Menge. Insbesondere operiert $U$ auf $M$ durch Linksmultiplikation. Die Operation von $S(X)$ auf $X$ entsteht durch Einschränkung der Operation von $\operatorname{Abb}(X, X)$ auf $S(X)$.
+\end{enumerate}
+\end{bsp}
+
+\begin{bem}\label{bem:currying}
+(\glqq Currying\grqq \footnote{Der Begriff „Currying“ bezieht sich auf den Logiker Haskell Curry.}) Sei $X$ eine Menge. Die Abbildungen
+\begin{align*}
+\left\{ \text{Operationen von } M \text{ auf } X \right\} &\leftrightarrows \left\{ \text{Monoidhom. } M \to \operatorname{Abb}(X, X) \right\}\\
+M \times X \to X, \quad (a, x) \mapsto a . x \qquad \quad &\mapsto \qquad M \to \operatorname{Abb}(X, X), \quad a \mapsto \tau_a \\
+M \times X \to X, \quad (a, x) \mapsto \varphi(a)(x) \quad &\mapsfrom \qquad \varphi\colon M\to \operatorname{Abb}(X, X)
+\end{align*}
+mit $\tau_a \colon X \to X$, $x \mapsto a . x$, sind wohldefinierte zueinander inverse Bijektionen.
+Im Fall von Gruppenoperationen schränken sich diese zu zueinander inversen Bijektionen
+\[
+\left\{ \text{Operationen von } G \text{ auf } X \right\} \leftrightarrows \left\{ \text{Gruppenhomomorphismen } G \to S(X) \right\}
+\]
+ein.
+\end{bem}
+
+
+\begin{proof}
+Übung.
+\end{proof}
+
+\begin{bsp}\label{bsp:abb_op}
+Die Identität $\operatorname{id} \colon \operatorname{Abb}(X, X) \to \operatorname{Abb}(X, X)$ korrespondiert unter \ref{bem:currying} zu der durch $f . x := f(x)$ gegebenen Operation von $M=\operatorname{Abb}(X, X)$ auf $X$. Auf der rechten Seite der Korrespondenz haben wir dann
+nämlich den Monoidhomomorphismus
+\[
+\varphi=\operatorname{id}\colon M=\operatorname{Abb}(X, X)\to \operatorname{Abb}(X, X),
+\]
+sodass wir auf der linken Seite die Operation
+\[
+\operatorname{Abb}(X, X)\times X\to X, (f,x)\mapsto \varphi(f)(x)=\operatorname{id}(f)(x)=f(x)
+\]
+erhalten.
+
+Aanalog korrespondiert $\operatorname{id} \colon S(X) \to S(X)$ zur Operation von $S(X)$ auf $X$ aus \ref{bsp:operationen}(c).
+\end{bsp}
+
+
+\begin{defini}\label{def:true_op}
+Sei $X$ eine $M$-Menge. Die Operation von $M$ auf $X$ heißt \defn{treu} (bzw. $X$ eine treue $M$-Menge), falls gilt:
+\[
+a . x = b . x \text{ für alle } x \in X \Rightarrow a = b
+\]
+
+Dies ist äquivalent dazu, dass der  zur Operation gehörige Monoid-Homomorphismus  $M \to \operatorname{Abb}(X, X)$ injektiv ist.
+\end{defini}
+
+\begin{anm}\label{anm:gruppenop_treu}
+Für eine Gruppenoperation ist dies äquivalent zu
+\[
+a . x = x \text{ für alle } x \in X \Rightarrow a = e,
+\]
+bzw. zur Injektivität des zugehörigen Gruppenhomomorphismus $G \to S(X)$.
+\end{anm}
+
+\begin{satz}[Satz von Cayley]\label{satz:cayley}
+\begin{enumerate}[label=(\alph*)]
+    \item $M$ ist eine treue $M$-Menge.
+    \item Ist $G$ endlich mit $\operatorname{ord}(G) = n$, dann ist $G$ isomorph zu einer Untergruppe von $S_n$.
+\end{enumerate}
+\end{satz}
+
+\begin{proof}
+(a) Seien $a, b \in M$ mit $a . x = b . x$ für alle $x \in M$. Dann folgt $a . e = b . e$, also $a e = b e$, und somit $a = b$.
+
+(b) Wegen der Endlichkeit von $G$ existiert eine Bijektion $f \colon \{1, \dots, n\} \to G$. Man rechnet nach, dass $\psi \colon S(G) \to S_n$, $\sigma \mapsto f^{-1} \circ \sigma \circ f$ ein Gruppenisomorphismus ist. Aus (a) erhalten wir einen injektiven Gruppenhomomorphismus $\varphi \colon G \hookrightarrow S(G)$. Wir betrachten die Komposition $\gamma := \psi \circ \varphi \colon G \to S(G) \hookrightarrow S_n$. Dann ist $\gamma$ injektiv, also $G \cong \operatorname{im} \gamma \subseteq S_n$.
+\end{proof}
+
+
+\begin{defini}\label{def:hom_mengen}
+Seien $X, Y$ $M$-Mengen und $\varphi \colon X \to Y$. $\varphi$ heißt \defn{Homomorphismus von $M$-Mengen} (oder \defn{$M$-äquivariant}), falls
+\[
+\varphi(a . x) = a . \varphi(x) \quad \text{für alle } a \in M, \, x \in X.
+\]
+Die Menge der $M$-Homomorphismen von $X$ nach $Y$ wird durch $\operatorname{Hom}_M(X, Y)$ bezeichnet.
+\end{defini}
+
+\begin{anm}\label{anm:iso_end_auto}
+\begin{itemize}
+    \item Wie bei Monoiden sind Isomorphismen, Endomorphismen und Automorphismen definiert. $\operatorname{End}_M(X)$ ist ein Monoid mit $\operatorname{Aut}_M(X) = \operatorname{End}_M(X)^\times$.
+
+    \item Ein Homomorphismus $\varphi \colon X \to Y$ von $M$-Mengen ist genau dann ein Isomorphismus von $M$-Mengen, wenn $\varphi$ bijektiv ist.
+
+    % \item Vorstellung: In Analogie zur Operation als skalare Multiplikation auf Mengen entsprechen Homomorphismen von $M$-Mengen den linearen Abbildungen.
+
+    \item Ist $\varphi \colon V \to W$ eine lineare Abbildung von $K$-Vektorräumen, dann ist die Bedingung $\varphi(\lambda x) = \lambda \varphi(x)$ gerade die $K$-Äquivarianz.
+\end{itemize}
+\end{anm}
+
+\begin{bem}\label{bem:univ_eig}
+(\defn{Universelle Eigenschaft der $M$-Menge $M$}) Sei $X$ eine $M$-Menge. Dann existiert für jedes $x \in X$ genau ein $M$-Mengenhomomorphismus $\varphi_x \colon M \to X$ mit $\varphi_x(e) = x$. 
+Explizit ist dieser gegeben durch \[\varphi_x(a) = a . x \text { für alle } a \in M.\]
+\end{bem}
+
+\begin{proof}
+Übung
+\end{proof}
+
+\begin{anm}\label{anm:currying_variante}
+\begin{itemize}
+\item Anstelle des Curryings $M \times X \to X \leadsto M \to \operatorname{Abb}(X, X)$ haben wir in \ref{bem:univ_eig} ein Currying $M \times X \to X \leadsto X \to \operatorname{Abb}(M, X)$ vorgenommen.
+    \item Ist $X$ eine $M$-Menge, so kann man eine Teilbarkeitsrelation auf $X$ definieren durch 
+    \[x | y \Leftrightarrow \text{ Es existiert ein } \, a \in M \text { mit } a. x = y.\]
+     Ist z.B. $R$ ein kommutativer Ring (mit multiplikativem Monoid $(R, \cdot)$)
+     erhält man dadurch den klassischen Teilbarkeitsbegriff. Für Gruppenoperationen ist diese Relation symmetrisch, denn: $a . x = y \iff x = a^{-1} . y$ (Vorstellung dann eher: "`Erreichbarkeit"' statt "`Teilbarkeit"').
+\end{itemize}
+\end{anm}
+
+Ab jetzt betrachten wir nur noch Gruppenoperationen.
+
+\begin{defini}\label{def:orbit_stabilisator}
+Sei $X$ eine $G$-Menge und $x \in X$. Dann heißt
+\[
+\Orb_G(x) := \{g . x \mid g \in G\}
+\]
+die \defn{Bahn} (oder der \defn{Orbit}) von $x$. Der \defn{Stabilisator} von $x$ ist definiert durch
+\[
+\operatorname{Stab}_G(x) := \{g \in G \mid g . x = x\}.
+\]
+Das Element $x$ heißt ein \defn{Fixpunkt}, falls $\operatorname{Stab}_G(x) = G$ ist (dies ist äquivalent zu  $g . x = x$ für alle $g \in G$.) Die Menge der Fixpunkte wird durch $\operatorname{Fix}(X)$ bezeichnet.
+\end{defini}
+
+\begin{bem}\label{bem:orbits_und_stabis}
+Sei $X$ eine $G$-Menge. Dann gilt:
+\begin{itemize}
+    \item[(a)] Für alle $x \in X$ ist $\operatorname{Stab}_G(x) \leq G$.
+    \item[(b)] Durch \[x \sim y :\Leftrightarrow \text{Es existiert ein } \, g \in G \text{ mit } g . x = y\] ist eine Äquivalenzrelation auf $X$ gegeben. Die Äquivalenzklasse von $x$ ist $\Orb_G(x)$. Insbesondere ist $X$ die disjunkte Vereinigung von Bahnen. Ist $(x_i )_{i\in I}$ ein Vertretersystem der Bahnen, dann ist 
+    \[
+     X = \dot\bigcup_{i\in I}\Orb_G(x_i).
+    \]
+\end{itemize}
+\end{bem}
+
+
+\begin{proof}
+(a) Sei $x \in X$. Dann ist $\operatorname{Stab}_G(x)$ eine Untergruppe von $G$,
+\begin{denn}
+Da $e . x = x$ gilt, folgt, dass $e$ in $\operatorname{Stab}_G(x)$ liegt. Wenn $a, b \in \operatorname{Stab}_G(x)$ sind, dann folgt $a . x = x$ und $b . x = x$, und damit auch \[
+(a b) . x = a . (b . x) = a . x = x,\] daher liegt auch $a b$ in $\operatorname{Stab}_G(x)$. Für jedes $a \in \operatorname{Stab}_G(x)$ ist zudem $x = a . x$, und somit gilt \[a^{-1} . x = a^{-1} . (a . x) = (a^{-1} a) . x = e . x = x.\] Deshalb gehört auch $a^{-1}$ zu $\operatorname{Stab}_G(x)$.
+\end{denn}
+
+(b) Die Relation \[x \sim y :\Leftrightarrow \text{ Es existiert ein } g \in G \text{ mit } g . x = y\] ist eine Äquivalenzrelation auf $X$,
+\begin{denn}
+Für jedes $x \in X$ gilt $e . x = x$, also ist die Relation reflexiv. Falls $x \sim y$ gilt, existiert ein $g \in G$ mit $g . x = y$. Dann gilt aber auch $g^{-1} . y = x$, also ist die Relation symmetrisch. Für die Transitivität nehmen wir an, dass $x \sim y$ und $y \sim z$ gelten, d.h., es existieren $g, h \in G$ mit $g . x = y$ und $h . y = z$. Dann gilt $(h g) . x = h . (g . x) = h . y = z$, also $x \sim z$.
+\end{denn}
+Die Äquivalenzklasse von $x \in M$ ist gegeben durch
+\[
+\{ y \in M \mid \text{es existiert ein } g \in G \text{ mit } g . x = y \} = \operatorname{Orb}_G(x).
+\]
+\end{proof}
+
+
+\begin{bsp}\label{bsp:orbit_stabilisator_beispiele}
+\begin{enumerate}[label=(\alph*)]
+    \item $G = S_n$ operiert auf $\{1, \dots, n\}$. Für $x \in \{1, \dots, n\}$ ist \[\operatorname{Orb}_{S_n}(x) = \{1, \dots, n\},\] denn für jedes $y \in \{1, \dots, n\}$ existiert ein $\sigma \in S_n$ mit $\sigma(x) = y$. Es ist \[\operatorname{Stab}_{S_n}(x) = \{\sigma \in S_n \mid \sigma(x) = x\} \cong S_{n-1}.\]
+
+    \item $H=\langle (1\  2)(3\  4\  5)\rangle\leq S_5$ operiert durch Einschränkung der Operation aus (a) auf
+    $\{1,2,3,4,5\}$. Bei dieser Operation liegen genau zwei Bahnen vor, nämlich $\{1,2\}$
+    und $\{3,4,5\}$. Allgemeiner korrespondieren für $\sigma\in S_n$ die Bahnen der Operation von $H=\langle\sigma\rangle$ auf $\{1,\ldots,n\}$ genau zu den Zyklen aus der Zyklendarstellung von $\sigma$.
+
+    \item Sei $H \leq G$ und $g \in G$. Bezüglich der Linksmultiplikationsoperation von $H$ auf $G$ ist \[\operatorname{Orb}_H(g) = \{h g \mid h \in H\} = H g,\]
+    d.h. die Bahnen der Linksmultiplikation sind genau die Rechtsnebenklassen.
+    Möchte man die Linksnebenklassen als Orbits erhalten, muss man $G$ von rechts operieren lassen bzw. den "`$()^{-1}$-Trick"' anwenden: $H$ operiert von links auf $G$ durch $h . g = g h^{-1}$ (dann ist $\operatorname{Orb}_H(g) = g H$). In beiden Fällen ist $\operatorname{Stab}_H(g) = \{e\}$.
+
+    \item $G$ operiert durch \defn{Konjugation} auf sich selbst durch \[g . x := g x g^{-1}.\] Dann ist \[\operatorname{Orb}_G(x) = \{g x g^{-1} \mid g \in G\},\] die sogenannte \defn{Konjugationsklasse} von $x$.
+
+    \item Sei $K$ ein Körper.
+    \begin{itemize}
+    % \item $\operatorname{GL}_n(K)$ operiert durch Linksmultiplikation auf $\operatorname{M}_{n,n}(K)$: Ein Vertretersystem der Bahnen ist durch die strenge Zeilenstufenform gegeben.
+    
+    \item $\operatorname{GL}_n(K)$ operiert durch Konjugation auf $\operatorname{M}_{n,n}(K)$:
+    \[
+    g.A=gAg^{-1} \quad \text{für } g\in\GL_n(K), A\in\operatorname{M}_{n,n}(K). 
+    \]
+    Die Bahnen entsprechen den Ähnlichkeitsklassen von Matrizen. Ein Vertretersystem der Bahnen durch ist sowohl durch die Frobenius- als auch durch die Weierstraß-Normalform gegeben. Falls $K$ algebraisch abgeschlossen ist (z.B. $K=\mathbb{C}$), ist ein weiteres Vertretersystem durch die Jordansche Normalform gegeben.
+    
+    \item $\operatorname{GL}_n(K)$ operiert auf der Menge der symmetrischen $n \times n$-Matrizen über $K$ durch 
+    \[g . A := g A g^T \quad \text{für } g\in\GL_n(K), A\in\operatorname{M}_{n,n}(K).\]
+    Für $K = \mathbb{R}$ bestimmt der Sylvestersche Trägheitssatz ein Vertretersystem der Bahnen.
+    \end{itemize}    
+\end{enumerate}
+\end{bsp}
+
+\begin{anm}\label{anm:linkskoseten}
+Sei $H \leq G$. Die Menge der Linksnebenklassen $G / H$ wird durch 
+\[
+G \times G / H \to G / H, \quad g . (a H) := (g a) H
+\]
+zu einer $G$-Menge. Die kanonische Projektion $\pi \colon G \to G / H$ ist ein Homomorphismus von $G$-Mengen, denn
+\[
+\pi(g . a) = \pi(g a) = g a H = g.aH = g . \pi(a).
+\]
+Diese werden wir im Folgenden betrachten.
+\end{anm}
+
+\begin{bem}\label{bem:univ_eig_g_menge}
+(\defn{Universelle Eigenschaft der $G$-Menge $G / H$}) Sei $X$ eine $G$-Menge und $H \leq G$. Dann existiert für jedes $x \in X$ mit $H \leq \operatorname{Stab}_G(x)$ ein eindeutig bestimmter Homomorphismus von $G$-Mengen
+\[
+\varphi_x \colon G / H \to X \quad \text{mit} \quad \varphi_x(H) = \varphi_x(e_{G/H}) = x.
+\]
+Dieser ist explizit gegeben durch $\varphi_x(a H) = a . x$. Es gilt: 
+\begin{itemize}
+\item $\operatorname{im} \varphi_x = \operatorname{Orb}_G(x)$,
+\item $\varphi_x$ genau dann injektiv, wenn $H = \operatorname{Stab}_G(x)$ ist.
+\end{itemize}
+\end{bem}
+
+\begin{proof}
+Wir beginnen mit dem Nachweis der Existenz. Sei $x\in X$. Wir setzen $\varphi_x \colon G / H \to X$, $a H \mapsto a . x$ und zeigen zunächst, dass $\varphi_x$ wohldefiniert ist. Für $a, b \in G$ mit $a H = b H$ folgt $a^{-1} b \in H \leq \operatorname{Stab}_G(x)$, also
+\[
+a . x = a . ((a^{-1} b) . x) = (a a^{-1}b) . x = b . x.
+\]
+Weiterhin ist $\varphi_x$ $G$-äquivariant, denn für $g\in G$ ist
+\[
+\varphi_x(g . a H) = \varphi_x((g a) H) = (g a) . x = g . (a . x) = g . \varphi_x(a H).
+\]
+und erfüllt $\varphi_x(e_{G/H})=\varphi_x(eH)=e.x=x$.
+Zum Nachweis der Eindeutigkeit sei $\psi_x \colon G / H \to X$ ein $G$-äquivarianter Homomorphismus mit $\psi_x(H) = x$. Dann gilt für alle $a \in G$
+\[
+\psi_x(a H) = \psi_x(a.H)= a . \psi_x(H) = a . x = \varphi_x(a H),
+\]
+also ist $\psi_x = \varphi_x$. Wir betrachten
+\[
+G \xrightarrow{\pi} G / H \xrightarrow{\varphi_x} X, \quad g \mapsto g . x.
+\]
+und erhalten $\operatorname{im} \varphi_x = \operatorname{im} (\varphi_x \circ \pi) = \operatorname{Orb}_G(x)$. Es verbleibt der Beweis der letzten Behauptung des Satzes. Seien dazu $a, b \in G$. Es gilt:
+\[
+\varphi_x(a H) = \varphi_x(b H) \Leftrightarrow a . x = b . x \Leftrightarrow a^{-1} b \in \operatorname{Stab}_G(x) \Leftrightarrow a \operatorname{Stab}_G(x) = b \operatorname{Stab}_G(x).
+\]
+Somit ist $\varphi_x$ genau dann injektiv, wenn für alle $a,b\in G$ die Äquivalenz 
+\[\quad a \operatorname{Stab}_G(x) = b \operatorname{Stab}_G(x) \iff a H = b H.
+\]
+gilt. Diese ist aber äquivalent zu $\operatorname{Stab}_G(x) = H$ (setze $b = e$  und beachte \ref{anm:eigenschaften_nebenklassen}).
+\end{proof}
+
+\begin{folgerung}\label{folg:isom_orbit}
+Sei $X$ eine $G$-Menge und $x \in X$. Dann ist
+\[
+G / \operatorname{Stab}_G(x) \to \operatorname{Orb}_G(x), \quad a \operatorname{Stab}_G(x) \mapsto a . x
+\]
+ein Isomorphismus von $G$-Mengen.
+\end{folgerung}
+
+\begin{proof}
+Aus \ref{bem:univ_eig_g_menge} (mit $H=\operatorname{Stab}_G(x)$) folgt: Die obige Abbildung ist bijektiv und ein Homomorphismus von $G$-Mengen. Somit ist sie ein Isomorphismus von $G$-Mengen.
+\end{proof}
+
+\begin{defini}\label{def:transitiv}
+Eine $G$-Menge $X$ heißt \defn{transitiv}, falls $X \neq \emptyset$ ist und für alle $x, y \in X$ ein $g \in G$ mit $g . x = y$ existiert. Dazu äquivalent sind jeweils die Bedingungen
+\begin{itemize}
+\item Es existiert ein $x \in X$ mit $X = \operatorname{Orb}_G(x)$,
+\item $X \neq \emptyset$ und für alle $x \in X$ ist $X = \operatorname{Orb}_G(x)$.
+\end{itemize}
+\end{defini}
+
+\begin{anm}
+Ist $X$ eine $G$-Menge, dann schränkt sich für jedes $x\in X$ die Operation von $G$ auf $X$ zu einer 
+transitiven Operation von $G$ auf $\Orb_G(x)$ ein (beachte: Für $y\in\Orb_G(x)$, $g\in G$ ist $g.y\in\Orb_G(x)$). Insbesondere ist $X$ wegen \ref{bem:orbits_und_stabis} die disjunkte Vereinigung
+von transitiven $G$-Mengen.
+\end{anm}
+
+\begin{bsp}\label{bsp:transitive_operationen}
+\begin{enumerate}[label=(\alph*)]
+    \item $S_n$ operiert transitiv auf $\{1, \dots, n\}$: Für alle $i, j \in \{1, \dots, n\}$ existiert $\sigma \in S_n$ mit $\sigma(i) = j$.
+    \item Sei $H \leq G$. Dann ist $G / H$ eine transitive $G$-Menge, denn nach Definition ist
+    \[\operatorname{Orb}_G(H) = \{ a.H \ | \ a \in G\} = \{ aH \ | \ a\in G\} =G / H.\]
+    Wir werden gleich sehen, dass dies bis
+    auf Isomorphie alle transitiven $G$-Mengen sind.
+\end{enumerate}
+\end{bsp}
+
+\begin{satz}\label{satz:transitive_g_menge}
+Sei $X$ eine transitive $G$-Menge. Dann gilt:
+\begin{itemize}
+    \item[(a)] Für $x, y \in X$ existiert ein $g \in G$ mit $\operatorname{Stab}_G(y) = g \operatorname{Stab}_G(x) g^{-1}$, d.h. je zwei Stabilisatoren sind konjugiert zueinander.
+    \item[(b)] Für jedes $x \in X$ ist \[G / \operatorname{Stab}_G(x) \to X, \quad a \operatorname{Stab}_G(x) \mapsto a . x\] ein Isomorphismus von $G$-Mengen.
+    \item[(c)] Es existiert ein $H \leq G$ mit $X \cong G / H$ (als $H$-Menge).
+\end{itemize}
+Ist zudem $G$ endlich, dann gilt $\lvert X \rvert \mid \operatorname{ord}(G)$.
+\end{satz}
+
+\begin{proof}
+(a) Seien $x, y \in X$. Wegen der Transitivität von $X$ existiert ein $g \in G$ mit $g . x = y$. Sei $h \in \operatorname{Stab}_G(x)$. Dann erhalten wir
+\[
+(g h g^{-1}) . y = g.(h. (g^{-1} . y)) = g (h . x) = g . x = y,
+\]
+somit ist $g h g^{-1} \in \operatorname{Stab}_G(y)$ und deshalb gilt $g\operatorname{Stab}_G(x)g^{-1}\subseteq \operatorname{Stab}_G(y)$. Die andere Inklusion zeigt man analog.
+
+(b) folgt aus \ref{folg:isom_orbit} und $\operatorname{Orb}_G(x) = X$.
+
+(c) Wir setzen $H := \operatorname{Stab}_G(x)$ für ein beliebiges $x \in X$, dann folgt die Behauptung aus (b). 
+
+Aus (c) ergibt sich mit Hilfe des Satzes von Lagrange \ref{satz:lagrange}
+\[
+|X| = |G / H| = (G : H) \mid \ord(G).
+\]
+\end{proof}
+
+\begin{satz}\label{satz:bahnengleichung}
+(\defn{Bahnengleichung}) Sei $X$ eine $G$-Menge. Dann gilt:
+\begin{itemize}
+    \item[(a)] Für jedes $x \in X$ ist $|\operatorname{Orb}_G(x)| = (G : \operatorname{Stab}_G(x))$.
+    \item[(b)] Ist $|X|$ endlich und $x_1, \dots, x_n$ ein Vertretersystem der Bahnen, dann ist
+    \[
+    |X| = \sum_{i=1}^n (G : \operatorname{Stab}_G(x_i)).
+    \]
+\end{itemize}
+\end{satz}
+
+\begin{proof}
+(a) Wegen \ref{folg:isom_orbit} ist $G / \operatorname{Stab}_G(x) \cong \operatorname{Orb}_G(x)$,
+woraus direkt die Behauptung folgt.
+
+(b) Wegen \ref{bem:orbits_und_stabis} und (a) ist 
+\[
+|X|=|\dot\bigcup_{i=1,\ldots,n}\Orb_G(x_i)|=\sum_{i=1}^n|\Orb_G(x_i)|=\sum_{i=1}^n|G : \operatorname{Stab}_G(x_i)|.
+\]
+\end{proof}
+
+\begin{anm}\label{anm:lagrange_satz}
+Die Bahnengleichung liefert einen weiteren Beweis des Satzes von Lagrange: Sei $G$ eine endliche Gruppe und $H \leq G$ eine Untergruppe. Wir lassen $H$ auf $G$ durch Rechtsinversenmultiplikation operieren: $h . x = x h^{-1}$ (vgl. \ref{bsp:orbit_stabilisator_beispiele})
+
+Sei $n = (G : H)$ und $x_1, \dots, x_n$ ein Vertretersystem der Bahnen (=Linksnebenklassen von $H$ in $G$), dann ist
+\begin{align*}
+\operatorname{ord}(G) &= \sum_{i=1}^n |\operatorname{Orb}_H(x_i)| = \sum_{i=1}^n |x_i H| = \sum_{i=1}^n (H : \operatorname{Stab}_H(x_i)) \\
+&= \sum_{i=1}^n (H : \{e\}) = \sum_{i=1}^n |H| = n \cdot \operatorname{ord}(H).
+\end{align*}
+\end{anm}
+
+\begin{folgerung}\label{folg:fixpunktgleichung}
+(\defn{Fixpunktgleichung}) Sei $X$ eine endliche $G$-Menge und $x_1, \dots, x_n$ ein Vertretersystem der Bahnen, die mehr als ein Element besitzen. Dann gilt:
+\[
+|X| = |\operatorname{Fix}_G(X)| + \sum_{i=1}^n (G : \operatorname{Stab}_G(x_i)).
+\]
+\end{folgerung}
+
+\begin{proof}
+Die Behauptung folgt aus der Bahnengleichung \ref{satz:bahnengleichung}, denn es gilt:
+\[
+x\in\operatorname{Fix}_G(X) \Leftrightarrow \operatorname{Stab}_G(x) = G \Leftrightarrow (G : \operatorname{Stab}_G(x)) = 1.
+\]
+\end{proof}
+
+\begin{defini}\label{def:zentralisator}
+Wir betrachten die Operation von $G$ auf $G$ durch Konjugation: $g . x := g x g^{-1}$. Sei $x \in G$. Die Untergruppe
+\[
+Z_G(x) := \operatorname{Stab}_G(x) = \{ g \in G \mid g x g^{-1} = x \} = \{ g\in G \mid gx=xg\} \leq G
+\]
+heißt der \defn{Zentralisator} von $x$ in $G$.
+\end{defini}
+
+\begin{folgerung}\label{folg:zentralisator_gleichung}
+Sei $G$ eine endliche Gruppe, und sei $x_1, \dots, x_n$ ein Vertretersystem der Bahnen in $G \setminus Z(G)$ bezüglich der Konjugationsoperation von $G$ auf sich selbst. Dann gilt:
+\[
+\operatorname{ord}(G) = \operatorname{ord}(Z(G)) + \sum_{i=1}^n (G : Z_G(x_i)).
+\]
+\end{folgerung}
+
+\begin{proof}
+Sei $x\in G$. Dann gilt:
+\[x \in Z(G) \iff g x g^{-1} = x \text{ für alle } g \in G \iff x \text{ ist Fixpunkt der Konjugationsoperation.}\]
+Die Behauptung folgt somit aus der Fixpunktgleichung \ref{folg:fixpunktgleichung}.
+\end{proof}
+
+\end{document}
