@@ -1972,4 +1972,589 @@ Sei $x\in G$. Dann gilt:
 Die Behauptung folgt somit aus der Fixpunktgleichung \ref{folg:fixpunktgleichung}.
 \end{proof}
 
+\chapter{Ringe}
+\setcounter{section}{3}
+\section{Ringe und Ideale}
+
+\begin{defini}\label{def:ring}
+Ein \defn{Ring} ist ein Tupel $(R, {+}, {\cdot})$, bestehend aus einer Menge $R$ und zwei Verknüpfungen $+$, $\cdot \colon R \times R \rightarrow R$, so dass gilt:
+\begin{itemize}
+    \item[(R1)] $(R, {+})$ ist eine abelsche Gruppe.
+    \item[(R2)] $(R, {\cdot})$ ist ein Monoid.
+    \item[(R3)] $(a + b) \cdot c = a \cdot c + b \cdot c$ und $c \cdot (a + b) = c \cdot a + c \cdot b$ für alle $a, b, c \in R$.
+\end{itemize}
+Das neutrale Element bezüglich $+$ bezeichnen wir mit $0_R$ (Nullelement), das neutrale Element bezüglich $\cdot$ mit $1_R$ (Einselement).
+
+$R$ heißt \defn{kommutativ}, wenn $\cdot$ kommutativ ist.
+
+Eine Teilmenge $S \subseteq R$ heißt \defn{Unterring}, wenn $(S, {+})$ eine Untergruppe in $(R, {+})$ und $(S, {\cdot})$ ein Untermonoid in $(R, {\cdot})$ ist.
+
+Seien $R, R'$ Ringe. Eine Abbildung $\varphi \colon R \to R'$ heißt \defn{Ringhomomorphismus}, wenn gilt:
+\begin{itemize}
+    \item $\varphi(a + b) = \varphi(a) + \varphi(b)$, d.h. $\varphi$ ist ein Gruppenhomomorphismus bezüglich $+$,
+    \item $\varphi(a \cdot b) = \varphi(a) \cdot \varphi(b)$ für alle $a, b \in R$ und $\varphi(1_R) = 1_{R'}$, d.h. $\varphi$ ist ein Monoidhomomorphismus bezüglich $\cdot$.
+\end{itemize}
+\end{defini}
+
+
+\begin{anm}\label{anm:indizes_bei_nulleins}
+\begin{itemize}
+\item Wir lassen die Indizes „$R$” bei $0_R$ und $1_R$ häufig weg und schreiben einfach $0$ bzw. $1$.
+\item In der Literatur gibt es Ringdefinitionen, die nur die Assoziativität der Multiplikation fordern. Dort heißt das, was bei uns Ring heißt, dann ein "`Ring mit Eins"'.
+\item Endo-, Iso- und Automorphismen von Ringen werden analog wie bei Monoiden und Gruppen definiert.
+Ein Ringhomomomorphismus ist genau dann ein Ringisomorphismus, wenn er bijektiv ist.
+\item Es gelten diverse Rechenregeln, die man meist schon in den Anfängervorlesungen beweist, z.B.
+\[
+0\cdot a=0, \quad (-1)\cdot a=-a=a\cdot(-1), \quad \ldots  
+\]
+(jeweils für alle $a\in R$).
+\end{itemize}
+\end{anm}
+
+\begin{bsp}\label{bsp:ring_beispiele}
+\begin{itemize}
+    \item[(a)] $\mathbb{Z},\QQ$ sind der gewöhnlichen Addition und Multiplikation Ringe,
+    $\ZZ$ ist ein Unterring von $\QQ$.
+    \item[(b)] Der einfachstmögliche Ring ist "`der"' Nullring -- eine einelementige Menge mit den einzig möglichen Verknüpfungen. Alle Nullringe sind kanonisch isomorph zueinander,
+    deswegen sprechen wir von "`dem"' Nullring und bezeichnen ihn mit $0$.
+    bezeichnet mit $0$. Es gilt
+    \[
+    R=0 \iff 0_R = 1_R.
+    \]
+    Die Implikation "`$\Rightarrow$"' ist klar, für die andere Implikation bemerken wir, dass
+    sich aus $0_R=1_R$ für jedes $a\in R$ die Gleichung $a=1_R\cdot a=0_r\cdot a=0_R$
+    ergibt.
+    \item[(c)] Für einen Körper $K$ bildet $M_{n,n}(K)$, die Menge der $n \times n$-Matrizen über $K$ mit Matrixaddition und -multiplikation, einen Ring. Dieser ist nicht kommutativ für $n \geq 2$.
+\end{itemize}
+\end{bsp}
+
+\begin{bem}\label{bem:universelle_eigenschaft_z_ring}
+(\defn{Universelle Eigenschaft des Rings $\ZZ$}) Für jeden Ring $R$ existiert genau ein Ringhomomorphismus
+\[
+\varphi_R \colon \ZZ \to R.
+\]
+Dieser ist explizit gegeben durch
+\[
+\varphi_R(n) := n_R = \begin{cases} 
+\underbrace{1_R + \cdots + 1_R}_{\text{$n$-mal}} & \text{falls } n \in \NN, \\ 
+0 & \text{falls } n = 0, \\ 
+-(\underbrace{1_R + \cdots + 1_R}_{\text{$(-n)$-mal}}) & \text{falls } -n \in \NN. 
+\end{cases}
+\]
+\end{bem}
+
+\begin{proof}
+Nach der universellen Eigenschaft der Gruppe $\ZZ$ existiert genau ein Gruppenhomomorphismus $\varphi \colon (\ZZ, +) \to (R, +)$ mit $\varphi(1) = 1_R$. Dieser ist genau durch $\varphi_R$ gegeben. Man verifiziert, dass $\varphi_R$ ein Ringhomomorphismus ist.
+\end{proof}
+
+\begin{anm}
+Für $n\in\ZZ$ notieren wir $n_R=\varphi_R(n)\in R$ meist wieder mit $n$. Da $\varphi_R$ im Allgemeinen nicht injektiv ist, kann $m_R=n_R$ gelten, obwohl $m\neq n$ in $\ZZ$ ist.
+Diese Lesart von Elementen von $\ZZ$ als Elementen von $R$ begegnet uns etwa beim binomischen Lehrsatz in $R$: Sind $a,b\in R$ mit $ab=ba$, dann ist
+\[
+(a+b)^n=\sum_{k=0}^n\binom{n}{k}a^{k}b^{n-k}.
+\]
+\end{anm}
+
+
+
+
+\begin{notation}
+In diesem Abschnitt seien von jetzt an $R, S$ stets kommutative Ringe.
+\end{notation}
+
+\begin{defini}\label{def:ideal}
+$I \subseteq R$ heißt ein \defn{Ideal}, falls gilt:
+\begin{itemize}
+    \item[(I1)] $0 \in I$.
+    \item[(I2)] Sind $a, b \in I$, dann ist auch $a + b \in I$.
+    \item[(I3)] Sind $a \in I$ und $r \in R$, dann ist auch $r a \in I$.
+\end{itemize}
+\end{defini}
+
+\begin{anm}
+\begin{itemize}
+\item Ist $I \subseteq R$ ein Ideal, so ist $I$ insbesondere eine Untergruppe von $R$ bzgl. "$+$":
+\begin{denn}
+(I1) und (I2) liefern (UG1) und (UG2). Aus (I3) folgt, dass mit $a \in I$ auch $-a=(-1)a \in I$ liegt, was (UG3) zur Folge hat.
+\end{denn}
+\item Unterringe und Ideale sind zwei verschiedene Dinge: $\ZZ$ ist ein Unterring von $\QQ$,
+aber kein Ideal in $\QQ$; $2\mathbb{Z}$ ist ein Ideal in $\ZZ$ (das sehen wir im Anschluss),
+aber kein Unterring von $\ZZ$. 
+
+\end{itemize}
+\end{anm}
+
+\begin{bsp}\label{bsp:ideale}
+\begin{itemize}
+    \item $\{0\}$ und $R$ sind Ideale in $R$.
+    \item Ideale in $\ZZ$ sind genau von der Form $n\ZZ$ für $n \in \NN_0$. Die Untergruppen $I = n\ZZ$ von $\ZZ$ erfüllen alle (I3).
+\end{itemize}
+\end{bsp}
+
+\begin{bem}\label{bem:ringhom_idealeigenschaften}
+Sei $\varphi \colon R \to S$ ein Ringhomomorphismus. Dann gilt:
+\begin{itemize}
+    \item[(a)] Ist $I \subseteq S$ ein Ideal, dann ist auch $\varphi^{-1}(I) \subseteq R$ ein Ideal.
+    \item[(b)] Der Kern $\operatorname{ker} \varphi := \{a \in R \mid \varphi(a) = 0\} = \varphi^{-1}(\{0\})$ ist ein Ideal in $R$.
+    \item[(c)] Ist $I \subseteq R$ ein Ideal und $\varphi$ surjektiv, dann ist auch $\varphi(I) \subseteq S$ ein Ideal.
+    \item[(d)] Bilder und Urbilder von Unterringen unter $\varphi$ sind wieder Unterringe. Insbesondere ist das Bild $\operatorname{im} \varphi \subseteq S$ ist ein Unterring.
+\end{itemize}
+\end{bem}
+
+\begin{proof}
+Das rechnet man leicht nach.
+\end{proof}
+
+\begin{bem}\label{bem:faktorring}
+$ I \subseteq R $ Ideal. Dann wird die Faktorgruppe $ R / I $ wird mit der Multiplikation
+\[
+(a + I)(b + I) := ab + I
+\]
+zu einem Ring, dem \defn{Faktorring} (\defn{Restklassenring}) von $ R $ nach $ I $.
+
+Die kanonische Projektion $ \pi \colon R \to R / I $, $ a \mapsto a + I $ ist ein surjektiver Ringhomomorphismus mit $ \operatorname{ker} \pi = I $.
+\end{bem}
+
+\begin{proof}
+Wir rechnen die Wohldefiniertheit der Multiplikation nach. Seien $ a_1, a_2, b_1, b_2 \in R $ mit $ a_1 + I = a_2 + I $ und $ b_1 + I = b_2 + I $. Dann gilt
+\[
+a_1 b_1 - a_2 b_2 = (a_1 - a_2)b_1 + a_2(b_1 - b_2) \in I,
+\]
+da $ (a_1 - a_2) \in I $ und $ (b_1 - b_2) \in I $ sind. Also ist $ a_1 b_1 + I = a_2 b_2 + I $.
+Vom Rest überzeugt man sich leicht.
+\end{proof}
+
+\begin{anm}\label{anm:nullring}
+Es ist $R / I = 0 \iff I = R$, 
+\begin{denn}
+Aufgrund von \ref{bsp:ring_beispiele} gilt: \[R / I = 0 \iff 0 + I = 1 + I \iff 1 \in I \iff I = R.\]
+\end{denn}
+\end{anm}
+
+\begin{bsp}\label{bsp:restklassenringe}
+$R = \ZZ$, $I = n \ZZ$ für $n \in \NN$. Dann erhält man den Restklassenring $\ZZ / n \ZZ = \{ \overline{0}, \ldots, \overline{n-1} \}$ mit den Verknüpfungen \[\overline{a} + \overline{b} := \overline{a + b}, \qquad \overline{a} \cdot
+\overline{b} := \overline{a \cdot b}.\]
+\end{bsp}
+
+Die folgenden drei Aussagen beweist ganz analog zu den entsprechenden Aussagen in Abschnitt
+\ref{sec:faktorgruppen}.
+
+\begin{bem}\label{bem:ideale_faktorringe}
+Sei $I \subseteq R$ ein Ideal und $\pi \colon R \to R / I$ die kanonische Projektion. Dann sind die Abbildungen
+\[
+\left\{ \text{Ideale in } R / I \right\} \overset{\Phi}{\underset{\Psi}{\rightleftarrows}} \left\{ \text{Ideale } \tilde{I} \text{ in } R \text{ mit } \tilde{I} \supseteq I \right\}
+\]
+mit
+\[
+\Phi \colon J \mapsto \pi^{-1}(J) \quad \text{und} \quad \Psi \colon \tilde{I} \mapsto \pi(\tilde{I})=\tilde I/I
+\]
+inklusionserhaltende, zueinander inverse Bijektionen.
+\end{bem}
+
+\begin{satz}[Universelle Eigenschaft des Faktorrings]\label{satz:faktorring_universelle_eigenschaft}
+ Sei $\varphi \colon R \to S$ ein Ringhomomorphismus und $I \subseteq R$ ein Ideal mit $I \subseteq \ker \varphi$. Dann existiert ein eindeutig bestimmter Ringhomomorphismus $\overline{\varphi} \colon R / I \to S$, sodass das folgende Diagramm kommutiert:
+\[
+\xymatrix{
+R \ar[r]^{\varphi} \ar[d]_{\pi} & S \\
+R / I \ar@{-->}[ur]_{\overline{\varphi}}
+}
+\]
+d.h. $\overline{\varphi} \circ \pi = \varphi$. Explizit ist $\overline{\varphi}$ gegeben durch $\overline{\varphi} \colon R / I \to S, \; a + I \mapsto \varphi(a)$. Es gilt $\ker(\overline{\varphi}) = \ker \varphi / I$ und $\operatorname{im} \overline{\varphi} = \operatorname{im} \varphi$.
+\end{satz}
+
+\begin{satz}[Homomorphiesatz für Ringe]\label{satz:homomorphiesatz_ring}
+Sei $\varphi \colon R \to S$ ein Ringhomomorphismus. Dann gibt es einen eindeutig bestimmten Ringisomorphismus
+\[
+\overline{\varphi} \colon R / \ker \varphi \to \operatorname{im} \varphi,
+\]
+sodass das folgende Diagramm kommutiert:
+\[
+\xymatrix{
+R \ar[r]^{\varphi} \ar[d]_{\pi} & S \\
+R / \ker \varphi  \ar[r]^\Phi_{\cong} & \operatorname{im} \varphi \ar@{^{(}->}[u]_{i}
+}
+\]
+Hierbei ist $\pi$ die kanonische Projektion und $i$ die Inklusionsabbildung. Die Abbildung $\Phi$ ist explizit gegeben durch
+\[
+\Phi(a + \ker \varphi) = \varphi(a) \quad \text{für } a \in R.
+\]
+\end{satz}
+
+\begin{defini}\label{def:nullteiler_integritätsring}
+Ein Element $a \in R$ heißt ein \defn{Nullteiler} in $R$, wenn es ein $b \in R\setminus\{0\}$ mit $a b = 0$ gibt. $R$ heißt ein \defn{Integritätsring} (oder \defn{Integritätsbereich}), wenn $R \neq 0$ ist und es bis auf die Null keinen Nullteiler gibt, d.h. wenn gilt:
+\[
+ab=0\iff a=0 \ \text{ oder } \ b=0.
+\]
+\end{defini}
+
+\begin{anm}\label{anm:nullteiler}
+\begin{itemize}
+    \item Für $R \neq 0$ ist $0$ ein Nullteiler in $R$, da $0 \cdot 1 = 0$ und $1 \neq 0$.
+    \item Achtung: Es gibt unterschiedliche Definitionen von Nullteilern in der Literatur.
+    \item Im Nullring ist $0$ kein Nullteiler.
+    \item Der Nullring ist kein Integritätsring.
+    \item Nullteiler $\neq$ Teiler der Null (selbst in Integritätsringen ist jedes Element ein Teiler der Null).
+    \item Ist $a\in R$ kein Nullteiler, dann ist a "`kürzbar"': Aus $ar=as$ mit $r,s\in R$ folgt dann $r=s$, denn aus $ar=as$ ergibt sich $a(r-s)=0$, was zu $r-s=0$ und damit zu $r=s$ führt.
+    Insbesondere können in Integritätsringen Elemente $\neq0$ gekürzt werden. 
+\end{itemize}
+\end{anm}
+
+\begin{bsp}\label{bsp:integritätsring}
+\begin{itemize}
+    \item[(a)] $\ZZ$ ist ein Integritätsring.
+    \item[(b)] $\overline{2} \in \ZZ / 6\ZZ$ ist ein Nullteiler, da $\overline{2} \cdot \overline{3} = \overline{6} = \overline{0}$ in $\ZZ / 6\ZZ$.
+\end{itemize}
+\end{bsp}
+
+\begin{defini}\label{def:einheitengruppe}
+Die \defn{Einheitengruppe} $R^{\times}$ von $R$ ist die Einheitengruppe des Monoids $(R, \cdot)$. Die Elemente von $R^{\times}$ heißen die \defn{Einheiten} von $R$. Das bedeutet: Ein Element $a \in R$ liegt genau dann in $R^{\times}$, wenn es ein $b \in R$ gibt, so dass $a \cdot b = 1$ ist.
+\end{defini}
+
+\begin{bsp}\label{bsp:einheitengruppe}
+\begin{itemize}
+    \item[(a)] $\ZZ^{\times} = \{ \pm 1 \}$.
+    \item[(b)] $(\ZZ / 4\ZZ)^{\times} = \{ \overline{1}, \overline{3} \}$.
+\end{itemize}
+\end{bsp}
+
+\begin{anm}
+Jeder Ringhomomorphismus $\varphi\colon R\to S$ schränkt sich zu einem Gruppenhomomorphismus $R^\times\to S^\times$ ein und für alle $a\in R^\times$ ist $\varphi(a^{-1})=\varphi(a)^{-1}$. Dies
+ergibt sich direkt aus \ref{bem:gruppenhom_universelle_eigenschaft}.
+\end{anm}
+
+\begin{defini}\label{def:hauptideal}
+Für ein Element $a \in R$ heißt \[(a) := Ra = \{ r \cdot a \mid r \in R \}\] das \defn{von $a$ erzeugte Hauptideal}. Ein Ideal $I \subseteq R$ heißt \defn{Hauptideal}, wenn es ein $a \in R$ gibt, so dass $I = (a)$ ist. $R$ heißt ein \defn{Hauptidealring} (HIR), wenn $R$ ein Integritätsring ist und jedes Ideal in $R$ ein Hauptideal ist.
+\end{defini}
+
+
+\begin{bsp}\label{bsp:hauptidealring}
+$\ZZ$ ist ein HIR, denn: Ideale in $\ZZ$ sind durch $n \ZZ = (n)$, $n \in \NN_0$, gegeben (vgl. \ref{def:ideal}), und $\ZZ$ ist ein Integritätsring.
+\end{bsp}
+
+\begin{bem}\label{bem:einheit_ideal}
+Sei $a \in R$. Dann sind äquivalent:
+\begin{itemize}
+    \item[(i)] $a \in R^{\times}$
+    \item[(ii)] $(a) = R$
+\end{itemize}
+Insbesondere ist $(1) = R$ (``\defn{Einsideal}'').
+\end{bem}
+\begin{proof}
+Es gilt 
+\[a \in R^{\times} \iff \text{Es existiert ein } b \in R \text{ mit } a b = 1 \iff 1 \in (a) \iff (a) = R.\]
+\end{proof}
+
+\begin{defini}\label{def:koerper}
+$R$ heißt ein \defn{Körper}, wenn $R^{\times} = R \setminus \{ 0 \}$ ist. Sind $R,S$ Körper, dann ist ein \defn{Körperhomomorphismus} $R\to S$ ein Ringhomomorphismus der zugrunde liegenden Ringe
+$R,S$.
+\end{defini}
+
+\begin{anm}\label{anm:kein_koerper}
+Insbesondere ist $R = 0$ kein Körper.
+\end{anm}
+
+\begin{satz}\label{satz:koerper_eigenschaften}
+Sei $R \neq 0$. Dann sind äquivalent:
+\begin{itemize}
+    \item[(i)] $R$ ist ein Körper.
+    \item[(ii)] $(0)$ und $(1) = R$ sind die einzigen Ideale in $R$.
+    \item[(iii)] Jeder Ringhomomorphismus $\varphi \colon R \to S$ in einen Ring $S \neq 0$ ist injektiv.
+\end{itemize}
+\end{satz}
+
+\begin{proof}
+(i) $\Rightarrow$ (ii): Sei $R$ ein Körper und $I \neq (0)$ ein Ideal in $R$. Dann existiert ein $a \in I$ mit $a \neq 0$, also $a \in R^{\times}$,  woraus nach \ref{bem:einheit_ideal} $R = (a) \subseteq I$ folgt. Also ist $I = R$.
+
+(ii) $\Rightarrow$ (iii): Sei $\varphi \colon R \to S$ ein Ringhomomorphismus mit $S \neq 0$. Dann ist $\operatorname{ker} \varphi \subseteq R$ ein Ideal. Da $\operatorname{ker} \varphi \neq R$ ist wegen $\varphi(1_R) = 1_S \neq 0_S$, folgt aus (ii), dass $\operatorname{ker} \varphi = (0)$ ist, also ist $\varphi$ injektiv.
+
+(iii) $\Rightarrow$ (i): Sei $a \in R \setminus R^{\times}$. Nach \ref{bem:einheit_ideal} ist $(a) \neq R$. Wir setzen $S := R / (a)$ , was wegen \ref{anm:nullring} $ \neq 0$ ist. Das Element $a$ liegt im Kern der kanonischen Projektion von $R$ nach $S=R/(a)$, die wegen (iii) injektiv ist. Dies impliziert $a = 0$, also ist $R$ ein Körper.
+\end{proof}
+
+\begin{anm}\label{anm:hinweise_struktur_r}
+\begin{itemize}
+\item Insbesondere gelten für $R$ folgende Implikationen:
+\[
+R \text{ Körper } \Rightarrow R \text{ HIR } \Rightarrow R \text{ Integritätsring}.
+\]
+\item Jeder Körperhomomorphismus ist wegen \ref{satz:koerper_eigenschaften} injektiv.
+\end{itemize}
+\end{anm}
+
+\begin{defini}\label{def:summe_produkt_ideale}
+Seien $I, J \subseteq R$ Ideale. Dann sind
+\[
+I + J := \{ a + b \mid a \in I, \; b \in J \}, \quad I\cap J,
+\]
+\[
+I J := \left\{ \sum_{i=1}^n a_i b_i \mid a_i \in I, \; b_i \in J, \; n \in \NN_0 \right\}
+\]
+Ideale in $R$. Analog sind endliche Summen, Durchschnitte und Produkte von Idealen wieder Ideale. Wir setzen $I^n := I\cdot \ldots\cdot I \quad \text{($n$-mal)}$. Konvention: $I^0 := (1) = R$.
+
+$I,J$ heißen \defn{relativ prim}, wenn $I+J=(1)$ ist.
+
+Ist $(I_\lambda)_{\lambda \in \Lambda}$ eine Familie von Idealen, dann ist
+\[
+\sum_{\lambda \in \Lambda} I_\lambda := \left\{ \sum_{\lambda \in \Lambda} a_\lambda \mid a_\lambda \in I_\lambda, \; a_\lambda = 0 \text{ für fast alle } \lambda \in \Lambda \right\}
+\]
+ein Ideal in $R$.
+
+Sind $a_1, \ldots, a_n \in R$, dann setzen wir
+\[
+(a_1, \ldots, a_n) := \left\{ r_1 a_1 + \dots + r_n a_n \mid r_1, \ldots, r_n \in R \right\} = (a_1) + \dots + (a_n).
+\]
+$(a_1, \ldots, a_n)$ heißt das \defn{von $a_1, \ldots, a_n$ erzeugte Ideal}.
+
+Ist allgemeiner $M \subseteq R$, dann setzen wir
+\[
+(M) := \left\{ \sum_{x \in M} r_x x \mid r_x \in R, \; r_x = 0 \text{ für fast alle } x \in M \right\} = \sum_{x \in M} (x).
+\]
+$(M)$ heißt das \defn{von $M$ erzeugte Ideal}.
+\end{defini}
+
+\begin{anm}\label{anm:kleinstes_ideal}
+Anstelle Erzeugnis, Summe und Produkt von Idealen so wie oben explizit zu definieren,
+hätten wir sie auch (in Analogie etwa zu \ref{bem:erzeugte_untergruppe}) über universelle Eigenschaften definieren können. Dann hätten wir die Existenz nachrechnen müssen und hätten dies
+über die obigen Definitionen tun können. Konkret gelten die folgenden universellen Eigenschaften:
+\begin{itemize}
+    \item $(M)$ ist das kleinste Ideal in $R$, das $M$ enthält. Für jedes Ideal $I$ in $R$ gilt:
+    \[(M) \subseteq I \iff M \subseteq I.\]
+    \item $I + J$ ist das kleinste Ideal in $R$, das $I$ und $J$ enthält. Für jedes Ideal $K$ in $R$ gilt:
+    \[I + J \subseteq K \iff I \subseteq K \text{ und } J \subseteq K.\]
+    \item $I J$ ist das kleinste Ideal in $R$, das alle Produkte $ab$ von Elementen $a \in I$, $b \in J$ enthält.
+    Für jedes Ideal $K$ in $R$ gilt:
+    \[
+    I J \subseteq K \iff ab \in K \text{ für alle } a \in I, b \in J.
+    \]
+\end{itemize}
+Die Multiplikation von Idealen ist assoziativ(!), daher ist Klammerung nicht notwendig und wir werden im Folgenden darauf verzichten.
+\end{anm}
+
+\begin{bsp}\label{bsp:idealsummen_produkte}
+Sei $R = \ZZ$, $I = (2)$, $J = (3)$. Dann gilt:
+\begin{itemize}
+    \item $I + J = (1) = \ZZ$, denn: $1 = (-1) \cdot 2 + 1 \cdot 3 \in I + J$. Insbesonder sind $I$ und $J$ relativ prim.
+    \item $I \cap J = (6)$.
+    \item $IJ=(6)$
+\end{itemize}
+
+In Hauptidealringen gilt allgemein:
+\[
+(a) + (b) = \operatorname{ggT}(a, b), \quad (a) \cap (b) = \operatorname{kgV}(a, b).
+\]
+(wobei $\ggT$ und $\operatorname{kgV}$ noch zu definieren wären, was wir aber zumindest für den $\ggT$ im nächsten Abschnitt tun werden).
+\end{bsp}
+
+\begin{bem}\label{bem:idealprodukte_durchschnitte}
+Seien $I_1, \dots, I_n \subseteq R$ Ideale. Dann gilt:
+\begin{itemize}
+    \item[(a)] $I_1 \cdot\ldots\cdot I_n \subseteq I_1 \cap \dots \cap I_n$.
+    \item[(b)] Sind $I_1, \dots, I_n$ paarweise relativ prim, so gilt
+    \[
+    I_1 \cdot\ldots\cdot I_n = I_1 \cap \dots \cap I_n.
+    \]
+\end{itemize}
+\end{bem}
+
+\begin{defini}\label{def:produkt_ringe}
+Sei $(R_i)_{i \in J}$ eine Familie von Ringen. Das kartesische Produkt $\prod_{i \in J} R_i$ wird durch komponentenweise Addition und Multiplikation zu einem Ring. Diesen Ring nennt man das \defn{direkte Produkt} über die Familie $(R_i)_{i \in J}$.
+\end{defini}
+
+\begin{satz}\label{satz:chinesischer_restsatz_variante}
+(\defn{Variante des Chinesischen Restsatzes}) Seien $I_1, \dots, I_n \subseteq R$ Ideale. Wir betrachten die Abbildung
+\[
+\varphi \colon R \to \prod_{k=1}^n R / I_k, \quad r \mapsto (r + I_1, \dots, r + I_n).
+\]
+Dann gilt:
+\begin{itemize}
+    \item[(a)] $\varphi$ ist ein Ringhomomorphismus.
+    \item[(b)] $\varphi$ ist genau dann surjektiv, wenn die Ideale $I_1, \dots, I_n$ paarweise relativ prim sind.
+    \item[(c)] $\ker \varphi = \bigcap_{k=1}^n I_k$.
+    \item[(d)] $\varphi$ ist genau dann injektiv, wenn $\bigcap_{k=1}^n I_k = (0)$ ist.
+\end{itemize}
+Insbesondere erhalten wir unter der Voraussetzung, dass $I_1, \dots, I_n$ paarweise relativ prim sind, einen Ringisomorphismus
+\[
+R / \bigcap_{k=1}^n I_k \cong R / I_1 \times \dots \times R / I_n.
+\]
+\end{satz}
+
+%Vgl. LA 2, SS20, 1.40
+
+\begin{proof}
+Das Nullelement in $R / I_k$ ist $I_k$, und das Einselement ist $1 + I_k$. Für die bessere Lesbarkeit des Beweises bezeichnen wir diese im Folgenden jeweils mit $\overline{0}$ bzw. $\overline{1}$ (unabhängig von $k$). 
+
+(a) rechnet man nach.
+
+(b) "`$\Rightarrow$"' Sei $\varphi$ surjektiv und seien $j,k \in \{1, \dots, n\}, j \neq k$. 
+Es ist $I_j + I_k = (1)$,
+\begin{denn}
+
+Wegen der Surjektivität von $\varphi$ existiert ein $x \in R$ mit $\varphi(x) = (\overline{0}, \dots, \overline{0}, \overline{1}, \overline{0}, \dots, \overline{0})$ (mit $\overline{1}$ an der $k$-ten Stelle). Somit ist $x \in I_j$. 
+Außerdem ist
+\[
+\varphi(1 - x) = \varphi(1) - \varphi(x) = (\overline{1}, \dots, \overline{1}) - (\overline{0}, \dots, \overline{0}, \overline{1}, \overline{0}, \dots, \overline{0})
+= (\overline{1}, \dots, \overline{1}, \overline{0}, \overline{1}, \dots, \overline{1}) 
+\]
+(mit $\overline{0}$ an der $k$-ten Stelle. Insbesondere ist $1-x\in I_k$. Wir erhalten
+\[
+1 = x + (1 - x) + x \in I_j + I_k.
+\]
+\end{denn}
+"`$\Leftarrow$"' Seien $I_1, \dots, I_n$ paarweise relativ prim. Das Element $(\overline{0}, \ldots, \overline{0},
+\overline{1}, \overline{0}, \dots, \overline{0})$ (mit $\overline{1}$ an der $k$-ten Stelle) liegt in  $\image\varphi$ für $k = 1, \dots, n$, 
+\begin{denn}
+Sei $k \in \{1, \dots, n\}$ fixiert. Für $j \neq k$ ist $I_k + I_j = (1)$. 
+Somit existieren Elemente $u_j \in I_k, v_j \in I_j$ mit $u_j + v_j = 1$. Wir setzen 
+\[
+e_k := v_1 \cdot\ldots\cdot v_{k-1} v_{k+1} \cdot\ldots\cdot v_n.
+\]
+Dann ist $e_k \in I_j$ für $j\neq k$ und
+\[
+e_k = (1-u_1)\cdot\ldots(1 - u_{k-1})(1 - u_{k+1}) \cdot\ldots\cdot (1 - u_n)=1+z
+\]
+für ein $z\in I_k$. Wir erhalten
+\[
+\varphi(e_k)=((\overline{0}, \dots, \overline{0}, \overline{1}, \overline{0}, \dots, \overline{0})
+\]
+(mit $\overline{1}$ an der $k$-ten Stelle).
+\end{denn}
+Sei $y = (r_1 + I_1, \dots, r_n + I_n)\in\prod_{k=1}^n R / I_k$. Dann ist
+\begin{align*}
+\varphi(r_1 e_1 + \dots + r_n e_n) &= \varphi(r_1) \varphi(e_1) + \dots + \varphi(r_n) \varphi(e_n)\\
+&= (r_1 + I_1, \overline{0}, \dots, \overline{0}) + \dots + (\overline{0}, \dots, r_n + I_n) = y,
+\end{align*}
+und deshalb $\varphi$ surjektiv.
+
+(c) Es ist
+\[
+\ker\varphi)=\{r\in R \ | \ r+I_1=I_1,\ldots, r+I_n=I_n\}=I_1\cap\ldots\cap I_n.
+\]
+Daraus ergibt sich unmittelbar (d), und durch Anwendung des Homomorphiesatzes für Ringe erhalten wir die letzte Aussage des Satzes.
+\end{proof}
+
+\begin{bsp}\label{bsp:produkt_ideale}
+Die Abbildung 
+\[\varphi \colon \ZZ \to \ZZ / 2\ZZ \times \ZZ / 3\ZZ, \quad a \mapsto (a + 2\ZZ, a + 3\ZZ)\] ist surjektiv, da $(2) + (3) = (1)$ ist, vgl. \ref{def:summe_produkt_ideale}. Der Kern von $\varphi$ ist $(2) \cap (3) = (6)$.
+
+Somit induziert $\varphi$ einen Ringisomorphismus
+\[
+\ZZ / 6\ZZ \cong \ZZ / 2\ZZ \times \ZZ / 3\ZZ.
+\]
+\end{bsp}
+
+\begin{defini}\label{def:primideal_maximalideal}
+Sei $I \subseteq R$ ein Ideal.
+\begin{itemize}
+    \item $I$ heißt \defn{Primideal}, wenn $I \neq R$ ist und für alle $x, y \in R$ gilt: $x y \in I \Rightarrow x \in I$ oder $y \in I$.
+    \item $I$ heißt \defn{maximales Ideal}, wenn $I \neq R$ ist und es kein Ideal $J \subseteq R$ gibt, für das $I \subsetneqq J \subsetneqq R$ gilt. Äquivalent dazu ist die Bedingung, dass $I\neq R$ ist und für alle Ideale $J\subsetneqq R$ gilt: $I\subseteq J\Rightarrow I=J$.
+\end{itemize}
+\end{defini}
+
+\begin{bem}\label{bem:primideal_maximalideal_faktorring}
+Sei $I \subseteq R$ ein Primideal. Dann gilt:
+\begin{itemize}
+    \item[(a)] $I$ ist Primideal $\iff R / I$ ist ein Integritätsring.
+    \item[(b)] $I$ ist maximales Ideal $\iff R / I$ ist ein Körper.
+\end{itemize}
+\end{bem}
+
+\begin{proof}
+(a) Die Bedingung
+\[
+x y \in I \Rightarrow x \in I \text{ oder } y \in I
+\]
+ist äquivalent zu
+\[
+\overline{x} \cdot \overline{y} = \overline{0} \Rightarrow \overline{x} = \overline{0} \text{ oder } \overline{y} = \overline{0}
+\]
+in $R / I$, und die Bedingung $I \neq R$ ist nach \ref{anm:nullring} äquivalent dazu, dass $R / I \neq 0$ ist.
+Somit ist die Eigenschaft von $I$, ein Primideal zu sein, äquivalent zur Eigenschaft von $R / I$,
+ein Integritätsring zu sein.
+
+(b) Nach Bemerkung \ref{bem:ideale_faktorringe} entsprechen die Ideale $J \subseteq R$ mit $I \subsetneqq J \subsetneqq R$ den Idealen $\neq(0),(1)$ in $R / I$. Nach Satz \ref{satz:koerper_eigenschaften} ist $R / I$ genau dann ein Körper, wenn es solche Ideale nicht gibt.
+\end{proof}
+
+\begin{folgerung}\label{folgerung:max_ideal_ist_primideal}
+Sei $I \subseteq R$ ein maximales Ideal. Dann ist $I$ ein Primideal.
+\end{folgerung}
+
+\begin{proof}
+Jeder Körper ist nullteilerfrei (siehe Lineare Algebra I). Die Behauptung folgt dann aus Satz \ref{bem:primideal_maximalideal_faktorring}.
+\end{proof}
+
+\begin{bem}\label{bem:primzahl_und_koerper}
+Sei $n \in \NN$. Dann sind äquivalent:
+\begin{itemize}
+    \item[(i)] $n$ ist eine Primzahl.
+    \item[(ii)] $\ZZ / n\ZZ$ ist nullteilerfrei.
+    \item[(iii)] $\ZZ / n\ZZ$ ist ein Körper.
+\end{itemize}
+\end{bem}
+
+\begin{proof}
+siehe Lineare Algebra I. Man beachte, dass die Beweise für diese Aussage in der LAI meist benutzen,
+dass in $\ZZ$ der Satz von der eindeutigen Primfaktorzerlegung gilt, was wir eigentlich erst
+im nächsten Abschnitt beweisen werden.
+\end{proof}
+
+\begin{folgerung}\label{folgerung:primideale_in_Z}
+Die Primideale in $\ZZ$ sind genau das Nullideal $(0)$ sowie die Ideale der Form $(p)$ für eine Primzahl $p$.
+Maximale Ideale in $\ZZ$ sind genau die Ideale der Form $(p)$ für eine Primzahl $p$.
+\end{folgerung}
+
+\begin{folgerung}\label{folgerung:kleiner_fermatscher_satz}
+(Kleiner Satz von Fermat) Sei $a \in \ZZ$, $p$ eine Primzahl. Dann gilt:
+\[
+a^p \equiv a \pmod{p}.
+\]
+\end{folgerung}
+
+\begin{proof}
+$\ZZ / p\ZZ$ ist nach \ref{bem:primzahl_und_koerper} ein Körper, somit ist $(\ZZ / p\ZZ)^{\times} \cong \ZZ / p\ZZ \setminus \{0\}$ eine Gruppe mit $p - 1$ Elementen. Falls $p \nmid a$ gilt, dann ist $\overline{a} \in (\ZZ / p\ZZ)^{\times}$ und somit $\overline{a}^{p - 1} = \overline{1}$ nach dem Satz von Euler-Fermat, also $a^{p - 1} \equiv 1 \pmod{p}$ und folglich $a^p \equiv a \pmod{p}$. Falls $p \mid a$ gilt, ist $a^p \equiv 0 \equiv a \pmod{p}$.
+\end{proof}
+
+\begin{satz}\label{satz:maximales_ideal_existiert}
+Sei $R \neq 0$. Dann besitzt $R$ ein maximales Ideal.
+\end{satz}
+
+% siehe Lineare Algebra II, Sommersemester 2020, Satz 1.33
+\begin{proof}
+Wir setzen \[\mathcal{X} := \{ I \subseteq R \mid I \text{ Ideal, } I \neq R \}.\] $\mathcal{X}$ ist bzgl. "`$\subseteq$"' halbgeordnet und ist nichtleer wegen $\{0\} \in \mathcal{X}$. Sei $\{ I_\lambda \}_{\lambda \in \Lambda}$ eine totalgeordnete Teilmenge von $\mathcal{X}$, d.h. für alle $\lambda, \mu \in \Lambda$ gilt $I_\lambda \subseteq I_\mu$ oder $I_\mu \subseteq I_\lambda$. Dann besitzt $\{ I_\lambda \}_{\lambda \in \Lambda}$ eine obere Schranke in $\mathcal{X}$, d.h. es existiert ein $J \in \mathcal{X}$ mit $I_\lambda \subseteq J$ für alle $\lambda \in \Lambda$,
+\begin{denn}
+Wir setzen $J := \bigcup_{\lambda \in \Lambda} I_\lambda$.
+\begin{itemize}
+    \item $J$ ist ein Ideal in $R$, denn:
+    \begin{itemize}
+        \item $0 \in J$ wegen $0 \in I_\lambda$ für alle $\lambda \in \Lambda$.
+        \item Für $a, b \in J$ existieren $\lambda, \mu \in \Lambda$ mit $a \in I_\lambda$ und $b \in I_\mu$. Ohne Einschränkung gelte $I_\lambda \subseteq I_\mu$. Dann sind $a, b \in I_\mu$ und somit $a + b \in I_\mu \subseteq J$.
+        \item Für $a \in J$ und $r \in R$ existiert ein $\lambda \in \Lambda$ mit $a \in I_\lambda$, also ist $r a \in I_\lambda \subseteq J$.
+    \end{itemize}
+    \item $J \neq R$, denn $I_\lambda \subsetneq R$ für alle $\lambda \in \Lambda$ (d.h. $J \in \mathcal{X}$).
+\end{itemize}
+Damit ist $J\in\mathcal{X}$. Außerdem gilt  $I_\lambda \subseteq J$ für alle $\lambda \in \Lambda$.
+\end{denn}
+
+Nach dem Zornschen Lemma besitzt $\mathcal{X}$ ein maximales Element $J$ bezüglich "`$\subseteq$"'. Dieses ist ein maximales Ideal von $R$.
+\end{proof}
+
+
+\begin{anm}\label{anm:aussagen_aequivalent}
+Satz \ref{satz:maximales_ideal_existiert} ist äquivalent zum Auswahlaxiom / Zornschen Lemma.
+\end{anm}
+
+\begin{folgerung}\label{folgerung:maximal_ideal_enthalten}
+Es gilt:
+\begin{itemize}
+    \item[(a)] Jedes Ideal $I \subsetneqq R$ ist in einem maximalen Ideal von $R$ enthalten.
+    \item[(b)] Jede Nichteinheit in $R$ ist in einem maximalen Ideal von $R$ enthalten.
+\end{itemize}
+\end{folgerung}
+
+\begin{proof}
+(a) Sei $I \subsetneqq R$. Nach Anmerkung \ref{anm:nullring} ist $R / I \neq 0$, also besitzt $R / I$ nach Satz \ref{satz:maximales_ideal_existiert} ein maximales Ideal. Aufgrund von \ref{bem:ideale_faktorringe} existiert ein maximales Ideal in $R$, das $I$ enthält.
+
+(b) Sei $a \in R \setminus R^{\times}$. Dann ist $(a) \subsetneqq R$ wegen \ref{bem:einheit_ideal}, und nach (a) folgt die Behauptung.
+\end{proof}
+
 \end{document}
+
+
