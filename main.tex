@@ -20,6 +20,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{color, graphicx, float, parskip, enumitem}
 \usepackage{fancyhdr, titlesec}
+\usepackage{tikz} % Include the TikZ package for drawing
 %\usepackage[on,german]{mampf}
 %\setmampfurl{https://mampf.mathi.uni-heidelberg.de}
 
@@ -180,6 +181,7 @@ plainpages=false,}
 \DeclareMathOperator{\SL}{SL}
 \DeclareMathOperator{\SO}{SO}
 \DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Stab}{Stab}
 \DeclareMathOperator{\supp}{supp}
 \DeclareMathOperator{\tr}{tr}
 \DeclareMathOperator{\TV}{TV}
@@ -1725,15 +1727,15 @@ Sei $X$ eine $G$-Menge und $x \in X$. Dann heißt
 \]
 die \defn{Bahn} (oder der \defn{Orbit}) von $x$. Der \defn{Stabilisator} von $x$ ist definiert durch
 \[
-\operatorname{Stab}_G(x) := \{g \in G \mid g . x = x\}.
+\Stab_G(x) := \{g \in G \mid g . x = x\}.
 \]
-Das Element $x$ heißt ein \defn{Fixpunkt}, falls $\operatorname{Stab}_G(x) = G$ ist (dies ist äquivalent zu  $g . x = x$ für alle $g \in G$.) Die Menge der Fixpunkte wird durch $\operatorname{Fix}(X)$ bezeichnet.
+Das Element $x$ heißt ein \defn{Fixpunkt}, falls $\Stab_G(x) = G$ ist (dies ist äquivalent zu  $g . x = x$ für alle $g \in G$.) Die Menge der Fixpunkte wird durch $\operatorname{Fix}(X)$ bezeichnet.
 \end{defini}
 
 \begin{bem}\label{bem:orbits_und_stabis}
 Sei $X$ eine $G$-Menge. Dann gilt:
 \begin{itemize}
-    \item[(a)] Für alle $x \in X$ ist $\operatorname{Stab}_G(x) \leq G$.
+    \item[(a)] Für alle $x \in X$ ist $\Stab_G(x) \leq G$.
     \item[(b)] Durch \[x \sim y :\Leftrightarrow \text{Es existiert ein } \, g \in G \text{ mit } g . x = y\] ist eine Äquivalenzrelation auf $X$ gegeben. Die Äquivalenzklasse von $x$ ist $\Orb_G(x)$. Insbesondere ist $X$ die disjunkte Vereinigung von Bahnen. Ist $(x_i )_{i\in I}$ ein Vertretersystem der Bahnen, dann ist 
     \[
      X = \dot\bigcup_{i\in I}\Orb_G(x_i).
@@ -1743,10 +1745,10 @@ Sei $X$ eine $G$-Menge. Dann gilt:
 
 
 \begin{proof}
-(a) Sei $x \in X$. Dann ist $\operatorname{Stab}_G(x)$ eine Untergruppe von $G$,
+(a) Sei $x \in X$. Dann ist $\Stab_G(x)$ eine Untergruppe von $G$,
 \begin{denn}
-Da $e . x = x$ gilt, folgt, dass $e$ in $\operatorname{Stab}_G(x)$ liegt. Wenn $a, b \in \operatorname{Stab}_G(x)$ sind, dann folgt $a . x = x$ und $b . x = x$, und damit auch \[
-(a b) . x = a . (b . x) = a . x = x,\] daher liegt auch $a b$ in $\operatorname{Stab}_G(x)$. Für jedes $a \in \operatorname{Stab}_G(x)$ ist zudem $x = a . x$, und somit gilt \[a^{-1} . x = a^{-1} . (a . x) = (a^{-1} a) . x = e . x = x.\] Deshalb gehört auch $a^{-1}$ zu $\operatorname{Stab}_G(x)$.
+Da $e . x = x$ gilt, folgt, dass $e$ in $\Stab_G(x)$ liegt. Wenn $a, b \in \Stab_G(x)$ sind, dann folgt $a . x = x$ und $b . x = x$, und damit auch \[
+(a b) . x = a . (b . x) = a . x = x,\] daher liegt auch $a b$ in $\Stab_G(x)$. Für jedes $a \in \Stab_G(x)$ ist zudem $x = a . x$, und somit gilt \[a^{-1} . x = a^{-1} . (a . x) = (a^{-1} a) . x = e . x = x.\] Deshalb gehört auch $a^{-1}$ zu $\Stab_G(x)$.
 \end{denn}
 
 (b) Die Relation \[x \sim y :\Leftrightarrow \text{ Es existiert ein } g \in G \text{ mit } g . x = y\] ist eine Äquivalenzrelation auf $X$,
@@ -1762,15 +1764,56 @@ Die Äquivalenzklasse von $x \in M$ ist gegeben durch
 
 \begin{bsp}\label{bsp:orbit_stabilisator_beispiele}
 \begin{enumerate}[label=(\alph*)]
-    \item $G = S_n$ operiert auf $\{1, \dots, n\}$. Für $x \in \{1, \dots, n\}$ ist \[\operatorname{Orb}_{S_n}(x) = \{1, \dots, n\},\] denn für jedes $y \in \{1, \dots, n\}$ existiert ein $\sigma \in S_n$ mit $\sigma(x) = y$. Es ist \[\operatorname{Stab}_{S_n}(x) = \{\sigma \in S_n \mid \sigma(x) = x\} \cong S_{n-1}.\]
+    \item $\RR^{\times}$ operiert auf $\RR^2$ durch $\lambda. x = \lambda^2 x$. Für $x \in \RR^2$ ist
+    \[
+    \operatorname{Orb}_{\RR^{\times}} x = \{ \lambda. x \mid \lambda \in \RR^{\times} \} = \{ \lambda^2 x \mid \lambda \in \RR^{\times} \} = \RR_{>0} x.
+    \]
+    Damit ist $\operatorname{Orb}_{\RR^{\times}} 0 = \{0\}$ und für $x \neq 0$ ist $\operatorname{Orb}_{\RR^{\times}} x$ eine Halbgerade.
 
-    \item $H=\langle (1\  2)(3\  4\  5)\rangle\leq S_5$ operiert durch Einschränkung der Operation aus (a) auf
+\begin{center}
+\begin{tikzpicture}
+
+
+
+\draw[->] (0,0) -- (2,0.5);    
+\draw[->] (0,0) -- (0.5,2);    
+\draw[->] (0,0) -- (1,-1);    
+\draw[->] (0,0) -- (-1.5,-1);   
+\draw[->] (0,0) -- (-2,0.5);   
+
+% Mark a point x on one of the half-lines
+\fill (1,0.25) circle (1.5pt) node[above right] {$x$}; % Point on one of the half-lines
+
+% Label for the orbit
+\node[red] at (3, 2) {$\operatorname{Orb}_{\mathbb{R}^\times} 0$};
+
+% Draw the origin and half-lines with different slopes
+\fill[red] (0,0) circle (3pt);
+
+\end{tikzpicture}
+\end{center}
+    Für $x \in \RR^2$, $\lambda \in \RR^{\times}$ gilt: $\lambda \in \Stab_{\RR^{\times}} x \iff \lambda^2 x = x$. Wir erhalten
+    \[
+    \Stab_{\RR^{\times}} 0 = \RR^{\times}, \quad \Stab_{\RR^{\times}} x = \{\pm 1\} \text{ für } x \neq 0.
+    \]
+    Die Operation ist nicht treu, denn $-1.x = x = 1.x$ für alle $x \in \RR^2$, aber $1 \neq -1$.
+
+    \item $G = S_n$ operiert auf $\{1, \dots, n\}$. Für $x \in \{1, \dots, n\}$ ist \[\operatorname{Orb}_{S_n}(x) = \{1, \dots, n\},\] denn für jedes $y \in \{1, \dots, n\}$ existiert ein $\sigma \in S_n$ mit $\sigma(x) = y$. Es ist \[\Stab_{S_n}(x) = \{\sigma \in S_n \mid \sigma(x) = x\} \cong S_{n-1}.\]
+
+    \item Sei $\sigma=(1\  2)(3\  4\  5)\in S_5$. Die Gruppe $H=\langle \sigma\rangle\leq S_5$ operiert durch Einschränkung der Operation aus (a) auf
     $\{1,2,3,4,5\}$. Bei dieser Operation liegen genau zwei Bahnen vor, nämlich $\{1,2\}$
-    und $\{3,4,5\}$. Allgemeiner korrespondieren für $\sigma\in S_n$ die Bahnen der Operation von $H=\langle\sigma\rangle$ auf $\{1,\ldots,n\}$ genau zu den Zyklen aus der Zyklendarstellung von $\sigma$.
-
+    und $\{3,4,5\}$. Allgemeiner korrespondieren für $\sigma\in S_n$ die Bahnen der Operation von $H=\langle\sigma\rangle$ auf $\{1,\ldots,n\}$ genau zu den Zyklen aus der Zyklendarstellung von $\sigma$. Im konkreten Beispiel ist
+    \[
+    \Stab_H(1)=\{\ident,\sigma^2,\sigma^4\}=\langle\sigma^2\rangle, \quad
+    \Stab_H(3)=\{\ident,\sigma^3\}=\langle\sigma^3\rangle.
+    \]
+    Wir beobachten, dass die Bahn des Elements $1$ aus 2 Elementen besteht und der Stabilisator
+    aus $3$ Elementen; die Bahn des Elements $3$ besteht aus $3$ Elementen und der Stabilisator
+    aus $2$ Elementen. In beiden Fällen ergibt sich als Produkt der beiden Größen $6=\ord(H)$.
+    Dass dies kein Zufall ist, werden wir gleich sehen (\ref{folg:isom_orbit}, \ref{satz:bahnengleichung}).
     \item Sei $H \leq G$ und $g \in G$. Bezüglich der Linksmultiplikationsoperation von $H$ auf $G$ ist \[\operatorname{Orb}_H(g) = \{h g \mid h \in H\} = H g,\]
     d.h. die Bahnen der Linksmultiplikation sind genau die Rechtsnebenklassen.
-    Möchte man die Linksnebenklassen als Orbits erhalten, muss man $G$ von rechts operieren lassen bzw. den "`$()^{-1}$-Trick"' anwenden: $H$ operiert von links auf $G$ durch $h . g = g h^{-1}$ (dann ist $\operatorname{Orb}_H(g) = g H$). In beiden Fällen ist $\operatorname{Stab}_H(g) = \{e\}$.
+    Möchte man die Linksnebenklassen als Orbits erhalten, muss man $G$ von rechts operieren lassen bzw. den "`$()^{-1}$-Trick"' anwenden: $H$ operiert von links auf $G$ durch $h . g = g h^{-1}$ (dann ist $\operatorname{Orb}_H(g) = g H$). In beiden Fällen ist $\Stab_H(g) = \{e\}$.
 
     \item $G$ operiert durch \defn{Konjugation} auf sich selbst durch \[g . x := g x g^{-1}.\] Dann ist \[\operatorname{Orb}_G(x) = \{g x g^{-1} \mid g \in G\},\] die sogenannte \defn{Konjugationsklasse} von $x$.
 
@@ -1804,19 +1847,19 @@ Diese werden wir im Folgenden betrachten.
 \end{anm}
 
 \begin{bem}\label{bem:univ_eig_g_menge}
-(\defn{Universelle Eigenschaft der $G$-Menge $G / H$}) Sei $X$ eine $G$-Menge und $H \leq G$. Dann existiert für jedes $x \in X$ mit $H \leq \operatorname{Stab}_G(x)$ ein eindeutig bestimmter Homomorphismus von $G$-Mengen
+(\defn{Universelle Eigenschaft der $G$-Menge $G / H$}) Sei $X$ eine $G$-Menge und $H \leq G$. Dann existiert für jedes $x \in X$ mit $H \leq \Stab_G(x)$ ein eindeutig bestimmter Homomorphismus von $G$-Mengen
 \[
-\varphi_x \colon G / H \to X \quad \text{mit} \quad \varphi_x(H) = \varphi_x(e_{G/H}) = x.
+\varphi_x \colon G / H \to X \quad \text{mit} \quad \varphi_x(H) = x.
 \]
 Dieser ist explizit gegeben durch $\varphi_x(a H) = a . x$. Es gilt: 
 \begin{itemize}
 \item $\operatorname{im} \varphi_x = \operatorname{Orb}_G(x)$,
-\item $\varphi_x$ genau dann injektiv, wenn $H = \operatorname{Stab}_G(x)$ ist.
+\item $\varphi_x$ genau dann injektiv, wenn $H = \Stab_G(x)$ ist.
 \end{itemize}
 \end{bem}
 
 \begin{proof}
-Wir beginnen mit dem Nachweis der Existenz. Sei $x\in X$. Wir setzen $\varphi_x \colon G / H \to X$, $a H \mapsto a . x$ und zeigen zunächst, dass $\varphi_x$ wohldefiniert ist. Für $a, b \in G$ mit $a H = b H$ folgt $a^{-1} b \in H \leq \operatorname{Stab}_G(x)$, also
+Wir beginnen mit dem Nachweis der Existenz. Sei $x\in X$. Wir setzen $\varphi_x \colon G / H \to X$, $a H \mapsto a . x$ und zeigen zunächst, dass $\varphi_x$ wohldefiniert ist. Für $a, b \in G$ mit $a H = b H$ folgt $a^{-1} b \in H \leq \Stab_G(x)$, also
 \[
 a . x = a . ((a^{-1} b) . x) = (a a^{-1}b) . x = b . x.
 \]
@@ -1835,24 +1878,24 @@ G \xrightarrow{\pi} G / H \xrightarrow{\varphi_x} X, \quad g \mapsto g . x.
 \]
 und erhalten $\operatorname{im} \varphi_x = \operatorname{im} (\varphi_x \circ \pi) = \operatorname{Orb}_G(x)$. Es verbleibt der Beweis der letzten Behauptung des Satzes. Seien dazu $a, b \in G$. Es gilt:
 \[
-\varphi_x(a H) = \varphi_x(b H) \Leftrightarrow a . x = b . x \Leftrightarrow a^{-1} b \in \operatorname{Stab}_G(x) \Leftrightarrow a \operatorname{Stab}_G(x) = b \operatorname{Stab}_G(x).
+\varphi_x(a H) = \varphi_x(b H) \Leftrightarrow a . x = b . x \Leftrightarrow a^{-1} b \in \Stab_G(x) \Leftrightarrow a \Stab_G(x) = b \Stab_G(x).
 \]
 Somit ist $\varphi_x$ genau dann injektiv, wenn für alle $a,b\in G$ die Äquivalenz 
-\[\quad a \operatorname{Stab}_G(x) = b \operatorname{Stab}_G(x) \iff a H = b H.
+\[\quad a \Stab_G(x) = b \Stab_G(x) \iff a H = b H.
 \]
-gilt. Diese ist aber äquivalent zu $\operatorname{Stab}_G(x) = H$ (setze $b = e$  und beachte \ref{anm:eigenschaften_nebenklassen}).
+gilt. Diese ist aber äquivalent zu $\Stab_G(x) = H$ (setze $b = e$  und beachte \ref{anm:eigenschaften_nebenklassen}).
 \end{proof}
 
 \begin{folgerung}\label{folg:isom_orbit}
 Sei $X$ eine $G$-Menge und $x \in X$. Dann ist
 \[
-G / \operatorname{Stab}_G(x) \to \operatorname{Orb}_G(x), \quad a \operatorname{Stab}_G(x) \mapsto a . x
+G / \Stab_G(x) \to \operatorname{Orb}_G(x), \quad a \Stab_G(x) \mapsto a . x
 \]
 ein Isomorphismus von $G$-Mengen.
 \end{folgerung}
 
 \begin{proof}
-Aus \ref{bem:univ_eig_g_menge} (mit $H=\operatorname{Stab}_G(x)$) folgt: Die obige Abbildung ist bijektiv und ein Homomorphismus von $G$-Mengen. Somit ist sie ein Isomorphismus von $G$-Mengen.
+Aus \ref{bem:univ_eig_g_menge} (mit $H=\Stab_G(x)$) folgt: Die obige Abbildung ist bijektiv und ein Homomorphismus von $G$-Mengen. Somit ist sie ein Isomorphismus von $G$-Mengen.
 \end{proof}
 
 \begin{defini}\label{def:transitiv}
@@ -1876,29 +1919,30 @@ von transitiven $G$-Mengen.
     \[\operatorname{Orb}_G(H) = \{ a.H \ | \ a \in G\} = \{ aH \ | \ a\in G\} =G / H.\]
     Wir werden gleich sehen, dass dies bis
     auf Isomorphie alle transitiven $G$-Mengen sind.
+    \item Die Operation aus \ref{bsp:orbit_stabilisator_beispiele}(a) ist nicht transitiv.
 \end{enumerate}
 \end{bsp}
 
 \begin{satz}\label{satz:transitive_g_menge}
 Sei $X$ eine transitive $G$-Menge. Dann gilt:
 \begin{itemize}
-    \item[(a)] Für $x, y \in X$ existiert ein $g \in G$ mit $\operatorname{Stab}_G(y) = g \operatorname{Stab}_G(x) g^{-1}$, d.h. je zwei Stabilisatoren sind konjugiert zueinander.
-    \item[(b)] Für jedes $x \in X$ ist \[G / \operatorname{Stab}_G(x) \to X, \quad a \operatorname{Stab}_G(x) \mapsto a . x\] ein Isomorphismus von $G$-Mengen.
+    \item[(a)] Für $x, y \in X$ existiert ein $g \in G$ mit $\Stab_G(y) = g \Stab_G(x) g^{-1}$, d.h. je zwei Stabilisatoren sind konjugiert zueinander.
+    \item[(b)] Für jedes $x \in X$ ist \[G / \Stab_G(x) \to X, \quad a \Stab_G(x) \mapsto a . x\] ein Isomorphismus von $G$-Mengen.
     \item[(c)] Es existiert ein $H \leq G$ mit $X \cong G / H$ (als $H$-Menge).
 \end{itemize}
 Ist zudem $G$ endlich, dann gilt $\lvert X \rvert \mid \operatorname{ord}(G)$.
 \end{satz}
 
 \begin{proof}
-(a) Seien $x, y \in X$. Wegen der Transitivität von $X$ existiert ein $g \in G$ mit $g . x = y$. Sei $h \in \operatorname{Stab}_G(x)$. Dann erhalten wir
+(a) Seien $x, y \in X$. Wegen der Transitivität von $X$ existiert ein $g \in G$ mit $g . x = y$. Sei $h \in \Stab_G(x)$. Dann erhalten wir
 \[
 (g h g^{-1}) . y = g.(h. (g^{-1} . y)) = g (h . x) = g . x = y,
 \]
-somit ist $g h g^{-1} \in \operatorname{Stab}_G(y)$ und deshalb gilt $g\operatorname{Stab}_G(x)g^{-1}\subseteq \operatorname{Stab}_G(y)$. Die andere Inklusion zeigt man analog.
+somit ist $g h g^{-1} \in \Stab_G(y)$ und deshalb gilt $g\Stab_G(x)g^{-1}\subseteq \Stab_G(y)$. Die andere Inklusion zeigt man analog.
 
 (b) folgt aus \ref{folg:isom_orbit} und $\operatorname{Orb}_G(x) = X$.
 
-(c) Wir setzen $H := \operatorname{Stab}_G(x)$ für ein beliebiges $x \in X$, dann folgt die Behauptung aus (b). 
+(c) Wir setzen $H := \Stab_G(x)$ für ein beliebiges $x \in X$, dann folgt die Behauptung aus (b). 
 
 Aus (c) ergibt sich mit Hilfe des Satzes von Lagrange \ref{satz:lagrange}
 \[
@@ -1909,21 +1953,21 @@ Aus (c) ergibt sich mit Hilfe des Satzes von Lagrange \ref{satz:lagrange}
 \begin{satz}\label{satz:bahnengleichung}
 (\defn{Bahnengleichung}) Sei $X$ eine $G$-Menge. Dann gilt:
 \begin{itemize}
-    \item[(a)] Für jedes $x \in X$ ist $|\operatorname{Orb}_G(x)| = (G : \operatorname{Stab}_G(x))$.
+    \item[(a)] Für jedes $x \in X$ ist $|\operatorname{Orb}_G(x)| = (G : \Stab_G(x))$.
     \item[(b)] Ist $|X|$ endlich und $x_1, \dots, x_n$ ein Vertretersystem der Bahnen, dann ist
     \[
-    |X| = \sum_{i=1}^n (G : \operatorname{Stab}_G(x_i)).
+    |X| = \sum_{i=1}^n (G : \Stab_G(x_i)).
     \]
 \end{itemize}
 \end{satz}
 
 \begin{proof}
-(a) Wegen \ref{folg:isom_orbit} ist $G / \operatorname{Stab}_G(x) \cong \operatorname{Orb}_G(x)$,
+(a) Wegen \ref{folg:isom_orbit} ist $G / \Stab_G(x) \cong \operatorname{Orb}_G(x)$,
 woraus direkt die Behauptung folgt.
 
 (b) Wegen \ref{bem:orbits_und_stabis} und (a) ist 
 \[
-|X|=|\dot\bigcup_{i=1,\ldots,n}\Orb_G(x_i)|=\sum_{i=1}^n|\Orb_G(x_i)|=\sum_{i=1}^n|G : \operatorname{Stab}_G(x_i)|.
+|X|=|\dot\bigcup_{i=1,\ldots,n}\Orb_G(x_i)|=\sum_{i=1}^n|\Orb_G(x_i)|=\sum_{i=1}^n|G : \Stab_G(x_i)|.
 \]
 \end{proof}
 
@@ -1932,7 +1976,7 @@ Die Bahnengleichung liefert einen weiteren Beweis des Satzes von Lagrange: Sei $
 
 Sei $n = (G : H)$ und $x_1, \dots, x_n$ ein Vertretersystem der Bahnen (=Linksnebenklassen von $H$ in $G$), dann ist
 \begin{align*}
-\operatorname{ord}(G) &= \sum_{i=1}^n |\operatorname{Orb}_H(x_i)| = \sum_{i=1}^n |x_i H| = \sum_{i=1}^n (H : \operatorname{Stab}_H(x_i)) \\
+\operatorname{ord}(G) &= \sum_{i=1}^n |\operatorname{Orb}_H(x_i)| = \sum_{i=1}^n |x_i H| = \sum_{i=1}^n (H : \Stab_H(x_i)) \\
 &= \sum_{i=1}^n (H : \{e\}) = \sum_{i=1}^n |H| = n \cdot \operatorname{ord}(H).
 \end{align*}
 \end{anm}
@@ -1940,21 +1984,21 @@ Sei $n = (G : H)$ und $x_1, \dots, x_n$ ein Vertretersystem der Bahnen (=Linksne
 \begin{folgerung}\label{folg:fixpunktgleichung}
 (\defn{Fixpunktgleichung}) Sei $X$ eine endliche $G$-Menge und $x_1, \dots, x_n$ ein Vertretersystem der Bahnen, die mehr als ein Element besitzen. Dann gilt:
 \[
-|X| = |\operatorname{Fix}_G(X)| + \sum_{i=1}^n (G : \operatorname{Stab}_G(x_i)).
+|X| = |\operatorname{Fix}_G(X)| + \sum_{i=1}^n (G : \Stab_G(x_i)).
 \]
 \end{folgerung}
 
 \begin{proof}
 Die Behauptung folgt aus der Bahnengleichung \ref{satz:bahnengleichung}, denn es gilt:
 \[
-x\in\operatorname{Fix}_G(X) \Leftrightarrow \operatorname{Stab}_G(x) = G \Leftrightarrow (G : \operatorname{Stab}_G(x)) = 1.
+x\in\operatorname{Fix}_G(X) \Leftrightarrow \Stab_G(x) = G \Leftrightarrow (G : \Stab_G(x)) = 1.
 \]
 \end{proof}
 
 \begin{defini}\label{def:zentralisator}
 Wir betrachten die Operation von $G$ auf $G$ durch Konjugation: $g . x := g x g^{-1}$. Sei $x \in G$. Die Untergruppe
 \[
-Z_G(x) := \operatorname{Stab}_G(x) = \{ g \in G \mid g x g^{-1} = x \} = \{ g\in G \mid gx=xg\} \leq G
+Z_G(x) := \Stab_G(x) = \{ g \in G \mid g x g^{-1} = x \} = \{ g\in G \mid gx=xg\} \leq G
 \]
 heißt der \defn{Zentralisator} von $x$ in $G$.
 \end{defini}
@@ -2556,5 +2600,3 @@ Es gilt:
 \end{proof}
 
 \end{document}
-
-
