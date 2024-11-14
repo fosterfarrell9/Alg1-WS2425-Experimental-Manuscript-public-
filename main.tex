@@ -148,7 +148,7 @@ plainpages=false,}
 \renewcommand{\setminus}{\smallsetminus}
 
 %Neue Operatoren
-
+\DeclareMathOperator{\Abb}{Abb}
 \DeclareMathOperator{\Aff}{Aff}
 \DeclareMathOperator{\Aut}{Aut}
 \DeclareMathOperator{\Bew}{Bew}
@@ -161,6 +161,7 @@ plainpages=false,}
 \DeclareMathOperator{\Div}{Div}
 \DeclareMathOperator{\DV}{DV}
 \DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Fix}{Fix}
 \DeclareMathOperator{\ggT}{ggT}
 \DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\Hom}{Hom}
@@ -168,6 +169,7 @@ plainpages=false,}
 \DeclareMathOperator{\image}{im}
 \DeclareMathOperator{\intern}{int}
 \DeclareMathOperator{\kgV}{kgV}
+\DeclareMathOperator{\Mat}{M}
 \DeclareMathOperator{\mdeg}{mdeg}
 \DeclareMathOperator{\Orb}{Orb}
 \DeclareMathOperator{\Orth}{O}
@@ -334,7 +336,7 @@ Wir werden im Folgenden meistens kurz „$ M $ Monoid” statt „$ (M, \cdot) $
 \begin{enumerate}
     \item[(a)] $ (\NN_0, +) $ ist ein Monoid mit neutralem Element $ 0 $. Wenn wir im Folgenden von „dem Monoid $ \NN_0 $” sprechen, ist dieses gemeint.
     \item[(b)] $ (\ZZ, +) $, $ (\ZZ, \cdot) $ sind Monoide.
-    \item[(c)] Ist $ X $ eine Menge, dann ist $\operatorname{Abb}(X, X) $ ist Monoid bzgl. „$\circ$”.
+    \item[(c)] Ist $ X $ eine Menge, dann ist $\Abb(X, X) $ ist Monoid bzgl. „$\circ$”.
 \end{enumerate}
 \end{bsp}
 
@@ -379,8 +381,8 @@ Sei $ M $ ein Monoid und $ a $ ein Element von $ M $. Das Element $ a $ heißt \
 
 \begin{bsp}\label{bsp:invertierbar_involutorisch}
 \begin{itemize}
-    \item[(a)] $ X $ Menge. Es ist $ f \in \operatorname{Abb}(X, X) $ genau dann invertierbar, wenn $ f $ bijektiv ist.
-    \item[(b)] Achsenspiegelungen im $ \mathbb{R}^2 $ sind Involutionen in $ \operatorname{Abb}(\mathbb{R}^2, \mathbb{R}^2) $.
+    \item[(a)] $ X $ Menge. Es ist $ f \in \Abb(X, X) $ genau dann invertierbar, wenn $ f $ bijektiv ist.
+    \item[(b)] Achsenspiegelungen im $ \mathbb{R}^2 $ sind Involutionen in $ \Abb(\mathbb{R}^2, \mathbb{R}^2) $.
 \end{itemize}
 \end{bsp}
 
@@ -431,9 +433,9 @@ Zum Schluss zeigen wir, dass jedes Element $a\in M^{\times} $ ein Inverses in $M
     \item[(a)] $ (\NN_0, +)^{\times} = \{ 0 \} $
     \item[(b)] $ (\ZZ, +)^{\times} = \{ \pm 1 \} $
     \item[(c)] $ (\ZZ, +) $ ist eine abelsche Gruppe. Wenn wir in diesem Kapitel von „der Gruppe $\ZZ$” sprechen, so ist diese gemeint.
-    \item[(d)] Ist $ R $ Ring, dann ist $ (M_{n \times n}(R), \cdot)^{\times} = \operatorname{GL}_n(R) $ (\defn{allgemeine lineare Gruppe}).
+    \item[(d)] Ist $ R $ Ring, dann ist $ (M_{n \times n}(R), \cdot)^{\times} = \GL_n(R) $ (\defn{allgemeine lineare Gruppe}).
     \item[(e)] Sei $ M $ eine Menge. Dann heißt
-    \[ S(M) := \operatorname{Abb}(M, M)^{\times} := \{ f: M \to M \mid f \text{ bijektiv} \} \] die \defn{symmetrische Gruppe} auf $ M $. $ S(M) $ ist nichtabelsch für $ |M| \geq 3 $. Wir setzen
+    \[ S(M) := \Abb(M, M)^{\times} := \{ f: M \to M \mid f \text{ bijektiv} \} \] die \defn{symmetrische Gruppe} auf $ M $. $ S(M) $ ist nichtabelsch für $ |M| \geq 3 $. Wir setzen
 \[
 S_n := S(\{ 1, \dots, n \}) \quad \text{für } n \in \NN
 \]
@@ -479,7 +481,7 @@ dass $\varphi(e_G) = e_H$ ist. Somit ist $ \varphi $ ein Gruppenhomomorphismus.
 \begin{bsp}\label{bsp:gruppenhom_beispiele}
 \begin{itemize}
     \item[(a)] $ \exp: (\mathbb{R}, +) \to (\mathbb{R}_{>0}, \cdot) $ ist ein Gruppenhomomorphismus wegen \[\exp(a + b) = \exp(a) \exp(b) \] für alle $ a, b \in \mathbb{R} $.
-    \item[(b)] $ \operatorname{sgn}: S_n \to \{ \pm 1 \} $ ist ein Gruppenhomomomorphismus wegen \[\operatorname{sgn}(\sigma \circ \tau) = \operatorname{sgn}(\sigma) \cdot \operatorname{sgn}(\tau) \] für alle $ \sigma, \tau \in S_n $.
+    \item[(b)] $ \sgn: S_n \to \{ \pm 1 \} $ ist ein Gruppenhomomomorphismus wegen \[\sgn(\sigma \circ \tau) = \sgn(\sigma) \cdot \sgn(\tau) \] für alle $ \sigma, \tau \in S_n $.
 \end{itemize}
 \end{bsp}
 
@@ -506,10 +508,10 @@ Insbesondere erfüllt jeder Gruppenhomomorphismus $ \varphi: G \to H $ automatis
 Seien $ M $ und $ N $ Monoide und $ \varphi: M \to N $ ein Monoidhomomorphismus.
 \begin{itemize}
     \item $ \varphi $ heißt ein \defn{Monoid-Endomorphismus}, wenn $ M = N $ ist.
-    \item $ \varphi $ heißt ein \defn{Monoid-Isomorphismus}, wenn es einen Monoidhomomorphismus $ \psi: N \to M $ gibt, sodass $ \psi \circ \varphi = \operatorname{id}_M $ und $ \varphi \circ \psi = \operatorname{id}_N $ ist. In diesem Fall nennen wir $ M $ und $ N $ isomorph und schreiben $ M \cong N $ schreiben.
+    \item $ \varphi $ heißt ein \defn{Monoid-Isomorphismus}, wenn es einen Monoidhomomorphismus $ \psi: N \to M $ gibt, sodass $ \psi \circ \varphi = \ident_M $ und $ \varphi \circ \psi = \ident_N $ ist. In diesem Fall nennen wir $ M $ und $ N $ isomorph und schreiben $ M \cong N $ schreiben.
     \item $ \varphi $ heißt ein \defn{Monoid-Automorphismus}, wenn $ \varphi $ sowohl ein Endomorphismus als auch ein Isomorphismus ist.
 \end{itemize}
-Die Menge der Endomorphismen von $ M $ wird mit $ \operatorname{End}(M) $ bezeichnet und bildet ein Monoid bezüglich der Verknüpfung $ \circ $. Die Menge der Automorphismen von $ M $ wird mit $ \operatorname{Aut}(M) $ bezeichnet und bildet eine Gruppe bezüglich $ \circ $. 
+Die Menge der Endomorphismen von $ M $ wird mit $ \End(M) $ bezeichnet und bildet ein Monoid bezüglich der Verknüpfung $ \circ $. Die Menge der Automorphismen von $ M $ wird mit $ \Aut(M) $ bezeichnet und bildet eine Gruppe bezüglich $ \circ $. 
 
 Analoge Bezeichnungen kann man für Gruppenhomorphismen einführen.
 \end{defini}
@@ -518,7 +520,7 @@ Analoge Bezeichnungen kann man für Gruppenhomorphismen einführen.
 \begin{anm}\label{anm:verknuepfung_isomorph}
 \begin{itemize}
 \item Die Verknüpfung von zwei Isomorphismen ist wieder ein Isomorphismus.  
-\item Es ist $\operatorname{Aut}(M) = \operatorname{End}(M)^{\times}.$
+\item Es ist $\Aut(M) = \End(M)^{\times}.$
 \end{itemize}
 \end{anm}
 
@@ -532,9 +534,9 @@ Seien $ M $ und $ N $ Monoide und $ \varphi: M \to N $ ein Monoidhomomorphismus.
 \end{bem}
 
 \begin{proof}
-Wir zeigen zunächst die Implikation von (i) nach (ii). Angenommen, $ \varphi $ ist ein Isomorphismus. Dann gibt es einen Monoidhomomorphismus $ \psi: N \to M $ mit $ \psi \circ \varphi = \operatorname{id}_M $ und $ \varphi \circ \psi = \operatorname{id}_N $. Diese Eigenschaft impliziert, dass $ \varphi $ bijektiv ist.
+Wir zeigen zunächst die Implikation von (i) nach (ii). Angenommen, $ \varphi $ ist ein Isomorphismus. Dann gibt es einen Monoidhomomorphismus $ \psi: N \to M $ mit $ \psi \circ \varphi = \ident_M $ und $ \varphi \circ \psi = \ident_N $. Diese Eigenschaft impliziert, dass $ \varphi $ bijektiv ist.
 
-Umgekehrt nehmen wir nun an, dass $ \varphi $ bijektiv ist und zeigen, dass $ \varphi $ dann ein Isomorphismus ist. Da $ \varphi $ bijektiv ist, existiert eine Abbildung von Mengen $ \psi: N \to M $, sodass $ \psi \circ \varphi = \operatorname{id}_M $ und $ \varphi \circ \psi = \operatorname{id}_N $. Es bleibt zu zeigen, dass $ \psi $ ebenfalls ein Homomorphismus ist.
+Umgekehrt nehmen wir nun an, dass $ \varphi $ bijektiv ist und zeigen, dass $ \varphi $ dann ein Isomorphismus ist. Da $ \varphi $ bijektiv ist, existiert eine Abbildung von Mengen $ \psi: N \to M $, sodass $ \psi \circ \varphi = \ident_M $ und $ \varphi \circ \psi = \ident_N $. Es bleibt zu zeigen, dass $ \psi $ ebenfalls ein Homomorphismus ist.
 
 Seien dazu $ a, b \in N $. Da $ \varphi $ bijektiv ist, existieren eindeutig bestimmte Elemente $ \tilde{a}, \tilde{b} \in M $ mit $ a = \varphi(\tilde{a}) $ und $ b = \varphi(\tilde{b}) $. Dann folgt:
 \[
@@ -620,7 +622,7 @@ $U$ ist mit der eingeschränkten Verknüpfung selbst ein Monoid (bzw. eine Grupp
 \begin{itemize}
     \item[(a)] Sei $G$ eine Gruppe. Dann gilt $\{e\}\leq G$ und $G\leq G$.   
     \item[(b)] Die Menge $\NN_0 \subseteq \ZZ$ bildet ein Untermonoid bezüglich der Addition, da $0 \in \NN_0$ ist und die Summe zweier nicht-negativer ganzer Zahlen ebenfalls nicht-negativ ist. Allerdings ist $\NN_0$ keine Untergruppe von $\ZZ$, da zum Beispiel die $1 \in \NN_0$ kein additiv inverses Element besitzt).   
-    \item[(c)] Sei $K$ ein Körper. Dann ist \[\operatorname{SL}_n(K) := \{ A \in \operatorname{GL}_n(K) \mid \det A = 1 \}\] die sogenannte \defn{spezielle lineare Gruppe}, eine Untergruppe von $\operatorname{GL}_n(K)$. Beachte dabei: Für die Determinante gilt $\det(A^{-1}) = \frac{1}{\det A}$, sodass $\det A^{-1} = 1$, wenn $\det A = 1$ ist.
+    \item[(c)] Sei $K$ ein Körper. Dann ist \[\SL_n(K) := \{ A \in \GL_n(K) \mid \det A = 1 \}\] die sogenannte \defn{spezielle lineare Gruppe}, eine Untergruppe von $\GL_n(K)$. Beachte dabei: Für die Determinante gilt $\det(A^{-1}) = \frac{1}{\det A}$, sodass $\det A^{-1} = 1$, wenn $\det A = 1$ ist.
 \end{itemize}
 \end{bsp}
 
@@ -815,7 +817,7 @@ Seien $G$ und $H$ Gruppen und $\varphi: G \to H$ ein Gruppenhomomorphismus. Dann
 \]
 der \defn{Kern} von $\varphi$ und
 \[
-\operatorname{im} \varphi := \varphi(G) = \{ \varphi(a) \mid a \in G \}
+\image \varphi := \varphi(G) = \{ \varphi(a) \mid a \in G \}
 \]
 das \defn{Bild} von $\varphi$.
 \end{defini}
@@ -824,15 +826,15 @@ das \defn{Bild} von $\varphi$.
 Seien $G, H$ Gruppen und $\varphi \colon G \to H$ ein Gruppenhomomorphismus. Dann gilt:
 \begin{itemize}
     \item[(a)] $\ker \varphi \leq G$
-    \item[(b)] $\operatorname{im} \varphi \leq H$
+    \item[(b)] $\image \varphi \leq H$
     \item[(c)] $\varphi$ ist genau dann injektiv, wenn $\ker \varphi = \{e_G\}$ ist.
-    \item[(d)] $\varphi$ ist genau dann surjektiv, wenn $\operatorname{im} \varphi = H$ ist.
+    \item[(d)] $\varphi$ ist genau dann surjektiv, wenn $\image \varphi = H$ ist.
     \item[(e)] (Beschreibung der Fasern) Für $b \in H$ gilt
     \[
     \varphi^{-1}(b) = 
     \begin{cases}
-      \emptyset & \text{falls } b \notin \operatorname{im} \varphi \\
-      a \ker \varphi = \{ay \mid y \in \ker \varphi \} & \text{falls } b \in \operatorname{im} \varphi, \text{ wobei } a \in G \text{ beliebig mit } \varphi(a) = b.
+      \emptyset & \text{falls } b \notin \image \varphi \\
+      a \ker \varphi = \{ay \mid y \in \ker \varphi \} & \text{falls } b \in \image \varphi, \text{ wobei } a \in G \text{ beliebig mit } \varphi(a) = b.
     \end{cases}
     \]
 \end{itemize}
@@ -842,7 +844,7 @@ Seien $G, H$ Gruppen und $\varphi \colon G \to H$ ein Gruppenhomomorphismus. Dan
 \begin{itemize}
     \item[(a)] Der Kern $\ker \varphi = \varphi^{-1}(\{e_H\})$ ist nach \ref{bem:gruppenhomomorphismus_bilder_und_urbilder} eine Untergruppe von $G$, da $\{e_H\} \leq H$.
     
-    \item[(b)] Das Bild $\operatorname{im} \varphi = \varphi(G)$ ist nach \ref{bem:gruppenhomomorphismus_bilder_und_urbilder} eine Untergruppe von $H$, da $G \leq G$.
+    \item[(b)] Das Bild $\image \varphi = \varphi(G)$ ist nach \ref{bem:gruppenhomomorphismus_bilder_und_urbilder} eine Untergruppe von $H$, da $G \leq G$.
     
     \item[(c)] „$\Rightarrow$” Sei $\varphi$ injektiv und $a \in \ker \varphi$. Dann gilt $\varphi(a) = e_H = \varphi(e_G)$, also $a = e_G$, was zeigt, dass $\ker \varphi = \{e_G\}$.
 
@@ -850,8 +852,8 @@ Seien $G, H$ Gruppen und $\varphi \colon G \to H$ ein Gruppenhomomorphismus. Dan
 
     \item[(d)] folgt aus der Definition des Bildes.
 
-    \item[(e)] Ist $b \notin \operatorname{im} \varphi$, dann ist $\varphi^{-1}(\{b\}) = \emptyset$.
-Im Folgenden sei $b \in \operatorname{im} \varphi$. Dann gibt es ein Element $a \in G$ mit $\varphi(a) = b$. Es gilt
+    \item[(e)] Ist $b \notin \image \varphi$, dann ist $\varphi^{-1}(\{b\}) = \emptyset$.
+Im Folgenden sei $b \in \image \varphi$. Dann gibt es ein Element $a \in G$ mit $\varphi(a) = b$. Es gilt
     \[
     \varphi^{-1}(\{b\}) = a \ker \varphi,
     \]
@@ -1099,7 +1101,7 @@ Seien $G, H$ Gruppen und $\varphi \colon G \to H$ ein Homomorphismus.
 Dann gilt:
 \begin{itemize}
     \item[(a)] $N \trianglelefteq H \Rightarrow \varphi^{-1}(N) \trianglelefteq G$
-    \item[(b)] $\operatorname{ker} \varphi \trianglelefteq G$
+    \item[(b)] $\ker \varphi \trianglelefteq G$
     \item[(c)] $N \trianglelefteq G$ und $\varphi$ surjektiv $\Rightarrow \varphi(N) \trianglelefteq H$
 \end{itemize}
 \end{bem}
@@ -1125,8 +1127,8 @@ Aussage \ref{bem:normalteiler_homomorphismus} (c) gilt ohne die Voraussetzung, d
 \end{anm}
 
 \begin{bsp}\label{bsp:alternierende_gruppe}
-Wir setzen \[A_n := \ker(\operatorname{sgn}) = \{ \sigma \in S_n \mid \operatorname{sgn}(\sigma) = 1 \}.\] 
-$A_n$ heißt die \defn{alternierende Gruppe}. Dann ist $A_n \trianglelefteq S_n$, da $\operatorname{sgn} \colon S_n \to \{\pm 1\}$ ein Gruppenhomomorphismus ist und $A_n$ den Kern dieses Homomorphismus bildet.
+Wir setzen \[A_n := \ker(\sgn) = \{ \sigma \in S_n \mid \sgn(\sigma) = 1 \}.\] 
+$A_n$ heißt die \defn{alternierende Gruppe}. Dann ist $A_n \trianglelefteq S_n$, da $\sgn \colon S_n \to \{\pm 1\}$ ein Gruppenhomomorphismus ist und $A_n$ den Kern dieses Homomorphismus bildet.
 \end{bsp}
 
 \begin{bem}\label{bem:ordnung_index_2_normalteiler}
@@ -1227,7 +1229,7 @@ Die Assoziativität der Verknüpfung wird von $G$ vererbt.
 \end{bsp}
 
 \begin{bem}\label{bem:kanonische_projektion}
-Sei $N \trianglelefteq G$. Dann ist die Abbildung $\pi \colon G \to G/N, \, a \mapsto aN$ ein surjektiver Homomorphismus mit $\operatorname{ker} \pi = N$. 
+Sei $N \trianglelefteq G$. Dann ist die Abbildung $\pi \colon G \to G/N, \, a \mapsto aN$ ein surjektiver Homomorphismus mit $\ker \pi = N$. 
 
 $\pi$ heißt die \defn{kanonische Projektion} von $G$ nach $G/N$.
 \end{bem}
@@ -1241,19 +1243,19 @@ also ist $\pi$ tatsächlich ein Homomorphismus.
 
 Die Surjektivität von $\pi$ ergibt sich daraus, dass jedes Element in $G/N$ als $aN$ für ein $a \in G$ dargestellt werden kann. Somit ist $\pi(G) = \{aN \mid a \in G\} = G / N$.
 
-Zum Schluss zeigen wir, dass $\operatorname{ker} \pi = N$ ist. Es gilt \[\pi(a) = N \Leftrightarrow aN = N,\] was nach \ref{anm:triviale_gruppe_schreibweise} genau dann der Fall ist, wenn $a \in N$ ist.
+Zum Schluss zeigen wir, dass $\ker \pi = N$ ist. Es gilt \[\pi(a) = N \Leftrightarrow aN = N,\] was nach \ref{anm:triviale_gruppe_schreibweise} genau dann der Fall ist, wenn $a \in N$ ist.
 \end{proof}
 
 \begin{folgerung}\label{folgerung:normalteiler_faktorisierte_gruppe}
 Sei $N \leq G$. Dann sind äquivalent:
 \begin{itemize}
     \item[(i)] $N \trianglelefteq G$.
-    \item[(ii)] Es existiert eine Gruppe $H$ und ein Homomorphismus $\varphi \colon G \to H$ mit $N = \operatorname{ker} \varphi$.
+    \item[(ii)] Es existiert eine Gruppe $H$ und ein Homomorphismus $\varphi \colon G \to H$ mit $N = \ker \varphi$.
 \end{itemize}
 \end{folgerung}
 
 \begin{proof}
-(i) $\Rightarrow$ (ii): Wir setzen $H := G/N$ und $\varphi := \pi$, wobei $\pi \colon G \to G/N$ die kanonische Projektion ist. Nach \ref{bem:kanonische_projektion} gilt dann $\operatorname{ker} \pi = N$.
+(i) $\Rightarrow$ (ii): Wir setzen $H := G/N$ und $\varphi := \pi$, wobei $\pi \colon G \to G/N$ die kanonische Projektion ist. Nach \ref{bem:kanonische_projektion} gilt dann $\ker \pi = N$.
 
 (ii) $\Rightarrow$ (i): Dies folgt aus \ref{bem:normalteiler_homomorphismus}.
 \end{proof}
@@ -1279,15 +1281,15 @@ V \trianglelefteq G/N \Leftrightarrow \pi^{-1}(V)=\Phi(V) \trianglelefteq G.
 \end{bem}
 
 \begin{proof}
-Zunächst zeigen wir, dass $\Phi$ wohldefiniert ist. Sei $V \leq G/N$. Dann folgt aus \ref{bem:gruppenhomomorphismus_bilder_und_urbilder} (a), dass $\pi^{-1}(V) \leq G$ ist. Weiterhin gilt $\pi^{-1}(V) \supseteq \pi^{-1}(\{e_{G/N}\}) = \operatorname{ker} \pi = N$.
+Zunächst zeigen wir, dass $\Phi$ wohldefiniert ist. Sei $V \leq G/N$. Dann folgt aus \ref{bem:gruppenhomomorphismus_bilder_und_urbilder} (a), dass $\pi^{-1}(V) \leq G$ ist. Weiterhin gilt $\pi^{-1}(V) \supseteq \pi^{-1}(\{e_{G/N}\}) = \ker \pi = N$.
 
 Ebenso ist $\Psi$ wohldefiniert, da $\pi(U) \leq G/N$ aufgrund von \ref{bem:gruppenhomomorphismus_bilder_und_urbilder} (c).
 
 Die Abbildung $\Phi$ ist offenischtlich inklusionserhaltend.
 
-Nun zeigen wir, dass $\Phi \circ \Psi = \operatorname{id}$. Sei dazu $U \leq G$ mit $U \supseteq N$. Setze $V := \Psi(U) = \pi(U)$. Wir behaupten, dass dann $\Phi(V) = U$ ist, d.h. $\pi^{-1}(V) = U$. Die Inklusion $\pi^{-1}(V) \supseteq U$ ergibt sich sofort, da $\pi^{-1}(V) = \pi^{-1}(\pi(U)) \supseteq U$. Für die umgekehrte Inklusion sei $u \in \pi^{-1}(V)$. Dann ist $\pi(u) \in V = \pi(U)$, sodass ein $\tilde u\in U$ mit $\pi(\tilde u) = \pi(u)$ existiert. Somit gilt $u \tilde u^{-1} \in \operatorname{ker} \pi = N$, und daher folgt $u = u \tilde u^{-1} \tilde u \in U$.
+Nun zeigen wir, dass $\Phi \circ \Psi = \ident$ ist. Sei dazu $U \leq G$ mit $U \supseteq N$. Setze $V := \Psi(U) = \pi(U)$. Wir behaupten, dass dann $\Phi(V) = U$ ist, d.h. $\pi^{-1}(V) = U$. Die Inklusion $\pi^{-1}(V) \supseteq U$ ergibt sich sofort, da $\pi^{-1}(V) = \pi^{-1}(\pi(U)) \supseteq U$. Für die umgekehrte Inklusion sei $u \in \pi^{-1}(V)$. Dann ist $\pi(u) \in V = \pi(U)$, sodass ein $\tilde u\in U$ mit $\pi(\tilde u) = \pi(u)$ existiert. Somit gilt $u \tilde u^{-1} \in \ker \pi = N$, und daher folgt $u = u \tilde u^{-1} \tilde u \in U$.
 
-Schließlich zeigen wir, dass $\Psi \circ \Phi = \operatorname{id}$ ist. Sei dazu $V \leq G/N$. Dann gilt
+Schließlich zeigen wir, dass $\Psi \circ \Phi = \ident$ ist. Sei dazu $V \leq G/N$. Dann gilt
 \[
 \Psi(\Phi(V)) = \pi(\pi^{-1}(V)),
 \]
@@ -1302,7 +1304,7 @@ Für die Umkehrung sei $\pi^{-1}(V)\trianglelefteq G$. Aus der Surjektivität vo
 \end{proof}
 
 \begin{satz}[Universelle Eigenschaft der Faktorgruppe]\label{satz:universelle_eigenschaft_faktorgruppe}
-Seien $G, H$ Gruppen und $\varphi \colon G \to H$ ein Homomorphismus und $N \trianglelefteq G$ mit $N \subseteq \operatorname{ker} \varphi$. Dann existiert ein eindeutig bestimmter Homomorphismus $\overline{\varphi} \colon G/N \to H$, sodass folgendes Diagramm kommutiert:
+Seien $G, H$ Gruppen und $\varphi \colon G \to H$ ein Homomorphismus und $N \trianglelefteq G$ mit $N \subseteq \ker \varphi$. Dann existiert ein eindeutig bestimmter Homomorphismus $\overline{\varphi} \colon G/N \to H$, sodass folgendes Diagramm kommutiert:
 \[
 \xymatrix{
     G \ar[rr]^{\varphi} \ar[dr]_{\pi} & & H \\
@@ -1313,7 +1315,7 @@ d.h. $\overline{\varphi} \circ \pi = \varphi$. Explizit ist $\overline{\varphi}$
 \[
 \overline{\varphi} \colon G/N \to H, \, aN \mapsto \varphi(a).
 \]
-Es gilt $\operatorname{ker}(\overline{\varphi}) = \operatorname{ker}(\varphi)/N$ und $\operatorname{im} \overline{\varphi} = \operatorname{im} \varphi$.
+Es gilt $\ker(\overline{\varphi}) = \ker(\varphi)/N$ und $\image \overline{\varphi} = \image \varphi$.
 \end{satz}
 
 \begin{proof}
@@ -1600,24 +1602,24 @@ vozustellen. Ist $V$ ein $K$-VR, dann ist die skalare Multiplikation $K \times V
 
 \begin{bsp}\label{bsp:operationen}
 \begin{enumerate}[label=(\alph*)]
-    \item Ist $X$ eine Menge, so operiert das Monoid $\operatorname{Abb}(X, X)$ auf $X$ durch $f . x := f(x)$. Ist $K$ ein Körper und $V$ ein $K$-Vektorraum, so operiert $\operatorname{End}_K(V)$ analog auf $V$.
-    \item Sind $X, Y$ Mengen, dann operiert das Monoid $\operatorname{Abb}(Y, Y)$  von links auf $\operatorname{Abb}(X, Y)$ durch $f . g := f \circ g$.
-    Das Monoid $\operatorname{Abb}(X, X)$ operiert von rechts auf $\operatorname{Abb}(X, Y)$ durch $g . f := g \circ f$.
+    \item Ist $X$ eine Menge, so operiert das Monoid $\Abb(X, X)$ auf $X$ durch $f . x := f(x)$. Ist $K$ ein Körper und $V$ ein $K$-Vektorraum, so operiert $\End_K(V)$ analog auf $V$.
+    \item Sind $X, Y$ Mengen, dann operiert das Monoid $\Abb(Y, Y)$  von links auf $\Abb(X, Y)$ durch $f . g := f \circ g$.
+    Das Monoid $\Abb(X, X)$ operiert von rechts auf $\Abb(X, Y)$ durch $g . f := g \circ f$.
     \item Ist $X$ eine Menge, so operiert die symmetrische Gruppe $S(X)$ auf $X$ durch $\pi . a := \pi(a)$. Insbesondere operiert $S_n$ auf $\{1, \dots, n\}$.
     \item $M$ operiert auf sich selbst durch Linksmultiplikation: $a . b := a b$.
     Im Folgenden nennen wir das schlichtweg "`die"' $M$-Menge $M$. Die Rechtsmultiplikation liefert eine Rechtsoperation,
     im Gruppenfall können wir daraus  durch $a . b := b a^{-1}$ eine Linksoperation machen.
     \item Sei $U \leq M$ ein Untermonoid.
-    Dann wird jede $M$-Menge durch Einschränkung zu einer $U$-Menge. Insbesondere operiert $U$ auf $M$ durch Linksmultiplikation. Die Operation von $S(X)$ auf $X$ entsteht durch Einschränkung der Operation von $\operatorname{Abb}(X, X)$ auf $S(X)$.
+    Dann wird jede $M$-Menge durch Einschränkung zu einer $U$-Menge. Insbesondere operiert $U$ auf $M$ durch Linksmultiplikation. Die Operation von $S(X)$ auf $X$ entsteht durch Einschränkung der Operation von $\Abb(X, X)$ auf $S(X)$.
 \end{enumerate}
 \end{bsp}
 
 \begin{bem}\label{bem:currying}
 (\glqq Currying\grqq \footnote{Der Begriff „Currying“ bezieht sich auf den Logiker Haskell Curry.}) Sei $X$ eine Menge. Die Abbildungen
 \begin{align*}
-\left\{ \text{Operationen von } M \text{ auf } X \right\} &\leftrightarrows \left\{ \text{Monoidhom. } M \to \operatorname{Abb}(X, X) \right\}\\
-M \times X \to X, \quad (a, x) \mapsto a . x \qquad \quad &\mapsto \qquad M \to \operatorname{Abb}(X, X), \quad a \mapsto \tau_a \\
-M \times X \to X, \quad (a, x) \mapsto \varphi(a)(x) \quad &\mapsfrom \qquad \varphi\colon M\to \operatorname{Abb}(X, X)
+\left\{ \text{Operationen von } M \text{ auf } X \right\} &\leftrightarrows \left\{ \text{Monoidhom. } M \to \Abb(X, X) \right\}\\
+M \times X \to X, \quad (a, x) \mapsto a . x \qquad \quad &\mapsto \qquad M \to \Abb(X, X), \quad a \mapsto \tau_a \\
+M \times X \to X, \quad (a, x) \mapsto \varphi(a)(x) \quad &\mapsfrom \qquad \varphi\colon M\to \Abb(X, X)
 \end{align*}
 mit $\tau_a \colon X \to X$, $x \mapsto a . x$, sind wohldefinierte zueinander inverse Bijektionen.
 Im Fall von Gruppenoperationen schränken sich diese zu zueinander inversen Bijektionen
@@ -1633,18 +1635,18 @@ ein.
 \end{proof}
 
 \begin{bsp}\label{bsp:abb_op}
-Die Identität $\operatorname{id} \colon \operatorname{Abb}(X, X) \to \operatorname{Abb}(X, X)$ korrespondiert unter \ref{bem:currying} zu der durch $f . x := f(x)$ gegebenen Operation von $M=\operatorname{Abb}(X, X)$ auf $X$. Auf der rechten Seite der Korrespondenz haben wir dann
+Die Identität $\ident \colon \Abb(X, X) \to \Abb(X, X)$ korrespondiert unter \ref{bem:currying} zu der durch $f . x := f(x)$ gegebenen Operation von $M=\Abb(X, X)$ auf $X$. Auf der rechten Seite der Korrespondenz haben wir dann
 nämlich den Monoidhomomorphismus
 \[
-\varphi=\operatorname{id}\colon M=\operatorname{Abb}(X, X)\to \operatorname{Abb}(X, X),
+\varphi=\ident\colon M=\Abb(X, X)\to \Abb(X, X),
 \]
 sodass wir auf der linken Seite die Operation
 \[
-\operatorname{Abb}(X, X)\times X\to X, (f,x)\mapsto \varphi(f)(x)=\operatorname{id}(f)(x)=f(x)
+\Abb(X, X)\times X\to X, (f,x)\mapsto \varphi(f)(x)=\ident(f)(x)=f(x)
 \]
 erhalten.
 
-Aanalog korrespondiert $\operatorname{id} \colon S(X) \to S(X)$ zur Operation von $S(X)$ auf $X$ aus \ref{bsp:operationen}(c).
+Aanalog korrespondiert $\ident \colon S(X) \to S(X)$ zur Operation von $S(X)$ auf $X$ aus \ref{bsp:operationen}(c).
 \end{bsp}
 
 
@@ -1654,7 +1656,7 @@ Sei $X$ eine $M$-Menge. Die Operation von $M$ auf $X$ heißt \defn{treu} (bzw. $
 a . x = b . x \text{ für alle } x \in X \Rightarrow a = b
 \]
 
-Dies ist äquivalent dazu, dass der  zur Operation gehörige Monoid-Homomorphismus  $M \to \operatorname{Abb}(X, X)$ injektiv ist.
+Dies ist äquivalent dazu, dass der  zur Operation gehörige Monoid-Homomorphismus  $M \to \Abb(X, X)$ injektiv ist.
 \end{defini}
 
 \begin{anm}\label{anm:gruppenop_treu}
@@ -1668,14 +1670,14 @@ bzw. zur Injektivität des zugehörigen Gruppenhomomorphismus $G \to S(X)$.
 \begin{satz}[Satz von Cayley]\label{satz:cayley}
 \begin{enumerate}[label=(\alph*)]
     \item $M$ ist eine treue $M$-Menge.
-    \item Ist $G$ endlich mit $\operatorname{ord}(G) = n$, dann ist $G$ isomorph zu einer Untergruppe von $S_n$.
+    \item Ist $G$ endlich mit $\ord(G) = n$, dann ist $G$ isomorph zu einer Untergruppe von $S_n$.
 \end{enumerate}
 \end{satz}
 
 \begin{proof}
 (a) Seien $a, b \in M$ mit $a . x = b . x$ für alle $x \in M$. Dann folgt $a . e = b . e$, also $a e = b e$, und somit $a = b$.
 
-(b) Wegen der Endlichkeit von $G$ existiert eine Bijektion $f \colon \{1, \dots, n\} \to G$. Man rechnet nach, dass $\psi \colon S(G) \to S_n$, $\sigma \mapsto f^{-1} \circ \sigma \circ f$ ein Gruppenisomorphismus ist. Aus (a) erhalten wir einen injektiven Gruppenhomomorphismus $\varphi \colon G \hookrightarrow S(G)$. Wir betrachten die Komposition $\gamma := \psi \circ \varphi \colon G \to S(G) \hookrightarrow S_n$. Dann ist $\gamma$ injektiv, also $G \cong \operatorname{im} \gamma \subseteq S_n$.
+(b) Wegen der Endlichkeit von $G$ existiert eine Bijektion $f \colon \{1, \dots, n\} \to G$. Man rechnet nach, dass $\psi \colon S(G) \to S_n$, $\sigma \mapsto f^{-1} \circ \sigma \circ f$ ein Gruppenisomorphismus ist. Aus (a) erhalten wir einen injektiven Gruppenhomomorphismus $\varphi \colon G \hookrightarrow S(G)$. Wir betrachten die Komposition $\gamma := \psi \circ \varphi \colon G \to S(G) \hookrightarrow S_n$. Dann ist $\gamma$ injektiv, also $G \cong \image \gamma \subseteq S_n$.
 \end{proof}
 
 
@@ -1684,12 +1686,12 @@ Seien $X, Y$ $M$-Mengen und $\varphi \colon X \to Y$. $\varphi$ heißt \defn{Hom
 \[
 \varphi(a . x) = a . \varphi(x) \quad \text{für alle } a \in M, \, x \in X.
 \]
-Die Menge der $M$-Homomorphismen von $X$ nach $Y$ wird durch $\operatorname{Hom}_M(X, Y)$ bezeichnet.
+Die Menge der $M$-Homomorphismen von $X$ nach $Y$ wird durch $\Hom_M(X, Y)$ bezeichnet.
 \end{defini}
 
 \begin{anm}\label{anm:iso_end_auto}
 \begin{itemize}
-    \item Wie bei Monoiden sind Isomorphismen, Endomorphismen und Automorphismen definiert. $\operatorname{End}_M(X)$ ist ein Monoid mit $\operatorname{Aut}_M(X) = \operatorname{End}_M(X)^\times$.
+    \item Wie bei Monoiden sind Isomorphismen, Endomorphismen und Automorphismen definiert. $\End_M(X)$ ist ein Monoid mit $\Aut_M(X) = \End_M(X)^\times$.
 
     \item Ein Homomorphismus $\varphi \colon X \to Y$ von $M$-Mengen ist genau dann ein Isomorphismus von $M$-Mengen, wenn $\varphi$ bijektiv ist.
 
@@ -1710,7 +1712,7 @@ Explizit ist dieser gegeben durch \[\varphi_x(a) = a . x \text { für alle } a \
 
 \begin{anm}\label{anm:currying_variante}
 \begin{itemize}
-\item Anstelle des Curryings $M \times X \to X \leadsto M \to \operatorname{Abb}(X, X)$ haben wir in \ref{bem:univ_eig} ein Currying $M \times X \to X \leadsto X \to \operatorname{Abb}(M, X)$ vorgenommen.
+\item Anstelle des Curryings $M \times X \to X \leadsto M \to \Abb(X, X)$ haben wir in \ref{bem:univ_eig} ein Currying $M \times X \to X \leadsto X \to \Abb(M, X)$ vorgenommen.
     \item Ist $X$ eine $M$-Menge, so kann man eine Teilbarkeitsrelation auf $X$ definieren durch 
     \[x | y \Leftrightarrow \text{ Es existiert ein } \, a \in M \text { mit } a. x = y.\]
      Ist z.B. $R$ ein kommutativer Ring (mit multiplikativem Monoid $(R, \cdot)$)
@@ -1729,7 +1731,7 @@ die \defn{Bahn} (oder der \defn{Orbit}) von $x$. Der \defn{Stabilisator} von $x$
 \[
 \Stab_G(x) := \{g \in G \mid g . x = x\}.
 \]
-Das Element $x$ heißt ein \defn{Fixpunkt}, falls $\Stab_G(x) = G$ ist (dies ist äquivalent zu  $g . x = x$ für alle $g \in G$.) Die Menge der Fixpunkte wird durch $\operatorname{Fix}(X)$ bezeichnet.
+Das Element $x$ heißt ein \defn{Fixpunkt}, falls $\Stab_G(x) = G$ ist (dies ist äquivalent zu  $g . x = x$ für alle $g \in G$.) Die Menge der Fixpunkte wird durch $\Fix(X)$ bezeichnet.
 \end{defini}
 
 \begin{bem}\label{bem:orbits_und_stabis}
@@ -1757,7 +1759,7 @@ Für jedes $x \in X$ gilt $e . x = x$, also ist die Relation reflexiv. Falls $x 
 \end{denn}
 Die Äquivalenzklasse von $x \in M$ ist gegeben durch
 \[
-\{ y \in M \mid \text{es existiert ein } g \in G \text{ mit } g . x = y \} = \operatorname{Orb}_G(x).
+\{ y \in M \mid \text{es existiert ein } g \in G \text{ mit } g . x = y \} = \Orb_G(x).
 \]
 \end{proof}
 
@@ -1766,9 +1768,9 @@ Die Äquivalenzklasse von $x \in M$ ist gegeben durch
 \begin{enumerate}[label=(\alph*)]
     \item $\RR^{\times}$ operiert auf $\RR^2$ durch $\lambda. x = \lambda^2 x$. Für $x \in \RR^2$ ist
     \[
-    \operatorname{Orb}_{\RR^{\times}} x = \{ \lambda. x \mid \lambda \in \RR^{\times} \} = \{ \lambda^2 x \mid \lambda \in \RR^{\times} \} = \RR_{>0} x.
+    \Orb_{\RR^{\times}} x = \{ \lambda. x \mid \lambda \in \RR^{\times} \} = \{ \lambda^2 x \mid \lambda \in \RR^{\times} \} = \RR_{>0} x.
     \]
-    Damit ist $\operatorname{Orb}_{\RR^{\times}} 0 = \{0\}$ und für $x \neq 0$ ist $\operatorname{Orb}_{\RR^{\times}} x$ eine Halbgerade.
+    Damit ist $\Orb_{\RR^{\times}} 0 = \{0\}$ und für $x \neq 0$ ist $\Orb_{\RR^{\times}} x$ eine Halbgerade.
 
 \begin{center}
 \begin{tikzpicture}
@@ -1785,7 +1787,7 @@ Die Äquivalenzklasse von $x \in M$ ist gegeben durch
 \fill (1,0.25) circle (1.5pt) node[above right] {$x$}; % Point on one of the half-lines
 
 % Label for the orbit
-\node[red] at (3, 2) {$\operatorname{Orb}_{\mathbb{R}^\times} 0$};
+\node[red] at (3, 2) {$\Orb_{\mathbb{R}^\times} 0$};
 
 % Draw the origin and half-lines with different slopes
 \fill[red] (0,0) circle (3pt);
@@ -1798,7 +1800,7 @@ Die Äquivalenzklasse von $x \in M$ ist gegeben durch
     \]
     Die Operation ist nicht treu, denn $-1.x = x = 1.x$ für alle $x \in \RR^2$, aber $1 \neq -1$.
 
-    \item $G = S_n$ operiert auf $\{1, \dots, n\}$. Für $x \in \{1, \dots, n\}$ ist \[\operatorname{Orb}_{S_n}(x) = \{1, \dots, n\},\] denn für jedes $y \in \{1, \dots, n\}$ existiert ein $\sigma \in S_n$ mit $\sigma(x) = y$. Es ist \[\Stab_{S_n}(x) = \{\sigma \in S_n \mid \sigma(x) = x\} \cong S_{n-1}.\]
+    \item $G = S_n$ operiert auf $\{1, \dots, n\}$. Für $x \in \{1, \dots, n\}$ ist \[\Orb_{S_n}(x) = \{1, \dots, n\},\] denn für jedes $y \in \{1, \dots, n\}$ existiert ein $\sigma \in S_n$ mit $\sigma(x) = y$. Es ist \[\Stab_{S_n}(x) = \{\sigma \in S_n \mid \sigma(x) = x\} \cong S_{n-1}.\]
 
     \item Sei $\sigma=(1\  2)(3\  4\  5)\in S_5$. Die Gruppe $H=\langle \sigma\rangle\leq S_5$ operiert durch Einschränkung der Operation aus (a) auf
     $\{1,2,3,4,5\}$. Bei dieser Operation liegen genau zwei Bahnen vor, nämlich $\{1,2\}$
@@ -1811,24 +1813,24 @@ Die Äquivalenzklasse von $x \in M$ ist gegeben durch
     aus $3$ Elementen; die Bahn des Elements $3$ besteht aus $3$ Elementen und der Stabilisator
     aus $2$ Elementen. In beiden Fällen ergibt sich als Produkt der beiden Größen $6=\ord(H)$.
     Dass dies kein Zufall ist, werden wir gleich sehen (\ref{folg:isom_orbit}, \ref{satz:bahnengleichung}).
-    \item Sei $H \leq G$ und $g \in G$. Bezüglich der Linksmultiplikationsoperation von $H$ auf $G$ ist \[\operatorname{Orb}_H(g) = \{h g \mid h \in H\} = H g,\]
+    \item Sei $H \leq G$ und $g \in G$. Bezüglich der Linksmultiplikationsoperation von $H$ auf $G$ ist \[\Orb_H(g) = \{h g \mid h \in H\} = H g,\]
     d.h. die Bahnen der Linksmultiplikation sind genau die Rechtsnebenklassen.
-    Möchte man die Linksnebenklassen als Orbits erhalten, muss man $G$ von rechts operieren lassen bzw. den "`$()^{-1}$-Trick"' anwenden: $H$ operiert von links auf $G$ durch $h . g = g h^{-1}$ (dann ist $\operatorname{Orb}_H(g) = g H$). In beiden Fällen ist $\Stab_H(g) = \{e\}$.
+    Möchte man die Linksnebenklassen als Orbits erhalten, muss man $G$ von rechts operieren lassen bzw. den "`$()^{-1}$-Trick"' anwenden: $H$ operiert von links auf $G$ durch $h . g = g h^{-1}$ (dann ist $\Orb_H(g) = g H$). In beiden Fällen ist $\Stab_H(g) = \{e\}$.
 
-    \item $G$ operiert durch \defn{Konjugation} auf sich selbst durch \[g . x := g x g^{-1}.\] Dann ist \[\operatorname{Orb}_G(x) = \{g x g^{-1} \mid g \in G\},\] die sogenannte \defn{Konjugationsklasse} von $x$.
+    \item $G$ operiert durch \defn{Konjugation} auf sich selbst durch \[g . x := g x g^{-1}.\] Dann ist \[\Orb_G(x) = \{g x g^{-1} \mid g \in G\},\] die sogenannte \defn{Konjugationsklasse} von $x$.
 
     \item Sei $K$ ein Körper.
     \begin{itemize}
-    % \item $\operatorname{GL}_n(K)$ operiert durch Linksmultiplikation auf $\operatorname{M}_{n,n}(K)$: Ein Vertretersystem der Bahnen ist durch die strenge Zeilenstufenform gegeben.
+    % \item $\GL_n(K)$ operiert durch Linksmultiplikation auf $\Mat_{n,n}(K)$: Ein Vertretersystem der Bahnen ist durch die strenge Zeilenstufenform gegeben.
     
-    \item $\operatorname{GL}_n(K)$ operiert durch Konjugation auf $\operatorname{M}_{n,n}(K)$:
+    \item $\GL_n(K)$ operiert durch Konjugation auf $\Mat_{n,n}(K)$:
     \[
-    g.A=gAg^{-1} \quad \text{für } g\in\GL_n(K), A\in\operatorname{M}_{n,n}(K). 
+    g.A=gAg^{-1} \quad \text{für } g\in\GL_n(K), A\in\Mat_{n,n}(K). 
     \]
     Die Bahnen entsprechen den Ähnlichkeitsklassen von Matrizen. Ein Vertretersystem der Bahnen durch ist sowohl durch die Frobenius- als auch durch die Weierstraß-Normalform gegeben. Falls $K$ algebraisch abgeschlossen ist (z.B. $K=\mathbb{C}$), ist ein weiteres Vertretersystem durch die Jordansche Normalform gegeben.
     
-    \item $\operatorname{GL}_n(K)$ operiert auf der Menge der symmetrischen $n \times n$-Matrizen über $K$ durch 
-    \[g . A := g A g^T \quad \text{für } g\in\GL_n(K), A\in\operatorname{M}_{n,n}(K).\]
+    \item $\GL_n(K)$ operiert auf der Menge der symmetrischen $n \times n$-Matrizen über $K$ durch 
+    \[g . A := g A g^T \quad \text{für } g\in\GL_n(K), A\in\Mat_{n,n}(K).\]
     Für $K = \mathbb{R}$ bestimmt der Sylvestersche Trägheitssatz ein Vertretersystem der Bahnen.
     \end{itemize}    
 \end{enumerate}
@@ -1853,7 +1855,7 @@ Diese werden wir im Folgenden betrachten.
 \]
 Dieser ist explizit gegeben durch $\varphi_x(a H) = a . x$. Es gilt: 
 \begin{itemize}
-\item $\operatorname{im} \varphi_x = \operatorname{Orb}_G(x)$,
+\item $\image \varphi_x = \Orb_G(x)$,
 \item $\varphi_x$ genau dann injektiv, wenn $H = \Stab_G(x)$ ist.
 \end{itemize}
 \end{bem}
@@ -1876,7 +1878,7 @@ also ist $\psi_x = \varphi_x$. Wir betrachten
 \[
 G \xrightarrow{\pi} G / H \xrightarrow{\varphi_x} X, \quad g \mapsto g . x.
 \]
-und erhalten $\operatorname{im} \varphi_x = \operatorname{im} (\varphi_x \circ \pi) = \operatorname{Orb}_G(x)$. Es verbleibt der Beweis der letzten Behauptung des Satzes. Seien dazu $a, b \in G$. Es gilt:
+und erhalten $\image \varphi_x = \image (\varphi_x \circ \pi) = \Orb_G(x)$. Es verbleibt der Beweis der letzten Behauptung des Satzes. Seien dazu $a, b \in G$. Es gilt:
 \[
 \varphi_x(a H) = \varphi_x(b H) \Leftrightarrow a . x = b . x \Leftrightarrow a^{-1} b \in \Stab_G(x) \Leftrightarrow a \Stab_G(x) = b \Stab_G(x).
 \]
@@ -1889,7 +1891,7 @@ gilt. Diese ist aber äquivalent zu $\Stab_G(x) = H$ (setze $b = e$  und beachte
 \begin{folgerung}\label{folg:isom_orbit}
 Sei $X$ eine $G$-Menge und $x \in X$. Dann ist
 \[
-G / \Stab_G(x) \to \operatorname{Orb}_G(x), \quad a \Stab_G(x) \mapsto a . x
+G / \Stab_G(x) \to \Orb_G(x), \quad a \Stab_G(x) \mapsto a . x
 \]
 ein Isomorphismus von $G$-Mengen.
 \end{folgerung}
@@ -1901,8 +1903,8 @@ Aus \ref{bem:univ_eig_g_menge} (mit $H=\Stab_G(x)$) folgt: Die obige Abbildung i
 \begin{defini}\label{def:transitiv}
 Eine $G$-Menge $X$ heißt \defn{transitiv}, falls $X \neq \emptyset$ ist und für alle $x, y \in X$ ein $g \in G$ mit $g . x = y$ existiert. Dazu äquivalent sind jeweils die Bedingungen
 \begin{itemize}
-\item Es existiert ein $x \in X$ mit $X = \operatorname{Orb}_G(x)$,
-\item $X \neq \emptyset$ und für alle $x \in X$ ist $X = \operatorname{Orb}_G(x)$.
+\item Es existiert ein $x \in X$ mit $X = \Orb_G(x)$,
+\item $X \neq \emptyset$ und für alle $x \in X$ ist $X = \Orb_G(x)$.
 \end{itemize}
 \end{defini}
 
@@ -1916,7 +1918,7 @@ von transitiven $G$-Mengen.
 \begin{enumerate}[label=(\alph*)]
     \item $S_n$ operiert transitiv auf $\{1, \dots, n\}$: Für alle $i, j \in \{1, \dots, n\}$ existiert $\sigma \in S_n$ mit $\sigma(i) = j$.
     \item Sei $H \leq G$. Dann ist $G / H$ eine transitive $G$-Menge, denn nach Definition ist
-    \[\operatorname{Orb}_G(H) = \{ a.H \ | \ a \in G\} = \{ aH \ | \ a\in G\} =G / H.\]
+    \[\Orb_G(H) = \{ a.H \ | \ a \in G\} = \{ aH \ | \ a\in G\} =G / H.\]
     Wir werden gleich sehen, dass dies bis
     auf Isomorphie alle transitiven $G$-Mengen sind.
     \item Die Operation aus \ref{bsp:orbit_stabilisator_beispiele}(a) ist nicht transitiv.
@@ -1930,7 +1932,7 @@ Sei $X$ eine transitive $G$-Menge. Dann gilt:
     \item[(b)] Für jedes $x \in X$ ist \[G / \Stab_G(x) \to X, \quad a \Stab_G(x) \mapsto a . x\] ein Isomorphismus von $G$-Mengen.
     \item[(c)] Es existiert ein $H \leq G$ mit $X \cong G / H$ (als $H$-Menge).
 \end{itemize}
-Ist zudem $G$ endlich, dann gilt $\lvert X \rvert \mid \operatorname{ord}(G)$.
+Ist zudem $G$ endlich, dann gilt $\lvert X \rvert \mid \ord(G)$.
 \end{satz}
 
 \begin{proof}
@@ -1940,7 +1942,7 @@ Ist zudem $G$ endlich, dann gilt $\lvert X \rvert \mid \operatorname{ord}(G)$.
 \]
 somit ist $g h g^{-1} \in \Stab_G(y)$ und deshalb gilt $g\Stab_G(x)g^{-1}\subseteq \Stab_G(y)$. Die andere Inklusion zeigt man analog.
 
-(b) folgt aus \ref{folg:isom_orbit} und $\operatorname{Orb}_G(x) = X$.
+(b) folgt aus \ref{folg:isom_orbit} und $\Orb_G(x) = X$.
 
 (c) Wir setzen $H := \Stab_G(x)$ für ein beliebiges $x \in X$, dann folgt die Behauptung aus (b). 
 
@@ -1953,7 +1955,7 @@ Aus (c) ergibt sich mit Hilfe des Satzes von Lagrange \ref{satz:lagrange}
 \begin{satz}\label{satz:bahnengleichung}
 (\defn{Bahnengleichung}) Sei $X$ eine $G$-Menge. Dann gilt:
 \begin{itemize}
-    \item[(a)] Für jedes $x \in X$ ist $|\operatorname{Orb}_G(x)| = (G : \Stab_G(x))$.
+    \item[(a)] Für jedes $x \in X$ ist $|\Orb_G(x)| = (G : \Stab_G(x))$.
     \item[(b)] Ist $|X|$ endlich und $x_1, \dots, x_n$ ein Vertretersystem der Bahnen, dann ist
     \[
     |X| = \sum_{i=1}^n (G : \Stab_G(x_i)).
@@ -1962,7 +1964,7 @@ Aus (c) ergibt sich mit Hilfe des Satzes von Lagrange \ref{satz:lagrange}
 \end{satz}
 
 \begin{proof}
-(a) Wegen \ref{folg:isom_orbit} ist $G / \Stab_G(x) \cong \operatorname{Orb}_G(x)$,
+(a) Wegen \ref{folg:isom_orbit} ist $G / \Stab_G(x) \cong \Orb_G(x)$,
 woraus direkt die Behauptung folgt.
 
 (b) Wegen \ref{bem:orbits_und_stabis} und (a) ist 
@@ -1976,22 +1978,22 @@ Die Bahnengleichung liefert einen weiteren Beweis des Satzes von Lagrange: Sei $
 
 Sei $n = (G : H)$ und $x_1, \dots, x_n$ ein Vertretersystem der Bahnen (=Linksnebenklassen von $H$ in $G$), dann ist
 \begin{align*}
-\operatorname{ord}(G) &= \sum_{i=1}^n |\operatorname{Orb}_H(x_i)| = \sum_{i=1}^n |x_i H| = \sum_{i=1}^n (H : \Stab_H(x_i)) \\
-&= \sum_{i=1}^n (H : \{e\}) = \sum_{i=1}^n |H| = n \cdot \operatorname{ord}(H).
+\ord(G) &= \sum_{i=1}^n |\Orb_H(x_i)| = \sum_{i=1}^n |x_i H| = \sum_{i=1}^n (H : \Stab_H(x_i)) \\
+&= \sum_{i=1}^n (H : \{e\}) = \sum_{i=1}^n |H| = n \cdot \ord(H).
 \end{align*}
 \end{anm}
 
 \begin{folgerung}\label{folg:fixpunktgleichung}
 (\defn{Fixpunktgleichung}) Sei $X$ eine endliche $G$-Menge und $x_1, \dots, x_n$ ein Vertretersystem der Bahnen, die mehr als ein Element besitzen. Dann gilt:
 \[
-|X| = |\operatorname{Fix}_G(X)| + \sum_{i=1}^n (G : \Stab_G(x_i)).
+|X| = |\Fix_G(X)| + \sum_{i=1}^n (G : \Stab_G(x_i)).
 \]
 \end{folgerung}
 
 \begin{proof}
 Die Behauptung folgt aus der Bahnengleichung \ref{satz:bahnengleichung}, denn es gilt:
 \[
-x\in\operatorname{Fix}_G(X) \Leftrightarrow \Stab_G(x) = G \Leftrightarrow (G : \Stab_G(x)) = 1.
+x\in\Fix_G(X) \Leftrightarrow \Stab_G(x) = G \Leftrightarrow (G : \Stab_G(x)) = 1.
 \]
 \end{proof}
 
@@ -2006,7 +2008,7 @@ heißt der \defn{Zentralisator} von $x$ in $G$.
 \begin{folgerung}\label{folg:zentralisator_gleichung}
 Sei $G$ eine endliche Gruppe, und sei $x_1, \dots, x_n$ ein Vertretersystem der Bahnen in $G \setminus Z(G)$ bezüglich der Konjugationsoperation von $G$ auf sich selbst. Dann gilt:
 \[
-\operatorname{ord}(G) = \operatorname{ord}(Z(G)) + \sum_{i=1}^n (G : Z_G(x_i)).
+\ord(G) = \ord(Z(G)) + \sum_{i=1}^n (G : Z_G(x_i)).
 \]
 \end{folgerung}
 
@@ -2031,7 +2033,7 @@ Das neutrale Element bezüglich $+$ bezeichnen wir mit $0_R$ (Nullelement), das 
 
 $R$ heißt \defn{kommutativ}, wenn $\cdot$ kommutativ ist.
 
-Eine Teilmenge $S \subseteq R$ heißt \defn{Unterring}, wenn $(S, {+})$ eine Untergruppe in $(R, {+})$ und $(S, {\cdot})$ ein Untermonoid in $(R, {\cdot})$ ist.
+Eine Teilmenge $S \subseteq R$ heißt ein \defn{Unterring} von $R$, wenn $(S, {+})$ eine Untergruppe in $(R, {+})$ und $(S, {\cdot})$ ein Untermonoid in $(R, {\cdot})$ ist.
 
 Seien $R, R'$ Ringe. Eine Abbildung $\varphi \colon R \to R'$ heißt \defn{Ringhomomorphismus}, wenn gilt:
 \begin{itemize}
@@ -2057,11 +2059,11 @@ Ein Ringhomomomorphismus ist genau dann ein Ringisomorphismus, wenn er bijektiv 
 
 \begin{bsp}\label{bsp:ring_beispiele}
 \begin{itemize}
-    \item[(a)] $\mathbb{Z},\QQ$ sind der gewöhnlichen Addition und Multiplikation Ringe,
+    \item[(a)] $\mathbb{Z},\QQ$ sind mit der gewöhnlichen Addition und Multiplikation Ringe,
     $\ZZ$ ist ein Unterring von $\QQ$.
     \item[(b)] Der einfachstmögliche Ring ist "`der"' Nullring -- eine einelementige Menge mit den einzig möglichen Verknüpfungen. Alle Nullringe sind kanonisch isomorph zueinander,
     deswegen sprechen wir von "`dem"' Nullring und bezeichnen ihn mit $0$.
-    bezeichnet mit $0$. Es gilt
+    Es gilt
     \[
     R=0 \iff 0_R = 1_R.
     \]
@@ -2121,6 +2123,8 @@ $I \subseteq R$ heißt ein \defn{Ideal}, falls gilt:
 \begin{denn}
 (I1) und (I2) liefern (UG1) und (UG2). Aus (I3) folgt, dass mit $a \in I$ auch $-a=(-1)a \in I$ liegt, was (UG3) zur Folge hat.
 \end{denn}
+Aufgrund von (I3) ist dann jedes Ideal von $R$ ein $R$-Untermodul von $R$. Umgekehrt ist jeder
+$R$-Untermodul von $R$ ein Ideal in $R$.
 \item Unterringe und Ideale sind zwei verschiedene Dinge: $\ZZ$ ist ein Unterring von $\QQ$,
 aber kein Ideal in $\QQ$; $2\mathbb{Z}$ ist ein Ideal in $\ZZ$ (das sehen wir im Anschluss),
 aber kein Unterring von $\ZZ$. 
@@ -2139,9 +2143,9 @@ aber kein Unterring von $\ZZ$.
 Sei $\varphi \colon R \to S$ ein Ringhomomorphismus. Dann gilt:
 \begin{itemize}
     \item[(a)] Ist $I \subseteq S$ ein Ideal, dann ist auch $\varphi^{-1}(I) \subseteq R$ ein Ideal.
-    \item[(b)] Der Kern $\operatorname{ker} \varphi := \{a \in R \mid \varphi(a) = 0\} = \varphi^{-1}(\{0\})$ ist ein Ideal in $R$.
+    \item[(b)] Der Kern $\ker \varphi := \{a \in R \mid \varphi(a) = 0\} = \varphi^{-1}(\{0\})$ ist ein Ideal in $R$.
     \item[(c)] Ist $I \subseteq R$ ein Ideal und $\varphi$ surjektiv, dann ist auch $\varphi(I) \subseteq S$ ein Ideal.
-    \item[(d)] Bilder und Urbilder von Unterringen unter $\varphi$ sind wieder Unterringe. Insbesondere ist das Bild $\operatorname{im} \varphi \subseteq S$ ist ein Unterring.
+    \item[(d)] Bilder und Urbilder von Unterringen unter $\varphi$ sind wieder Unterringe. Insbesondere ist das Bild $\image \varphi \subseteq S$ ist ein Unterring.
 \end{itemize}
 \end{bem}
 
@@ -2156,7 +2160,12 @@ $ I \subseteq R $ Ideal. Dann wird die Faktorgruppe $ R / I $ wird mit der Multi
 \]
 zu einem Ring, dem \defn{Faktorring} (\defn{Restklassenring}) von $ R $ nach $ I $.
 
-Die kanonische Projektion $ \pi \colon R \to R / I $, $ a \mapsto a + I $ ist ein surjektiver Ringhomomorphismus mit $ \operatorname{ker} \pi = I $.
+$a+I$ heißt die \defn{Restklasse} von $a$ modulo $I$. Wir schreiben auch
+\[
+a\equiv b \mod I
+\]
+für $a+I=b+I$.
+Die kanonische Projektion $ \pi \colon R \to R / I $, $ a \mapsto a + I $ ist ein surjektiver Ringhomomorphismus mit $ \ker \pi = I $.
 \end{bem}
 
 \begin{proof}
@@ -2169,10 +2178,18 @@ Vom Rest überzeugt man sich leicht.
 \end{proof}
 
 \begin{anm}\label{anm:nullring}
-Es ist $R / I = 0 \iff I = R$, 
+\begin{itemize}
+    \item Es ist $R / I = 0 \iff I = R$, 
 \begin{denn}
 Aufgrund von \ref{bsp:ring_beispiele} gilt: \[R / I = 0 \iff 0 + I = 1 + I \iff 1 \in I \iff I = R.\]
 \end{denn}
+\item Es ist $R/{0}=R$. Hier tritt eine kleine Subtilität auf, denn streng nach Definition ist
+$R/\{0\}=\{\{a\} \ | \ a\in R\}$, da für jedes $a\in R$ die Restklasse $a+{0}$ durch die Menge $\{a\}$
+gegeben ist. Man identifiziert jedoch die Menge $\{\{a\} \ | \ a\in R\}$ mit $R=\{a\ | \ a\in R\}$.
+Im Hinblick auf die universelle Eigenschaft \ref{satz:faktorring_universelle_eigenschaft} des Faktorrings -- die diesen wie üblich bis auf eindeutige Isomorphie bestimmt -- macht dies Sinn,
+denn $R$ zusammen mit $\pi=\ident\colon R\to R$ erfüllt die universelle Eigenschaft von $R/\{0\}$.
+Das gleiche gilt sinngemäß natürlich auch schon für Faktorgruppen der Form $G/e$.
+\end{itemize}
 \end{anm}
 
 \begin{bsp}\label{bsp:restklassenringe}
@@ -2203,19 +2220,19 @@ R \ar[r]^{\varphi} \ar[d]_{\pi} & S \\
 R / I \ar@{-->}[ur]_{\overline{\varphi}}
 }
 \]
-d.h. $\overline{\varphi} \circ \pi = \varphi$. Explizit ist $\overline{\varphi}$ gegeben durch $\overline{\varphi} \colon R / I \to S, \; a + I \mapsto \varphi(a)$. Es gilt $\ker(\overline{\varphi}) = \ker \varphi / I$ und $\operatorname{im} \overline{\varphi} = \operatorname{im} \varphi$.
+d.h. $\overline{\varphi} \circ \pi = \varphi$. Explizit ist $\overline{\varphi}$ gegeben durch $\overline{\varphi} \colon R / I \to S, \; a + I \mapsto \varphi(a)$. Es gilt $\ker(\overline{\varphi}) = \ker \varphi / I$ und $\image \overline{\varphi} = \image \varphi$.
 \end{satz}
 
 \begin{satz}[Homomorphiesatz für Ringe]\label{satz:homomorphiesatz_ring}
 Sei $\varphi \colon R \to S$ ein Ringhomomorphismus. Dann gibt es einen eindeutig bestimmten Ringisomorphismus
 \[
-\overline{\varphi} \colon R / \ker \varphi \to \operatorname{im} \varphi,
+\overline{\varphi} \colon R / \ker \varphi \to \image \varphi,
 \]
 sodass das folgende Diagramm kommutiert:
 \[
 \xymatrix{
 R \ar[r]^{\varphi} \ar[d]_{\pi} & S \\
-R / \ker \varphi  \ar[r]^\Phi_{\cong} & \operatorname{im} \varphi \ar@{^{(}->}[u]_{i}
+R / \ker \varphi  \ar[r]^\Phi_{\cong} & \image \varphi \ar@{^{(}->}[u]_{i}
 }
 \]
 Hierbei ist $\pi$ die kanonische Projektion und $i$ die Inklusionsabbildung. Die Abbildung $\Phi$ ist explizit gegeben durch
@@ -2263,7 +2280,7 @@ Die \defn{Einheitengruppe} $R^{\times}$ von $R$ ist die Einheitengruppe des Mono
 
 \begin{anm}
 Jeder Ringhomomorphismus $\varphi\colon R\to S$ schränkt sich zu einem Gruppenhomomorphismus $R^\times\to S^\times$ ein und für alle $a\in R^\times$ ist $\varphi(a^{-1})=\varphi(a)^{-1}$. Dies
-ergibt sich direkt aus \ref{bem:gruppenhom_universelle_eigenschaft}.
+ergibt sich direkt aus \ref{bem:gruppenhom_universelle_eigenschaft}. Im Allgemeinen ist jedoch $\varphi(R\setminus R^\times)\not\subseteq S\setminus S^\times$, wie man an der Inklusion $\varphi\colon\ZZ\hookrightarrow\QQ$ sieht.
 \end{anm}
 
 \begin{defini}\label{def:hauptideal}
@@ -2297,6 +2314,10 @@ $R,S$.
 Insbesondere ist $R = 0$ kein Körper.
 \end{anm}
 
+\begin{bsp}\label{bsp:koerper}
+$\QQ,\RR$ und $\CC$ sind Körper. Dagegen ist $\ZZ$ kein Körper, denn $\ZZ^\times=\{\pm1\}\neq\ZZ\setminus\{0\}$.
+\end{bsp}
+
 \begin{satz}\label{satz:koerper_eigenschaften}
 Sei $R \neq 0$. Dann sind äquivalent:
 \begin{itemize}
@@ -2309,7 +2330,7 @@ Sei $R \neq 0$. Dann sind äquivalent:
 \begin{proof}
 (i) $\Rightarrow$ (ii): Sei $R$ ein Körper und $I \neq (0)$ ein Ideal in $R$. Dann existiert ein $a \in I$ mit $a \neq 0$, also $a \in R^{\times}$,  woraus nach \ref{bem:einheit_ideal} $R = (a) \subseteq I$ folgt. Also ist $I = R$.
 
-(ii) $\Rightarrow$ (iii): Sei $\varphi \colon R \to S$ ein Ringhomomorphismus mit $S \neq 0$. Dann ist $\operatorname{ker} \varphi \subseteq R$ ein Ideal. Da $\operatorname{ker} \varphi \neq R$ ist wegen $\varphi(1_R) = 1_S \neq 0_S$, folgt aus (ii), dass $\operatorname{ker} \varphi = (0)$ ist, also ist $\varphi$ injektiv.
+(ii) $\Rightarrow$ (iii): Sei $\varphi \colon R \to S$ ein Ringhomomorphismus mit $S \neq 0$. Dann ist $\ker \varphi \subseteq R$ ein Ideal. Da $\ker \varphi \neq R$ ist wegen $\varphi(1_R) = 1_S \neq 0_S$, folgt aus (ii), dass $\ker \varphi = (0)$ ist, also ist $\varphi$ injektiv.
 
 (iii) $\Rightarrow$ (i): Sei $a \in R \setminus R^{\times}$. Nach \ref{bem:einheit_ideal} ist $(a) \neq R$. Wir setzen $S := R / (a)$ , was wegen \ref{anm:nullring} $ \neq 0$ ist. Das Element $a$ liegt im Kern der kanonischen Projektion von $R$ nach $S=R/(a)$, die wegen (iii) injektiv ist. Dies impliziert $a = 0$, also ist $R$ ein Körper.
 \end{proof}
@@ -2332,9 +2353,9 @@ I + J := \{ a + b \mid a \in I, \; b \in J \}, \quad I\cap J,
 \[
 I J := \left\{ \sum_{i=1}^n a_i b_i \mid a_i \in I, \; b_i \in J, \; n \in \NN_0 \right\}
 \]
-Ideale in $R$. Analog sind endliche Summen, Durchschnitte und Produkte von Idealen wieder Ideale. Wir setzen $I^n := I\cdot \ldots\cdot I \quad \text{($n$-mal)}$. Konvention: $I^0 := (1) = R$.
+Ideale in $R$. Analog sind endliche Summen und Produkte sowie beliebige Durchschnitte von Idealen wieder Ideale. Wir setzen $I^n := I\cdot \ldots\cdot I \quad \text{($n$-mal)}$. Konvention: $I^0 := (1) = R$.
 
-$I,J$ heißen \defn{relativ prim}, wenn $I+J=(1)$ ist.
+$I,J$ heißen \defn{relativ prim} (\defn{koprim}), wenn $I+J=(1)$ ist.
 
 Ist $(I_\lambda)_{\lambda \in \Lambda}$ eine Familie von Idealen, dann ist
 \[
@@ -2383,9 +2404,9 @@ Sei $R = \ZZ$, $I = (2)$, $J = (3)$. Dann gilt:
 
 In Hauptidealringen gilt allgemein:
 \[
-(a) + (b) = \operatorname{ggT}(a, b), \quad (a) \cap (b) = \operatorname{kgV}(a, b).
+(a) + (b) = \ggT(a, b), \quad (a) \cap (b) = \kgV(a, b).
 \]
-(wobei $\ggT$ und $\operatorname{kgV}$ noch zu definieren wären, was wir aber zumindest für den $\ggT$ im nächsten Abschnitt tun werden).
+(wobei $\ggT$ und $\kgV$ noch zu definieren wären, was wir aber zumindest für den $\ggT$ im nächsten Abschnitt tun werden).
 \end{bsp}
 
 \begin{bem}\label{bem:idealprodukte_durchschnitte}
@@ -2600,3 +2621,4 @@ Es gilt:
 \end{proof}
 
 \end{document}
+
