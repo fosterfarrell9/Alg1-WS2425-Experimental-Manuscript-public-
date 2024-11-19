@@ -146,6 +146,7 @@ plainpages=false,}
 \newcommand{\frakU}{\mathfrak U}
 
 \renewcommand{\setminus}{\smallsetminus}
+\newcommand{\assoc}{\mathrel{\widehat{=}}}
 
 %Neue Operatoren
 \DeclareMathOperator{\Abb}{Abb}
@@ -162,6 +163,7 @@ plainpages=false,}
 \DeclareMathOperator{\DV}{DV}
 \DeclareMathOperator{\End}{End}
 \DeclareMathOperator{\Fix}{Fix}
+\DeclareMathOperator{\Frob}{Frob}
 \DeclareMathOperator{\ggT}{ggT}
 \DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\Hom}{Hom}
@@ -1156,7 +1158,7 @@ Insbesondere existiert für jede Teilmenge $M \subseteq G$ der "`von $M$ erzeugt
 \begin{bem}\label{bem:produkt_normalteiler}
 Seien $U, V \leq G$. Dann gilt:
 \begin{itemize}
-    \item[(a)] Falls $U \trianglelefteq G$ oder $V \trianglelefteq G$, dann ist $UV = \{uv \mid u \in U, v \in V\}G$.
+    \item[(a)] Falls $U \trianglelefteq G$ oder $V \trianglelefteq G$, dann ist $UV = \{uv \mid u \in U, v \in V\}$.
     \item[(b)] Falls $U \trianglelefteq G$ und $V \trianglelefteq G$, dann gilt $UV \trianglelefteq G$.
 \end{itemize}
 \end{bem}
@@ -2278,7 +2280,7 @@ Die \defn{Einheitengruppe} $R^{\times}$ von $R$ ist die Einheitengruppe des Mono
 \end{itemize}
 \end{bsp}
 
-\begin{anm}
+\begin{anm}\label{anm:einheitenmorphismus}
 Jeder Ringhomomorphismus $\varphi\colon R\to S$ schränkt sich zu einem Gruppenhomomorphismus $R^\times\to S^\times$ ein und für alle $a\in R^\times$ ist $\varphi(a^{-1})=\varphi(a)^{-1}$. Dies
 ergibt sich direkt aus \ref{bem:gruppenhom_universelle_eigenschaft}. Im Allgemeinen ist jedoch $\varphi(R\setminus R^\times)\not\subseteq S\setminus S^\times$, wie man an der Inklusion $\varphi\colon\ZZ\hookrightarrow\QQ$ sieht.
 \end{anm}
@@ -2357,12 +2359,6 @@ Ideale in $R$. Analog sind endliche Summen und Produkte sowie beliebige Durchsch
 
 $I,J$ heißen \defn{relativ prim} (\defn{koprim}), wenn $I+J=(1)$ ist.
 
-Ist $(I_\lambda)_{\lambda \in \Lambda}$ eine Familie von Idealen, dann ist
-\[
-\sum_{\lambda \in \Lambda} I_\lambda := \left\{ \sum_{\lambda \in \Lambda} a_\lambda \mid a_\lambda \in I_\lambda, \; a_\lambda = 0 \text{ für fast alle } \lambda \in \Lambda \right\}
-\]
-ein Ideal in $R$.
-
 Sind $a_1, \ldots, a_n \in R$, dann setzen wir
 \[
 (a_1, \ldots, a_n) := \left\{ r_1 a_1 + \dots + r_n a_n \mid r_1, \ldots, r_n \in R \right\} = (a_1) + \dots + (a_n).
@@ -2371,7 +2367,7 @@ $(a_1, \ldots, a_n)$ heißt das \defn{von $a_1, \ldots, a_n$ erzeugte Ideal}.
 
 Ist allgemeiner $M \subseteq R$, dann setzen wir
 \[
-(M) := \left\{ \sum_{x \in M} r_x x \mid r_x \in R, \; r_x = 0 \text{ für fast alle } x \in M \right\} = \sum_{x \in M} (x).
+(M) := \left\{ \sum_{x \in M} r_x x \mid r_x \in R, \; r_x = 0 \text{ für fast alle } x \in M \right\}.
 \]
 $(M)$ heißt das \defn{von $M$ erzeugte Ideal}.
 \end{defini}
@@ -2397,7 +2393,7 @@ Die Multiplikation von Idealen ist assoziativ(!), daher ist Klammerung nicht not
 \begin{bsp}\label{bsp:idealsummen_produkte}
 Sei $R = \ZZ$, $I = (2)$, $J = (3)$. Dann gilt:
 \begin{itemize}
-    \item $I + J = (1) = \ZZ$, denn: $1 = (-1) \cdot 2 + 1 \cdot 3 \in I + J$. Insbesonder sind $I$ und $J$ relativ prim.
+    \item $I + J = (1) = \ZZ$, denn: $1 = (-1) \cdot 2 + 1 \cdot 3 \in I + J$. Insbesondere sind $I$ und $J$ relativ prim.
     \item $I \cap J = (6)$.
     \item $IJ=(6)$
 \end{itemize}
@@ -2491,7 +2487,7 @@ und deshalb $\varphi$ surjektiv.
 
 (c) Es ist
 \[
-\ker\varphi)=\{r\in R \ | \ r+I_1=I_1,\ldots, r+I_n=I_n\}=I_1\cap\ldots\cap I_n.
+\ker(\varphi)=\{r\in R \ | \ r+I_1=I_1,\ldots, r+I_n=I_n\}=I_1\cap\ldots\cap I_n.
 \]
 Daraus ergibt sich unmittelbar (d), und durch Anwendung des Homomorphiesatzes für Ringe erhalten wir die letzte Aussage des Satzes.
 \end{proof}
@@ -2566,6 +2562,12 @@ Die Primideale in $\ZZ$ sind genau das Nullideal $(0)$ sowie die Ideale der Form
 Maximale Ideale in $\ZZ$ sind genau die Ideale der Form $(p)$ für eine Primzahl $p$.
 \end{folgerung}
 
+\begin{notation}
+Für eine Primzahl $p$ schreiben wir $\FF_p:=\ZZ/p\ZZ$ und sprechem von "`dem \defn{Körper mit $p$ Elementen}"'.
+Man kann zeigen, dass $\FF_p$ bis auf kanonische Isomorphie der einzige Körper mit $p$ Elementen ist.
+\end{notation}
+
+
 \begin{folgerung}\label{folgerung:kleiner_fermatscher_satz}
 (Kleiner Satz von Fermat) Sei $a \in \ZZ$, $p$ eine Primzahl. Dann gilt:
 \[
@@ -2574,7 +2576,7 @@ a^p \equiv a \pmod{p}.
 \end{folgerung}
 
 \begin{proof}
-$\ZZ / p\ZZ$ ist nach \ref{bem:primzahl_und_koerper} ein Körper, somit ist $(\ZZ / p\ZZ)^{\times} \cong \ZZ / p\ZZ \setminus \{0\}$ eine Gruppe mit $p - 1$ Elementen. Falls $p \nmid a$ gilt, dann ist $\overline{a} \in (\ZZ / p\ZZ)^{\times}$ und somit $\overline{a}^{p - 1} = \overline{1}$ nach dem Satz von Euler-Fermat, also $a^{p - 1} \equiv 1 \pmod{p}$ und folglich $a^p \equiv a \pmod{p}$. Falls $p \mid a$ gilt, ist $a^p \equiv 0 \equiv a \pmod{p}$.
+Es ist $\FF_p^{\times}$ eine Gruppe mit $p - 1$ Elementen. Falls $p \nmid a$ gilt, dann ist $\overline{a} \in \FF_p^{\times}$ und somit $\overline{a}^{p - 1} = \overline{1}$ nach dem Satz von Euler-Fermat, also $a^{p - 1} \equiv 1 \pmod{p}$ und folglich $a^p \equiv a \pmod{p}$. Falls $p \mid a$ gilt, ist $a^p \equiv 0 \equiv a \pmod{p}$.
 \end{proof}
 
 \begin{satz}\label{satz:maximales_ideal_existiert}
@@ -2593,7 +2595,7 @@ Wir setzen $J := \bigcup_{\lambda \in \Lambda} I_\lambda$.
         \item Für $a, b \in J$ existieren $\lambda, \mu \in \Lambda$ mit $a \in I_\lambda$ und $b \in I_\mu$. Ohne Einschränkung gelte $I_\lambda \subseteq I_\mu$. Dann sind $a, b \in I_\mu$ und somit $a + b \in I_\mu \subseteq J$.
         \item Für $a \in J$ und $r \in R$ existiert ein $\lambda \in \Lambda$ mit $a \in I_\lambda$, also ist $r a \in I_\lambda \subseteq J$.
     \end{itemize}
-    \item $J \neq R$, denn $I_\lambda \subsetneq R$ für alle $\lambda \in \Lambda$ (d.h. $J \in \mathcal{X}$).
+    \item $J \neq R$, denn $1\not\in J$ wegen $1\not\in I_\lambda$ für alle $\lambda \in \Lambda$ (d.h. $J \in \mathcal{X}$).
 \end{itemize}
 Damit ist $J\in\mathcal{X}$. Außerdem gilt  $I_\lambda \subseteq J$ für alle $\lambda \in \Lambda$.
 \end{denn}
@@ -2618,6 +2620,343 @@ Es gilt:
 (a) Sei $I \subsetneqq R$. Nach Anmerkung \ref{anm:nullring} ist $R / I \neq 0$, also besitzt $R / I$ nach Satz \ref{satz:maximales_ideal_existiert} ein maximales Ideal. Aufgrund von \ref{bem:ideale_faktorringe} existiert ein maximales Ideal in $R$, das $I$ enthält.
 
 (b) Sei $a \in R \setminus R^{\times}$. Dann ist $(a) \subsetneqq R$ wegen \ref{bem:einheit_ideal}, und nach (a) folgt die Behauptung.
+\end{proof}
+
+%\end{document}
+
+
+\begin{notation}
+(Bruchschreibweise) Für $a \in R$, $u \in R^{\times}$ schreiben wir
+\[
+\frac{a}{u} := u^{-1} a = a u^{-1}.
+\]
+Sind $b \in R$, $v \in R^{\times}$, dann gilt
+\[
+\frac{a}{u} = \frac{b}{v} \iff a v = b u.
+\]
+\end{notation}
+
+\begin{anm}\label{anm:bruchregeln}
+Es gelten die aus der Schule bekannten Regeln für das Rechnen mit Brüchen in $R$:
+\[
+\frac{a}{u} \cdot \frac{b}{v} = \frac{a b}{u v}, \quad \frac{a}{u} + \frac{b}{v} = \frac{a v + b u}{u v}, \quad \dots
+\]
+\end{anm}
+
+\begin{defini}\label{def:quotient_koerper}
+Sei $R$ ein Integritätsring. Ein \defn{Quotientenkörper} von $R$ besteht aus:
+\begin{itemize}
+    \item einem Körper $K$, den wir mit $\Quot(R)$ notieren,
+    \item einem injektiven Ringhomomorphismus $\iota: R \hookrightarrow K = \Quot(R)$.
+\end{itemize}
+Hierfür soll eine der beiden zueinander äquivalenten Bedingungen gelten:
+
+\begin{itemize}
+    \item[(i)] Für jedes $x \in \Quot(R)$ existieren $a, u \in R$ mit $u \neq 0$ und $x = \frac{\iota(a)}{\iota(u)}$. Man beachte hierbei , dass $\iota(u)\in \Quot(R)^\times$
+    ist, da $\iota$ injektiv ist.
+    \item[(ii)] (Universelle Eigenschaft des Quotientenkörpers) Für jeden Körper $L$ und jeden injektiven Ringhomomorphismus $\varphi \colon R \to L$ gibt es genau einen Körperhomomorphismus $\Phi \colon \Quot(R) \hookrightarrow L$, für den folgendes Diagramm kommutiert:
+    \[
+    \begin{xy}
+        \xymatrix{
+            \Quot(R) \ar@{^{(}->}[rr]^{\Phi} & & L \\
+            & R \ar@{^{(}->}[ur]_{\varphi} \ar@{^{(}->}[ul]^{\iota} &
+        }
+    \end{xy}
+    \]
+    Für diesen gilt dann (automatisch):
+    \[
+    \Phi \left( \frac{\iota(a)}{\iota(u)} \right) = \frac{\varphi(a)}{\varphi(u)}
+    \]
+    für alle $a, u \in R$ mit $u \neq 0$.
+\end{itemize}
+\end{defini}
+
+\begin{proof}
+(der Äquivalenz (i) $\iff$ (ii)).
+
+"`(ii) $\Rightarrow$ (i)"' Wir setzen
+\[
+L := \{ x \in \Quot(R) \mid \text{Es existieren } a, u \in R, u \neq 0 \text{ mit } x = \frac{\iota(a)}{\iota(u)} \} \subseteq \Quot(R).
+\]
+Man rechnet nach, dass $L$ ein Unterring von $\Quot(R)$ ist, der ein Körper ist (invers zu $x = \frac{\iota(a)}{\iota(u)}$ mit $a, u \in R\setminus\{0\}$ ist das Element $\frac{\iota(u)}{\iota(a)}$). Es ist $\iota(R) \subseteq L$, denn für $r \in R$ ist $\iota(r) = \frac{\iota(r)}{\iota(1)}$. Wir wenden die universelle Eigenschaft aus (ii) auf $\varphi=\iota\colon R\to L$ an.
+Es existiert dann ein Körperhomomorphismus $\Phi \colon \Quot(R) \hookrightarrow L$ mit
+\[
+\Phi \left( \frac{\iota(a)}{\iota(u)} \right) = \frac{\iota(a)}{\iota(u)} \quad \text{für alle } a, u \in R \text{ mit } u \neq 0.
+\]
+Die Verkettung $L \overset{\subseteq}{\hookrightarrow} \Quot(R) \overset{\Phi}{\hookrightarrow} L$ stimmt mit $\operatorname{id}_L$ überein, daher ist $\Phi$ surjektiv.
+Da $\Phi$ ein Körperhomomorphismus ist, ist er automatisch injektiv. Somit ist $\Phi$ ein Isomorphismus, und die Inklusion $L \subseteq \Quot(R)$ ist surjektiv, also $L = \Quot(R)$.
+
+"`(i) $\Rightarrow$ (ii)"' Wir zeigen zunächst die Eindeutigkeit von $\Phi$.
+Für alle $a, u \in R$ mit $u \neq 0$ gilt
+\[
+\Phi \left( \frac{\iota(a)}{\iota(u)} \right) = \Phi (\iota(a)\iota(u)^{-1}) \overset{\ref{anm:einheitenmorphismus}}{=} \Phi(\iota(a)) \Phi(\iota(u))^{-1} = \frac{\varphi(a)}{\varphi(u)}.
+\]
+Aufgrund von (i) ist $\Phi$ durch diese Gleichung eindeutig bestimmt.
+Nun zeigen wir die Existenz eines solchen Homomorphismus $\Phi$. 
+Wir definieren $\Phi \colon \Quot(R) \to L$ durch $\Phi\left(\frac{\iota(a)}{\iota(u)}\right) := \frac{\varphi(a)}{\varphi(u)}$.
+
+$\Phi$ ist wohldefiniert,
+\begin{denn}
+Sind $a, b, u, v \in R$, $u, v \neq 0$ mit $\frac{\iota(a)}{\iota(u)} = \frac{\iota(b)}{\iota(v)}$, so folgt wegen der Injektivität von $\iota$, dass $a v = b u$ ist, was weiter impliziert, dass $\varphi(a) \varphi(v) = \varphi(b) \varphi(u)$ ist. Daher gilt auch $\frac{\varphi(a)}{\varphi(u)} = \frac{\varphi(b)}{\varphi(v)}$.
+\end{denn}
+
+Dass $\Phi$ ein Körperhomomorphismus ist, rechnet man nach. Exemplarisch zeigen wir die Verträglichkeit mit der Addition. Seien $a, b, u, v \in R$ mit $u, v \neq 0$. Wir setzen
+$a':=\iota(a)$, $b':=\iota(b)$, $c':=\iota(c)$, $d':=\iota(d)$. Dann ergibt sich
+\[
+\Phi \left( \frac{a'}{u'} + \frac{b'}{v'} \right) = \Phi \left( \frac{a' v' + b' u'}{u' v'} \right) = \frac{\varphi(a v + b u)}{\varphi(u v)} = \frac{\varphi(a) \varphi(v) + \varphi(b) \varphi(u)}{\varphi(u) \varphi(v)} = \frac{\varphi(a)}{\varphi(u)} + \frac{\varphi(b)}{\varphi(v)},
+\]
+also
+\[
+\Phi \left( \frac{a'}{u'}  + \frac{b'}{v'} \right)=
+\Phi \left( \frac{a'}{u'} \right) + \Phi \left( \frac{b'}{v'} \right).
+\]
+Es ist
+\[
+\Phi(\iota(a))=\Phi\left(\frac{\iota(a)}{\iota(1)}\right)=\frac{\varphi(a)}{\varphi(1)}=\varphi(a)
+\]
+für alle $a\in R$ und deshalb kommutiert das Diagramm in (ii).
+\end{proof}
+
+\begin{notation}
+Mittels $\iota$ fassen wir $R$ häufig als Unterring von $\Quot(R)$ auf, d.h. für $a \in R$ schreiben wir $a \in \Quot(R)$ statt $\iota(a) \in \Quot(R)$ und statt $\iota(R) \subseteq K$ direkt $R \subseteq K$.
+In dem Sinne wird dann jedes Element aus $R \setminus \{0\}$ in $K$ invertierbar.
+Bedingung (i) lässt sich umformulieren zu
+\begin{itemize}
+    \item[(i')] Für jedes $x \in \Quot(R)$ existieren $a, u \in R$ mit $u \neq 0$ und $x = \frac{a}{u}$.
+\end{itemize}
+Die Formel aus (ii) lautet dann: $\Phi \left( \frac{a}{u} \right) = \frac{\varphi(a)}{\varphi(u)}$
+für alle $a, u \in R$ mit $u \neq 0$.
+\end{notation}
+
+\begin{satz}\label{satz:existenz_quotientenkörper}
+Sei $R$ ein Integritätsring. Dann gilt:
+\begin{itemize}
+    \item[(a)] Es existiert ein Quotientenkörper von $R$.
+    \item[(b)] Je zwei Quotientenkörper von $R$ sind kanonisch isomorph im folgenden Sinne: Sind $K_1$ zusammen mit $\iota_1 \colon R \hookrightarrow K_1$ und $K_2$ zusammen mit $\iota_2 \colon R \hookrightarrow K_2$ Quotientenkörper von $R$, dann existiert ein eindeutig bestimmter Körperisomorphismus $\Phi \colon K_1 \to K_2$, so dass das folgende Diagramm kommutiert:
+    \[
+    \begin{xy}
+    \xymatrix{
+        & K_1 \ar[rr]^{\Phi}_\cong & & K_2 \\
+        & & R \ar@{^{(}->}[ul]^{\iota_1} \ar@{^{(}->}[ur]_{\iota_2} &
+    }
+    \end{xy}
+    \]
+\end{itemize}
+\end{satz}
+
+\begin{proof}
+(a) Wir definieren eine Relation auf $R \times (R \setminus \{0\})$ wie folgt:
+\[
+(r_1, s_1) \sim (r_2, s_2) \quad \text{genau dann, wenn} \quad r_1 s_2 = r_2 s_1.
+\]
+Man rechnet nach, dass $\sim$ eine Äquivalenzrelation ist. 
+
+Wir setzen $K := (R \times (R \setminus \{0\}))/\sim$ (Menge der Äquivalenzklassen).
+
+Wir bezeichnen die Klasse von $(r, s) \in R \times (R \setminus \{0\})$ mit $[r, s]$.
+
+Wir definieren 
+\[
+[r_1, s_1] + [r_2, s_2] := [r_1 s_2 + r_2 s_1, s_1 s_2],
+\]
+\[
+[r_1, s_1] \cdot [r_2, s_2] := [r_1 r_2, s_1 s_2].
+\]
+Man rechnet nach, dass $K$ damit ein Körper wird (Nullelement: $[0,1]$, Einselement: $[1,1]$, $[s,r]$ ist das Inverse zu $[r,s]$). Wir definieren 
+\[\iota \colon R \to K, \quad r \mapsto [r,1].\]
+Dann ist $\iota$ ein injektiver Ringhomomorphismus.
+In $K$ ist jedes Element von der Form
+\[
+[r, s] = [r,1] \cdot [1,s] = [r,1] \cdot [s,1]^{-1} = \frac{\iota(r)}{\iota(s)}.
+\]
+Damit ist $K$ ein Quotientenkörper von $R$.
+
+(b) Hierbei handelt es sich um ein "`Standard-UE-Argument"':
+\begin{itemize}
+\item Wir wenden die universelle Eigenschaft von $(K_1, \iota_1)$ auf $(K_2, \iota_2)$ an, um einen eindeutig bestimmten Körperhomomorphismus $\Phi \colon K_1 \to K_2$ mit $\Phi \circ \iota_1 = \iota_2$ zu erhalten.
+\item Wir wenden die universelle Eigenschaft von $(K_2, \iota_2)$ auf $(K_1, \iota_1)$ an, um einen eindeutig bestimmten Körperhomomorphismus $\Psi \colon K_2 \to K_1$ mit $\Psi \circ \iota_2 = \iota_1$ zu erhalten.
+\end{itemize}
+Somit ist
+\[
+\Psi\circ\Phi\circ\iota_1=\Psi\circ\iota_2=\iota_1=\ident\circ\iota_1,
+\]
+d.h. wir haben ein kommutatives Diagramm
+\[
+\begin{xy}
+\xymatrix{
+K_1 \ar@<0.5ex>[rr]^{\Psi\circ\Phi} \ar@<-0.5ex>[rr]_{\operatorname{id}_{K_1}} & & K_1 \\
+& R \ar@{_{(}->}[ul]^{\iota_1} \ar@{^{(}->}[ur]_{\iota_1}
+}
+\end{xy}
+\]
+Aus der Eindeutigkeitsaussage in der universellen Eigenschaft von $(K_1,\iota_1)$ folgt $\Psi\circ\Phi=\ident_{K_1}$. Analog zeigt man $\Phi\circ\Psi=\ident_{K_2}$. Somit ist $\Phi$ ein Isomorphismus.
+\end{proof}
+
+\begin{bsp}\label{bsp:quotient_koerper_konstruktion}
+\begin{itemize}
+    \item[(a)] Die Konstruktion aus dem Beweis von Satz \ref{satz:existenz_quotientenkörper} liefert eine Möglichkeit, den Körper $\mathbb{Q}$ als Quotientenkörper von $\ZZ$ formal zu konstruieren.
+    In der Praxis rechnet man in $\QQ$ natürlich nicht mit dieser expliziten Konstruktion. Stattdessen verwendet man die Existenz von $\QQ=\Quot(\ZZ)$ zusammen mit (i'). 
+    \item[(b)] Ist $K$ ein Körper, dann ist $K$ zusammen mit der Identität $\operatorname{id}_K \colon K \to K$ ein Quotientenkörper von $K$. Aus der expliziten Konstruktion in \ref{satz:existenz_quotientenkörper} ist dies nicht unmittelbar klar.
+    Mit der universellen Eigenschaft ist es sofort einsichtig: Ist $L$ ein Körper und $\varphi \colon K \to L$ ein injektiver Ringhomomorphismus, dann existiert genau ein Körperhomomorphismus $\Phi$, sodass folgendes Diagramm kommutiert:
+\[
+\begin{xy}
+\xymatrix{
+K \ar[rr]^{\Phi}  & & L \\
+& \ar[ul]_{\operatorname{id}} K \ar[ur]_{\varphi} &
+}
+\end{xy}
+\]
+(nämlich $\Phi = \varphi$). Insbesondere ist $\Quot(\Quot(R))=\Quot(R)$.
+\end{itemize}
+\end{bsp}
+
+\begin{anm}\label{anm:quotient_koerper_besonderheiten}
+\begin{itemize}
+    \item Wegen \ref{satz:existenz_quotientenkörper} (b) sprechen wir von "`dem"' Quotientenkörper $\Quot(R)$.
+    \item Die Philosophie hinter der universellen Eigenschaft ist, dass $\Quot(R)$ "`der"' kleinste Körper ist, in den $R$ eingebettet werden kann. Bei der Konstruktion von $\Quot(R)$ haben wir die Elemente $R \setminus \{0\}$ künstlich invertierbar gemacht.
+    \item Ist $R$ ein Integritätsring und $K$ ein Körper mit $R \subseteq K$, dann ist
+    \[
+    \left\{ \frac{r}{u} \in K \mid r, u \in R, u \neq 0 \right\}
+    \]
+    ein Unterring von $K$, der selbst ein Körper ist, und wegen \ref{satz:existenz_quotientenkörper} (a) ein Quotientenkörper von $R$.
+    \item Gelegentlich schreibt man auch in Integritätsringen Ausdrücke wie $\frac{r}{s}$ mit $r, s \in R$, $s \neq 0$, auch wenn $s$ keine Einheit in $R$ ist. Dabei fasst man $R$ als Unterring von $\Quot(R)$ auf, in $\Quot(R)$ existiert das Element $\frac{r}{s}$.
+\end{itemize}
+\end{anm}
+
+\begin{bsp}
+Ist $K$ ein Körper, dann ist der Polynomring $K[X]$ ein Integritätsring (das zeigt man meist
+schon in der Linearen Algebra, wir werden uns aber in einem späteren Abschnitt nochmal explizit
+mit Polynomringen beschäftigen). Der Körper
+\[
+K(X):=\Quot(K[X])
+\]
+heißt der \defn{Körper der rationalen Funktionen über $K$ in der Variablen $X$}. Seine Elemente
+sind von der Form $\frac{f}{g}$ mit $f,g\in K[X],g\neq 0$ und heißen \defn{rationale Funktionen}.
+\end{bsp}
+
+\begin{defini}\label{def:charakteristik}
+Es bezeichne $\varphi_R\colon\ZZ\to R$ den eindeutig bestimmten Ringhomomorphismus aus der universellen Eigenschaft \ref{bem:universelle_eigenschaft_z_ring} von $\ZZ$.
+Das eindeutig bestimmte $n \in \NN_0$ mit $\ker \varphi_R = (n)$ heißt die \defn{Charakteristik} von $R$.
+\end{defini}
+
+\begin{anm}\label{anm:charakteristik}
+Wegen Satz 1.26 ist $\charact R = \min \{ n \in \NN \mid n \cdot 1_R = 0 \}$ (falls dieses existiert), sonst $0$.
+\end{anm}
+
+\begin{bem}\label{bem:charakteristik_primzahl}
+Ist $R$ ein Integritätsring, so ist $\charact(R)$ entweder $0$ oder eine Primzahl.
+\end{bem}
+
+\begin{proof}
+Aus dem Homomorphiesatz erhalten wir einen injektiven Ringhomomorphismus
+\[
+\ZZ / \ker \varphi_R \hookrightarrow R.
+\]
+Da $R$ ein Integritätsring ist, ist auch $\ZZ / \ker \varphi_R$ ein Integritätsring. Man beachte hierzu, dass $\ker \varphi_R \neq (1)$ und damit $\ZZ / \ker \varphi_R \neq 0$ ist, denn $\varphi_R(1) = 1_R \neq 0_R$, da $R$ ein Integritätsring ist. Somit ist $\ker \varphi_R$ nach \ref{bem:primideal_maximalideal_faktorring} ein Primideal in $\ZZ$, woraus mit \ref{folgerung:primideale_in_Z} die Behauptung folgt.
+\end{proof}
+
+\begin{bsp}\label{bsp:charakteristik_beispiele}
+\begin{itemize}
+    \item[(a)] Es ist $\charact \ZZ = \charact \QQ = \charact R = \charact \CC = 0$.
+    \item[(b)] Ist $p$ eine Primzahl, so gilt $\charact (\ZZ / p\ZZ) = p$.
+\end{itemize}
+\end{bsp}
+
+\begin{bem}\label{bem:charakteristik_int_koerper}
+Seien $R, S$ Integritätsringe. Dann gilt:
+\begin{itemize}
+    \item[(a)] Existiert ein injektiver Ringhomomorphismus $i \colon R \hookrightarrow S$, so ist $\charact(R) = \charact(S)$.
+    \item[(b)] Sind $R$ und $S$ Körper mit $\charact(R) \neq \charact(S)$, so existiert kein Körperhomomorphismus von $R$ nach $S$.
+    \item[(c)] Es ist $\charact(\Quot(R))=\charact(R)$.
+\end{itemize}
+\end{bem}
+
+\begin{proof}
+(a) Wir betrachten das folgende Diagramm:
+\[
+\xymatrix{
+\ZZ \ar[r]^{\varphi_R} \ar[dr]_{\varphi_S} & R \ar@{^{(}->}[d]^i \\
+& S
+}
+\]
+Wegen der Eindeutigkeitsaussage in der universellen Eigenschaft von $\ZZ$ folgt $\varphi_S = i \circ \varphi_R$. 
+Aus der Injektivität von $i$ ergibt sich
+\[
+a \in \ker \varphi_S \iff \varphi_S(a) = 0 \iff i(\varphi_R(a)) = 0 \iff \varphi_R(a) = 0 \iff a \in \ker \varphi_R,
+\]
+also $\ker \varphi_S = \ker \varphi_R$ und somit $\charact(R) = \charact(S)$.
+
+(b) Sei $i \colon R \to S$ ein Körperhomomorphismus. Nach Satz \ref{satz:koerper_eigenschaften} ist $i$ injektiv, was im Widerspruch zu (a) steht, da dann $\charact(R) = \charact(S)$ gelten müsste.
+
+(c) folgt direkt aus (a).
+\end{proof}
+
+\begin{bsp}
+Sei $p$ eine Primzahl. Wir betrachten die Inklusionen $\FF_p\hookrightarrow\FF_p[X]\hookrightarrow\FF_p(X)$. Hierbei wird $a\in\FF_p$
+auf das konstante Polynom $a$ abgebildet. Hierbei handelt es sich um Ringhomomorphismen.
+Insbesondere gilt wegen \ref{bem:charakteristik_int_koerper}:
+\[
+p=\charact \FF_p=\charact \FF_p[X]=\charact\FF_p(X).
+\]
+Der Polynomring $\FF_p[X]$ und damit auch der Körper $\FF_p(X)$ haben unendlich viele Elemente.
+Insbesondere ist $\FF_p(X)$ ein Körper der Charakteristik $p>0$ mit unendlich vielen Elementen.
+\end{bsp}
+
+\begin{defini}\label{bem:frobenius_hom}
+Sei $R$ ein Integritätsring mit $\charact R = p > 0$. Die Abbildung
+\[
+\Frob_R \colon R \to R, \quad a \mapsto a^p
+\]
+heißt der \defn{Frobenius-Homomorphismus} von $R$.
+\end{defini}
+
+\begin{bem}\label{bem:frobenius_ringhom}
+Sei $R$ ein Integritätsring mit $\charact R = p > 0$. Dann ist $\Frob_R$ ein Ringhomomorphismus. Insbesondere gilt:
+\[
+(a + b)^p = a^p + b^p \quad \text{(``Freshman's dream'')}
+\]
+\end{bem}
+
+\begin{proof}
+Es gilt $\Frob_R(1_R) = 1_R$ und $\Frob_R(a b) = \Frob_R(a) \Frob_R(b)$ für alle $a, b \in R$. Seien $a, b \in R$. Dann folgt
+\[
+\Frob_R(a + b) = (a + b)^p = a^p + \binom{p}{1} a^{p-1} b + \dots + \binom{p}{p-1} a b^{p-1} + b^p = a^p + b^p,
+\]
+da $p \mid \binom{p}{i}$ für $i = 1, \dots, p - 1$, weil $\binom{p}{i}$ für diese $i$ eine ganze Zahl
+ist, deren Zähler durch $p$, deren Nenner jedoch nicht durch $p$ teilbar ist.
+\end{proof}
+
+\begin{defini}\label{def:primkoerper}
+Sei $K$ ein Körper. Der Durchschnitt aller Teilkörper von $K$ (d.h. der Unterringe von $K$, die Körper sind) heißt der \defn{Primkörper} von $K$.
+\end{defini}
+
+\begin{anm}\label{anm:primkoerper_ist_koerper}
+Der Primkörper von $K$ ist selbst ein Körper. Analog hätten wir auch den Primring eines Ringes definieren können, verzichten aber an dieser Stelle darauf.
+\end{anm}
+
+\begin{bem}\label{bem:charakteristik_und_primkoerper}
+Sei $K$ ein Körper und $P \subseteq K$ der Primkörper von $K$. Dann gilt:
+\begin{itemize}
+    \item[(a)] $\charact K = 0 \iff P \cong \QQ$.
+    \item[(b)] $\charact K = p > 0 \iff P \cong \FF_p$.
+\end{itemize}
+\end{bem}
+
+\begin{proof}
+Wir zeigen (a) und (b) zusammen.
+
+"`$\Rightarrow$"' Sei $\varphi_K \colon \ZZ \to K$ der kanonische Homomorphismus aus der universellen Eigenschaft von $\ZZ$. Dann ist $\operatorname{im} \varphi_K \subseteq K$ ein Unterring von $K$ und somit nullteilerfrei. Außerdem gilt $1_K \in P$, also $\operatorname{im} \varphi_K \subseteq P$. Folglich ist $\Quot(\operatorname{im} \varphi_K) \subseteq P$, und daher $\Quot(\operatorname{im} \varphi_K) = P$.
+\begin{itemize}
+\item Ist $\operatorname{char} K = 0$, so ist $\ker\varphi_K=0$ und daher nach dem Homomorphiesatz $\mathbb{Z} \cong \operatorname{im} \varphi_K$, also $\mathbb{Q} \cong \Quot(\operatorname{im} \varphi_K) = P$.
+\item Ist $\operatorname{char} K = p > 0$, so ist $\ker\varphi_K=p\ZZ$ und deshalb nach dem Homomorphiesatz $\mathbb{F}_p \cong \operatorname{im} \varphi_K$. Wir erhalten $\FF_p = \Quot(\FF_p) \cong \Quot(\operatorname{im} \varphi_K) = P$
+
+\end{itemize}
+
+"`$\Leftarrow$"' Aus $P\subseteq K$ ergibt sich $\charact(P)=\charact(K)$.
+\begin{itemize}
+    \item Ist $P \cong \QQ$, dann ist $\charact(K) = \charact(P) = \charact(\QQ) = 0$.
+    \item Ist $P \cong \FF_p$, dann ist $\charact(K) = \charact(P) = \charact(\FF_p) = p$.
+\end{itemize}
 \end{proof}
 
 \end{document}
