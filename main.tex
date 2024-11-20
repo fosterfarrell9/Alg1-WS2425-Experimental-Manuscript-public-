@@ -2806,7 +2806,7 @@ K \ar[rr]^{\Phi}  & & L \\
 }
 \end{xy}
 \]
-(nämlich $\Phi = \varphi$). Insbesondere ist $\Quot(\Quot(R))=\Quot(R)$.
+(nämlich $\Phi = \varphi$). Insbesondere ist $\Quot(\Quot(R))=\Quot(R)$. Genausogut hätten wir auch mit (i') argumentieren können, denn jedes Element aus $K$ lässt sich in der Form $x=\frac{x}{1}$ schreiben.
 \end{itemize}
 \end{bsp}
 
@@ -2843,6 +2843,13 @@ Das eindeutig bestimmte $n \in \NN_0$ mit $\ker \varphi_R = (n)$ heißt die \def
 Wegen Satz 1.26 ist $\charact R = \min \{ n \in \NN \mid n \cdot 1_R = 0 \}$ (falls dieses existiert), sonst $0$.
 \end{anm}
 
+\begin{bsp}\label{bsp:charakteristik_beispiele}
+\begin{itemize}
+    \item[(a)] Es ist $\charact \ZZ = \charact \QQ = \charact R = \charact \CC = 0$.
+    \item[(b)] Ist $n\in\NN$, so gilt $\charact (\ZZ / n\ZZ) = n$.
+\end{itemize}
+\end{bsp}
+
 \begin{bem}\label{bem:charakteristik_primzahl}
 Ist $R$ ein Integritätsring, so ist $\charact(R)$ entweder $0$ oder eine Primzahl.
 \end{bem}
@@ -2855,12 +2862,7 @@ Aus dem Homomorphiesatz erhalten wir einen injektiven Ringhomomorphismus
 Da $R$ ein Integritätsring ist, ist auch $\ZZ / \ker \varphi_R$ ein Integritätsring. Man beachte hierzu, dass $\ker \varphi_R \neq (1)$ und damit $\ZZ / \ker \varphi_R \neq 0$ ist, denn $\varphi_R(1) = 1_R \neq 0_R$, da $R$ ein Integritätsring ist. Somit ist $\ker \varphi_R$ nach \ref{bem:primideal_maximalideal_faktorring} ein Primideal in $\ZZ$, woraus mit \ref{folgerung:primideale_in_Z} die Behauptung folgt.
 \end{proof}
 
-\begin{bsp}\label{bsp:charakteristik_beispiele}
-\begin{itemize}
-    \item[(a)] Es ist $\charact \ZZ = \charact \QQ = \charact R = \charact \CC = 0$.
-    \item[(b)] Ist $p$ eine Primzahl, so gilt $\charact (\ZZ / p\ZZ) = p$.
-\end{itemize}
-\end{bsp}
+
 
 \begin{bem}\label{bem:charakteristik_int_koerper}
 Seien $R, S$ Integritätsringe. Dann gilt:
