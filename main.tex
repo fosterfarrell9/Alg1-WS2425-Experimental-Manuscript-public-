@@ -2759,7 +2759,7 @@ und definieren
 [r_1, s_1] + [r_2, s_2] &:= [r_1 s_2 + r_2 s_1, s_1 s_2],\\
 [r_1, s_1] \cdot [r_2, s_2] &:= [r_1 r_2, s_1 s_2].
 \end{align*}
-Man rechnet nach, dass $K$ damit ein Körper wird (Nullelement: $[0,1]$, Einselement: $[1,1]$, $[s,r]$ ist das Inverse zu $[r,s]$). Wir definieren 
+Man rechnet nach, dass $K$ damit ein Körper wird (Nullelement: $[0,1]$, Einselement: $[1,1]$, $[s,r]$ ist das Inverse zu $[r,s]$, falls $r,s\in R\setminus\{0\}$ sind). Wir definieren 
 \[\iota \colon R \to K, \quad r \mapsto [r,1].\]
 Dann ist $\iota$ ein injektiver Ringhomomorphismus.
 In $K$ ist jedes Element von der Form
@@ -2862,11 +2862,11 @@ Da $R$ ein Integritätsring ist, ist auch $\ZZ / \ker \varphi_R$ ein Integrität
 
 
 \begin{bem}\label{bem:charakteristik_int_koerper}
-Seien $R, S$ Integritätsringe. Dann gilt:
+Es gilt:
 \begin{itemize}
     \item[(a)] Existiert ein injektiver Ringhomomorphismus $i \colon R \hookrightarrow S$, so ist $\charact(R) = \charact(S)$.
     \item[(b)] Sind $R$ und $S$ Körper mit $\charact(R) \neq \charact(S)$, so existiert kein Körperhomomorphismus von $R$ nach $S$.
-    \item[(c)] Es ist $\charact(\Quot(R))=\charact(R)$.
+    \item[(c)] Ist $R$ ein Integritätsring, so ist $\charact(\Quot(R))=\charact(R)$.
 \end{itemize}
 \end{bem}
 
