@@ -2958,5 +2958,691 @@ Wir zeigen (a) und (b) zusammen.
 \end{itemize}
 \end{proof}
 
+\section{Teilbarkeit}
+Wir werden in diesem Abschnitt die Teilbarkeitstheorie in Integritätsringen entwickeln. Mit etwas mehr Aufwand könnte man die Theorie auch allgemeiner in Ringen oder in "`kürzbaren Monoiden"' betrachten (für viele Aspekte spielt nur die Struktur von $(R, \cdot)$ eine Rolle).
+\begin{notation}
+In diesem Abschnitt sei $R$ stets ein Integritätsring.
+\end{notation}
+
+\begin{defini}\label{def:teiler}
+Seien $a, b \in R$.
+\begin{itemize}
+    \item $b$ heißt ein \defn{Teiler} von $a$ (Bezeichnung: $b \mid a$), falls ein 
+     $r \in R$ mit $b = r a$ existiert.
+    \item $a, b$ heißen \defn{assoziiert} (Bezeichnung: $a \assoc b$), falls gilt: $a \mid b$ und $ b \mid a$.
+
+\end{itemize}
+\end{defini}
+
+\begin{bsp}\label{bsp:teilbarkeit}
+In $\ZZ$ gilt $3 \mid 12$, aber $5 \nmid 12$. Zudem ist $3 \assoc -3$, denn $3 \mid (-3)$ und $(-3) \mid 3$.
+\end{bsp}
+
+\begin{bem}\label{bem:teiler_assoziiert}
+Seien $a, b \in R$. Dann gilt:
+\begin{enumerate}[label=(\alph*)]
+    \item $a \mid b \iff (b) \subseteq (a)$,
+    \item $a \assoc b \iff (a) = (b) \iff $ Es existiert ein $\varepsilon \in R^\times \text{ mit } a = \varepsilon b$.
+\end{enumerate}
+\end{bem}
+
+\begin{proof}
+(a) Zunächst zeigen wir "`$\Rightarrow$"'.
+Angenommen, $a \mid b$, d.h.\ es existiert ein $r \in R$ mit $b = r a$. Sei $x \in (b)$, d.h.\ $x = s b$ für ein $s \in R$. Dann folgt $x = s (r a) = (s r) a\in (a)$. Somit gilt $(b) \subseteq (a)$.
+
+Für "`$\Leftarrow$"' nehmen wir an, dass $(b) \subseteq (a)$ gilt. Insbesondere ist $b \in (a)$, d.h.\ es existiert ein $r \in R$ mit $b = r a$. Daraus folgt $a \mid b$.
+
+(b) Es gilt $a \assoc b \iff (a) = (b)$ nach Definition von $\assoc$ und (a). Zu zeigen bleibt die zweite Äquivalenz. Angenommen, $(a) = (b)$. Dann existieren $r, s \in R$ mit $b = r a$ und $a = s b$. Durch Einsetzen erhalten wir $a = s (r a) = (s r) a$, also $a (1 - r s) = 0$. Da $R$ ein Integritätsring ist, folgt $a=0$ oder $1-rs=0$.
+Falls $a = 0$ ist, folgt $b = r a = 0$. Damit ist $a = 0 = 1 \cdot b$, und wir setzen $\varepsilon := 1$. Falls $1 - r s = 0$ ist, also $r s = 1$ ist, wählen wir $\varepsilon := s\in R^\times$. In beiden Fällen gilt $a = \varepsilon b$. Existiert umgekehrt ein $\varepsilon\in R^\times$ mit $a=\varepsilon b$, so folgt $b\mid a$, außerdem $b=\varepsilon^{-1}a$ und deshalb $a|b$, so dass insgesamt $a\assoc b$ folgt.
+\end{proof}
+
+\begin{anm}\label{anm:assoziiert_teilbarkeit}
+\begin{itemize}
+    \item $\assoc$ ist eine Äquivalenzrelation auf $R$ (klar wegen \ref{bem:teiler_assoziiert}(b)).
+    \item Die Teilbarkeitsrelation auf $R$ ist ein Beispiel für eine \defn{Präordnung} auf $R$, d.h.\ eine Relation $\leq$, die reflexiv und transitiv ist. Sie ist jedoch nicht antisymmetrisch: Aus $a \mid b$ und $b \mid a$ folgt im Allgemeinen nicht $a = b$, sondern nur $a \assoc b$ (vgl.\ \ref{bem:teiler_assoziiert}). Möchte man Antisymmetrie (und damit eine Ordnungsrelation), muss man modulo $\assoc$ rechnen.
+    Alternativ kann man mit mit Hauptidealen statt mit Elementen rechnen. Die "`$\subseteq$-Relation"' auf Hauptidealen ist eine Ordnungsrelation.
+\end{itemize}
+\end{anm}
+
+\begin{bem}\label{bem:ggT}
+Sei $\emptyset \neq T \subseteq R$, $d\in R$.
+\begin{itemize}
+    \item $d$ heißt ein \defn{gemeinsamer Teiler} von $T$ (Bezeichnung: $d \mid T$), falls gilt:
+    \[
+    \text{Für alle } a \in T \text{ gilt } d \mid a.
+    \]
+    \item $d$ heißt ein \defn{größter gemeinsamer Teiler} von $T$, falls gilt:
+    \[
+    d \mid T \text{ und für alle } a \in R \text{ mit } a \mid T \text{ gilt } a \mid d.
+    \]
+\end{itemize}
+In diesem Fall schreiben wir (in missbräuchlicher Schreibweise, siehe \ref{anm:ggT_existenz}): \[d = \ggT(T).\] 
+Für $\ggT(\{a_1, \dots, a_n\})$ schreiben wir auch $\ggT(a_1, \dots, a_n)$.
+
+Elemente $a,b\in R$ heißen \defn{teilerfremd} (\defn{relativ prim}), falls $\ggT(a,b)=1$ ist.
+\end{bem}
+
+\begin{anm}\label{anm:ggT_existenz}
+\begin{itemize}
+    \item Bezüglich der Teilbarkeitspräordnung gilt:
+    \begin{itemize}
+        \item gemeinsame Teiler = untere Schranken,
+        \item größte gemeinsame Teiler = Infima.
+    \end{itemize}
+    \item Im Allgemeinen wird $\ggT(T)$ gar nicht existieren. Z.\,B.\ existiert in 
+    \[R = \ZZ[\sqrt{-3}] = \{a + b \sqrt{-3} \mid a, b \in \ZZ \} \subseteq \CC\]
+    kein $\ggT$ von $4$ und $2 \cdot (1 + \sqrt{-3})$.
+    \item Selbst falls ein größter gemeinsamer Teiler existiert, ist er nur eindeutig bis auf $\assoc$. Wenn wir etwa schreiben $d = \ggT(a, b)$, dann ist $d$ ein größter gemeinsamer Teiler von $a$ und $b$, und die Menge aller größten gemeinsamen Teiler von $a$ und $b$ ist durch $\{d' \in R \mid d' \assoc d\}$ gegeben.
+    \item Analog zu $\ggT(T)$ kann man $\kgV(T)$ (=\defn{kleinstes gemeinsames Vielfaches}) von $T$ definieren.    
+\end{itemize}
+\end{anm}
+
+
+
+\begin{bem}\label{bem:ggT_hauptideal}
+Sei $\emptyset \neq T \subseteq R$, $d \in R$. Dann sind äquivalent:
+\begin{enumerate}[label=(\roman*)]
+    \item $d = \ggT(T)$,
+    \item $(d)$ ist das kleinste Hauptideal von $R$ mit $T \subseteq (d)$,
+    \item $(d)$ ist das kleinste Hauptideal von $R$ mit $(T) \subseteq (d)$.
+\end{enumerate}
+\end{bem}
+
+\begin{proof}
+(ii) bedeutet explizit: $T \subseteq (d)$ und falls $c \in R$ mit $T \subseteq (c)$ ist, dann ist $(d) \subseteq (c)$. In Termen von Teilbarkeit ist dies äquivalent zu: $d \mid T$ und falls $c \in R$ mit $c \mid T$ ist, dann gilt $c \mid d$, d.\,h.\ $d = \ggT(T)$. Die Äquivalenz von (ii) und (iii) ergibt sich aus der universellen Eigenschaft des Idealerzeugnisses \ref{anm:kleinstes_ideal}.
+\end{proof}
+
+\begin{folgerung}\label{folg:ggT_hauptideal}
+Sei $R$ ein Hauptidealring, $\emptyset \neq T \subseteq R$. Dann existiert $\ggT(T)$ und es gilt:
+\[
+(\ggT(T)) = (T).
+\]
+Insbesondere lässt sich $\ggT(T)$ als endliche $R$-Linearkombination von Elementen aus $T$ schreiben (vgl. \ref{def:summe_produkt_ideale}). Spezialfall: Für $a_1, \dots, a_n \in R$ existiert $\ggT(a_1, \dots, a_n)$, es ist \[(\ggT(a_1, \dots, a_n)) = (a_1, \dots, a_n),\] insbesondere existieren $r_1, \dots, r_n \in R$ mit 
+\[
+\ggT(a_1, \dots, a_n) = r_1 a_1 + \dots + r_n a_n.
+\]
+\end{folgerung}
+
+\begin{proof}
+Die Behauptung folgt direkt aus \ref{bem:ggT_hauptideal} und der Annahme, dass $R$ ein Hauptidealring ist: Das Ideal $(T)$ ist dann selbst ein Hauptideal, d.\,h.\ es existiert ein $d \in R$ mit $(T) = (d)$. Dieses ist das kleinste Hauptideal, das $T$ enthält.
+\end{proof}
+
+\begin{anm}\label{anm:ggT_nicht_linear}
+Es gibt Ringe, die keine Hauptidealringe sind und in denen $\ggT$s existieren, die sich jedoch nicht linear kombinieren lassen: Zum Beispiel gilt in $R = \RR[X, Y]$ (Polynomring in $X, Y$ über $\RR$), dass $\ggT(X, Y) = 1$ ist (aus Gradgründen), jedoch existieren keine $f, g \in \RR[X, Y]$ mit $f X + g Y = 1$, denn Einsetzen von $X = Y = 0$ würde zu $0 = 1$ und damit zum Widerspruch führen. Wir werden später sehen: $\RR[X, Y]$ ist ein sogenannter faktorieller Ring, deswegen existieren in $\RR[X, Y]$ größte gemeinsame Teiler.
+\end{anm}
+
+\begin{folgerung}[Chinesischer Restsatz für Hauptidealringe]
+Sei $R$ ein Hauptidealring, und seien $a_1,\ldots,a_n$ paarweise teilerfremde Elemente aus $R$.
+Dann ist die Abbildung
+\[
+R/(a_1\cdot\ldots\cdot a_n)\to R/(a_1)\times\ldots\times R/(a_n), \quad
+(r+(a_1\cdot\ldots\cdot a_n))\mapsto(r+(a_1),\ldots,r+(a_n))
+\]
+ein Ringisomorphismus. Insbesondere gilt: Sind $b_1,\ldots,b_n\in R$, so besitzt das das System von Kongruenzen
+\[
+x\equiv b_1 \bmod (a_1), \ldots, x\equiv b_n \bmod (a_n)
+\]
+eine Lösung in $R$. Diese ist eindeutig bestimmt modulo $(a_1\cdot\ldots\cdot a_n)$.
+\end{folgerung}
+
+
+\begin{defini}\label{def:prime_irreduzibel}
+Sei $p \in R \setminus (R^\times \cup \{0\})$.
+\begin{itemize}
+    \item $p$ heißt \defn{Primelement} $\iff (p)$ ist ein Primideal $\iff$ Aus $p \mid a b$ für $a, b \in R$ folgt stets $p \mid a$ oder $p \mid b$.
+    \item $p$ heißt \defn{irreduzibel} $\iff$ Aus $p = a b$ für $a, b \in R$ folgt stets $p \mid a$ oder $p \mid b$.
+\end{itemize}
+\end{defini}
+
+\begin{bem}\label{bem:primelement_irreduzibel}
+Sei $p \in R \setminus (R^\times \cup \{0\})$ ein Primelement. Dann ist $p$ irreduzibel.
+\end{bem}
+
+\begin{proof}
+Sei $p = a b$. Dann gilt insbesondere $p\mid ab$, und da $p$ ein Primelement ist, folgt $p \mid a$ oder $p \mid b$. Damit ist $p$ irreduzibel.
+\end{proof}
+
+\begin{bem}\label{bem:irreduzibel_eigenschaften}
+Sei $p \in R \setminus (R^\times \cup \{0\})$. Dann sind äquivalent:
+\begin{enumerate}[label=(\roman*)]
+    \item $p$ ist irreduzibel.
+    \item Aus $p = a b$ mit $a, b \in R$ folgt stets $a \in R^\times$ oder $b \in R^\times$.
+    \item $(p)$ ist maximal bezüglich "`$\subseteq$"' in $\{(a) \mid a \in R \setminus R^\times\}$.  
+\end{enumerate}
+\end{bem}
+
+\begin{proof}
+"`(i) $\Rightarrow$ (ii)"': Seien $a, b \in R$ mit $p = a b$. Da $p$ irreduzibel ist, folgt $p \mid a$ oder $p \mid b$. Ohne Einschränkung gelte $p \mid a$, dann existiert ein $r \in R$ mit $a = r p$. Damit folgt $p = r p b$. Weil $R$ Integritätsring ist, folgt durch Kürzen $r b = 1$, also $b \in R^\times$.
+
+"`(ii) $\Rightarrow$ (iii)"': Sei $a \in R \setminus R^\times$ mit $(p) \subseteq (a)$. Dann existiert ein $b \in R$ mit $p = a b$. Daraus folgt $b \in R^\times$, also $p \assoc a$. Damit ist $(p) = (a)$.
+
+"`(iii) $\Rightarrow$ (i)"': Seien $a, b \in R$ mit $p = a b$. Dann ist $(p) \subseteq (a)$. Falls $a \in R^\times$ ist, dann ist $p \assoc b$, also $p \mid b$. Falls $a \notin R^\times$ gilt, dann ergibt sich aus (iii) die Gleichheit $(p) = (a)$, also $p \assoc a$, woraus $p \mid a$ folgt.
+\end{proof}
+
+\begin{anm}\label{anm:klassische_irreduzibilität}
+\ref{bem:irreduzibel_eigenschaften}(ii) ist die klassische Irreduzibilitätsdefinition in Integritätsringen. Die Definition \ref{def:prime_irreduzibel} eignet sich jedoch besser zur Verallgemeinerung auf die Situation außerhalb von Integritätsringen.
+\end{anm}
+
+\begin{folgerung}\label{folg:irreduzibel_primelement_maximal}
+Sei $R$ ein Hauptidealring und $p \in R \setminus (R^\times \cup \{0\})$. Dann sind äquivalent:
+\begin{enumerate}[label=(\roman*)]
+    \item $p$ ist irreduzibel,
+    \item $p$ ist ein Primelement,
+    \item $(p)$ ist ein maximales Ideal.
+\end{enumerate}
+\end{folgerung}
+
+\begin{proof}
+"`(i) $\Rightarrow$ (iii)"': Nach \ref{bem:irreduzibel_eigenschaften}(iii) ist $(p)$ maximal in $\{(a) \mid a \in R \setminus R^\times\}$, also ein maximales Ideal, da $R$ ein Hauptidealring ist.
+
+"`(iii) $\Rightarrow$ (ii)"': Da $(p)$ maximales Ideal ist, ist $(p)$ nach \ref{folgerung:max_ideal_ist_primideal} ein Primideal  und deshalb $p$ ein Primelement.
+
+"`(ii) $\Rightarrow$ (i)"': Dies folgt direkt aus \ref{bem:primelement_irreduzibel}.
+\end{proof}
+
+\begin{bsp}\label{bsp:primelement_beispiele}
+\begin{enumerate}[label=(\alph*)]
+    \item Da $\ZZ$ ein Hauptidealring ist, sind die Primelemente in $\ZZ$ sind genau die irreduzible Elementen in $\ZZ$, also genau von der Form $\pm p$ für Primzahlen $p$. Somit erhalten wir dieselben Primideale und maximalen Ideale in $\ZZ$ wie in \ref{folgerung:primideale_in_Z} (ohne Verwendung von \ref{bem:primzahl_und_koerper}).
+    Hierbei ist zu beachten, dass Primelemente und irreduzible Elemente per Definition von Null
+    verschieden sind, während das Nullideal durchaus Primideal oder gar maximales Ideal sein kann.
+    Im Fall von $\ZZ$ ist $(0)$ ein Primideal, jedoch kein maximales Ideal.
+    \item Sei $R$ ein Integritätsring und $a \in R$. Wir werden später sehen: Der Polynomring $R[X]$ ist ein Integritätsring und der (surjektive) Einsetzungshomomorphismus $R[X] \to R$, $f \mapsto f(a)$, hat genau den Kern $(X - a)$. Insbesondere ist $R[X] / (X - a) \cong R$, und damit ist $X - a$ ein Primelement in $R[X]$.
+    \item Sei $R = \{f \in \RR[X] \mid f(0) \in \QQ \}$ (dies ist ein Unterring von $\RR[X]$). 
+    Ein Element von $R$ ist etwa durch $\sqrt{2} X$ gegeben wegen $(\sqrt{2} X)(0) = 0 \in \QQ$.
+    In $R$ ist $X$ irreduzibel (aus Gradgründen), aber nicht prim, da \[X \mid \sqrt{2} X \cdot \sqrt{2} X = 2 X^2,\] aber $X \nmid \sqrt{2} X$.
+    Andernfalls würde ein $r \in R$ mit $\sqrt{2} X = r X$ existieren. Daraus folgt $r = \sqrt{2} \in R$, ein Widerspruch.   
+    \item Sei $R = \ZZ[\sqrt{-3}]$. 
+    Die Zahl $2$ ist irreduzibel in $R$ (das müsste man nachrechnen), aber nicht prim, da 
+    \[
+    2 \mid (1 + \sqrt{-3})(1 - \sqrt{-3}) = 4,\]
+    aber $2 \nmid (1 \pm \sqrt{-3})$.
+\end{enumerate}
+\end{bsp}
+
+\begin{defini}\label{def:euklidischer_ring}
+$R$ heißt ein \defn{euklidischer Ring}, falls es eine Abbildung $\delta \colon R \setminus \{0\} \to \NN_0$ gibt, sodass gilt:
+Für alle $a, b \in R$ mit $b \neq 0$ existieren $q, r \in R$ mit \[a = q b + r \text{ und } \delta(r) < \delta(b), \text{ falls } r \neq 0 \text{ (``Division mit Rest''). }\]
+$\delta$ heißt eine \defn{euklidische Gradfunktion} auf $R$.
+\end{defini}
+
+\begin{bsp}\label{bsp:euklidische_ringe}
+\begin{enumerate}[label=(\alph*)]
+    \item $\ZZ$ ist ein euklidischer Ring mit $\delta = | \cdot |$.
+    \item Ist $K$ ein Körper, so ist $R = K[X]$ ein euklidischer Ring mit $\delta = \deg(\cdot)$.
+    \item Ist $K$ ein Körper, so ist $K$ ein euklidischer Ring mit $\delta \colon K\setminus\{0\} \to \NN_0, \, x \mapsto 1$. Hier ist jeweils $a = (a b^{-1}) b + 0$.
+    \item Der Ring $R = \ZZ[i] = \{a + b i \mid a, b \in \ZZ\} \subseteq \CC$ ist ein euklidischer Ring mit $\delta(a + b i) = a^2 + b^2$ (Ring der ganzen Gaußschen Zahlen, vgl.\ Übungen).
+\end{enumerate}
+\end{bsp}
+
+\begin{satz}\label{satz:euklidischer_ring_hir}
+Sei $R$ ein euklidischer Ring. Dann ist $R$ ein Hauptidealring.
+\end{satz}
+
+\begin{proof}
+Sei $I \subseteq R$ ein Ideal mit $I \neq 0$. 
+Es ist $\emptyset \neq \{\delta(b) \mid b \in I \setminus \{0\}\} \subseteq \NN_0$. Wir wählen $b \in I \setminus \{0\}$, sodass $\delta(b)$ minimal ist. Es ist $I = (b)$,
+\begin{denn}
+"`$\supseteq$"': Wegen $b \in I$ ist $(b) \subseteq I$. 
+
+"`$\subseteq$"': Sei $a \in I$. Dann existieren $q, r \in R$ mit $a = q b + r$ und $r = 0$ oder $\delta(r) < \delta(b)$. Aus $r = a - q b \in I$ und der Minimalität von $\delta(b)$ folgt $r = 0$. Also gilt $a = q b$.
+\end{denn}
+\end{proof}
+
+\begin{anm}\label{anm:nicht_euklidische_hir}
+Es gibt Hauptidealringe, die nicht euklidisch sind.
+\end{anm}
+
+\begin{folgerung}\label{folg:polynomring_hir}
+Ist $K$ ein Körper, so ist der Polynomring $K[X]$ ein Hauptidealring.
+\end{folgerung}
+
+\begin{bem}\label{bem:ggt_divrest}
+Seien $a, b, q, r \in R$ mit $a = q b + r$. Dann gilt:
+\[
+(a, b) = (b, r),
+\]
+insbesondere ist $\ggT(a, b) = \ggT(b, r)$ (in dem Sinne, dass, falls eine Seite existiert, auch die andere existiert und Gleichheit besteht).
+\end{bem}
+\begin{proof}
+Aus $a = q b + r$ ergibt sich $a \in (b, r)$, also $(a, b) \subseteq (b, r)$. 
+Weiterhin folgt $r = a - q b$, also $r \in (a, b)$ und damit $(b, r) \subseteq (a, b)$. Somit ist $(a, b) = (b, r)$. Die Aussage über den $\ggT$ folgt direkt aus \ref{bem:ggT_hauptideal}.
+\end{proof}
+
+\begin{satz}[Euklidischer Algorithmus]\label{satz:euklidischer_algorithmus}
+Sei $R$ ein euklidischer Ring mit der euklidischen Gradfunktion $\delta$. Für $a, b \in R \setminus \{0\}$ betrachten wir eine Folge $a_0, a_1, \dots$ von Elementen aus $R$, die induktiv wie folgt definiert ist:
+\begin{align*}
+a_0 &:= a, \\
+a_1 &:= b, \\
+a_0 &= q_0 a_1 + a_2 \text{ mit } \delta(a_2) < \delta(a_1) \text{ oder } a_2 = 0, \\
+ \text{Falls } a_2\neq0 {: }\quad  a_1 &= q_1 a_2 + a_3 \text{ mit } \delta(a_3) < \delta(a_2) \text{ oder } a_3 = 0, \\
+ &\vdots \\
+ \text{Falls } a_i\neq 0 {: } \quad  a_{i-1} &= q_{i-1} a_{i} + a_{i+1} \text{ mit } \delta(a_{i+1}) < \delta(a_{i}) \text{ oder } a_{i+1} = 0.\\
+ & \vdots
+\intertext{Dann existiert ein eindeutig bestimmter Index $n \in \NN$ mit $a_n \neq 0$ und $a_{n+1} = 0$. Der Algorithmus terminiert also, die letzten beiden Zeilen sind von der Form}
+a_{n-2}&=q_{n-2}a_{n-1}+a_n \text{ mit } \delta(a_n) < \delta(a_{n-1})\\
+a_{n-1}& =q_{n-1}a_n+0
+\end{align*}
+Es gilt:
+\[
+d := a_n = \ggT(a, b).
+\]
+
+Durch Rückwärtseinsetzen lässt sich $d$ als Linearkombination von $a$ und $b$ darstellen:
+\[
+d = a_n = a_{n-2} - q_{n-2} a_{n-1} = \dots = u a + v b \quad \text{mit } u, v \in R.
+\]
+\end{satz}
+
+
+\begin{proof}
+Falls $a_i \neq 0$ für alle $i \in \NN$ wäre, dann wäre $\delta(a_1) > \delta(a_2) > \dots$ eine streng monoton fallende Folge in $\NN$, was zum Widerspruch führt.
+
+Es gilt wegen \ref{bem:ggt_divrest}:
+\[
+a_n = \ggT(a_n, 0) = \ggT(a_{n-1}, a_n) = \dots = \ggT(a_0, a_1) = \ggT(a, b).
+\]
+\end{proof}
+
+\begin{bsp}\label{bsp:ggt_euklidischer_algorithmus}
+Sei $R = \ZZ$. Wir bestimmen $\ggT(24,15)$ mit Hilfe des Euklidischen Algorithmus:
+\begin{align*}
+24 &= 1 \cdot 15 + 9, \\
+15 &= 1 \cdot 9 + 6, \\
+9 &= 1 \cdot 6 + 3, \\
+6 &= 2 \cdot 3 + 0.
+\end{align*}
+Es ergibt sich $\ggT(24, 15) = 3$.
+Es ist
+\begin{align*}
+3 &= 9 - 1 \cdot 6 = 9 - (15 - 9) = 2 \cdot 9 - 1 \cdot 15= 2 \cdot (24 - 15) - 1 \cdot 15 \\
+&= 2 \cdot 24 - 3 \cdot 15.
+\end{align*}
+\end{bsp}
+
+\begin{bem}\label{bem:p-adische_bewertung}
+Sei $p \in R$ ein Primelement und $x \in R$. Wir setzen
+\[
+v_p(x) := \sup \{n \in \NN_0 \mid p^n \mid x\} \in \NN_0 \cup \{\infty\}.
+\]
+Dann gilt für alle $x, y \in R$:
+\begin{enumerate}[label=(\alph*)]
+    \item $v_p(0) = \infty$,
+    \item $v_p(xy) = v_p(x) + v_p(y)$,
+    \item $v_p(x + y) \geq \min(v_p(x), v_p(y))$,
+    \item $v_p(p) = 1$,
+    \item $v_p(x) = 0$, falls $x \in R \setminus (R^\times \cup \{0\})$ irreduzibel und $x \not\assoc p$,
+    \item $v_p(x) = 0$, falls $x \in R^\times$.
+\end{enumerate}
+
+Erfüllt $v_p$ sogar die stärkere Bedingung
+\begin{enumerate}
+    \item[(a')] $v_p(x) = \infty \iff x = 0$,
+\end{enumerate}
+so kann man $v_p$ auf $\Quot(R)$ fortsetzen, indem man für $a, b \in R, b \neq 0$, definiert:
+\[
+v_p\left(\frac{a}{b}\right) := v_p(a) - v_p(b).
+\]
+Dann gelten (b) und (c) für alle $x, y \in \Quot(R)$.
+\end{bem}
+\begin{proof}
+(a) Dies gilt, da $0 \cdot p^n = 0$ für alle $n \in \NN$.
+
+(c) Sei $n \in \NN_0$ beliebig mit $n \leq \min(v_p(x), v_p(y))$. Dann existieren $r, s \in R$ mit $x = r p^n$ und $y = s p^n$. Daraus folgt:
+\[
+x + y = (r + s) p^n,
+\]
+also ist $v_p(x + y) \geq n$.
+Da $n \in \NN_0$ beliebig gewählt war, folgt $v_p(x + y) \geq \min(v_p(x), v_p(y))$. 
+
+(d) Aus $p \mid p$ folgt $v_p(p) \geq 1$. 
+Angenommen, es wäre $v_p(p) > 1$. Dann gilt $p^2 \mid p$, und es existiert ein $a \in R$ mit $p = a p^2$. Daraus folgt durch Kürzen $1 = a p$ und damit $p \in R^\times$, was ein Widerspruch ist. Somit ist $v_p(p) = 1$.
+
+(e) Sei $x \in R \setminus (R^\times \cup \{0\})$ irreduzibel und $x \nmid p$.
+Angenommen, es wäre $v_p(x) \geq 1$. Dann gilt $p \mid x$. Da $x$ irreduzibel ist, folgt aus \ref{bem:irreduzibel_eigenschaften}, dass $p \in R^\times$ oder $p \assoc x$ ist, was jeweils im Widerspruch zur Voraussetzung steht. Also ist $v_p(x) = 0$.
+
+(f) Sei $x \in R^\times$.
+Angenommen, $v_p(x) > 1$. Dann gilt $p \mid x$, also existiert ein $a \in R$ mit $x = a p$. Daraus folgt $1 = x^{-1} a p$, also $p \in R^\times$, ein Widerspruch. Somit ist $v_p(x) = 0$.
+
+(b) Zu zeigen ist $v_p(xy) = v_p(x) + v_p(y)$.
+
+"`$\geq$"': Seien $m, n \in \NN_0$ beliebig mit $v_p(x) \geq m$ und $v_p(y) \geq n$. Dann existieren $r, s \in R$ mit $x = r p^m$ und $y = s p^n$. Daraus folgt:
+\[
+xy = r s p^{m+n},
+\]
+also ist $v_p(xy) \geq m + n$. Da $m, n$ beliebig gewählt wurden, folgt $v_p(xy) \geq v_p(x) + v_p(y)$.
+
+"`$\leq$"': Wir zeigen per Induktion nach $n\in\NN_0$ die Aussage
+\[v_p(xy) \geq n \implies v_p(x) + v_p(y) \geq n,\]
+welche insbesondere $v_p(xy) \leq v_p(x) + v_p(y)$ zur Folge hat.
+Der Fall $n=0$ ist klar. Wir setzen nun $v_p(xy) \geq n + 1$ voraus. 
+Dann existiert ein $r \in R$ mit $xy = r p^{n+1}$. Da $p$ prim ist, folgt $p \mid xy$ und daher $p\mid x$ oder $p\mid y$. Wir nehmen ohne Einschränkung $p \mid x$ an. Dann existiert ein $a \in R$ mit $x = p a$. Daraus folgt $r p^{n+1} = xy = p a y$ und somit $r p^n = a y$.
+Somit ist $v_p(a y) \geq n$, und wegen der Induktionsannahme gilt $v_p(a) + v_p(y) \geq n$. 
+Aus "`$\geq$"' und (d) erhalten wir
+\[
+v_p(x) + v_p(y) = v_p(pa) + v_p(y)\geq v_p(p)+v_p(a)+v_p(y)=1+v_p(a)+v_p(y)\geq 1+n,
+\]
+was den Induktionsbeweis beendet.
+
+Es verbleibt zu zeigen, dass sich $v_p$ unter Annahme der stärkeren Bedingung (a') auf $\Quot(R)$
+fortsetzen lässt. Seien $a, b, a', b' \in R$ mit $b, b' \neq 0$ und $\frac{a}{b} = \frac{a'}{b'}$. Dann gilt $a b' = a' b$ und darum $v_p(a b') = v_p(a' b)$.
+Nach (b) folgt:
+\[
+v_p(a) + v_p(b') = v_p(a') + v_p(b)
+\]
+und deshalb
+\[
+v_p(a) - v_p(b) = v_p(a') - v_p(b'),
+\]
+wobei $v_p(b)$, $v_p(b')$ beide wegen (a') von $\infty$ verschieden sind, d.h. die Fortsetzung von $v_p$ auf $\Quot(R)$ ist wohldefiniert. Wir zeigen nun noch, dass (b) und (c) dann für alle $x,y\in\Quot(R)$ gelten. Seien $x = \frac{a}{b}$ und $y = \frac{c}{d}$ Elemente in $\Quot(R)$ mit $a, b, c, d \in R$ und $b, d \neq 0$. Dann gilt:
+\begin{align*}
+v_p(x \cdot y) &= v_p\left(\frac{a}{b} \cdot \frac{c}{d}\right) = v_p\left(\frac{a c}{b d}\right)
+=v_p(ac)-v_p(bd)\overset{(b)}{=}
+v_p(a) + v_p(c) - v_p(b) - v_p(d)\\
+&= v_p\left(\frac{a}{b}\right) + v_p\left(\frac{c}{d}\right) = v_p(x) + v_p(y).
+\end{align*}
+Außerdem gilt:
+\begin{align*}
+v_p(x + y) &= v_p\left(\frac{a}{b} + \frac{c}{d}\right) = v_p\left(\frac{a d + b c}{b d}\right)
+= v_p(a d + b c) - v_p(b d)\\
+& \geq \min(v_p(a d), v_p(b c)) - v_p(b) - v_p(d)\\
+& = \min\big(v_p(a) + v_p(d), v_p(b) + v_p(c)\big) - v_p(b) - v_p(d)\\
+& = \min\big(v_p(a) - v_p(b), v_p(c) - v_p(d)\big) = \min\big(v_p\left(\frac{a}{b}\right),v_p\left(\frac{c}{d}\right)\big)\\
+& = \min(v_p(x), v_p(y))
+\end{align*}
+\end{proof}
+
+\begin{anm}\label{anm:diskrete_bewertung}
+\begin{itemize}
+\item Es kann passieren, dass $v_p(x) = \infty$ ist, obwohl $x \neq 0$ ist, d.h. im Allgemeinen wird nur (a) statt (a') gelten.
+\item Ist $K$ ein Körper und $v \colon K \to \ZZ \cup \{\infty\}$ eine Abbildung, die (a'), (b), (c) aus \ref{bem:p-adische_bewertung} erfüllt (mit $v$ statt $v_p$), so heißt $v$ auch eine \defn{diskrete Bewertung} auf $K$.
+\end{itemize}
+\end{anm}
+
+\begin{bsp}\label{bsp:diskrete_bewertung}
+\begin{enumerate}[label=(\alph*)]
+    \item Sei $R = \ZZ$ und $x = 90 = 2 \cdot 3^2 \cdot 5$. Dann gilt:
+    \[
+    v_2(90) = 1, \quad v_3(90) = 2, \quad v_5(90) = 1,
+    \]
+    sowie $v_p(90) = 0$ für alle Primzahlen $p \neq 2,3,5$. Beachte: $v_{-2}(90) = 1$, $v_{-3}(90) = 2$, $v_{-5}(90) = 1$.
+    
+    \item Sei $R$ ein Integritätsring, $f \in R[X]$ und $a \in R$. Dann ist $p = X - a$ ein Primelement in $R[X]$, siehe \ref{bsp:primelement_beispiele}. Die \defn{Nullstellenordnung} von $f$ in $a$ ist definiert als
+    \[
+    \operatorname{ord}_a(f) := v_p(f) = \sup \{n \in \NN_0 \ \mid \ (X - a)^n \mid f\}.
+    \]
+\end{enumerate}
+Man kann zeigen, dass in beiden Fällen (a') aus \ref{bem:p-adische_bewertung} erfüllt ist.
+\end{bsp}
+
+\begin{defini}\label{def:primteiler_zerlegung}
+Sei $a \in R \setminus \{0\}$ und $p \in R$ ein Primelement. 
+
+$p$ heißt ein \defn{Primteiler} von $a$, falls $p \mid a$. 
+
+Eine Darstellung $a = e \cdot \prod_{i=1}^n b_i^{w_i}$ für $n \in \NN_0$ mit $e \in R^\times$ und $b_1, \dots, b_n \in R$ paarweise nicht assoziiert sowie $w_1, \dots, w_n \in \NN$ heißt:
+\begin{itemize}
+    \item eine \defn{Irreduziblenzerlegung (IZ)} von $a$, falls $b_1, \dots, b_n$ irreduzibel sind.
+    \item eine \defn{Primfaktorzerlegung (PFZ)} von $a$, falls $b_1, \dots, b_n$ Primelemente sind.
+\end{itemize}
+\end{defini}
+
+\begin{anm}\label{anm:primfaktorzerlegung_ist_irreduzibilitaetszerlegung}
+\begin{itemize}
+\item Jede PFZ ist eine IZ (wegen \ref{bem:primelement_irreduzibel}).
+\item Jede Einheit $a \in R^\times$ besitzt das leere Produkt als PFZ:
+\[
+a = a \cdot \prod_{\emptyset}.
+\]
+Diese ist auch die einzig mögliche IZ von $a$, da eine Einheit kein Produkt von Nicht-Einheiten sein kann.
+\end{itemize}
+\end{anm}
+
+
+
+\begin{satz}\label{satz:primfaktorzerlegung}
+Sei $a \in R \setminus \{0\}$ und $a$ besitze eine PFZ. $\PP$ sei ein Vertretersystem aller Primelemente von $R$ modulo "`$\assoc$"'. Dann gilt:
+\begin{enumerate}[label=(\alph*)]
+    \item Bis auf Assoziiertheit hat $a$ nur endliche viele Primteiler. 
+    \item Alle PFZ von $a$ stimen bis auf Reihenfolge und Assoziiertheit überein.
+    \item Jede IZ von $a$ ist eine PFZ von $a$. Insbesondere stimmen alle IZ von $a$ bis auf Reihenfolge und Assoziiertheit überein.
+    \item Eine konkrete PFZ von $a$ ist gegeben durch
+    \[
+    a = e \cdot \prod_{p \in \PP} p^{v_p(a)}
+    \]
+    für ein eindeutig bestimmtes $e \in R^\times$. Hierbei ist $v_p(a)\in\NN_0$ für alle
+    $p\in\PP$ und $v_p(a)=0$ für fast alle $p\in\PP$.
+\end{enumerate}
+\end{satz}
+
+\begin{proof}
+Ist $a\in R^\times$, so folgt die Aussage des Satzes aus \ref{bem:p-adische_bewertung}(f) und \ref{anm:primfaktorzerlegung_ist_irreduzibilitaetszerlegung}. Im Folgenden sei $a\in R\setminus(R^\times\cup\{0\})$. Sei 
+\[
+a = e \cdot \prod_{i=1}^n p_i^{w_i} \tag{*} \label{eq:PFZ}
+\]
+eine PFZ von $a$. Wegen $a\not\in R^\times$ ist $n\geq 1$. Sei $p$ ein Primteiler von $a$. Dann existiert ein $i \in \{1, \dots, n\}$ mit $p \mid p_i$. Da $p_i$ als Primelement irreduzibel ist, folgt, dass $p \assoc p_i$ ist. Insbesondere hat $a$ bis auf Assoziertheit nur endlich viele Primteiler, womit (a) gezeigt ist. Für jedes $i\in\{1,\ldots,n\}$ existiert ein eindeutig bestimmtes Primelement in $\PP$, dass zu $p_i$ assoziiert ist. Wir nehmen im Folgenden ohne Einschränkung an, dass $p_1,\ldots,p_n$ selbst in $\PP$ liegen (andernfalls ersetzen wir sie durch die entsprechenden Assoziierten in $\PP$ und müssen ggf. die Einheit $e$ abändern).
+ Sei nun
+\[
+a = u \cdot \prod_{i=1}^m b_i^{t_i} \tag{**} \label{eq:IZ}
+\]
+eine beliebige IZ von $a$. Es gilt dann $p_1\mid a$,
+und da $p_1$ ein Primelement ist, teilt $p_1$ eines der Elemente $b_1,\ldots,b_m$, nach Umnummerieren etwa ohne Einschränkung $b_1$. Da $b_1$ irreduzibel ist, folgt $b_1\assoc p_1$.
+Da $b_1,\ldots,b_m$ paarweise nicht assoziiert sind, ist $p_1$ zu keinem der Elemente $b_2,\ldots,b_m$ assoziiert. Dieselbe Argumentation lässt sich auch für $p_2,\ldots,p_n$
+vornehmen, und wir erhalten nach Umnummerierung $b_1\assoc p_1,\ldots,b_n\assoc p_n$ und damit
+insbesondere $m\geq n$. Außerdem sind die Elemente $b_1,\ldots,b_n$ selbst Primelemente,
+und es ist $p_j\not\assoc b_i$ für $i\neq j$. Es ist dann für $j=1,\ldots,n$ jeweils
+\[
+v_{p_j}(a) = v_{p_j}\left(u \cdot \prod_{i=1}^n b_i^{t_i}\right) = v_{p_j}(u) + \sum_{i=1}^n t_i v_{p_j}(b_i)\overset{\ref{bem:p-adische_bewertung}}{=}0+\sum_{i=1}^m t_i\delta_{ij}=t_j.
+\]
+Da \eqref{eq:PFZ} als PFZ auch eine IZ von $a$ ist, ist $t_j=v_{p_j}(a)=w_j$ für $j=1,\ldots,n$.
+Wir schreiben für $j=1,\ldots,n$ jeweils $b_j=u_jp_j$ mit $u_j\in R^\times$. Es folgt
+\[
+a = u \cdot \prod_{i=1}^m b_i^{t_i} = \left(u \cdot \prod_{i=1}^n u_i^{w_i}\right) \cdot \prod_{i=1}^n p_i^{w_i}\cdot\prod_{i=n+1}^m b_i^{t_i}
+=\left(e^{-1}u \cdot \prod_{i=1}^n u_i^{w_i}\right) \cdot a\cdot \prod_{i=n+1}^m b_i^{t_i}.
+\]
+Durch Kürzen von $a$ erhalten wir, dass $\prod_{i=n+1}^m b_i^{t_i}\in R^\times$ ist. Dies hat
+$m=n$ zur Folge. Die IZ \eqref{eq:IZ} ist also eine PFZ von $a$ und stimmt mit der gegebenen
+PFZ \eqref{eq:PFZ} von $a$ bis auf Reihenfolge und Assoziiertheit überein. Somit stimmen je zwei
+IZ und damit auch je zwei PFZ von $a$ bis auf Reihenfolge und Assoziiertheit überein, was (b) und (c) liefert. Für (d) bemerken wir
+\[
+a = e \cdot \prod_{i=1}^n p_i^{w_i}=e \cdot \prod_{i=1}^n v_{p_i}^{v_{p_i}(a)}=e \cdot \prod_{p \in \PP} p^{v_p(a)},
+\]
+wobei $v_p(a)=0$ für $p\in\PP\setminus\{p_1,\ldots,p_n\}$ ist und sich die Eindeutigkeit von $e$
+aus der Annahme, dass es eine weitere Einheit gibt, welche die entsprechende Gleichung erfüllt, durch Kürzen ergibt.
+\end{proof}
+
+
+
+\begin{bsp}\label{bsp:irreduzibilitaetszerlegungen_eindeutigkeit}
+IZ brauchen (falls sie existieren) nicht unbedingt eindeutig zu sein:
+\begin{enumerate}[label=(\alph*)]
+    \item In $R := \{f \in \RR[X] \mid f(0) \in \QQ\}$ gilt:
+    \[
+    2 X^2 = 2 \cdot X^2 = (\sqrt{2}X)^2,
+    \]
+    also gibt es zwei IZ, die nicht bis auf Reihenfolge und Assoziiertheit übereinstimmen. Insbesondere hat $2X^2$ keine PFZ in $R$ und $X, \sqrt{2} X$ sind irreduzible Elemente in $R$, die keine Primelemente sind.
+
+    \item In $R := \ZZ[\sqrt{-3}]$ gilt:
+    \[
+    4 = 2 \cdot 2 = (1 + \sqrt{-3})(1 - \sqrt{-3}),
+    \]
+    also gibt es zwei IZ, die nicht bis auf Reihenfolge und Assoziiertheit übereinstimmen. Insbesondere hat $4$ keine PFZ in $\ZZ[\sqrt{-3}]$, und $2, 1 + \sqrt{-3}, 1 - \sqrt{-3}$ sind irreduzible Elemente in $R$, die keine Primelemente sind.
+\end{enumerate}
+\end{bsp}
+
+\begin{defini}\label{def:faktorieller_ring}
+Ein Ring $R$ heißt \defn{faktoriell}, falls jedes Element $a \in R \setminus \{0\}$ eine (wegen Satz \ref{satz:primfaktorzerlegung} bis auf Reihenfolge und Assoziiertheit eindeutige) PFZ besitzt.
+\end{defini}
+
+\begin{bsp}
+Dass der Polynomring $\CC[X]$ faktoriell ist, lässt sich direkt aus dem Fundamentalsatz der Algebra ablesen. Dieser besagt schließlich, dass sich jedes nichtkonstante Polynom $f\in\CC[X]$
+in der Form $f=e(X-a_1)\cdot\ldots\cdot(X-a_n)$ mit $e\in\CC^\times,a_1,\ldots,a_n\in\CC$ schreiben lässt, und die Polynome $X-a_i$ sind allesamt Primelemente in $\CC[X]$ (vgl. \ref{bsp:primelement_beispiele}). Wir werden gleich sehen, dass der Polynomring $K[X]$ über einem beliebigen Körper $K$ grundsätzlich faktoriell ist.
+\end{bsp}
+
+\begin{folgerung}\label{folg:irreduzibel_prim_faktoriell}
+Sei $R$ ein faktorieller Ring und $p \in R \setminus (R^\times \cup \{0\})$. Dann sind äquivalent:
+\begin{enumerate}[label=(\roman*)]
+    \item $p$ ist irreduzibel,
+    \item $p$ ist ein Primelement.
+\end{enumerate}
+\end{folgerung}
+\begin{proof}
+"`(i)$\Rightarrow$(ii)"': Sei $p$ irreduzibel. Dann ist $p$ eine IZ von $p$ und wegen $R$ faktoriell ist nach \ref{satz:primfaktorzerlegung} durch $p$ ebenfalls eine Primfaktorzerlegung von $p$ gegeben. Somit ist $p$ ein Primelement.
+
+"`(ii)$\Rightarrow$(i)"' ergibt sich aus \ref{bem:primelement_irreduzibel}.     
+\end{proof}
+
+\begin{satz}\label{satz:accp_iz_existenz}
+Erfüllt $R$ die "`aufsteigende Kettenbedingung für Hauptideale"' (\defn{ACCP}), d.h. es gibt keine strikt aufsteigende Kette
+\[
+(a_1) \subsetneqq (a_2) \subsetneqq \dots
+\]
+von Hauptidealen in $R$, so besitzt jedes Element aus $R\setminus\{0\}$ eine IZ.
+\end{satz}
+\begin{proof}
+Wir zeigen die Behauptung durch Widerspruch. Sei
+\[
+\mathcal{M} := \{(a) \mid a \in R \setminus (R^\times \cup \{0\}), (a) \text{ besitzt keine IZ}\}.
+\]
+Angenommen, $\mathcal{M} \neq \emptyset$. Dann existiert ein bzgl.\ "`$\subseteq$"' maximales Element $J \in \mathcal{M}$, denn andernfalls gäbe es eine strikt aufsteigende Kette
+\[
+(a_1) \subsetneqq (a_2) \subsetneqq \dots
+\]
+von Hauptidealen.
+Es existiert also ein Element $a \in R\setminus (R^\times \cup \{0\}$, das keine IZ besitzt, mit $J = (a)$. Das Element $a$ ist nicht irreduzibel, andernfalls wäre $a$ selbst eine IZ von $a$, und somit $J=(a) \notin \mathcal{M}$, was ein Widerspruch ist. Deshalb existieren $b_1, b_2 \in R \setminus (R^\times \cup \{0\})$ mit $a=b_1b_2$.
+Dann gilt:
+\[
+(a) \subseteq (b_1), \quad (a) \subseteq (b_2).
+\]
+Angenommen es wäre $(a) = (b_1)$, dann würde ein $e \in R^\times$ mit $a = e b_1 = b_1 b_2$ existieren. Dies hätte $b_2 = e\in R^\times$ zur Folge, was ein Widerspruch ist.
+Also gilt $(a) \subsetneqq (b_1)$ und analog $(a) \subsetneqq (b_2)$. 
+Wegen der Maximalität von $(a)$ sind $(b_1), (b_2) \notin \mathcal{M}$, und deshalb besitzen $b_1, b_2$ jeweils eine IZ. Somit besitzt auch $a = b_1 b_2$ eine IZ, was ein Widerspruch ist. $\square$
+\end{proof}
+
+\begin{satz}\label{satz:hir_accp}
+Sei $R$ ein Hauptidealring. Dann erfüllt $R$ die ACCP-Bedingung.
+\end{satz}
+\begin{proof}
+Angenommen, es existiert eine strikt aufsteigende Kette von Hauptidealen:
+\[
+(a_1) \subsetneqq (a_2) \subsetneqq \dots
+\]
+in $R$. Wir setzen \[J := \bigcup_{i \in \NN} (a_i).\]
+Man kann nachrechnen, dass $J$ ein Ideal in $R$ ist (die Rechnung ist analog zu der im Beweis von \ref{satz:maximales_ideal_existiert}).
+Da $R$ ein Haupidealring ist, existiert ein $a \in R$ mit $J = (a)$. Es existiert ein $i \in \NN$ mit $a \in (a_i)$, also $(a) \subseteq (a_i) \subseteq (a)$, worau $(a_i) = (a)$ und schließlich
+$(a_i)=(a_{i+1})=\ldots$ folgt, im Widerspruch dazu, dass die gegebene Kette strikt aufsteigend ist.
+\end{proof}
+
+\begin{folgerung}\label{folg:hir_faktoriell}
+Jeder Hauptidealring ist faktoriell.
+\end{folgerung}
+\begin{proof}
+Sei $R$ ein Hauptidealring. Nach \ref{satz:hir_accp} erfüllt $R$ die ACCP-Bedingung, weswegen nach \ref{satz:accp_iz_existenz} jedes Element $a\in R\setminus\{0\}$ eine IZ besitzt.
+Bei dieser handelt es sich um eine PFZ, denn aufgrund von \ref{folg:irreduzibel_primelement_maximal}
+ist jedes irreduzible Element von $R$ ein Primelement.
+\end{proof}
+
+\begin{anm}\label{anm:implikationen_ringe}
+Insbesondere gelten die Implikationen:
+\[
+R \text{ euklidisch} \implies R \text{ Hauptidealring} \implies R \text{ faktoriell} \implies R \text{ Integritätsring}.
+\]
+Keine der Implikationen gilt in die andere Richtung.
+\end{anm}
+
+\begin{bsp}\label{bsp:faktorielle_ringe}
+\begin{enumerate}[label=(\alph*)]
+    \item $\ZZ$ ist faktoriell, da $\ZZ$ nach \ref{bsp:euklidische_ringe}(a) euklidisch ist.
+    \item Sei $K$ ein Körper. Dann ist $K[X]$ faktoriell, da $K[X]$ nach \ref{bsp:euklidische_ringe}(b) euklidisch ist.
+\end{enumerate}
+\end{bsp}
+
+\begin{bem}\label{bem:vp_diskrete_bewertung}
+Seien $R$ ein faktorieller Ring, $p \in R$ ein Primel und $\PP$ ein Vertretersystem der Primelemente von $R$ modulo "`$\assoc$"'. Dann gilt für $x \in R$:
+\[
+v_p(x) = \infty \iff x = 0.
+\]
+Insbesondere setzt sich $v_p$ zu einer diskreten Bewertung
+\[
+v_p \colon \Quot(R) \to \ZZ \cup \{\infty\}
+\]
+auf $\Quot(R)$ fort. Für diese gilt für alle $x, y \in K$:
+\begin{enumerate}[label=(\alph*)]
+    \item $x \in R\iff v_p(x) \geq 0$ für alle $p \in \PP$.
+    \item $x \in R^\times \iff v_p(x) = 0$ für alle $p \in \PP$.
+    \item Es existiert genau dann ein $a \in R$ mit $y = a x$, wenn $v_p(x) \leq v_p(y)$ für alle $p \in \PP$ ist.
+\end{enumerate}
+\end{bem}
+\begin{proof}
+Ist $x\in R$ mit $x\neq 0$, so ist $v_p(a)\in\NN_0$ nach \ref{satz:primfaktorzerlegung}.
+
+(a) "`$\Rightarrow$"' ist klar nach der Definition von $v_p$. 
+
+"`$\Leftarrow$"' Sei $x = \frac{a}{b} \in K^\times$ mit $a,b\in R$, $b\neq 0$ und $v_p(x) \geq 0$ für alle $p \in \PP$. Dann gilt:
+\[
+v_p(x) = v_p(a) - v_p(b) \geq 0 \quad \text{für alle } p \in \PP.
+\]
+Nach Satz \ref{satz:primfaktorzerlegung} existieren eindeutig bestimmte $e, f \in R^\times$ mit
+\[
+x = \frac{e \prod_{p \in \PP} p^{v_p(a)}}{f \prod_{p \in \PP} p^{v_p(b)}} = ef^{-1} \prod_{p \in \PP} p^{v_p(a) - v_p(b)} \in R.
+\]
+
+(c) Der Fall $x=0$ ist klar, dann muss jeweils auch $y=0$ sein. Im Folgenden sei $x\neq0$.
+Es gilt:
+\begin{align*}
+v_p(x)\leq v_p(y) \text{ für alle } p \in \PP & \iff
+v_p(y) - v_p(x) \geq 0 \text{ für alle } p \in \PP \\
+&\overset{\ref{bem:p-adische_bewertung}}{\iff}  v_p(x^{-1}y) \geq 0 \text{ für alle } p \in \PP\\
+& \overset{(a)}{\iff} x^{-1}y\in R\\
+& \iff \text{Es existiert ein } a\in R \text{ mit } y=ax.
+\end{align*}
+
+(b) Es gilt:
+\begin{align*}
+x \in R^\times &\iff x \in R \text{ und es existiert ein } y \in R \text{ mit } 1 = x y \\
+ & \overset{(a),(c)}{\iff} v_p(x) \geq 0 \text{ für alle } p \in \PP \text{ und } v_p(x) \leq v_p(1) = 0
+ \text{ für alle } p \in \PP \\
+ & \iff v_p(x) = 0 \text{ für alle } p \in \PP
+\end{align*}
+\end{proof}
+
+\begin{bsp}\label{bsp:diskrete_bewertung_auf_Q}
+\begin{enumerate}[label=(\alph*)]
+\item Sei $R = \ZZ$ und $x = \frac{2}{9}=\frac{2^1}{3^2} \in \QQ = \Quot(R)$. Dann gilt:
+\[
+v_2\left(\frac{2}{9}\right) = v_2(2) - v_2(9) = 1 - 0 = 1,
+\]
+\[
+v_3\left(\frac{2}{9}\right) = v_3(2) - v_3(9) = 0 - 2 = -2,
+\]
+\[
+v_p\left(\frac{2}{9}\right) = 0 \quad \text{für alle Primzahlen } p \neq 2, 3.
+\]
+
+\item Bemerkung \ref{bem:vp_diskrete_bewertung} liefert einen kurzen Beweis der Aussage:
+Ist $p$ eine Primzahl und $n \geq 2$, dann ist $\sqrt[n]{p}$ irrational.
+\begin{denn} Wir betrachten $v_p$ auf $\ZZ$. Falls $\sqrt[n]{p} \in \QQ$ ist, dann gilt:
+\[
+1 = v_p(p) = v_p\left(\left(\sqrt[n]{p}\right)^n\right) = n \cdot v_p\left(\sqrt[n]{p}\right).
+\]
+Daraus folgt
+\[
+v_p\left(\sqrt[n]{p}\right) = \frac{1}{n} \notin \ZZ \cup \{\infty\},
+\]
+was ein Widerspruch ist.
+\end{denn}
+\end{enumerate}
+\end{bsp}
+
+\begin{bem}\label{bem:ggt_faktorieller_ring}
+Sei $R$ ein faktorieller Ring und $T \subseteq R \setminus \{0\}$ eine nichtleere Teilmenge. Dann existiert ein größter gemeinsamer Teiler (ggT) von $T$, und es gilt:
+\[
+\ggT(T) = \prod_{p \in \PP} p^{\min_{t \in T} v_p(t)}.
+\]
+\end{bem}
+
+\begin{proof}
+Die Behauptung folgt recht leicht aus der Definition des ggT, \ref{anm:assoziiert_teilbarkeit} und \ref{bem:vp_diskrete_bewertung}(c).
+\end{proof}
+
 \end{document}
 
