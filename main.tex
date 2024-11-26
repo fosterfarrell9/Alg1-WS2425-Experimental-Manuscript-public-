@@ -2961,13 +2961,13 @@ Wir zeigen (a) und (b) zusammen.
 \section{Teilbarkeit}
 Wir werden in diesem Abschnitt die Teilbarkeitstheorie in Integritätsringen entwickeln. Mit etwas mehr Aufwand könnte man die Theorie auch allgemeiner in Ringen oder in "`kürzbaren Monoiden"' betrachten (für viele Aspekte spielt nur die Struktur von $(R, \cdot)$ eine Rolle).
 \begin{notation}
-In diesem Abschnitt sei $R$ stets ein Integritätsring.
+In diesem Abschnitt sei $R$ stets ein Integritätsring. Wir fassen $R$ als Unterring seines Quotientenkörpers $\Quot(R)$ auf. 
 \end{notation}
 
 \begin{defini}\label{def:teiler}
 Seien $a, b \in R$.
 \begin{itemize}
-    \item $b$ heißt ein \defn{Teiler} von $a$ (Bezeichnung: $b \mid a$), falls ein 
+    \item $a$ heißt ein \defn{Teiler} von $b$ (Bezeichnung: $a \mid b$), falls ein 
      $r \in R$ mit $b = r a$ existiert.
     \item $a, b$ heißen \defn{assoziiert} (Bezeichnung: $a \assoc b$), falls gilt: $a \mid b$ und $ b \mid a$.
 
@@ -2981,19 +2981,24 @@ In $\ZZ$ gilt $3 \mid 12$, aber $5 \nmid 12$. Zudem ist $3 \assoc -3$, denn $3 \
 \begin{bem}\label{bem:teiler_assoziiert}
 Seien $a, b \in R$. Dann gilt:
 \begin{enumerate}[label=(\alph*)]
-    \item $a \mid b \iff (b) \subseteq (a)$,
-    \item $a \assoc b \iff (a) = (b) \iff $ Es existiert ein $\varepsilon \in R^\times \text{ mit } a = \varepsilon b$.
+    \item $a \mid b \iff (b) \subseteq (a)$. 
+    \item Ist $a\neq 0$, so gilt: $a\mid b \iff$ Das Element $\frac{b}{a}$ aus $\Quot(R)$ liegt bereits in $R$.
+    \item $a \assoc b \iff (a) = (b) \iff $ Es existiert ein $e \in R^\times \text{ mit } a = \varepsilon b$.
 \end{enumerate}
 \end{bem}
 
 \begin{proof}
-(a) Zunächst zeigen wir "`$\Rightarrow$"'.
-Angenommen, $a \mid b$, d.h.\ es existiert ein $r \in R$ mit $b = r a$. Sei $x \in (b)$, d.h.\ $x = s b$ für ein $s \in R$. Dann folgt $x = s (r a) = (s r) a\in (a)$. Somit gilt $(b) \subseteq (a)$.
+(a) Die Aussage ergibt sich aus der universellen Eigenschaft des Idealerzeugnisses. Es gilt nämlich:
+\[
+a|b\iff \text{Es existiert ein } r\in R \text { mit } b= ra \iff b \in (a) \iff (b)\subseteq (a)
+\]
+(b) folgt direkt aus der Definition.
 
-Für "`$\Leftarrow$"' nehmen wir an, dass $(b) \subseteq (a)$ gilt. Insbesondere ist $b \in (a)$, d.h.\ es existiert ein $r \in R$ mit $b = r a$. Daraus folgt $a \mid b$.
-
-(b) Es gilt $a \assoc b \iff (a) = (b)$ nach Definition von $\assoc$ und (a). Zu zeigen bleibt die zweite Äquivalenz. Angenommen, $(a) = (b)$. Dann existieren $r, s \in R$ mit $b = r a$ und $a = s b$. Durch Einsetzen erhalten wir $a = s (r a) = (s r) a$, also $a (1 - r s) = 0$. Da $R$ ein Integritätsring ist, folgt $a=0$ oder $1-rs=0$.
-Falls $a = 0$ ist, folgt $b = r a = 0$. Damit ist $a = 0 = 1 \cdot b$, und wir setzen $\varepsilon := 1$. Falls $1 - r s = 0$ ist, also $r s = 1$ ist, wählen wir $\varepsilon := s\in R^\times$. In beiden Fällen gilt $a = \varepsilon b$. Existiert umgekehrt ein $\varepsilon\in R^\times$ mit $a=\varepsilon b$, so folgt $b\mid a$, außerdem $b=\varepsilon^{-1}a$ und deshalb $a|b$, so dass insgesamt $a\assoc b$ folgt.
+(c) Es gilt $a \assoc b \iff (a) = (b)$ nach Definition von $\assoc$ und (a). Zu zeigen bleibt die zweite Äquivalenz. Ist eines der beiden Elemente $a,b$ gleich Null, so gilt dies bei beiden Aussagen auch für das jeweils andere. Im Folgenden seien $a,b\neq0$. Dann gilt
+\[
+(a)=(b)\overset{(b)}{\iff}\frac{a}{b}\in R\text{ und } \frac{b}{a}\in R\iff \frac{b}{a}\in R^\times
+\iff \text{ Es existiert ein } e\in R^\times \text{ mit } a=eb.
+\]
 \end{proof}
 
 \begin{anm}\label{anm:assoziiert_teilbarkeit}
@@ -3001,6 +3006,7 @@ Falls $a = 0$ ist, folgt $b = r a = 0$. Damit ist $a = 0 = 1 \cdot b$, und wir s
     \item $\assoc$ ist eine Äquivalenzrelation auf $R$ (klar wegen \ref{bem:teiler_assoziiert}(b)).
     \item Die Teilbarkeitsrelation auf $R$ ist ein Beispiel für eine \defn{Präordnung} auf $R$, d.h.\ eine Relation $\leq$, die reflexiv und transitiv ist. Sie ist jedoch nicht antisymmetrisch: Aus $a \mid b$ und $b \mid a$ folgt im Allgemeinen nicht $a = b$, sondern nur $a \assoc b$ (vgl.\ \ref{bem:teiler_assoziiert}). Möchte man Antisymmetrie (und damit eine Ordnungsrelation), muss man modulo $\assoc$ rechnen.
     Alternativ kann man mit mit Hauptidealen statt mit Elementen rechnen. Die "`$\subseteq$-Relation"' auf Hauptidealen ist eine Ordnungsrelation.
+    \item Alle nachfolgenden Konstrukte sind invariant unter Assoziiertheit: Ist ein Element ein Teiler (ggT, Primelement,...), so hat auch jedes dazu assoziierte element diese Eigenschaft.
 \end{itemize}
 \end{anm}
 
@@ -3059,7 +3065,7 @@ Sei $R$ ein Hauptidealring, $\emptyset \neq T \subseteq R$. Dann existiert $\ggT
 \]
 Insbesondere lässt sich $\ggT(T)$ als endliche $R$-Linearkombination von Elementen aus $T$ schreiben (vgl. \ref{def:summe_produkt_ideale}). Spezialfall: Für $a_1, \dots, a_n \in R$ existiert $\ggT(a_1, \dots, a_n)$, es ist \[(\ggT(a_1, \dots, a_n)) = (a_1, \dots, a_n),\] insbesondere existieren $r_1, \dots, r_n \in R$ mit 
 \[
-\ggT(a_1, \dots, a_n) = r_1 a_1 + \dots + r_n a_n.
+\ggT(a_1, \dots, a_n) = r_1 a_1 + \dots + r_n a_n \quad \text{("`Lemma von B\'ezout"')}
 \]
 \end{folgerung}
 
@@ -3112,7 +3118,7 @@ Sei $p \in R \setminus (R^\times \cup \{0\})$. Dann sind äquivalent:
 \end{bem}
 
 \begin{proof}
-"`(i) $\Rightarrow$ (ii)"': Seien $a, b \in R$ mit $p = a b$. Da $p$ irreduzibel ist, folgt $p \mid a$ oder $p \mid b$. Ohne Einschränkung gelte $p \mid a$, dann existiert ein $r \in R$ mit $a = r p$. Damit folgt $p = r p b$. Weil $R$ Integritätsring ist, folgt durch Kürzen $r b = 1$, also $b \in R^\times$.
+"`(i) $\Rightarrow$ (ii)"': Seien $a, b \in R$ mit $p = a b$. Da $p$ irreduzibel ist, folgt $p \mid a$ oder $p \mid b$. Ohne Einschränkung gelte $p \mid a$, dann ist $\frac{a}{p}\in R$ und $p=p\frac{a}{p}b$. Weil $R$ ein Integritätsring ist, folgt durch Kürzen $\frac{a}{p} b = 1$, also $b \in R^\times$.
 
 "`(ii) $\Rightarrow$ (iii)"': Sei $a \in R \setminus R^\times$ mit $(p) \subseteq (a)$. Dann existiert ein $b \in R$ mit $p = a b$. Daraus folgt $b \in R^\times$, also $p \assoc a$. Damit ist $(p) = (a)$.
 
@@ -3189,7 +3195,10 @@ Es ist $\emptyset \neq \{\delta(b) \mid b \in I \setminus \{0\}\} \subseteq \NN_
 \end{proof}
 
 \begin{anm}\label{anm:nicht_euklidische_hir}
-Es gibt Hauptidealringe, die nicht euklidisch sind.
+\begin{itemize}
+    \item Es gibt Hauptidealringe, die nicht euklidisch sind.
+    \item Die Klassifikation der Untergruppen von $\ZZ$ in \ref{satz:untergruppen_Z} hat das gleiche Argument (speziell mit der Division mit Rest in $\ZZ$) verwendet wie der Beweis von \ref{satz:euklidischer_ring_hir}
+\end{itemize}
 \end{anm}
 
 \begin{folgerung}\label{folg:polynomring_hir}
@@ -3295,13 +3304,14 @@ also ist $v_p(x + y) \geq n$.
 Da $n \in \NN_0$ beliebig gewählt war, folgt $v_p(x + y) \geq \min(v_p(x), v_p(y))$. 
 
 (d) Aus $p \mid p$ folgt $v_p(p) \geq 1$. 
-Angenommen, es wäre $v_p(p) > 1$. Dann gilt $p^2 \mid p$, und es existiert ein $a \in R$ mit $p = a p^2$. Daraus folgt durch Kürzen $1 = a p$ und damit $p \in R^\times$, was ein Widerspruch ist. Somit ist $v_p(p) = 1$.
+Angenommen, es wäre $v_p(p) > 1$. Dann gilt $p^2 \mid p$, also $\frac{1}{p}=\frac{p}{p^2}\in R$,
+und damit $p \in R^\times$, was ein Widerspruch ist. Somit ist $v_p(p) = 1$.
 
 (e) Sei $x \in R \setminus (R^\times \cup \{0\})$ irreduzibel und $x \nmid p$.
 Angenommen, es wäre $v_p(x) \geq 1$. Dann gilt $p \mid x$. Da $x$ irreduzibel ist, folgt aus \ref{bem:irreduzibel_eigenschaften}, dass $p \in R^\times$ oder $p \assoc x$ ist, was jeweils im Widerspruch zur Voraussetzung steht. Also ist $v_p(x) = 0$.
 
 (f) Sei $x \in R^\times$.
-Angenommen, $v_p(x) > 1$. Dann gilt $p \mid x$, also existiert ein $a \in R$ mit $x = a p$. Daraus folgt $1 = x^{-1} a p$, also $p \in R^\times$, ein Widerspruch. Somit ist $v_p(x) = 0$.
+Angenommen, $v_p(x) > 1$. Dann gilt $p \mid x$, also ist $\frac{x}{p}\in R$ und deshalb $\frac{1}{p} = x^{-1}\frac{x}{p}\in R$, also $p \in R^\times$, ein Widerspruch. Somit ist $v_p(x) = 0$.
 
 (b) Zu zeigen ist $v_p(xy) = v_p(x) + v_p(y)$.
 
@@ -3374,16 +3384,54 @@ v_p(x + y) &= v_p\left(\frac{a}{b} + \frac{c}{d}\right) = v_p\left(\frac{a d + b
 Man kann zeigen, dass in beiden Fällen (a') aus \ref{bem:p-adische_bewertung} erfüllt ist.
 \end{bsp}
 
+\begin{bem}\label{bem:zerlegungen_eindeutigkeit}
+Sei $a \in R \setminus \{0\}$ und habe zwei Zerlegungen:
+\[
+a = u p_1 \cdot\ldots\cdot p_r = v q_1 \cdot\ldots\cdot q_s,
+\]
+wobei $p_1, \dots, p_r$ Primelemente und $q_1, \dots, q_s$ irreduzible Elemente sind und $u, v \in R^\times$. Dann gilt:
+\[
+r = s \quad \text{und} \quad \text{nach Umnummerierung }p_i \assoc q_i \quad \text{für alle } i = 1, \dots, r.
+\]
+Insbesondere sind $q_1,\ldots,q_r$ Primelemente.
+\end{bem}
+
+\begin{proof}
+Wir beweisen die Aussage per Induktion nach $r$.
+Der Fall $r = 0$ ergibt sich direkt aus \ref{anm:primfaktorzerlegung_ist_irreduzibilitaetszerlegung}.
+Sei nun $r \geq 1$ und gelte
+\[
+u p_1 \cdot\ldots\cdot p_r = v q_1 \cdot\ldots\cdot q_s.
+\]
+Dann ist auch $s \geq 1$ und $p_1 \mid q_1 \cdot\ldots\cdot q_s$. Es existiert also ein $j \in \{1, \dots, s\}$ mit $p_1 \mid q_j$. Ohne Einschränkung sei $j = 1$, d.h., $p_1 \mid q_1$. Da $q_1$ irreduzibel ist, existiert ein $e \in R^\times$ mit $q_1 = e p_1$, also $q_1 \assoc p_1$.
+Einsetzen liefert:
+\[
+u p_1 \cdot\ldots\cdot p_r = v p_1 q_2 \cdot\ldots\cdot q_s,
+\]
+woraus sich durch Kürzen von $p_1$ ergibt:
+\[
+u p_2 \cdot\ldots\cdots p_r = v q_2 \cdot\ldots\cdot q_s.
+\]
+Nach Induktionsvoraussetzung folgt nun $r - 1 = s - 1$ und nach Umnummerierung  $p_i \assoc q_i$ für $i = 2, \dots, r$. Somit ist $r = s$ und $p_i \assoc q_i$ für alle $i = 1, \dots, r$.
+\end{proof}
+
+
 \begin{defini}\label{def:primteiler_zerlegung}
 Sei $a \in R \setminus \{0\}$ und $p \in R$ ein Primelement. 
 
 $p$ heißt ein \defn{Primteiler} von $a$, falls $p \mid a$. 
 
-Eine Darstellung $a = e \cdot \prod_{i=1}^n b_i^{w_i}$ für $n \in \NN_0$ mit $e \in R^\times$ und $b_1, \dots, b_n \in R$ paarweise nicht assoziiert sowie $w_1, \dots, w_n \in \NN$ heißt:
+Eine Darstellung \[a = e \cdot \prod_{i=1}^n b_i^{w_i}\] für $n \in \NN_0$ mit $e \in R^\times$ und $b_1, \dots, b_n \in R$ paarweise nicht assoziiert sowie $w_1, \dots, w_n \in \NN$ heißt:
 \begin{itemize}
     \item eine \defn{Irreduziblenzerlegung (IZ)} von $a$, falls $b_1, \dots, b_n$ irreduzibel sind.
     \item eine \defn{Primfaktorzerlegung (PFZ)} von $a$, falls $b_1, \dots, b_n$ Primelemente sind.
 \end{itemize}
+Wir sagen, dass zwei IZ (bzw. PFZ)
+\[
+a=e \cdot \prod_{i=1}^n b_i^{w_i}=f\prod_{i=1}^m c_i^{u_i}
+\]
+von $a$ \textbf{bis auf Reihenfolge und Assoziiertheit übereinstimmen (bis auf RuA übereinstimmnen)}, wenn 
+$n=m$ ist und nach Umnummerieren $b_i\assoc c_i$ und $w_i=u_i$ für $i=1,\ldots,n$ ist.
 \end{defini}
 
 \begin{anm}\label{anm:primfaktorzerlegung_ist_irreduzibilitaetszerlegung}
@@ -3400,11 +3448,11 @@ Diese ist auch die einzig mögliche IZ von $a$, da eine Einheit kein Produkt von
 
 
 \begin{satz}\label{satz:primfaktorzerlegung}
-Sei $a \in R \setminus \{0\}$ und $a$ besitze eine PFZ. $\PP$ sei ein Vertretersystem aller Primelemente von $R$ modulo "`$\assoc$"'. Dann gilt:
+Sei $a \in R \setminus \{0\}$ ein Element, das eine PFZ besitze. $\PP$ sei ein Vertretersystem aller Primelemente von $R$ modulo "`$\assoc$"'. Dann gilt:
 \begin{enumerate}[label=(\alph*)]
     \item Bis auf Assoziiertheit hat $a$ nur endliche viele Primteiler. 
-    \item Alle PFZ von $a$ stimen bis auf Reihenfolge und Assoziiertheit überein.
-    \item Jede IZ von $a$ ist eine PFZ von $a$. Insbesondere stimmen alle IZ von $a$ bis auf Reihenfolge und Assoziiertheit überein.
+    \item Alle PFZ von $a$ stimen bis auf RuA überein.
+    \item Jede IZ von $a$ ist eine PFZ von $a$. Insbesondere stimmen alle IZ von $a$ bis auf RuA überein.
     \item Eine konkrete PFZ von $a$ ist gegeben durch
     \[
     a = e \cdot \prod_{p \in \PP} p^{v_p(a)}
@@ -3419,35 +3467,14 @@ Ist $a\in R^\times$, so folgt die Aussage des Satzes aus \ref{bem:p-adische_bewe
 \[
 a = e \cdot \prod_{i=1}^n p_i^{w_i} \tag{*} \label{eq:PFZ}
 \]
-eine PFZ von $a$. Wegen $a\not\in R^\times$ ist $n\geq 1$. Sei $p$ ein Primteiler von $a$. Dann existiert ein $i \in \{1, \dots, n\}$ mit $p \mid p_i$. Da $p_i$ als Primelement irreduzibel ist, folgt, dass $p \assoc p_i$ ist. Insbesondere hat $a$ bis auf Assoziertheit nur endlich viele Primteiler, womit (a) gezeigt ist. Für jedes $i\in\{1,\ldots,n\}$ existiert ein eindeutig bestimmtes Primelement in $\PP$, dass zu $p_i$ assoziiert ist. Wir nehmen im Folgenden ohne Einschränkung an, dass $p_1,\ldots,p_n$ selbst in $\PP$ liegen (andernfalls ersetzen wir sie durch die entsprechenden Assoziierten in $\PP$ und müssen ggf. die Einheit $e$ abändern).
- Sei nun
+eine PFZ von $a$. Wegen $a\not\in R^\times$ ist $n\geq 1$. Sei $p$ ein Primteiler von $a$. Dann existiert ein $i \in \{1, \dots, n\}$ mit $p \mid p_i$. Da $p_i$ als Primelement irreduzibel ist, folgt, dass $p \assoc p_i$ ist. Insbesondere hat $a$ modulo "`$\assoc$"' nur endlich viele Primteiler, womit (a) gezeigt ist. Für jedes $i\in\{1,\ldots,n\}$ existiert ein eindeutig bestimmtes Primelement in $\PP$, dass zu $p_i$ assoziiert ist. Wir nehmen im Folgenden ohne Einschränkung an, dass $p_1,\ldots,p_n$ selbst in $\PP$ liegen (andernfalls ersetzen wir sie durch die entsprechenden Assoziierten in $\PP$ und müssen ggf. die Einheit $e$ abändern). Nach
+\ref{bem:zerlegungen_eindeutigkeit} stimmt jede IZ von $a$ stimmt mit der gegebenen
+PFZ von $a$ bis auf RuA überein und ist selbst eine PFZ von $a$. Insbesondere stimmen je zwei IZ und damit auch je zwei PFZ von a bis auf RuA überein, womit (b) und (c) gezeigt sind. Es verbleibt der Nachweis von (d). Für $j=1,\ldots,n$ ist
 \[
-a = u \cdot \prod_{i=1}^m b_i^{t_i} \tag{**} \label{eq:IZ}
+v_{p_j}(a) = v_{p_j}\left(e \cdot \prod_{i=1}^n p_i^{w_i}\right) = v_{p_j}(e) + \sum_{i=1}^n w_i v_{p_j}(p_i)\overset{\ref{bem:p-adische_bewertung}}{=}0+\sum_{i=1}^m w_i\delta_{ij}=w_j,
 \]
-eine beliebige IZ von $a$. Es gilt dann $p_1\mid a$,
-und da $p_1$ ein Primelement ist, teilt $p_1$ eines der Elemente $b_1,\ldots,b_m$, nach Umnummerieren etwa ohne Einschränkung $b_1$. Da $b_1$ irreduzibel ist, folgt $b_1\assoc p_1$.
-Da $b_1,\ldots,b_m$ paarweise nicht assoziiert sind, ist $p_1$ zu keinem der Elemente $b_2,\ldots,b_m$ assoziiert. Dieselbe Argumentation lässt sich auch für $p_2,\ldots,p_n$
-vornehmen, und wir erhalten nach Umnummerierung $b_1\assoc p_1,\ldots,b_n\assoc p_n$ und damit
-insbesondere $m\geq n$. Außerdem sind die Elemente $b_1,\ldots,b_n$ selbst Primelemente,
-und es ist $p_j\not\assoc b_i$ für $i\neq j$. Es ist dann für $j=1,\ldots,n$ jeweils
-\[
-v_{p_j}(a) = v_{p_j}\left(u \cdot \prod_{i=1}^n b_i^{t_i}\right) = v_{p_j}(u) + \sum_{i=1}^n t_i v_{p_j}(b_i)\overset{\ref{bem:p-adische_bewertung}}{=}0+\sum_{i=1}^m t_i\delta_{ij}=t_j.
-\]
-Da \eqref{eq:PFZ} als PFZ auch eine IZ von $a$ ist, ist $t_j=v_{p_j}(a)=w_j$ für $j=1,\ldots,n$.
-Wir schreiben für $j=1,\ldots,n$ jeweils $b_j=u_jp_j$ mit $u_j\in R^\times$. Es folgt
-\[
-a = u \cdot \prod_{i=1}^m b_i^{t_i} = \left(u \cdot \prod_{i=1}^n u_i^{w_i}\right) \cdot \prod_{i=1}^n p_i^{w_i}\cdot\prod_{i=n+1}^m b_i^{t_i}
-=\left(e^{-1}u \cdot \prod_{i=1}^n u_i^{w_i}\right) \cdot a\cdot \prod_{i=n+1}^m b_i^{t_i}.
-\]
-Durch Kürzen von $a$ erhalten wir, dass $\prod_{i=n+1}^m b_i^{t_i}\in R^\times$ ist. Dies hat
-$m=n$ zur Folge. Die IZ \eqref{eq:IZ} ist also eine PFZ von $a$ und stimmt mit der gegebenen
-PFZ \eqref{eq:PFZ} von $a$ bis auf Reihenfolge und Assoziiertheit überein. Somit stimmen je zwei
-IZ und damit auch je zwei PFZ von $a$ bis auf Reihenfolge und Assoziiertheit überein, was (b) und (c) liefert. Für (d) bemerken wir
-\[
-a = e \cdot \prod_{i=1}^n p_i^{w_i}=e \cdot \prod_{i=1}^n v_{p_i}^{v_{p_i}(a)}=e \cdot \prod_{p \in \PP} p^{v_p(a)},
-\]
-wobei $v_p(a)=0$ für $p\in\PP\setminus\{p_1,\ldots,p_n\}$ ist und sich die Eindeutigkeit von $e$
-aus der Annahme, dass es eine weitere Einheit gibt, welche die entsprechende Gleichung erfüllt, durch Kürzen ergibt.
+und für $p\in\PP\setminus\{p_1,\ldots,p_n\}$ ist $v_p(a)=0$, womit die Gleichung aus (d) gezeigt ist.
+Die Eindeutigkeit von $e$ ergibt sich aus der Annahme, dass es eine weitere Einheit gibt, welche die entsprechende Gleichung erfüllt, durch Kürzen.
 \end{proof}
 
 
@@ -3459,23 +3486,48 @@ IZ brauchen (falls sie existieren) nicht unbedingt eindeutig zu sein:
     \[
     2 X^2 = 2 \cdot X^2 = (\sqrt{2}X)^2,
     \]
-    also gibt es zwei IZ, die nicht bis auf Reihenfolge und Assoziiertheit übereinstimmen. Insbesondere hat $2X^2$ keine PFZ in $R$ und $X, \sqrt{2} X$ sind irreduzible Elemente in $R$, die keine Primelemente sind.
+    also gibt es zwei IZ, die nicht bis auf RuA übereinstimmen. Insbesondere hat $2X^2$ keine PFZ in $R$ und $X, \sqrt{2} X$ sind irreduzible Elemente in $R$, die keine Primelemente sind.
 
     \item In $R := \ZZ[\sqrt{-3}]$ gilt:
     \[
     4 = 2 \cdot 2 = (1 + \sqrt{-3})(1 - \sqrt{-3}),
     \]
-    also gibt es zwei IZ, die nicht bis auf Reihenfolge und Assoziiertheit übereinstimmen. Insbesondere hat $4$ keine PFZ in $\ZZ[\sqrt{-3}]$, und $2, 1 + \sqrt{-3}, 1 - \sqrt{-3}$ sind irreduzible Elemente in $R$, die keine Primelemente sind.
+    also gibt es zwei IZ, die nicht bis auf RuA übereinstimmen. Insbesondere hat $4$ keine PFZ in $\ZZ[\sqrt{-3}]$, und $2, 1 + \sqrt{-3}, 1 - \sqrt{-3}$ sind irreduzible Elemente in $R$, die keine Primelemente sind.
 \end{enumerate}
 \end{bsp}
 
 \begin{defini}\label{def:faktorieller_ring}
-Ein Ring $R$ heißt \defn{faktoriell}, falls jedes Element $a \in R \setminus \{0\}$ eine (wegen Satz \ref{satz:primfaktorzerlegung} bis auf Reihenfolge und Assoziiertheit eindeutige) PFZ besitzt.
+Ein Ring $R$ heißt \defn{faktoriell}, falls eine der folgenden beiden zueinander äquivalenten Aussagen gilt:
+\begin{enumerate}
+    \item[(i)] Jedes Element $a \in R \setminus \{0\}$ besitzt eine (wegen Satz \ref{satz:primfaktorzerlegung} automatisch bis auf RuA eindeutige) PFZ.
+    \item[(ii)] Jedes Element $a \in R \setminus \{0\}$ besitzt eine bis auf RuA eindeutige IZ.
+\end{enumerate}
 \end{defini}
+\begin{proof}
+(der Äquivalenz von (i) und (ii))
+Die Implikation (i)$\Rightarrow$(ii) ergibt sich direkt aus \ref{satz:primfaktorzerlegung}.
+Zum Nachweis von (ii)$\Rightarrow$(i) genügt es zu zeigen, dass jedes irreduzible Element aus
+$R$ ein Primelement ist. Sei dazu $p\in R\setminus(R^\times\cup\{0\})$ irreduzibel, und
+seien $a,b\in R$ mit $p\mid ab$. Zu zeigen ist, dass dann $p\mid a$ oder $p\mid b$ gilt.
+Die Aussage ist klar, falls $a=0$ oder $b=0$ ist. Sind $a,b$ beide von Null verschieden, so existieren IZ
+\[
+a=e \cdot \prod_{i=1}^n b_i^{w_i}, \quad b=f\prod_{i=1}^m c_i^{u_i}.
+\]
+Somit existiert ein $r\in R$ mit
+\[
+rp= ef \prod_{i=1}^n b_i^{w_i}\prod_{i=1}^m c_i^{u_i}
+\]
+Wegen der Eindeutigkeitsaussage in (ii) muss $p$ zu einem der Elemente $b_1,\ldots,b_n$
+oder $c_1,\ldots,c_m$ assoziiert sein und damit $p\mid a$ oder $p\mid b$ gelten.    
+\end{proof}
 
 \begin{bsp}
-Dass der Polynomring $\CC[X]$ faktoriell ist, lässt sich direkt aus dem Fundamentalsatz der Algebra ablesen. Dieser besagt schließlich, dass sich jedes nichtkonstante Polynom $f\in\CC[X]$
-in der Form $f=e(X-a_1)\cdot\ldots\cdot(X-a_n)$ mit $e\in\CC^\times,a_1,\ldots,a_n\in\CC$ schreiben lässt, und die Polynome $X-a_i$ sind allesamt Primelemente in $\CC[X]$ (vgl. \ref{bsp:primelement_beispiele}). Wir werden gleich sehen, dass der Polynomring $K[X]$ über einem beliebigen Körper $K$ grundsätzlich faktoriell ist.
+\begin{enumerate}
+\item[(a)] Dass der Polynomring $\CC[X]$ faktoriell ist, lässt sich direkt aus dem Fundamentalsatz der Algebra ablesen. Dieser besagt schließlich, dass sich jedes nichtkonstante Polynom $f\in\CC[X]$
+in der Form $f=e(X-a_1)\cdot\ldots\cdot(X-a_n)$ mit $e\in\CC^\times,a_1,\ldots,a_n\in\CC$ schreiben lässt, und die Polynome $X-a_i$ sind allesamt Primelemente in $\CC[X]$ (vgl. \ref{bsp:primelement_beispiele}). Wir werden gleich sehen, dass der Polynomring $K[X]$ über einem beliebigen Körper $K$ bzw. allgemeiner jeder Hauptidealring grundsätzlich faktoriell sind.
+\item[(b)] Die beiden Ringe $\{f \in \RR[X] \mid f(0) \in \QQ\}$ und $\ZZ[\sqrt{-3}]$
+aus \ref{bsp:irreduzibilitaetszerlegungen_eindeutigkeit} sind wegen der dort geschilderten Eigenschaften jeweils nicht faktoriell.
+\end{enumerate}
 \end{bsp}
 
 \begin{folgerung}\label{folg:irreduzibel_prim_faktoriell}
@@ -3490,6 +3542,7 @@ Sei $R$ ein faktorieller Ring und $p \in R \setminus (R^\times \cup \{0\})$. Dan
 
 "`(ii)$\Rightarrow$(i)"' ergibt sich aus \ref{bem:primelement_irreduzibel}.     
 \end{proof}
+
 
 \begin{satz}\label{satz:accp_iz_existenz}
 Erfüllt $R$ die "`aufsteigende Kettenbedingung für Hauptideale"' (\defn{ACCP}), d.h. es gibt keine strikt aufsteigende Kette
@@ -3556,7 +3609,7 @@ Keine der Implikationen gilt in die andere Richtung.
 \end{enumerate}
 \end{bsp}
 
-\begin{bem}\label{bem:vp_diskrete_bewertung}
+\begin{satz}\label{bem:vp_diskrete_bewertung}
 Seien $R$ ein faktorieller Ring, $p \in R$ ein Primel und $\PP$ ein Vertretersystem der Primelemente von $R$ modulo "`$\assoc$"'. Dann gilt für $x \in R$:
 \[
 v_p(x) = \infty \iff x = 0.
@@ -3565,13 +3618,13 @@ Insbesondere setzt sich $v_p$ zu einer diskreten Bewertung
 \[
 v_p \colon \Quot(R) \to \ZZ \cup \{\infty\}
 \]
-auf $\Quot(R)$ fort. Für diese gilt für alle $x, y \in K$:
+auf $\Quot(R)$ fort, der sogenannten \textbf{$p$-adischen Bewertung}. Für diese gilt für alle $x, y \in K$:
 \begin{enumerate}[label=(\alph*)]
     \item $x \in R\iff v_p(x) \geq 0$ für alle $p \in \PP$.
     \item $x \in R^\times \iff v_p(x) = 0$ für alle $p \in \PP$.
     \item Es existiert genau dann ein $a \in R$ mit $y = a x$, wenn $v_p(x) \leq v_p(y)$ für alle $p \in \PP$ ist.
 \end{enumerate}
-\end{bem}
+\end{satz}
 \begin{proof}
 Ist $x\in R$ mit $x\neq 0$, so ist $v_p(a)\in\NN_0$ nach \ref{satz:primfaktorzerlegung}.
 
