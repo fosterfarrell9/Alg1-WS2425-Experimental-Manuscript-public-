@@ -2400,7 +2400,7 @@ Sei $R = \ZZ$, $I = (2)$, $J = (3)$. Dann gilt:
 
 In Hauptidealringen gilt allgemein:
 \[
-(a) + (b) = \ggT(a, b), \quad (a) \cap (b) = \kgV(a, b).
+(a) + (b) = (\ggT(a, b)), \quad (a) \cap (b) = (\kgV(a, b)).
 \]
 (wobei $\ggT$ und $\kgV$ noch zu definieren wären, was wir aber zumindest für den $\ggT$ im nächsten Abschnitt tun werden).
 \end{bsp}
@@ -3006,11 +3006,11 @@ a|b\iff \text{Es existiert ein } r\in R \text { mit } b= ra \iff b \in (a) \iff 
     \item $\assoc$ ist eine Äquivalenzrelation auf $R$ (klar wegen \ref{bem:teiler_assoziiert}(b)).
     \item Die Teilbarkeitsrelation auf $R$ ist ein Beispiel für eine \defn{Präordnung} auf $R$, d.h.\ eine Relation $\leq$, die reflexiv und transitiv ist. Sie ist jedoch nicht antisymmetrisch: Aus $a \mid b$ und $b \mid a$ folgt im Allgemeinen nicht $a = b$, sondern nur $a \assoc b$ (vgl.\ \ref{bem:teiler_assoziiert}). Möchte man Antisymmetrie (und damit eine Ordnungsrelation), muss man modulo $\assoc$ rechnen.
     Alternativ kann man mit mit Hauptidealen statt mit Elementen rechnen. Die "`$\subseteq$-Relation"' auf Hauptidealen ist eine Ordnungsrelation.
-    \item Alle nachfolgenden Konstrukte sind invariant unter Assoziiertheit: Ist ein Element ein Teiler (ggT, Primelement,...), so hat auch jedes dazu assoziierte element diese Eigenschaft.
+    \item Alle nachfolgenden Konstrukte sind invariant unter Assoziiertheit: Ist ein Element ein Teiler (ggT, Primelement,...), so hat auch jedes dazu assoziierte Element diese Eigenschaft.
 \end{itemize}
 \end{anm}
 
-\begin{bem}\label{bem:ggT}
+\begin{def}\label{bem:ggT}
 Sei $\emptyset \neq T \subseteq R$, $d\in R$.
 \begin{itemize}
     \item $d$ heißt ein \defn{gemeinsamer Teiler} von $T$ (Bezeichnung: $d \mid T$), falls gilt:
@@ -3026,7 +3026,7 @@ In diesem Fall schreiben wir (in missbräuchlicher Schreibweise, siehe \ref{anm:
 Für $\ggT(\{a_1, \dots, a_n\})$ schreiben wir auch $\ggT(a_1, \dots, a_n)$.
 
 Elemente $a,b\in R$ heißen \defn{teilerfremd} (\defn{relativ prim}), falls $\ggT(a,b)=1$ ist.
-\end{bem}
+\end{def}
 
 \begin{anm}\label{anm:ggT_existenz}
 \begin{itemize}
@@ -3398,7 +3398,7 @@ Insbesondere sind $q_1,\ldots,q_r$ Primelemente.
 
 \begin{proof}
 Wir beweisen die Aussage per Induktion nach $r$.
-Der Fall $r = 0$ ergibt sich direkt aus \ref{anm:primfaktorzerlegung_ist_irreduzibilitaetszerlegung}.
+Ist $r = 0$, so ist $a$ eine Einheit und deshalb auch $s=0$.
 Sei nun $r \geq 1$ und gelte
 \[
 u p_1 \cdot\ldots\cdot p_r = v q_1 \cdot\ldots\cdot q_s.
@@ -3497,14 +3497,18 @@ IZ brauchen (falls sie existieren) nicht unbedingt eindeutig zu sein:
 \end{bsp}
 
 \begin{defini}\label{def:faktorieller_ring}
-Ein Ring $R$ heißt \defn{faktoriell}, falls eine der folgenden beiden zueinander äquivalenten Aussagen gilt:
-\begin{enumerate}
-    \item[(i)] Jedes Element $a \in R \setminus \{0\}$ besitzt eine (wegen Satz \ref{satz:primfaktorzerlegung} automatisch bis auf RuA eindeutige) PFZ.
-    \item[(ii)] Jedes Element $a \in R \setminus \{0\}$ besitzt eine bis auf RuA eindeutige IZ.
-\end{enumerate}
+Ein Ring $R$ heißt \defn{faktoriell}, wenn jedes Element aus $R\setminus\{0\}$ eine
+(wegen Satz \ref{satz:primfaktorzerlegung} automatisch bis auf RuA eindeutige) PFZ besitzt.
 \end{defini}
+
+\begin{bem}
+Die folgenden Aussagen sind äquivalent:
+\begin{enumerate}
+    \item[(i)] $R$ ist faktoriell.
+    \item[(ii)] Jedes Element aus $R \setminus \{0\}$ besitzt eine bis auf RuA eindeutige IZ.
+\end{enumerate}
+\end{bem}
 \begin{proof}
-(der Äquivalenz von (i) und (ii))
 Die Implikation (i)$\Rightarrow$(ii) ergibt sich direkt aus \ref{satz:primfaktorzerlegung}.
 Zum Nachweis von (ii)$\Rightarrow$(i) genügt es zu zeigen, dass jedes irreduzible Element aus
 $R$ ein Primelement ist. Sei dazu $p\in R\setminus(R^\times\cup\{0\})$ irreduzibel, und
@@ -3566,7 +3570,8 @@ Dann gilt:
 \[
 (a) \subseteq (b_1), \quad (a) \subseteq (b_2).
 \]
-Angenommen es wäre $(a) = (b_1)$, dann würde ein $e \in R^\times$ mit $a = e b_1 = b_1 b_2$ existieren. Dies hätte $b_2 = e\in R^\times$ zur Folge, was ein Widerspruch ist.
+Angenommen es wäre $(a) = (b_1)$, dann würde aus \ref{bem:teiler_assoziiert} folgen, dass
+$b_2 = \frac{a}{b_1}\in R^\times$ wäre, was ein Widerspruch ist.
 Also gilt $(a) \subsetneqq (b_1)$ und analog $(a) \subsetneqq (b_2)$. 
 Wegen der Maximalität von $(a)$ sind $(b_1), (b_2) \notin \mathcal{M}$, und deshalb besitzen $b_1, b_2$ jeweils eine IZ. Somit besitzt auch $a = b_1 b_2$ eine IZ, was ein Widerspruch ist. $\square$
 \end{proof}
@@ -3581,7 +3586,7 @@ Angenommen, es existiert eine strikt aufsteigende Kette von Hauptidealen:
 \]
 in $R$. Wir setzen \[J := \bigcup_{i \in \NN} (a_i).\]
 Man kann nachrechnen, dass $J$ ein Ideal in $R$ ist (die Rechnung ist analog zu der im Beweis von \ref{satz:maximales_ideal_existiert}).
-Da $R$ ein Haupidealring ist, existiert ein $a \in R$ mit $J = (a)$. Es existiert ein $i \in \NN$ mit $a \in (a_i)$, also $(a) \subseteq (a_i) \subseteq (a)$, worau $(a_i) = (a)$ und schließlich
+Da $R$ ein Haupidealring ist, existiert ein $a \in R$ mit $J = (a)$. Es existiert ein $i \in \NN$ mit $a \in (a_i)$, also $(a) \subseteq (a_i) \subseteq (a)$, woraus $(a_i) = (a)$ und schließlich
 $(a_i)=(a_{i+1})=\ldots$ folgt, im Widerspruch dazu, dass die gegebene Kette strikt aufsteigend ist.
 \end{proof}
 
@@ -3618,7 +3623,7 @@ Insbesondere setzt sich $v_p$ zu einer diskreten Bewertung
 \[
 v_p \colon \Quot(R) \to \ZZ \cup \{\infty\}
 \]
-auf $\Quot(R)$ fort, der sogenannten \textbf{$p$-adischen Bewertung}. Für diese gilt für alle $x, y \in K$:
+auf $\Quot(R)$ fort, der sogenannten \textbf{$p$-adischen Bewertung}. Für diese gilt für alle $x, y \in \Quot(R)$:
 \begin{enumerate}[label=(\alph*)]
     \item $x \in R\iff v_p(x) \geq 0$ für alle $p \in \PP$.
     \item $x \in R^\times \iff v_p(x) = 0$ für alle $p \in \PP$.
@@ -3694,7 +3699,7 @@ Sei $R$ ein faktorieller Ring und $T \subseteq R \setminus \{0\}$ eine nichtleer
 \end{bem}
 
 \begin{proof}
-Die Behauptung folgt recht leicht aus der Definition des ggT, \ref{anm:assoziiert_teilbarkeit} und \ref{bem:vp_diskrete_bewertung}(c).
+Die Behauptung folgt recht leicht aus der Definition des ggT, \ref{anm:assoziiert_teilbarkeit} und den Eigenschaften von $v_p$.
 \end{proof}
 
 \end{document}
