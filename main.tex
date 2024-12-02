@@ -156,6 +156,7 @@ plainpages=false,}
 \DeclareMathOperator{\Bild}{Bild}
 \DeclareMathOperator{\charpoly}{charpoly}
 \DeclareMathOperator{\charact}{char}
+\DeclareMathOperator{\cont}{cont}
 \DeclareMathOperator{\diag}{diag}
 \DeclareMathOperator{\diff}{d\!}
 \DeclareMathOperator{\Diff}{Diff}
@@ -176,6 +177,7 @@ plainpages=false,}
 \DeclareMathOperator{\Orb}{Orb}
 \DeclareMathOperator{\Orth}{O}
 \DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\pp}{pp}
 \DeclareMathOperator{\pr}{pr}
 \DeclareMathOperator{\Quot}{Quot}
 \DeclareMathOperator{\rel}{\, rel}
@@ -2983,7 +2985,7 @@ Seien $a, b \in R$. Dann gilt:
 \begin{enumerate}[label=(\alph*)]
     \item $a \mid b \iff (b) \subseteq (a)$. 
     \item Ist $a\neq 0$, so gilt: $a\mid b \iff$ Das Element $\frac{b}{a}$ aus $\Quot(R)$ liegt bereits in $R$.
-    \item $a \assoc b \iff (a) = (b) \iff $ Es existiert ein $e \in R^\times \text{ mit } a = \varepsilon b$.
+    \item $a \assoc b \iff (a) = (b) \iff $ Es existiert ein $e \in R^\times \text{ mit } a = e b$.
 \end{enumerate}
 \end{bem}
 
@@ -3437,7 +3439,7 @@ $n=m$ ist und nach Umnummerieren $b_i\assoc c_i$ und $w_i=u_i$ für $i=1,\ldots,
 \begin{anm}\label{anm:primfaktorzerlegung_ist_irreduzibilitaetszerlegung}
 \begin{itemize}
 \item Jede PFZ ist eine IZ (wegen \ref{bem:primelement_irreduzibel}).
-\item Jede Einheit $a \in R^\times$ besitzt das leere Produkt als PFZ:
+\item Jede Einheit $a \in R^\times$ besitzt das Produkt aus $a$ und dem leeren Produkt als PFZ:
 \[
 a = a \cdot \prod_{\emptyset}.
 \]
@@ -3560,6 +3562,8 @@ Wir zeigen die Behauptung durch Widerspruch. Sei
 \[
 \mathcal{M} := \{(a) \mid a \in R \setminus (R^\times \cup \{0\}), (a) \text{ besitzt keine IZ}\}.
 \]
+Man beachte, dass $\mathcal M$ wohldefiniert ist, da die Eigenschaft, keine IZ zu besitzen,
+invariant unter Assoziiertheit ist.
 Angenommen, $\mathcal{M} \neq \emptyset$. Dann existiert ein bzgl.\ "`$\subseteq$"' maximales Element $J \in \mathcal{M}$, denn andernfalls gäbe es eine strikt aufsteigende Kette
 \[
 (a_1) \subsetneqq (a_2) \subsetneqq \dots
@@ -3615,7 +3619,7 @@ Keine der Implikationen gilt in die andere Richtung.
 \end{bsp}
 
 \begin{satz}\label{bem:vp_diskrete_bewertung}
-Seien $R$ ein faktorieller Ring, $p \in R$ ein Primel und $\PP$ ein Vertretersystem der Primelemente von $R$ modulo "`$\assoc$"'. Dann gilt für $x \in R$:
+Seien $R$ ein faktorieller Ring, $p \in R$ ein Primelement und $\PP$ ein Vertretersystem der Primelemente von $R$ modulo "`$\assoc$"'. Dann gilt für $x \in R$:
 \[
 v_p(x) = \infty \iff x = 0.
 \]
