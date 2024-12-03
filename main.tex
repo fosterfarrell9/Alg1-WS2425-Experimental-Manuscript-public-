@@ -3696,7 +3696,9 @@ was ein Widerspruch ist.
 \end{bsp}
 
 \begin{bem}\label{bem:ggt_faktorieller_ring}
-Sei $R$ ein faktorieller Ring und $T \subseteq R \setminus \{0\}$ eine nichtleere Teilmenge. Dann existiert ein größter gemeinsamer Teiler (ggT) von $T$, und es gilt:
+Sei $R$ ein faktorieller Ring, $T \subseteq R \setminus \{0\}$ eine nichtleere Teilmenge
+und $\PP$ ein Vertretersystem der Primelemente von R modulo "`$\assoc$"'.
+Dann existiert ein größter gemeinsamer Teiler (ggT) von $T$, und es gilt:
 \[
 \ggT(T) = \prod_{p \in \PP} p^{\min_{t \in T} v_p(t)}.
 \]
@@ -3704,6 +3706,587 @@ Sei $R$ ein faktorieller Ring und $T \subseteq R \setminus \{0\}$ eine nichtleer
 
 \begin{proof}
 Die Behauptung folgt recht leicht aus der Definition des ggT, \ref{anm:assoziiert_teilbarkeit} und den Eigenschaften von $v_p$.
+\end{proof}
+
+\begin{anm} 
+Aus \ref{bem:ggt_faktorieller_ring} ergibt sich für einen faktoriellen Ring $R$ recht leicht, dass
+\begin{itemize}
+\item zwei Elemente $a,b\in R\setminus\{0\}$ genau dann teilerfremd sind, wenn die Mengen ihrer Primteiler disjunkt sind.
+\item jedes Element $x\in\Quot(R)\setminus\{0\}$ eine Darstellung der Form $x=\frac{a}{b}$ mit $a,b\in R$, $b\neq 0$ und $\ggT(a,b)=1$ hat (eine sogenannte \defn{gekürzte Darstellung}).
+\end{itemize}
+\end{anm}
+
+
+\section{Polynomringe und Algebren}
+
+\begin{notation}
+In diesem Abschnitt sei $ R $ stets ein kommutativer Ring und  $ n \in \NN $.
+\end{notation}
+In diesem Abschnitt wollen wir uns zunächst mit den folgenden Fragen beschäftigen:
+\begin{itemize}
+    \item Was ist der Polynomring $ R[X_1, \dots, X_n] $ über $ R $ in Variablen $ X_1, \dots, X_n $?
+    \item Welche Objekte lassen sich sinnvoll für $ X_1, \dots, X_n $ einsetzen?
+\end{itemize}
+Dabei werden wir in natürlicher Weise auf den Begriff einer $R$-Algebra geführt.
+
+\begin{defini}[Zentrum eines Rings]\label{def:zentrum}
+Sei $ A $ ein (nicht notwendig kommutativer) Ring. Der Unterring
+\[
+Z(A) := \{ a \in A \mid ab = ba \text{ für alle } b \in A \} \subseteq A
+\]
+heißt das \emph{Zentrum} von $ A $.
+\end{defini}
+
+\begin{defini}[$ R $-Algebra]\label{def:r-algebra}
+Eine $ R $-\defn{Algebra} ist ein (nicht notwendig kommutativer) Ring $ A $ zusammen mit einem Ringhomomorphismus $ \varphi \colon R \to A $ (\defn{Strukturhomomorphismus}) mit $ \operatorname{im} \varphi \subseteq Z(A) $. Sie heißt \defn{kommutativ}, falls $ A $ ein kommutativer Ring ist.
+\end{defini}
+
+\begin{notation}
+Zur besseren Unterscheidung bezeichnen wir zunächst die Multiplikation auf $ A $ mit $ * $. Über $ \varphi $ erhalten wir eine skalare Multiplikation $ R \times A \to A $ von $ R $ auf $ A $ durch
+\[
+r \cdot a := \varphi(r) * a.
+\]
+Man kann nachrechnen, dass $ A $ dadurch zum $ R $-Modul wird. Die Ringmultiplikation auf $ A $ ist diesbezüglich $ R $-bilinear, für $r\in R$ und $a,b\in A$ ist
+\[
+r \cdot (a * b) = \varphi(r) * (a * b) = (\varphi(r) * a) * b = (r \cdot a) * b = a * (\varphi(r) * b) = a * (r \cdot b).
+\]
+Für $ r \in R $ schreiben wir $ r_A := \varphi(r) = r \cdot 1_A \in A $ bzw. oft kürzer wieder $ r $ (Achtung: Da $ \varphi $ i.Allg. nicht injektiv ist, kann $ r_A = s_A $ auch für $ r \neq s \in R $ sein).
+
+Für $ r \in R, \, a \in A $ ist
+\[
+r \cdot a = \varphi(r) * a = r_A * a = r * a
+\]
+(mit obiger Konvention "`$r = r_A$"' ).
+Deshalb schreiben wir ab sofort auch die Multiplikation auf $ A $ mit $ "\cdot" $. Wegen $ \operatorname{im}(\varphi) \subseteq Z(A) $ ist $ r \cdot a = a \cdot r $ für alle $ r \in R, \, a \in A $.
+\end{notation}
+
+\begin{bsp}\label{bsp:6.3}
+\begin{itemize}
+    \item[(a)] $ R $ ist eine $ R $-Algebra via $ R \xrightarrow{\operatorname{id}} R $.
+    \item[(b)] Ist $ I \subseteq R $ ein Ideal, so wird $ R / I $ eine $ R $-Algebra über die kanonische Projektion
+    \[
+    R \to R / I, \quad r \mapsto r + I.
+    \]
+    Hier ist $r\cdot\overline{a}=\overline{r}\cdot\overline{a}=\overline{ra}$
+    für $r\in R$, $a\in R$.
+    \item[(c)] Sei $S|R$ eine \defn{Ringerweiterung} (d.h. $R$ ist ein Unterring von $S$) mit $R \subseteq Z(S)$. Dann wird $S$ über die Einbettung $R\hookrightarrow S$ zur $R$-Algebra. Die skalare Multiplikation $R\times S\to S$ entsteht hier durch die Einschränkung der Multiplikation $S\times S\to S$. So wird beispielsweise $\CC$ zur $\RR$-Algebra.    
+    \item[(d)] Ist $R$ ein Integritätsring, so ist $\Quot(R)$ (der Quotientenkörper) eine $R$-Algebra via der Einbettung $R \to \Quot(R)$.
+    \item[(e)] Ist $L|K$ eine \defn{Körpererweiterung} (d.h. $K$ ist ein Teilkörper von $L$), so wird $L$ wie in (d) zur $K$-Algebra.
+    \item[(f)] $\Mat_n(R)$ wird zu einer $R$-Algebra über
+    \[
+    R\to\Mat_n(R), \quad r \mapsto 
+    \begin{pmatrix}
+r &  &  \\
+&  \ddots & \\
+ &  &   r
+\end{pmatrix}.
+    \]
+\end{itemize}
+\end{bsp}
+
+\begin{defini}\label{def:R-Algebrenhomomorphismus}
+Seien $R$ ein kommutativer Ring und $R\xrightarrow{\varphi}A$, $R\xrightarrow{\psi}B$ $R$-Algebren. Eine Abbildung $f\colon A\to B$ heißt ein \defn{$R$-Alge\-bren\-homo\-mor\-phis\-mus}, falls $f$ ein Ringhomomorphismus ist, so dass folgendes Diagramm kommutiert:
+\[
+\begin{xy}
+\xymatrix{
+A \ar[rr]^{f}  & & B  \\
+& \ar[ul]^{\varphi} R \ar[ur]_{\psi} &
+}
+\end{xy}
+\]
+\end{defini}
+
+\begin{anm}\label{anm:R-Algebrenhom_diagramm}
+\begin{itemize}
+\item
+In Termen der skalaren Multiplikation lässt sich die Kommutativität des Diagramms durch 
+\[
+f(r \cdot a) = r \cdot f(a) \quad \text{für alle } r \in R \text{ und } a \in A.
+\]
+beschreiben (d.h. $f$ ist $R$-linear), denn für $r\in R$ und $a\in A$ ist
+\[
+f(r \cdot a) = f(\varphi(r)a) = f(\varphi(r))f(a)=\psi(r)f(a)=r\cdot f(a).
+\]
+\item Wie üblich definiert man Endo-, Iso- und Automorphismen von Algebren.
+\item Aufgrund der universellen Eigenschaft des Ringes $\ZZ$ sind $\ZZ$-Algebren
+zusammen mit $\ZZ$-Algebrenhomomorphismen letztlich nichts weiter als Ringe zusammen
+mit Ringhomomorphismen. Die Notation $n_R$ aus \ref{bem:universelle_eigenschaft_z_ring}
+entpuppt sich als Spezialfall der "`$r_A$"'-Notation aus diesem Abschnitt.
+\end{itemize}
+\end{anm}
+
+\begin{bsp}\label{bsp:algebrenhomomorphismus}
+Sei $L|K$ eine Körpererweiterung und $f \colon L \to L$ ein Körperhomomorphismus. Dann ist $f$ genau dann ein $K$-Algebrenhomomorphismus, wenn folgendes Diagramm kommutiert:
+\[
+\xymatrix{
+L \ar[rr]^f &  & L \\
+ & K \ar[ul]^{\subseteq} \ar[ur]_{\subseteq} &
+}
+\]
+d.h. genau dann, wenn $f|_K=\ident_K$ ist.
+Beispielsweise ist die komplexe Konjugation $\overline{\,\cdot\,} \colon \CC \to \CC$ ein  $\RR$-Algebrenhomomorphismus, da $\overline{x} = x$ für alle $x \in \RR$ ist.
+\end{bsp}
+
+\begin{defini}\label{def:unteralgebra}
+Sei $R \xrightarrow{\varphi} A$ eine $R$-Algebra. Eine Teilmenge $U \subseteq A$ heißt eine \defn{Unteralgebra} von $A$, falls $U$ ein Unterring von $A$ ist und $\operatorname{im}(\varphi) \subseteq U$ gilt (d.h. $r_A \in U$ für alle $r \in R$). 
+\end{defini}
+
+\begin{anm}\label{anm:unteralgebra}
+\begin{itemize}
+\item Ist $U \subseteq A$ eine Unteralgebra, so wird $U$ selbst zur $R$-Algebra via $R \xrightarrow{\varphi|^U} U$ wegen $\operatorname{im}(\varphi) \subseteq U\cap Z(A)\subseteq Z(U)$.
+\item Ist $S|R$ eine Ringerweiterung mit $R \subseteq Z(S)$, so sind die Unteralgebren von $S$ genau die Unterringen $U$ von $S$ mit $R \subseteq U \subseteq S$. Solche Unterringe $U$ nennen wir auch \defn{Zwischenringe} von $S|R$ und schreiben $S|U|R$.
+\end{itemize}
+\end{anm}
+
+\begin{defini}\label{def:polynomkombination}
+Sei $A$ eine $R$-Algebra und $a_1, \dots, a_n \in A$ paarweise miteinander kommutierende Elemente. Wir setzen
+\[
+R^{(\NN_0^n)}:=\{ (r_i)_{i \in \NN_0^n} \ | \ r_i\in R, r_i=0 \text{ für fast alle }
+i\in\NN_0^n\}
+\]
+
+Eine \defn{Polynomkombination} von $a_1, \dots, a_n$ ist ein Element aus $A$ der Form
+\[
+\sum_{i = (i_1, \dots, i_n) \in \NN_0^n} r_i a_1^{i_1} \cdot\ldots\cdot a_n^{i_n} \quad \text{für } (r_i)_{i \in \NN_0^n}\in R^{(\NN_0^n)}.
+\]
+Wir verwenden dafür künftig die \defn{Multiindexschreibweise}, d.h. für $a = (a_1, \dots, a_n) \in A^n$ und $i = (i_1, \dots, i_n) \in \NN_0^n$ schreiben wir
+\[
+a^i := a_1^{i_1} \cdot\ldots\cdot a_n^{i_n}.
+\]
+Dann kann eine Polynomkombination in etwas kompakterer Form geschrieben werden als
+\[
+\sum_{i \in \NN_0^n} r_i a^i \quad \text{für } ((r_i)_{i \in \NN_0^n}\in R^{(\NN_0^n)}.
+\]
+Die Menge aller Polynomkombinationen von $a_1, \dots, a_n$ bezeichnen wir mit $R[a_1, \dots, a_n]$.
+\end{defini}
+
+\begin{anm}\label{anm:poly_r_alg_kom}
+\begin{itemize}
+    \item Für $n = 1$: Für $a \in A$ ist jede Polynomkombination von $a$ von der Gestalt
+    \[
+    \sum_{i \in \NN_0} r_i a^i \quad \text{für } (r_i)_{i \in \NN_0} \text{ mit } r_i\in R , \, r_i = 0 \text{ für fast alle } i \in \NN_0.
+    \]
+    Es gilt also
+    \[
+    R[a] = \left\{ \sum_{i = 0}^m r_i a^i \;\middle|\; m \in \NN_0, \, r_1, \ldots, r_m \in R \right\}.
+    \]
+    \item $\NN_0^n$ ist bzgl. $+$ ein Monoid. Für Summen und Produkte von Polynomkombinationen von $a = (a_1, \ldots, a_n)$ gilt:
+    \[
+    \sum_{i \in \NN_0^n} r_i a^i + \sum_{i \in \NN_0^n} s_i a^i = \sum_{i \in \NN_0^n} (r_i + s_i) a^i,
+    \]
+    \[
+    \left( \sum_{i \in \NN_0^n} r_i a^i \right) \cdot \left( \sum_{i \in \NN_0^n} s_i a^i \right) = \sum_{i \in \NN_0^n} \left( \sum_{j, k \in \NN_0^n, j + k = i} r_j s_k \right) a^i.
+    \]
+    \item $R[a_1, \ldots, a_n]$ ist eine kommutative Unteralgebra von $A$, und zwar die kleinste Unteralgebra von $A$, die $a_1, \ldots, a_n$ enthält (beachte:
+    $r_A=r \cdot 1_A = r a^0 \in R[a_1, \ldots, a_n]$).
+    \item Ist $\varphi: A \to B$ ein Homomorphismus von $R$-Algebren, dann gilt
+    \[
+    \varphi \left( \sum_{i \in \NN_0^n} r_i a^i \right) = \sum_{i \in \NN_0^n} r_i \varphi(a)^i,
+    \]
+    wobei $\varphi(a) := (\varphi(a_1), \ldots, \varphi(a_n))$ für $a=(a_1,\ldots,a_n)$ ist.
+\end{itemize}
+\end{anm}
+
+\begin{bsp}\label{bsp:poly_kom}
+\begin{enumerate}[label=(\alph*)]
+    \item Seien $a, b \in R$. Dann ist $a^2 + 2ab + b^2$ eine Polynomkombination von $a$ und $b$ in der $R$-Algebra $R$.
+    \item Sei $A$ eine $R$-Algebra und $a_1, \ldots, a_n \in A$. Dann sind Linearkombinationen von $a_1, \ldots, a_n$ genau die Polynomkombinationen von $a_1, \ldots, a_n$, bei denen jeweils die Summe der Exponenten $1$ ist, d.h. für $i = (i_1, \ldots, i_n)\in\NN_0^n$ ist jeweils $i_1 + \cdots + i_n = 1$.
+\end{enumerate}
+\end{bsp}
+
+\begin{defini}\label{def:erzeugungssystem_unab}
+Sei $A$ eine kommutative $R$-Algebra und $a = (a_1, \ldots, a_n)$ eine Familie von Elementen aus $A$. Diese heißt
+\begin{itemize}
+    \item ein \defn{$R$-Algebren-Erzeugendensystem} von $A$, falls gilt $A = R[a_1, \ldots, a_n]$,
+    \item \defn{algebraisch unabhängig}, falls für jede Polynomkombination
+    \[
+    \sum_{i \in \NN_0^n} r_i a^i = 0
+    \]
+    stets $r_i = 0$ für alle $i \in \NN_0^n$ gilt.
+\end{itemize}
+\end{defini}
+
+\begin{anm}\label{anm:hom_polykomb}
+\begin{itemize}
+    \item Sei $(a_1, \ldots, a_n)$ ein Erzeugendensystem von $A$, und seien $\varphi, \psi: A \to B$ Homomorphismen von $R$-Algebren. Dann gilt:
+    \[
+    \varphi = \psi \iff \varphi(a_i) = \psi(a_i) \text{ für alle } i = 1, \ldots, n.
+    \]
+    \item Ist $a = (a_1, \ldots, a_n)$ algebraisch unabhängig, dann gilt für Polynomkombinationen davon:
+    \[
+    \sum_{i \in \NN_0^n} r_i a^i = \sum_{i \in \NN_0^n} s_i a^i \quad \iff \quad r_i = s_i \text{ für alle } i \in \NN_0^n.
+    \]
+\end{itemize}
+\end{anm}
+
+\begin{bsp}\label{bsp:k_basis_polykomb}
+\begin{enumerate}[label=(\alph*)]
+    \item Sei $K$ ein Körper und $A$ eine kommutative $K$-Algebra. Dann ist $A$ insbesondere ein $K$-Vektorraum. Ist $\dim_K A < \infty$ und $(a_1, \ldots, a_n)$ eine $K$-Basis von $A$, dann ist $(a_1, \ldots, a_n)$ auch ein $K$-Algebren-Erzeugendensystem von $A$, da jede Linearkombination eine Polynomkombination ist. Beispielsweise ist
+    $\CC = \RR[i]$, denn $(1, i)$ ist eine $\RR$-Basis von $\CC$ und $\RR[i] = \RR[1, i]$.
+    \item Die einelementige Familie $(a)$ mit $a = \sqrt{2}$ aus der $\QQ$-Algebra $\RR$ ist algebraisch abhängig über $\QQ$, denn $1 \cdot a^2 - 2 = 0$.
+    \item Es ist unbekannt, ob $(e,\pi)$ algebraisch unabhängig über $\QQ$ ist.
+\end{enumerate}
+\end{bsp}
+
+\begin{defini}\label{def:polynomring}
+Ein \defn{Polynomring über $R$ in den Variablen $X_1, \ldots, X_n$} besteht aus:
+\begin{itemize}
+    \item einer kommutativen $R$-Algebra $A$,
+    \item Elementen $X_1, \ldots, X_n$ aus $A$, die ein algebraisch unabhängiges Erzeugendensystem von $A$ bilden.
+\end{itemize}
+
+Wir schreiben dann $A = R[X_1, \ldots, X_n]$. Elemente aus $R[X_1, \ldots, X_n]$ heißen \defn{Polynome} in $X_1, \ldots, X_n$.
+Für jedes $f \in R[X_1, \ldots, X_n]$ existiert wegen \ref{bsp:poly_kom} eine eindeutig
+bestimmte Familie $(r_i)_{i \in \NN_0^n}$ von Elementen von $R$ mit $r_i = 0$ für fast alle $i \in \NN_0^n$ und
+\[
+f = \sum_{i \in \NN_0^n} r_i X^i,
+\]
+wobei $X^i := X_1^{i_1} \cdot\ldots\cdot X_n^{i_n}$ für $i = (i_1, \ldots, i_n) \in \NN_0^n$.
+\end{defini}
+Die (eindeutig bestimmten, vgl \ref{anm:koeffizientenvergleich}) Elemente $r_i$ heißen die \defn{Koeffizienten} von $f$.  
+$f$ heißt ein \defn{Monom}, wenn es genau ein $i \in \NN_0^n$ mit $r_i \neq 0$ gibt.  
+$f$ heißt \defn{konstant}, wenn $r_i = 0$ für alle $i \neq 0$ ist.
+
+\begin{anm}\label{anm:koeffizientenvergleich}
+In $R[X_1, \ldots, X_n]$ gilt wegen der algebraischen Unabhängigkeit von $X_1, \ldots, X_n$:  
+\[
+\sum_{i \in \NN_0^n} r_i X^i = \sum_{i \in \NN_0^n} s_i X^i \gdw r_i = s_i \; \text{für alle } i \in \NN_0^n.
+\quad \text{(\defn{Koeffizientenvergleich}) }
+\]
+
+Für $r \in R$ ist $r \cdot 1_{R[X_1,\ldots,X_n]} = r \cdot X^0$, d.h. der Strukturhomomorphismus $R \to R[X_1, \ldots, X_n]$ bildet $r \in R$ auf das konstante Polynom $r$ ab und ist injektiv. Wir identifizieren $R$ mit der Unteralgebra der konstanten Polynome.
+\end{anm}
+
+\begin{satz}[Universelle Eigenschaft des Polynomrings]\label{satz:ue_polynomrings}
+Sei $A$ eine $R$-Algebra und $a = (a_1, \ldots, a_n)$ eine Familie von paarweise miteinander kommutierenden Elementen aus $A$. 
+
+Dann existiert ein eindeutig bestimmter $R$-Algebrenhomomorphismus 
+\[
+\Phi \colon R[X_1, \ldots, X_n] \to A \quad \text{ mit } \quad \Phi(X_i) = a_i \text{ für }
+i = 1, \ldots, n,
+\]
+der sogenannte \defn{Einsetzungshomomorphismus}.
+
+Für $f = \sum_{i \in \NN_0^n} r_i X^i \in R[X_1, \ldots, X_n]$ ist
+\[
+f(a_1,\ldots,a_n):=\Phi(f) = \sum_{i \in \NN_0^n} r_i a^i = \sum_{i \in \NN_0^n} r_i a_1^{i_1} \cdot \ldots \cdot a_n^{i_n} \in A.
+\]
+("`$f(a_1, \ldots, a_n)$ entsteht durch \defn{Einsetzen} der $a_i$ für die $X_i$."')
+
+Für den Einsetzungshomomorphismus $\Phi$ gilt:
+\begin{itemize}
+    \item $\image\Phi=R[a_1,\ldots,a_n]$.
+    \item $\Phi$ surjektiv $\iff $ $a_1, \ldots, a_n$ ist ein Erzeugendensystem von $A$.
+    \item Falls $A$ kommutativ ist, dann gilt: $\Phi$ injektiv $\iff$ $a_1, \ldots, a_n$ sind algebraisch unabhängig.
+\end{itemize}
+\end{satz}
+\begin{proof}
+Die Eindeutigkeit folgt direkt aus \ref{anm:hom_polykomb}, da $X_1, \ldots, X_n$ algebraisch unabhängig sind. Zum Nachweis der Existenz definieren wir
+\[
+\Phi \colon R[X_1, \ldots, X_n] \to A, \quad \sum_{i \in \NN_0^n} r_i X^i \mapsto \sum_{i \in \NN_0^n} r_i a^i.
+\]
+Dann ist $\Phi(X_i) = a_i$ für $i = 1, \ldots, n$.
+Für $r \in R$ ist
+\[
+\Phi(r_{R[X_1, \ldots, X_n]}) = \Phi(r \cdot X^0) = r \cdot a^0 = r_A.
+\]
+
+Die Verträglichkeit mit der Addition und Multiplikation folgt direkt aus \ref{anm:poly_r_alg_kom}. Exemplarisch gilt etwa für die Addition:
+\begin{align*}
+\Phi(f + g) &= \Phi\left(\sum_{i \in \NN_0^n} r_i X^i + \sum_{i \in \NN_0^n} s_i X^i\right) = \Phi\left(\sum_{i \in \NN_0^n} (r_i + s_i) X^i\right) = \sum_{i \in \NN_0^n} (r_i + s_i) a^i \\
+&= \sum_{i \in \NN_0^n} r_i a^i + \sum_{i \in \NN_0^n} s_i a^i = \Phi(f) + \Phi(g).
+\end{align*}
+
+Der Rest der Aussagen ergibt sich direkt aus der Konstruktion von $\Phi$.
+\end{proof}
+
+\begin{satz}[Existenz und Eindeutigkeit von Polynomringen]\label{satz:existenz_eindeutigkeit_polynomringe}
+Es gilt:
+\begin{enumerate}[label=(\alph*)]
+    \item Es existiert ein Polynomring $R[X_1, \ldots, X_n]$.
+    \item Je zwei solche Polynomringe sind kanonisch isomorph.
+\end{enumerate}
+\end{satz}
+
+\begin{proof}
+(a) Dies führen wir hier nicht aus; vgl. dazu beispielsweise die Bücher von Lang oder Bosch.
+
+(b) folgt mit den üblichen Techniken zu universellen Eigenschaften.
+\end{proof}
+
+\begin{anm}\label{anm:eigenschaften_polynomring}
+\begin{itemize}
+\item Wegen Satz \ref{satz:existenz_eindeutigkeit_polynomringe} sprechen wir von "`dem"' Polynomring $R[X_1,\ldots,X_n]$.
+\item Es existiert ein kanonischer Isomorphismus
+\[
+R[X_1, \ldots, X_n] \cong \big(R[X_1, \ldots, X_{n-1}]\big)[X_n].
+\]
+\item Falls $K$ ein Körper ist, bilden die Monome $(X^i)_{i \in \NN_0^n}$, d.h.
+\[
+(X_1^{i_1} \cdot \ldots \cdot X_n^{i_n})_{(i_1, \ldots, i_n) \in \NN_0^n},
+\]
+eine $K$-Basis von $K[X_1, \ldots, X_n]$\footnote{Über allgemeinem $R$ ist $R[X_1,\ldots,X_n]$ ein freier $R$-Modul, für den die Monome $(X^i)_{i \in \NN_0^n}$ ebenfalls eine Basis bilden.}.
+\item Man kann \ref{def:polynomkombination} bis \ref{satz:existenz_eindeutigkeit_polynomringe} von $\NN_0^n$ auf Indexmengen
+\[\NN_0^{(J)} = \{(i_j)_{j \in J} \mid i_j \in \NN_0 \text{ für alle } j \in J, \, i_j = 0 \text{ für fast alle } j \in J\}\] verallgemeinern, wobei $J$ eine beliebige Menge ist (statt $\{1, \ldots, n\}$). Man erhält dann insbesondere für Familien $(a_j)_{j \in J}$ von paarweise miteinander kommutierenden Elementen aus $A$:
+\begin{itemize}
+    \item die davon erzeugte Unteralgebra $R[(a_j)_{j \in J}]$. Diese stimmt mit $\bigcup_{I \subseteq J \text{ endl.}} R[(a_i)_{i \in I}]$ überein.
+    \item einen Begriff von algebraischer Unabhängigkeit. Dieser ist äquivalent dazu, dass alle endlichen Teilfamilien $(a_i)_{i \in I}$ von $(a_j)_{j \in J}$ algebraisch unabhängig sind.
+\end{itemize}
+Ebenso erhält man Polynomringe $R[(X_j)_{j \in J}]$ mit einer analogen universellen Eigenschaft. Elemente von $R[(X_j)_{j \in J}]$ sind von der Form
+\[
+\sum_{i \in \NN_0^{(J)}} r_i X^i \quad \text{mit } X^i := \prod_{j \in J} X_j^{i_j} \text{ für } i = (i_j)_{j \in J} \in \NN_0^{(J)}, r_i \in R, \, r_i = 0 \text{ für fast alle } i \in \NN_0^{(J)}.
+\]
+\end{itemize}
+\end{anm}
+
+Im Folgenden wollen wir Polynome in einer Variablen besser verstehen.
+
+\begin{defini}\label{def:grad_und_leitkoeffizient}
+Sei $f = a_n X^n + a_{n-1} X^{n-1} + \cdots + a_1 X + a_0 \in R[X]$ mit $a_n \neq 0$. Dann heißt
+\begin{itemize}
+    \item $n$ der \defn{Grad} von $f$,
+    \item $a_n$ der \defn{Leitkoeffizient} von $f$ .
+\end{itemize}
+Wir bezeichnen den Grad von $f$ mit $\deg(f)$ und den Leitkoeffizienten von $f$ mit $\ell(f)$.
+Das Polynom $f$ heißt \defn{normiert}, falls $\ell(f) = 1$ gilt.
+Zusätzlich setzen wir:
+\[
+\deg(0) := -\infty, \quad \ell(0) := 0.
+\]
+sowie
+\[
+R[X]_{< n} := \{ g \in R[X] \mid \deg(g) < n \}.
+\]
+\end{defini}
+
+\begin{bem}\label{bem:eigenschaften_grad_und_leitkoeffizient}
+Seien $f, g \in R[X]$. Dann gilt:
+\begin{itemize}
+    \item[(a)] $\ell(fg) = \ell(f) \ell(g)$, falls $\ell(f)$ oder $\ell(g)$ kein Nullteiler ist.
+    \item[(b)] $\deg(fg) \leq \deg(f) + \deg(g)$, wobei Gleichheit gilt, falls $\ell(f)$ oder $\ell(g)$ kein Nullteiler ist.
+    \item[(c)] $\deg(f+g) \leq \max(\deg(f), \deg(g))$, wobei Gleichheit gilt, falls $\deg(f) \neq \deg(g)$ ist.
+\end{itemize}
+\end{bem}
+
+\begin{bem}\label{bem:eigenschaften_polynomring}
+Es gilt:
+\begin{itemize}
+    \item[(a)] $R$ ist ein Integritätsring $\iff R[X_1, \dots, X_n]$ ist ein Integritätsring.
+    \item[(b)] Ist $R$ ein Integritätsring, dann ist $R[X_1, \dots, X_n]^\times = R^\times$.
+\end{itemize}
+\end{bem}
+
+\begin{proof}
+Es genügt jeweils, (a) und (b) für $n = 1$ zu zeigen. Die Behauptung folgt dann in beiden Fällen per Induktion.
+
+(a) Sei zunächst $R$ ein Integritätsring und seien $f, g \in R[X]$ mit $f, g \neq 0$. Es gilt $\deg(f), \deg(g) \geq 0$ und  deshalb nach \ref{bem:eigenschaften_grad_und_leitkoeffizient}:
+    \[
+    \deg(f g) = \deg(f) + \deg(g) \geq  0,
+    \]
+weswegen $fg\neq 0$ ist und damit $RX]$ ein Integritätsring. Die umgekehrte Implikation ergibt sich daraus, dass Unterringe von Integritätsringen wieder Integritätsringe sind.
+
+(b) Sei $f \in R[X]^\times$. Dann existiert ein $g \in R[X]$ mit $f g = 1$. Aus 
+\[0=\deg(f g)  = \deg(f) + \deg(g)\] folgt $\deg(f) = \deg(g) = 0$, also $f, g \in R$. Damit ist $f \in R^\times$. Umgekehrt ist jedes Element aus $R^\times$ auch ein Element von $R[X]^\times$.
+\end{proof}
+
+\begin{satz}\label{satz:polynomdivision}
+Seien $f, g \in R[X]$ mit $\ell(g) \in R^\times$. Dann existieren eindeutig bestimmte Polynome $q, r \in R[X]$ mit
+\[
+g = q f + r \quad \text{und} \quad \deg(r) < \deg(f).
+\]
+\end{satz}
+
+\begin{proof}
+Der Beweis verläuft analog zu dem in der linearen Algebra für Körper geführten Beweis. Siehe auch das Skript zur Elementaren Zahlentheorie (EZT), Proposition 3.52.
+\end{proof}
+
+\begin{folgerung}\label{folgerung:polynomring-modul}
+Sei $K$ ein Körper und $f \in K[X]$ mit $\deg(f) = n$. Dann ist die $K$-Algebra $K[X]/(f)$ ein $K$-Vektorraum der Dimension $n$ mit Basis $(\overline{1}, \overline{X}, \dots, \overline{X}^{n-1})$\footnote{Über allgemeinem $R$ ist $R[X]/(f)$ für $f\in R[X]$
+mit $\ell(f)\in R^\times$ ein freier $R$-Modul vom Rang $n$ mit Basis $(\overline{1}, \overline{X}, \dots, \overline{X}^{n-1})$. Der Beweis hierfür ist analog zum obigem.}.
+\end{folgerung}
+
+\begin{proof}
+$K[X]/(f)$ wird zur $K$-Algebra über $K \hookrightarrow K[X] \to K[X]/(f)$ und dadurch auch zum $K$-Vektorraum. Aus Satz \ref{satz:polynomdivision} folgt die direkte Summen-Zerlegung von $K$-Vektorräumen
+\[
+K[X] = (f) \oplus K[X]_{<n},
+\]
+Die Projektion $K[X] \to K[X]/(f)$ induziert somit einen $K$-Vektorraumisomorphismus
+\[
+K[X]/(f) \cong K[X]_{<n}.
+\]
+Da $(1, X, \dots, X^{n-1})$ eine $K$-Basis von $K[X]_{<n}$ ist, folgt, dass $(\overline{1}, \overline{X}, \dots, \overline{X}^{n-1})$ eine $K$-Basis von $K[X]/(f)$ bildet.
+\end{proof}
+
+\begin{defini}\label{def:nullstelle}
+Für $f \in R[X]$ heißt ein $a \in R$ eine \defn{Nullstelle} von $f$, falls $f(a) = 0$ gilt.
+\end{defini}
+
+\begin{bem}\label{bem:nullstellen-polynome}
+Sei $f \in R[X]$. Dann sind äquivalent:
+\begin{enumerate}[label=(\roman*)]
+    \item $f(a) = 0$.
+    \item Es existiert ein $q \in R[X]$ mit $f = (X - a)q$.
+\end{enumerate}
+Insbesondere gilt: Der Kern des Einsetzungshomomorphismus
+\[
+\Phi \colon R[X] \to R, \quad f \mapsto f(a)
+\]
+ist genau durch das Hauptideal $(X - a)$ gegeben. Da $\Phi$ surjektiv ist, induziert $\Phi$ einen Isomorphismus von $R$-Algebren
+\[
+R[X] / (X - a) \cong R.
+\]
+\end{bem}
+\begin{proof}
+"`(i) $\Rightarrow$ (ii)"': Nach Satz~\ref{satz:polynomdivision} existieren wegen $\ell(X - a) = 1 \in R^\times$ Polynome $q, r \in R[X]$ mit
+\[
+f = (X - a)q + r \quad \text{und} \quad \deg(r) < \deg(X - a) = 1.
+\]
+Also ist $r$ konstant. Durch Einsetzen von $a$ ergibt sich:
+\[
+f(a) = (a - a)q(a) + r(a) = r(a),
+\]
+d.h. $r = 0$.
+
+"`(ii) $\Rightarrow$ (i)"': ist klar, wegen (ii) ist nämlich $f(a) = (a - a)q(a)=0$.
+\end{proof}
+
+\begin{defini}\label{def:nullstellenordnung}
+Sei $a \in R$. Dann definieren wir die \defn{Vielfachheit} der Nullstelle $a$ von $f$ (\defn{Nullstellenordnung}) als
+\[
+\ord_a(f) := \sup \{n \in \NN_0 \mid \text{Es existiert } g \in R[X] \text{ mit } f = (X - a)^n g \}.
+\]
+Ist $\operatorname{ord}_a(f) = 1$, so heißt $a$ eine \defn{einfache Nullstelle} von $f$.
+Ist $\operatorname{ord}_a(f) > 1$, so heißt $a$ eine \defn{mehrfache Nullstelle} von $f$.
+\end{defini}
+
+\begin{anm}\label{anm:nullstellenordnung}
+\begin{itemize}
+    \item $f(a) = 0 \iff \operatorname{ord}_a(f) > 0$ (nach Bemerkung~\ref{bem:nullstellen-polynome}).
+    \item Ist $f\neq0$, dann ist $\ord_a(f)\leq\deg(f)$, denn aus $f=(X-a)^ng$ folgt
+    mit \ref{bem:eigenschaften_grad_und_leitkoeffizient}, dass $\deg(f)=n+\deg (g)$ ist.
+    \item Ist $R$ ein Integritätsring, so ist $X-a$ ein Primelement in $R[X]$ wegen
+    $R[X]/(X-a)\cong R$. Wir erhalten genau $\ord_a=v_{X-a}$ aus \ref{bsp:diskrete_bewertung}(b). Wegen der zuvor aufgelisteten Eigenschaft ist (a') aus \ref{bem:p-adische_bewertung} erfüllt. Es gilt also für alle $f,g\in R[X]$:
+    \begin{align*}
+        &\ord_a(f) = \infty \iff f=0 \\
+        &\ord_a(fg) = \ord_a(f) + \ord_a(g), \\
+        &\ord_a(f + g) \geq \min\{\ord_a(f), \ord_a(g)\}.
+    \end{align*}
+    Ohne die Voraussetzung, dass $R$ ein Integritätsring ist, ist dies im Allgemeinen falsch. Sei zum Beispiel \[R = \mathbb{Z}/8\mathbb{Z}, \quad f = X - \overline{1}, \quad g = X + \overline{1},\quad a = \overline{3}.\] Dann ist $\operatorname{ord}_a(f) = \operatorname{ord}_a(g) = 0$, aber $\operatorname{ord}_a(fg) = \operatorname{ord}_a(X^2 - \overline{1}) = 1$, da
+    \[
+    X^2 - \overline{1} = (X - \overline{3})(X + \overline{3}).
+    \]
+    Ist $R$ ein Integritätsring, setzt sich $\ord_a$ nach \ref{bem:p-adische_bewertung}
+    nach zu einer diskreten Bewertung auf $\Quot(R[X])=\Quot(R)(X)$ fort. Wir erhalten dadurch Nullstellenordnung (und Polstellenordnung) für rationale Funktionen.
+\end{itemize}
+\end{anm}
+
+\begin{bem}\label{bem:summe-nullstellenordnung}
+Sei $R$ ein Integritätsring und $f\in R[X]\setminus\{0\}$. Dann besitzt $f$ höchstens $\deg(f)$ verschiedene Nullstellen in $R$, und es gilt:
+\[
+\sum_{a \in R} \ord_a(f) \leq \deg(f).
+\]
+\end{bem}
+\begin{proof}
+Übung
+\end{proof}
+
+\begin{defini}\label{def:zerfall_linear}
+Sei $K$ ein Körper und $f \in K[X]$ mit $\deg(f) = n$. Wir sagen, $f$ \defn{zerfällt in Linearfaktoren}, falls es $a_1, \dots, a_n \in R$ und $c \in R$ gibt mit
+\[
+f = c (X - a_1) \cdot\ldots\cdot (X - a_n).
+\]
+Der Körper $K$ heißt \defn{algebraisch abgeschlossen}, falls jedes Polynom aus $K[X] \setminus \{0\}$ in Linearfaktoren zerfällt. Dazu äquivalent ist die Bedingung, dass 
+jedes nichtkonstante Polynom aus $K[X]$ eine Nullstelle in $K$ besitzt. 
+\end{defini}
+
+\begin{satz}[Fundamentalsatz der Algebra]\label{satz:fundamentalsatz_algebra}
+Der Körper $\CC$ ist algebraisch abgeschlossen.
+\end{satz}
+
+\begin{proof}
+Der Beweis wird typischerweise in der Funktionentheorie-Vorlesung geführt. Siehe dort für Details.
+\end{proof}
+
+\begin{defini}\label{def:nullstelle_in_A}
+Sei $A$ eine kommutative $R$-Algebra und $f \in R[X]$. Dann können wir den Polynomring $A[X]$ betrachten. Aus der universellen Eigenschaft von $R[X]$ erhalten wir den Einsetzungshomomorphismus
+\[
+\Phi \colon R[X] \to A[X] \quad \text{ mit }\Phi(X) = X,
+\]
+für den also \[\Phi\left(\sum_{i=0}^n r_i X^i\right) = \sum_{i=0}^n (r_i)_A X^i\] ist.
+Für $f\in R[X]$ setzen wir $f_A:=\Phi(f)\in A[X]$.
+Anstelle von "`$f_A$ hat die Eigenschaft ..."' sagen wir meist "`$f$ hat die Eigenschaft ...
+über $A$"'. Anstelle von $f_A$ schreiben wir häufig wieder $f$.
+\end{defini}
+
+\begin{bsp}\label{bsp:polynom_zerfall}
+Sei $f = X^2 + 1 \in \RR[X]$. $f$ besitzt keine Nullstelle in $\RR$ und zerfällt daher nicht in Linearfaktoren. In $\CC[X]$ gilt hingegen:
+    \[
+    X^2 + 1 = (X - i)(X + i),
+    \]
+    d.h. über $\CC$ zerfällt $f$ in Linearfaktoren.
+\end{bsp}
+
+\begin{defini}\label{def:formale_ableitung}
+Sei $f = a_n X^n + \ldots + a_1 X + a_0 \in R[X]$. Dann definieren wir die \defn{formale Ableitung} von $f$ als
+\[
+f' := n a_n X^{n-1} + (n-1) a_{n-1} X^{n-2} + \ldots + a_1\in R[X].
+\]
+Wir setzen $f^{(0)}:=f$ und für $n\in\NN_0$ setzen wir induktiv $f^{(n+1)}:=(f^{(n)})'$.
+\end{defini}
+
+\begin{bsp}\label{bsp:ableitung_beispiele}
+\begin{itemize}
+    \item[(a)] Sei $f = X^3 - 7X^2 + 37 \in \QQ[X]$. Dann ist $f' = 3X^2 - 14X$.
+    \item[(b)] Sei $f = X^4 + X^3 \in \FF_3[X]$. Dann ist $f' = \overline{4}X^3 + \overline{3}X^2 = X^3$.
+    \item[(c)] Sei $f = X^6 + X^3 + 1 \in \FF_3[X]$. Dann ist $f' = 0$.
+\end{itemize}
+\end{bsp}
+
+
+\begin{bem}\label{bem:formale_ableitung}
+Es gilt:
+\begin{itemize}
+    \item[(a)] Die Abbildung $D \colon R[X] \to R[X], \; f \mapsto f'$, ist $R$-linear.
+    \item[(b)] Für $f \in R[X]$ ist $f' \in R[X]$ das eindeutig bestimmte Polynom, für das in $R[X, \varepsilon]$ (mit $\varepsilon$ als zusätzlicher Polynomvariable) gilt:
+    \[
+    f(X + \varepsilon) \equiv f + \varepsilon f' \mod \varepsilon^2,
+    \]
+    bzw. äquivalent dazu:
+    \[
+    \frac{f(X + \varepsilon) - f(X)}{\varepsilon} \equiv f' \mod \varepsilon.
+    \]    
+    \item[(c)] (Produktregel) Für $f, g \in R[X]$ gilt:
+    \[
+    (f g)' = f' g + f g'.
+    \]
+    \item[(d)] (Taylorentwicklung) Sind $f\in R[X]$ und $a \in R$ und gilt $2,\ldots,n\in R^\times$, dann gilt
+    \[
+    f \equiv \sum_{k=0}^n \frac{f^{(k)}(a)}{k!} (X - a)^k \mod (X - a)^{n+1}.
+    \]
+    Insbesondere gilt:
+    \[
+    f\equiv f(a)+f'(a)(X-a) \mod (X-a)^2.
+    \]
+\end{itemize}
+\end{bem}
+\begin{proof}
+Übung
+\end{proof}
+
+\begin{folgerung}\label{bem:nullstellen_und_ableitungen}
+Sei $f \in R[X]$, $a \in R$, $n \in \NN$ mit $2,\ldots,n\in R^\times$.
+Dann sind äquivalent:
+\begin{enumerate}
+\item [(i)] $\ord_a(f) > n$
+\item [(ii)] $f(a) = f'(a) = \ldots = f^{(n)}(a) = 0$.
+\end{enumerate}
+Insbesondere gilt:
+\[
+a \text{ ist eine mehrfache Nullstelle von } f \iff a \text{ ist eine gemeinsame Nullstelle von } f \text{ und } f'.
+\]
+\end{folgerung}
+\begin{proof}
+Übung
 \end{proof}
 
 \end{document}
