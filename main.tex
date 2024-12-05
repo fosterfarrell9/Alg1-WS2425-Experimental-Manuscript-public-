@@ -2822,7 +2822,7 @@ K \ar[rr]^{\Phi}  & & L \\
 \end{itemize}
 \end{anm}
 
-\begin{bsp}
+\begin{bsp}\label{bsp:funktionenkoerper}
 Ist $K$ ein Körper, dann ist der Polynomring $K[X]$ ein Integritätsring (das zeigt man meist
 schon in der Linearen Algebra, wir werden uns aber in einem späteren Abschnitt nochmal explizit
 mit Polynomringen beschäftigen). Der Körper
@@ -3971,7 +3971,7 @@ Für $f = \sum_{i \in \NN_0^n} r_i X^i \in R[X_1, \ldots, X_n]$ ist
 \[
 f(a_1,\ldots,a_n):=\Phi(f) = \sum_{i \in \NN_0^n} r_i a^i = \sum_{i \in \NN_0^n} r_i a_1^{i_1} \cdot \ldots \cdot a_n^{i_n} \in A.
 \]
-("`$f(a_1, \ldots, a_n)$ entsteht durch \defn{Einsetzen} der $a_i$ für die $X_i$."')
+Häufige Sprechweise dafür sind: "`$f(a_1, \ldots, a_n)$ entsteht durch \defn{Einsetzen} der $a_i$ für die $X_i$."', "`Wir setzen $X_1=a_1,\ldots,X_n=a_n$"'.
 
 Für den Einsetzungshomomorphismus $\Phi$ gilt:
 \begin{itemize}
@@ -3981,7 +3981,7 @@ Für den Einsetzungshomomorphismus $\Phi$ gilt:
 \end{itemize}
 \end{satz}
 \begin{proof}
-Die Eindeutigkeit folgt direkt aus \ref{anm:hom_polykomb}, da $X_1, \ldots, X_n$ algebraisch unabhängig sind. Zum Nachweis der Existenz definieren wir
+Die Eindeutigkeit folgt direkt aus \ref{anm:hom_polykomb}, da $X_1, \ldots, X_n$ ein $R$-Algebren-Erzeugendensystem von $R[X_1,\ldots,X_n]$ sind. Zum Nachweis der Existenz definieren wir
 \[
 \Phi \colon R[X_1, \ldots, X_n] \to A, \quad \sum_{i \in \NN_0^n} r_i X^i \mapsto \sum_{i \in \NN_0^n} r_i a^i.
 \]
@@ -4036,8 +4036,46 @@ Ebenso erhält man Polynomringe $R[(X_j)_{j \in J}]$ mit einer analogen universe
 \[
 \sum_{i \in \NN_0^{(J)}} r_i X^i \quad \text{mit } X^i := \prod_{j \in J} X_j^{i_j} \text{ für } i = (i_j)_{j \in J} \in \NN_0^{(J)}, r_i \in R, \, r_i = 0 \text{ für fast alle } i \in \NN_0^{(J)}.
 \]
+\item Ist $f\in R[X_1,\ldots,X_n]$ und $A$ eine kommutative $R$-Algebra, dann erhalten wir die \defn{von $f$ induzierte Polynomfunktion}
+\[
+A^n\to A, \quad (a_1,\ldots,a_n)\mapsto f(a_1,\ldots,a_n)
+\]
+(für $n=1$ bräuchte man die Kommutativität von $A$ nicht fordern). Insbesondere erhalten wir (für $A=R$ selbst) eine Polynomfunktion $R^n\to R$. Meist werden diese Polynomfunktionen wieder mit $f$ bezeichnet. Man beachte, dass Polynome und die davon induzierten Polynomfunktionen grundsätzlich verschiedene mathematische Objekte sind. Verschiedene Polynome können dieselbe Polynomfunktion induzieren. Der Begriff "`Körper der rationalen Funktionen"' für den Körper $K(X)$ aus \ref{bsp:funktionenkoerper} ist insofern irreführend.
+Elemente aus $K(X)$ sind Quotienten von Polynomen. Obwohl sie rationale Funktionen heißen, sind sie keine Funktionen.
 \end{itemize}
 \end{anm}
+
+\begin{bsp}
+\begin{enumerate}[label=(\alph*)]
+\item Die beiden Polynome $f=X^2+X,g=0\in\FF_2[X]$ induzieren beide dieselbe Polynomfunktion $\FF_2\to\FF_2$, nämlich die Nullabbildung.
+\item Das quadratische Polynom $f=X^2-X+41\in\ZZ[X]$ liefert für $X=1,\ldots,40$ jeweils paarweise verschiedene Primzahlen (aber $f(41)=41^2$ ist keine Primzahl mehr). Dies wurde von Euler 1771 in einem Brief an Bernoulli\footnote{Nouveaux M\'emoires de l’Acad\'emie royale des Sciences. Berlin, S. 36, 1772} beobachtet:
+\begin{center}
+\includegraphics[width=12cm]{images/Euler_Prime.png}
+\end{center}
+Mit Mitteln der Zahlentheorie kann man zeigen, dass 
+$p=41$ die größte Primzahl ist, für die das Polynom $X^2-X+p$ paarweise verschiedene Primzahlen für $X=1,\ldots,p-1$ liefert.
+\item Das Polynom
+\begin{align*}
+f &= (k + 2) \bigg( 1  - [wz + h + j - q]^2  - [(gk + 2g + k + 1)(h + j) + h - z]^2 \\
+& - [2n + p + q + z - e]^2  - [16(k + 1)^3(k + 2)(n + 1)^2 + 1 - f^2]^2 \\
+&- [e^3(e + 2)(a + 1)^2 + 1 - o^2]^2 - [(a^2 - 1)y^2 + n - x^2]^2 \\
+& - [16n^2y^4(a^2 - 1) + 1 - u^2]^2 \\
+& - \bigg[ \bigg( (a + u^2(u^2 - a))^2 - 1 \bigg) (n + 4dy)^2 + 1 - (x + cu)^2 \bigg]^2 \\
+& - [n + l + v - y]^2 - [(a^2 - 1)l^2 + 1 - m^2]^2  - [a + k + 1 - l - i]^2 \\
+& - \bigg[ p + l(a - n - 1) + b (2an + 2a - n^2 - 2n - 2) - m \bigg]^2 \\
+& - \bigg[ q + y(a - p - 1) + s (2ap + 2a - p^2 - 2p - 2) - x \bigg]^2 \\
+& - \bigg[ z + pl(a - p) + t (2ap - p^2 - 1) - pm \bigg]^2 \bigg)
+\end{align*}
+aus dem Polynomring $\ZZ[a,b,\ldots,z]$ über $\ZZ$ in den 26 Variablen $a,b,\ldots,z$
+hat die Eigenschaft, dass
+\[
+f(\NN^{26})\cap\NN=\PP
+\]
+ist, wobei $\PP$ die Menge aller Primzahlen ist\footnote{J. P. Jones, D. Sato, H. Wada and D. Wiens, Diophantine representation of the set of prime numbers, Amer. Math. Monthly, 83 (1976) 449-464}. Man beachte, dass das Polynom $f$ reduzibel ist. Schaut man sich den zweiten Faktor an, sieht man, dass die einzige Chance, einen positiven Wert zu erhalten,
+darin besteht, dass alle Ausdrücke in eckigen Klammern Null werden. Man versuche mal, dass zu erreichen...
+Der Nutzen dieses Polynoms ist eher überschaubar.
+\end{enumerate}    
+\end{bsp}
 
 Im Folgenden wollen wir Polynome in einer Variablen besser verstehen.
 
@@ -4101,7 +4139,7 @@ Der Beweis verläuft analog zu dem in der linearen Algebra für Körper geführt
 \end{proof}
 
 \begin{folgerung}\label{folgerung:polynomring-modul}
-Sei $K$ ein Körper und $f \in K[X]$ mit $\deg(f) = n$. Dann ist die $K$-Algebra $K[X]/(f)$ ein $K$-Vektorraum der Dimension $n$ mit Basis $(\overline{1}, \overline{X}, \dots, \overline{X}^{n-1})$\footnote{Über allgemeinem $R$ ist $R[X]/(f)$ für $f\in R[X]$
+Sei $K$ ein Körper und $f \in K[X]\setminus\{0\}$ mit $\deg(f) = n$. Dann ist die $K$-Algebra $K[X]/(f)$ ein $K$-Vektorraum der Dimension $n$ mit Basis $(\overline{1}, \overline{X}, \dots, \overline{X}^{n-1})$\footnote{Über allgemeinem $R$ ist $R[X]/(f)$ für $f\in R[X]$
 mit $\ell(f)\in R^\times$ ein freier $R$-Modul vom Rang $n$ mit Basis $(\overline{1}, \overline{X}, \dots, \overline{X}^{n-1})$. Der Beweis hierfür ist analog zum obigem.}.
 \end{folgerung}
 
@@ -4191,13 +4229,22 @@ Sei $R$ ein Integritätsring und $f\in R[X]\setminus\{0\}$. Dann besitzt $f$ hö
 \end{proof}
 
 \begin{defini}\label{def:zerfall_linear}
-Sei $K$ ein Körper und $f \in K[X]$ mit $\deg(f) = n$. Wir sagen, $f$ \defn{zerfällt in Linearfaktoren}, falls es $a_1, \dots, a_n \in R$ und $c \in R$ gibt mit
+Sei $K$ ein Körper und $f \in K[X]\setminus\{0\}$ mit $\deg(f) = n$. Wir sagen, $f$ \defn{zerfällt in Linearfaktoren}, falls es $a_1, \dots, a_n \in R$ und $c \in R$ gibt mit
 \[
 f = c (X - a_1) \cdot\ldots\cdot (X - a_n).
 \]
 Der Körper $K$ heißt \defn{algebraisch abgeschlossen}, falls jedes Polynom aus $K[X] \setminus \{0\}$ in Linearfaktoren zerfällt. Dazu äquivalent ist die Bedingung, dass 
 jedes nichtkonstante Polynom aus $K[X]$ eine Nullstelle in $K$ besitzt. 
 \end{defini}
+
+\begin{anm}\label{anm:linfakt_teiler}
+Zerfällt ein Polynom $f\in K[X]\setminus\{0\}$ in Linearfaktoren, so gilt dies auch für jeden Teiler $g$ von $f$, 
+\begin{denn}
+Jeder Primteiler von $g$ ist auch ein Primteiler von $f$, und dafür kommen
+nur Polynome der Form $X-a$ mit $a\in K$ in Betracht, da $f$ in Linearfaktoren zerfällt.
+Da $K[X]$ faktoriell ist, zerfällt auch $g$ in Linearfaktoren.
+\end{denn}
+\end{anm}
 
 \begin{satz}[Fundamentalsatz der Algebra]\label{satz:fundamentalsatz_algebra}
 Der Körper $\CC$ ist algebraisch abgeschlossen.
