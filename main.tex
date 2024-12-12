@@ -123,6 +123,7 @@ plainpages=false,}
 \newcommand{\calK}{\mathcal K}
 \newcommand{\calL}{\mathcal L}
 \newcommand{\calM}{\mathcal M}
+\newcommand{\calN}{\mathcal N}
 \newcommand{\calO}{\mathcal O}
 \newcommand{\calP}{\mathcal P}
 \newcommand{\calR}{\mathcal R}
@@ -131,6 +132,7 @@ plainpages=false,}
 \newcommand{\calU}{\mathcal U}
 \newcommand{\calV}{\mathcal V}
 \newcommand{\calW}{\mathcal W}
+\newcommand{\calX}{\mathcal X}
 
 \newcommand{\fraka}{\mathfrak a}
 \newcommand{\frakb}{\mathfrak b}
@@ -151,6 +153,7 @@ plainpages=false,}
 %Neue Operatoren
 \DeclareMathOperator{\Abb}{Abb}
 \DeclareMathOperator{\Aff}{Aff}
+\DeclareMathOperator{\alg}{alg}
 \DeclareMathOperator{\Aut}{Aut}
 \DeclareMathOperator{\Bew}{Bew}
 \DeclareMathOperator{\Bild}{Bild}
@@ -174,12 +177,14 @@ plainpages=false,}
 \DeclareMathOperator{\kgV}{kgV}
 \DeclareMathOperator{\Mat}{M}
 \DeclareMathOperator{\mdeg}{mdeg}
+\DeclareMathOperator{\mipo}{mipo}
 \DeclareMathOperator{\Orb}{Orb}
 \DeclareMathOperator{\Orth}{O}
 \DeclareMathOperator{\ord}{ord}
 \DeclareMathOperator{\pp}{pp}
 \DeclareMathOperator{\pr}{pr}
 \DeclareMathOperator{\Quot}{Quot}
+\DeclareMathOperator{\QQalg}{\QQ^{\alg}}
 \DeclareMathOperator{\rel}{\, rel}
 \DeclareMathOperator{\res}{res}
 \DeclareMathOperator{\rk}{rk}
@@ -4048,7 +4053,7 @@ Elemente aus $K(X)$ sind Quotienten von Polynomen. Obwohl sie rationale Funktion
 \begin{bsp}
 \begin{enumerate}[label=(\alph*)]
 \item Die beiden Polynome $f=X^2+X,g=0\in\FF_2[X]$ induzieren beide dieselbe Polynomfunktion $\FF_2\to\FF_2$, nämlich die Nullabbildung.
-\item Das quadratische Polynom $f=X^2-X+41\in\ZZ[X]$ liefert für $X=1,\ldots,40$ jeweils paarweise verschiedene Primzahlen (aber $f(41)=41^2$ ist keine Primzahl mehr). Dies wurde von Euler 1771 in einem Brief an Bernoulli\footnote{Nouveaux M\'emoires de l’Acad\'emie royale des Sciences. Berlin, S. 36, 1772} beobachtet:
+\item Das quadratische Polynom $f=X^2-X+41\in\ZZ[X]$ liefert für $X=1,\ldots,40$ jeweils paarweise verschiedene Primzahlen (aber $f(41)=41^2$ ist keine Primzahl mehr). Dies wurde von Euler 1771 in einem Brief an Bernoulli\footnote{Nouveaux M\'emoires de l’Acad\'emie Royale des Sciences. Berlin, S. 36, 1772} beobachtet:
 \begin{center}
 \includegraphics[width=12cm]{images/Euler_Prime.png}
 \end{center}
@@ -4128,7 +4133,7 @@ weswegen $fg\neq 0$ ist und damit $RX]$ ein Integritätsring. Die umgekehrte Imp
 \end{proof}
 
 \begin{satz}\label{satz:polynomdivision}
-Seien $f, g \in R[X]$ mit $\ell(g) \in R^\times$. Dann existieren eindeutig bestimmte Polynome $q, r \in R[X]$ mit
+Seien $f, g \in R[X]$ mit $\ell(f) \in R^\times$. Dann existieren eindeutig bestimmte Polynome $q, r \in R[X]$ mit
 \[
 g = q f + r \quad \text{und} \quad \deg(r) < \deg(f).
 \]
@@ -4189,7 +4194,7 @@ d.h. $r = 0$.
 \end{proof}
 
 \begin{defini}\label{def:nullstellenordnung}
-Sei $a \in R$. Dann definieren wir die \defn{Vielfachheit} der Nullstelle $a$ von $f$ (\defn{Nullstellenordnung}) als
+Sei $a \in R$ und $f\in R[X]$. Dann definieren wir die \defn{Vielfachheit} der Nullstelle $a$ von $f$ (\defn{Nullstellenordnung}) als
 \[
 \ord_a(f) := \sup \{n \in \NN_0 \mid \text{Es existiert } g \in R[X] \text{ mit } f = (X - a)^n g \}.
 \]
@@ -4266,11 +4271,16 @@ Anstelle von "`$f_A$ hat die Eigenschaft ..."' sagen wir meist "`$f$ hat die Eig
 \end{defini}
 
 \begin{bsp}\label{bsp:polynom_zerfall}
-Sei $f = X^2 + 1 \in \RR[X]$. $f$ besitzt keine Nullstelle in $\RR$ und zerfällt daher nicht in Linearfaktoren. In $\CC[X]$ gilt hingegen:
+Sei $f = X^2 + 1 \in \RR[X]$. $f$ besitzt keine Nullstelle in $\RR$ und zerfällt daher nicht in Linearfaktoren. Über $\CC$ zerfällt $f$ hingegen in Linearfaktoren:
     \[
     X^2 + 1 = (X - i)(X + i),
     \]
-    d.h. über $\CC$ zerfällt $f$ in Linearfaktoren.
+Die vorangegangene Definition erklärt, was hier formal gemeint ist: $\CC$ ist eine $\RR$-Algebra über die Inklusion $\RR\hookrightarrow\CC$. Wie oben beschrieben erhalten wir dadurch
+einen Ringhomomorphismus
+\[
+\Phi\colon\RR[X]\to\CC[X], 
+\]
+der ein reelles Polynom $\sum_i r_iX^i\in\RR[X]$ auf das komplexe Polynom $\sum_i (r_i)_\CC X^i\in\CC[X]$ abbildet. Hierbei ist $(r_i)_\CC$ das Bild der reellen Zahl $r_i$ unter der Inklusion von $\RR$ nach $\CC$, also nichts weiter als die reelle Zahl $r_i$, aufgefasst als Element von $\CC$. Wenn wir sagen, dass $f$ über $\CC$ in Linearfaktoren zerfällt, so meinen wir damit formal, dass das Polynom $f_\CC=X^2+1\in\CC[X]$ in Linearfaktoren zerfällt.
 \end{bsp}
 
 \begin{defini}\label{def:formale_ableitung}
@@ -4334,6 +4344,1048 @@ a \text{ ist eine mehrfache Nullstelle von } f \iff a \text{ ist eine gemeinsame
 \end{folgerung}
 \begin{proof}
 Übung
+\end{proof}
+
+\section{Teilbarkeit in Polynomringen}
+
+\begin{notation}
+In diesem Abschnitt sei $R$ stets ein faktorieller Ring mit $\Quot(R) = K$. Es sei daran erinnert, dass wir für jedes Primelement $p\in R$ eine dazugehörige $p$-adische Bewertung $v_p$ auf $K$ haben, siehe \ref{bem:vp_diskrete_bewertung}. Wir fixieren ein Vertretersystem $\PP$ von Primelementen von $R$ modulo "`$\assoc$"'. Für den Ring $\ZZ$ nehmen wir dafür immer die Menge aller Primzahlen. 
+\end{notation}
+
+In diesem Abschnitt wollen wir zeigen, dass $R[X]$ faktoriell ist. Wir reduzieren dazu die Teilbarkeitstheorie von $R[X]$ auf die der beiden faktoriellen Ringe $R$ und $K[X]$.
+
+
+\begin{bem}\label{bem:prim_element_in_R_auch_in_RX}
+Sei $a\in R$. Dann induziert die koeffizientenweise Projektionsabbildung
+\[
+R[X] \to R / (a)[X], \quad f=\sum_{i=0}^n a_i X^i \mapsto f_{R/(a)}=\sum_{i=0}^n \overline{a_i} X^i
+\]
+einen Isomorphismus
+\[
+R[X]/(a) \cong R / (a)[X]
+\]
+Insbesondere gilt:
+\[
+a \text{ Primelement in } R \iff  a \text { Primelement in } R[X].
+\]
+\end{bem}
+
+\begin{proof}
+Die koeffizientenweise Projektionsabbildung ist surjektiv, und ihr Kern ist genau durch $(a)$
+gegeben. Die erste Behauptung ergibt sich durch Anwendung des Homomorphiesatzes.
+Wir erhalten
+\begin{align*}
+a\text{ Primelement in } R &\iff R / (a) \text{ Int.ring} \overset{\ref{bem:eigenschaften_polynomring}}{\iff} R / (a)[X] \text{ Int.ring} 
+\iff R[X] / (a) \text{ Int.ring} \\
+&\iff \text{$a$ Primelement in } R[X].
+\end{align*}
+\end{proof}
+
+\begin{anm}
+Die koeffizientenweise Projektionsabbildung ist ein Spezialfall der Konstruktion aus \ref{def:nullstelle_in_A}:
+$A=R/(a)$ ist eine $R$-Algebra über die kanonische Projektion $R\to R/(a)$. Die Abbildung \[\Phi\colon R[X]\to A[X]=R/(a)[X], \quad f\mapsto f_A=f_{R/(a)}\]
+aus \ref{def:nullstelle_in_A} ist genau durch
+\[
+\Phi(\sum_{i=0}^n r_i X^i) = \sum_{i=0}^n (r_i)_A X^i = \sum_{i=0}^n \overline{r_i} X^i
+\]
+gegeben.
+\end{anm}
+
+\begin{bem}\label{bem:diskrete_bewertung_polynome}
+Sei $p \in R$ ein Primelement. Dann erfüllt die Abbildung
+\begin{align*}
+v_p\colon R[X]\to\NN_0\cup\{\infty\}, \quad f = a_n X^n + \ldots + a_0 \mapsto \sup \{ n \in \NN_0 \ \mid \ p^n \mid f \}
+\end{align*}
+die Eigenschaft (a') aus \ref{bem:p-adische_bewertung}, d.h. es gilt \[v_p(f) = \infty \iff f = 0.\]
+Wir erhalten dadurch eine diskrete Bewertung auf $\Quot(R[X]) = K(X)$, die wir im Folgenden auf $K[X]\subseteq K(X)$ einschränken:
+\[
+v_p \colon K[X] \to \ZZ \cup \{\infty\}.
+\]
+Für $f = a_n X^n + \ldots + a_0 \in K[X]$ ist
+\[
+v_p(f) = \min \{ v_p(a_0), \ldots, v_p(a_n) \}.
+\]
+$v_p$ setzt die $p$-adische Bewertung auf $K$ fort, wir nennen sie die \defn{$p$-adische Bewertung} auf $K(X)$.
+\end{bem}
+
+\begin{proof}
+Sei $f = a_n X^n + \ldots + a_0 \in R[X] \setminus \{0\}$. Dann gilt:
+\[
+p^n \mid f \iff p^n \mid a_0, \ldots, p^n \mid a_n.
+\]
+Daraus folgt $v_p(f) = \min \{ v_p(a_0), \ldots, v_p(a_n) \} < \infty$ und damit nach \ref{bem:p-adische_bewertung} die
+Aussage über die Fortsetzbarkeit.
+Ist $f=a_nX^n+\ldots+a_0\in K[X]$, so bringen wir die Koeffizienten von $f$ zunächst auf einen gemeinsamen Nenner, d.h. wir schreiben
+\[
+f=\frac{b_n}{d}X^n+\ldots+\frac{b_1}{d}X+\frac{b_0}{d}
+\]
+für $b_0,\ldots,b_n\in R$, $d\in R\setminus\{0\}$. Es ist dann
+\[
+f=\frac{b_n X^n + \ldots + b_0}{d}
+\]
+und deshalb
+\begin{align*}
+v_p(f)&=v_p(b_n X^n + \ldots + b_0)-v_p(d)= \min \{ v_p(b_0), \ldots, v_p(b_n) \} -v_p(d) \\
+&= \min \{ v_p(b_0)-v_p(d), \ldots, v_p(b_n)-v_p(d) \} = \min \{ v_p(a_0), \ldots, v_p(a_n) \}
+\end{align*}
+\end{proof}
+
+\begin{anm}
+Besonders wichtig ist für uns im Folgenden die Eigenschaft
+\[
+v_p(fg)=v_p(f)+v_p(g)
+\]
+für alle $f,g\in K[X]$ (die zu den Eigenschaften einer diskreten Bewertung gehört und die in \ref{bem:p-adische_bewertung} in einem allgemeineren Kontext gezeigt wurde).   
+\end{anm}
+
+\begin{bsp}\label{bsp:bewertung_polynome}
+$R = \ZZ$, $f = 15 T^2 + \frac{9}{4} T + \frac{27}{2} \in \QQ[T]$. Wir erhalten
+\begin{align*}
+v_2(f) &= \min \big\{ v_2(15), v_2\big(\frac{9}{ 4}\big), v_2\big(\frac{27}{2}\big) \big\} = \min \{0, -2, -1\} = -2,\\
+v_3(f) &= \min \big\{ v_3(15), v_3\big(\frac{9}{4}\big), v_3\big(\frac{27}{2}\big) \big\} = \min \{1, 2, 3\} = 1,\\
+v_p(f) &= 0 \quad \text{für alle Primzahlen } p \neq 2,3.
+\end{align*}
+\end{bsp}
+
+\begin{bem}\label{bem:bewertung_von_polynomen}
+Sei $f \in K[X] \setminus \{0\}$. Dann gilt:
+\begin{enumerate}[label=(\alph*)]
+    \item $v_p(f) = 0$ für fast alle $p \in \PP$.
+    \item $f \in R[X] \iff v_p(f) \geq 0$ für alle $p \in \PP$.
+\end{enumerate}
+\end{bem}
+
+\begin{proof}
+(a) Es ist $v_p(f) \neq 0$ höchstens für die endlich vielen Primteiler von Zähler und Nenner der Koeffizienten in gekürzter Darstellung.
+
+(b) Sei $f = a_n X^n + \ldots + a_0$. Dann gilt
+\begin{align*}
+f \in R[X] &\iff a_0, \ldots, a_n \in R \\
+    &\iff v_p(a_0), \ldots, v_p(a_n) \geq 0 \quad \text{für alle } p \in \PP \\
+    &\iff \min \{v_p(a_0), \ldots, v_p(a_n)\} \geq 0 \quad \text{für alle } p \in \PP \\
+    &\iff v_p(f) \geq 0 \quad \text{für alle } p \in \PP.
+\end{align*}
+\end{proof}
+
+\begin{defini}
+Sei $f=a_nX^n+\ldots+a_0\in R[X]\setminus\{0\}$. Dann heißt das Polynom $f$ \defn{primitiv}, wenn $\ggT(a_0,a_1,\ldots,a_n)=1$ ist.    
+\end{defini}
+
+\begin{anm}\label{anm:primitive_polynome}
+\begin{itemize}
+\item Jedes normierte Polynom in $R[X]$ ist primitiv.
+    \item Sei $f = a_n X^n + \ldots + a_0 \in R[X] \setminus \{0\}$. Dann ist
+    \[
+    \ggT(a_0, \ldots, a_n) \overset{\ref{bem:ggt_faktorieller_ring}}{=} \prod_{p \in \mathbb{P}} p^{\min\{v_p(a_0), \ldots, v_p(a_n)\}} = \prod_{p \in \mathbb{P}} p^{v_p(f)}
+    \]
+    Insbesondere ist $f$ ist genau dann primitiv, wenn $v_p(f) = 0$ für alle $p\in\PP$ ist.
+\end{itemize}
+\end{anm}
+
+\begin{bem}\label{bem:primitiver_anteil}
+Sei $f \in K[X] \setminus \{0\}$. Dann existieren ein Element $\cont(f)\in K^\times$ und 
+ein primitives Polynom $\pp(f)\in R[X]$ mit
+\[
+f=\cont(f)\pp(f)
+\]
+Sowohl $\cont(f)$ als auch $\pp(f)$ sind eindeutig bis auf Multiplikation mit Elementen aus $R^\times$\footnote{In Fortsetzung der Schreibweise, die wir bereits für den $\ggT$ verwendet haben, schreiben wir im folgenden trotzdem immer "`$=$"', auch wenn häufig nur Gleichheit bis auf Multiplikation mit Elementen aus $R^\times$ besteht.}. Wir nennen $\cont(f)$ den \defn{Inhalt} von $f$ und $\pp(f)$ den \defn{primitiven Anteil} von $f$. Explizit ist
+\[
+\cont(f)=\prod_{p \in \mathbb{P}} p^{v_p(f)}\in K^\times.
+\]
+Es gilt:
+\[
+f\in R[X] \text{ und } f \text{ primitiv } \iff \cont(f)=1 \iff \pp(f)=f. 
+\]
+Für $f=a_nX^n+\ldots+a_0\in R[X]\setminus\{0\}$ ist
+\[
+\cont(f)=\ggT(a_0, \ldots, a_n)\in R.
+\]
+\end{bem}
+\begin{proof}
+Wir setzen
+\[
+\cont(f)=\prod_{p \in \mathbb{P}} p^{v_p(f)}\in K^\times, \quad \pp(f) := \frac{f}{\cont(f)} \in K[X].
+\]
+Für alle $p \in \mathbb{P}$ ist
+\[
+v_p(\pp(f)) = v_p\left(\frac{f}{\cont(f)}\right) \stackrel{\ref{bem:p-adische_bewertung}}{=} v_p(f) - v_p(\cont(f)) = v_p(f) - v_p(f) = 0.
+\]
+Wegen \ref{bem:bewertung_von_polynomen} liegt $\pp(f)$ in $R[X]$, und wegen \ref{anm:primitive_polynome} ist $\pp(f)$ primitiv.
+Sei
+\[
+f = \cont(f) \cdot \pp(f) = c \cdot \tilde{f}
+\]
+mit $c \in K^\times$ und $\tilde{f} \in R[X]$ primitiv. Dann folgt
+\[
+v_p(\cont(f)) + v_p(\pp(f)) = v_p(c) + v_p(\tilde{f}).
+\]
+Daraus ergibt sich
+\[
+v_p(\cont(f)) - v_p(c) = 0 
+\]
+und deshalb $v_p\left(c^{-1}\cont(f)\right) = 0$.
+Da dies für alle $p\in\PP$ gilt, erhalten wir aus \ref{bem:vp_diskrete_bewertung}, dass $c^{-1}\cont(f)$
+in $R^\times$ liegt. Also ist $c \in \cont(f)R^\times$ und $\tilde{f} \in \pp(f)R^\times$. Die Charakterisierung
+primitiver Polynome in $R[X]$ ergibt sich unmittelbar, und die Beschreibung des Inhalts von Polynomen aus $R[X]$ durch
+den ggT der Koeffizienten folgt aus \ref{anm:primitive_polynome}.
+\end{proof}
+
+\begin{bsp}\label{bsp:inhalt_und_bewertung}
+Sei $R = \ZZ$ und
+\[
+f = 15 T^2 + \frac{9}{4} T + \frac{27}{2} \in \QQ[T].
+\]
+Nach Beispiel \ref{bsp:bewertung_polynome} gilt:
+\[
+\cont(f) = 2^{-2} \cdot 3^1 = \frac{3}{4}.
+\]
+Es ist
+\[
+f = \frac{3}{4} \cdot \underbrace{(20T^2 + 3T + 18)}_{\pp(f)}
+\]
+und $\pp(f)$ ist ein primitives Polynom aus $\ZZ[X]$ wegen $\ggT(20, 3, 18) = 1$.
+Da Primfaktorzerlegungen eher aufwendig zu berechnen sind, wäre es effizienter gewesen,
+zur Bestimmung von $\cont(f)$ und $\pp(f)$ die Koeffizienten von $f$ zunächst auf einen gemeinsamen Nenner zu bringen und dann gemeinsame Faktoren herauszuziehen:
+\[
+f= 15 T^2 + \frac{9}{4} T + \frac{27}{2}=\frac{1}{4}(60T^2+9T+54)=\frac{3}{4}(20T^2+3T+18).
+\]
+\end{bsp}
+
+\begin{satz}[Lemma von Gauß]\label{satz:gauss_lemma}
+Seien $f, g \in K[X] \setminus \{0\}$. Dann gilt:
+\begin{enumerate}[label=(\alph*)]
+    \item $\cont(fg) = \cont(f) \cdot \cont(g)$.
+    \item Sind $f, g$ in $R[X]$ und primitiv, dann ist $fg$ primitiv.
+    \item $\pp(fg) = \pp(f) \cdot \pp(g)$.
+\end{enumerate}
+\end{satz}
+
+\begin{proof}
+(a) Es ist
+    \begin{align*}
+    \cont(fg) &= \prod_{p \in \mathbb{P}} p^{v_p(fg)} \stackrel{\text{\ref{bem:diskrete_bewertung_polynome}}}{=} \prod_{p \in \mathbb{P}} p^{v_p(f) + v_p(g)} = \left( \prod_{p \in \mathbb{P}} p^{v_p(f)} \right) \left( \prod_{p \in \mathbb{P}} p^{v_p(g)} \right) \\
+    &= \cont(f) \cdot \cont(g).
+    \end{align*}
+(b) folgt aus (a).
+
+(c) Für $f, g \in K[X] \setminus \{0\}$ ist
+    \[
+    \pp(fg) = \frac{fg}{\cont(fg)} \stackrel{\text{(a)}}{=} \frac{f}{\cont(f)} \cdot \frac{g}{\cont(g)} = \pp(f) \cdot \pp(g).
+    \]
+\end{proof}
+
+\begin{folgerung}\label{folg:teilbarkeit_im_polring}
+Seien $f, g \in R[X] \setminus \{0\}$. Dann sind äquivalent:
+\begin{enumerate}[label=(\roman*)]
+    \item $f\mid g$ in $R[X]$.
+    \item $\cont(f) \mid \cont(g)$ in $R$ und $\pp(f) \mid \pp(g)$ in $R[X]$.
+    \item $\cont(f) \mid \cont(g)$ in $R$ und $f\mid g$ in $K[X]$.
+\end{enumerate}
+Ist insbesondere $f$ primitiv, dann gilt:
+\[
+f\mid g \text{ in } R[X] \iff f\mid g \text{ in } K[X].
+\]
+\end{folgerung}
+
+\begin{proof}
+"`(i)$\Rightarrow$(ii)"': Aus $f\mid g \in R[X]$ folgt, dass es ein $h \in R[X]$ gibt mit $g = h \cdot f$. Nach Satz~\ref{satz:gauss_lemma} gilt
+\[
+\cont(g) = \cont(h) \cdot \cont(f),
+\]
+und
+\[
+\pp(g) = \pp(h) \cdot \pp(f),
+\]
+woraus sich (ii) ergibt.
+
+"`(ii)$\Rightarrow$(i)"': Es gilt $g = \cont(g) \cdot \pp(g)$ und nach Voraussetzung $\cont(f) \mid \cont(g)$ sowie $\pp(f) \mid \pp(g)$. Daher folgt:
+\[
+f = \cont(f) \cdot \pp(f) \mid \cont(g) \cdot \pp(g) =g .
+\]
+
+Für den Nachweis der Äquivalenz von (ii) und (iii) bemerken wir zunächst, dass in $K[X]$ die Bedingung $f\mid g$ äquivalent zu $\pp(f)\mid\pp(g)$ ist, weil sich $f,\pp(f)$ bzw. $g,\pp(g)$ jeweils nur um eine Einheit in $K[X]$ unterscheiden.
+
+"`(ii)$\Rightarrow$(iii)"' ist trivial.
+
+"`(iii)$\Rightarrow$(ii)"': Wegen (iii) existiert ein $h \in K[X]$ mit $\pp(g) = h \cdot \pp(f)$. Damit erhalten wir
+\[
+1 = \cont(\pp(g)) = \cont(h \cdot \pp(f)) \stackrel{\text{\ref{satz:gauss_lemma}}}{=} \cont(h) \cdot \cont(\pp(f))
+=\cont(h),\]
+d.h. $h$ liegt nach \ref{bem:primitiver_anteil} in $R[X]$, womit (ii) gezeigt ist.
+\end{proof}
+
+
+\begin{bem}\label{bem:polynomringe_primelemente}
+Sei $f \in R[X]$.
+\begin{itemize}
+    \item[(a)] Falls $f$ konstant ist, dann gilt:
+    \[
+    f \text{ Primelement in } R[X] \iff f \text{ Primelement in } R.
+    \]
+    \item[(b)] Falls $f$ nicht konstant ist, dann gilt:
+    \[
+    f \text{ Primelement in } R[X] \iff f \text{ primitiv und Primelement in } K[X].
+    \]
+\end{itemize}
+
+\begin{proof}
+(a) ist eine Wiederholung von \ref{bem:prim_element_in_R_auch_in_RX}.
+
+(b) Sei $f$ nicht konstant.
+
+"$\Rightarrow$"': Sei $f$ ein Primelement in $R[X]$. Wegen \ref{bem:primelement_irreduzibel} ist $f$ irreduzibel in $R[X]$ und damit $\cont(f)=1$, also $f$ primitiv. Seien $g,h\in K[X]$ mit $f\mid gh$ in K[X]. Dann gilt auch $f\mid\pp(gh)=\pp(g)\pp(h)$ in $K[X]$ und wegen
+\ref{folg:teilbarkeit_im_polring} auch in $R[X]$. Da $f$ ein Primelement in $R[X]$ ist, folgt $f\mid\pp(g)$
+oder $f\mid\pp(h)$ in $R[X]$ und damit $f\mid g$ oder $f\mid h$ in $K[X]$.
+
+"$\Leftarrow$"': 
+%Sei $f$ ein Primelement in $K[X]$ und primitiv. 
+Seien $g,h\in R[X]$ mit $f\mid gh$.
+Da $f$ Primelement in $K[X]$ ist, gilt in $K[X]$: $f\mid g$ oder $f\mid h$, ohne Einschränkung $f\mid g$. Da $f$ primitiv ist, folgt aus \ref{folg:teilbarkeit_im_polring}, dass $f\mid g$ auch in $R[X]$ gilt.
+\end{proof}
+\end{bem}
+
+\begin{satz}\label{satz:polynomring_faktoriell}
+$R[X]$ ist faktoriell. Ist $f \in R[X] \setminus \{0\}$, so setzt sich eine PFZ von $f$ zusammen aus einer PFZ von $\cont(f)$ in $R$ und einer PFZ von $\pp(f)$ in $K[X]$ mit primitiven Faktoren.
+\end{satz}
+
+\begin{proof}
+Sei $f \in R[X] \setminus \{0\}$. Dann gilt:
+\[
+f = \cont(f) \pp(f).
+\]
+Da $\cont(f) \in R \setminus \{0\}$ ist und $R$ faktoriell ist, besitzt $\cont(f)$ eine PFZ in $R$. Diese ist wegen \ref{bem:polynomringe_primelemente} auch eine PFZ in $R[X]$.
+Weil $K[X]$ euklidisch und daher faktoriell ist, besitzt $\pp(f)$ eine PFZ in $K[X]$, etwa
+\[
+\pp(f) = \prod_{i=1}^n p_i^{w_i}.
+\]
+Da $p_i, \pp(f_i)$ sich nur um Faktoren aus $R \setminus \{0\}$, also insbesondere nur um Einheiten aus $K^\times$, unterscheiden, ist
+\[
+\pp(f) = \prod_{i=1}^n \pp(p_i)^{w_i} \tag{*} \label{eq:PFZ_poly}
+\]
+auch eine PFZ von $\pp(f)$ in $K[X]$, wobei die $\pp(p_i)\in R[X]$ primitiv sind und Primelemente in $K[X]$. Damit sind die $\pp(p_i)$ nach \ref{bem:polynomringe_primelemente} Primelemente in $R[X]$ und \eqref{eq:PFZ_poly} ist eine PFZ von $\pp(f)$ in $R[X]$.
+Insgesamt erhalten wir aus der PFZ von $\cont(f)$ und der PFZ von $\pp(f)$ eine PFZ von $f$
+in $R[X]$.
+\end{proof}
+
+\begin{folgerung}\label{folgerung:polynomringe_mehrere_variablen}
+$R[X_1, \dots, X_n]$ ist faktoriell.
+\end{folgerung}
+
+\begin{proof}
+Dies folgt induktiv aus \ref{satz:polynomring_faktoriell}.
+\end{proof}
+
+\begin{anm}\label{anm:polynomringe_irreduzibel_vs_prim}
+Da $R[X]$ faktoriell ist (genauso wie $R$ und $K[X]$), sind die Begriffe "`Primelement"' und "`irreduzibles Element"' in $R[X]$ nach \ref{folg:irreduzibel_prim_faktoriell} äquivalent. Man kann in \ref{bem:polynomringe_primelemente} auch jeweils „irreduzibel“ statt „Primelement“ schreiben. Für Polynome ist die Bezeichnung „irreduzibles Polynom“ gebräuchlich.
+\end{anm}
+
+\begin{bsp}\label{bsp:polynomring_kein_hjr}
+$\ZZ[X]$ ist faktoriell (nach \ref{satz:polynomring_faktoriell}, da $\ZZ$ faktoriell), aber kein Hauptidealring. Das Ideal $(2, X)$ ist kein Hauptideal,
+\begin{denn}
+Die Elemente $2$ und $X$ sind beides Primelemente in $\ZZ[X]$ und sind nicht zueinander assoziiert. Damit ist $\ggT(2,X)=1$. Wäre $(2,X)$ ein Hauptideal, so wäre $(2,X)=(1)$ nach \ref{bem:ggT_hauptideal}, insbesondere würden $a,b\in\ZZ[X]$ mit $2a+Xb=1$ existieren. Setzen wir $X=0$, erhalten wir $2a(0)=1$, was zum Widerspruch führt.
+\end{denn}
+\end{bsp}
+
+Wir erhalten aus dem Lemma von Gauß zwei weitere nützliche Aussagen, die wir so  
+auch schon vor \ref{satz:polynomring_faktoriell} hätten beweisen können. 
+
+\begin{bem}
+Es sei $f\in R[X]$ normiert und es seien $g,h\in K[X]$ normiert mit $f=gh$.
+Dann liegen $g,h$ beide in $R[X]$.
+\end{bem}
+\begin{proof}
+Da $f\in R[X]$ normiert ist, ist $\cont(f)=1$. Außerdem ist
+\[
+1=\ell(g)=\ell(\cont(g)\pp(g))=\cont(g)\ell(pp(g)),
+\]
+analog für $h$. Insbesondere liegen $\cont(g)^{-1}$, $\cont(h)^{-1}$ beide in $R$. Wir erhalten
+\[
+1=(\cont(f))^{-1}=(\cont(gh))^{-1}\overset{\ref{satz:gauss_lemma}}{=}\cont(g)^{-1}\cont(h)^{-1},
+\]
+weswegen $\cont(g)^{-1},\cont(h)^{-1}$ und damit auch $\cont(g),\cont(h)$ beides Einheiten in $R$ sind (in unserer verkürzenden Notation: $\cont(g)=\cont(h)=1$). Wegen \ref{bem:primitiver_anteil} liegen $g,h$ beide in $R[X]$.
+\end{proof}
+
+Die Äquivalenz von (i) und (ii) in der nächsten Aussage könnten wir mittlerweile auch aus \ref{bem:polynomringe_primelemente} und \ref{anm:polynomringe_irreduzibel_vs_prim}
+schließen, im nachfolgenden Beweis wird ein direktes Argument dafür gegeben.
+
+\begin{bem}\label{bem:irreduzibilitaet_polynomringe}
+Sei $f \in R[X]$ nichtkonstant. Dann sind äquivalent:
+\begin{itemize}
+    \item[(i)] $f$ ist irreduzibel in $K[X]$.
+    \item[(ii)] $\pp(f)$ ist irreduzibel in $R[X]$.
+    \item[(iii)] $f$ lässt sich nicht als Produkt zweier nichtkonstanter Polynome aus $R[X]$ schreiben.
+\end{itemize}
+\begin{proof}
+"`(i)$\Rightarrow$(ii)"': Sei $\pp(f)=gh$ mit $g,h\in R[X]$. Mit $f$ ist auch $\pp(f)$ irreduzibel in $K[X]$, in $K[X]$ gilt also $\pp(f)\mid g$ oder $\pp(f)\mid h$.
+Da $\pp(f)$ primitiv ist, gelten die Teilbarkeitsbeziehungen nach \ref{folg:teilbarkeit_im_polring} schon in $R[X]$,
+und damit ist $\pp(f)$ irreduzibel in $R[X]$.
+
+"`(ii)$\Rightarrow$(iii)"': Sei $f=gh$ mit $g,h\in R[X]$. Nach \ref{satz:gauss_lemma} ist
+$\pp(f)=\pp(g)\pp(h)$, was wegen der Irreduzibilität von $\pp(f)$ direkt $\pp(f)\mid\pp(g)$ oder $\pp(f)\mid \pp(h)$ nach sich zieht. Damit ist eines der beiden Polynome $g,h$ nichtkonstant.
+
+"`(iii)$\Rightarrow$(i)"': Sei $f=gh$ mit $g,h\in K[X]$. Nach \ref{satz:gauss_lemma} ist
+$\pp(f)=\pp(g)\pp(h)$ und deshalb $f=\cont(f)\pp(g)\pp(h)$. Wegen (iii) ist eines der Polynome $\pp(g),\pp(h)$ konstant und damit eines der Polynome $g,h$ eine Einheit in $K[X]$,
+weswegen $f$ irreduzibel in $K[X]$ ist. 
+\end{proof}
+\end{bem}
+
+Im Folgenden wollen wir Irreduzibilitätskriterien für Polynome herleiten.
+Wir schwächen für den Moment unsere Voraussetzungen an $R$ etwas ab und fordern nur noch, dass $R$ ein Integritätsring ist.
+
+\begin{defini}\label{bem:eisenstein_polynom}
+Seien $R$ ein Integritätsring, $\mathfrak{p} \subseteq R$ ein Primideal und $f = a_n X^n + \dots + a_0 \in R[X]$ ein Polynom vom Grad $n\geq 1$. Dann heißt $f$ ein \defn{$\mathfrak{p}$-Eisensteinpolynom}, falls gilt:
+\[
+a_n \notin \mathfrak{p}, \quad a_0, \dots, a_{n-1} \in \mathfrak{p}, \quad a_0 \notin \mathfrak{p}^2.
+\]
+\end{defini}
+
+\begin{anm}\label{anm:p_eisenstein_polynom}
+Ist $p \in R$ ein Primelement und $\mathfrak{p} = (p)$, dann sind die obigen Bedingungen äquivalent zu:
+\[
+p \nmid a_n, \quad p \mid a_0, \dots, a_{n-1}, \quad p^2 \nmid a_0.
+\]
+In diesem Fall spricht man auch von einem \defn{$p$-Eisensteinpolynom}.
+\end{anm}
+
+
+\begin{bsp}\label{bsp:eisenstein_2_3}
+Sei $R = \ZZ$ und $f = 3X^4 + 4X^3 + 6X + 2$. Dann ist $f$ ein 2-Eisensteinpolynom, aber kein 3-Eisensteinpolynom.
+\end{bsp}
+
+\begin{bem}\label{bem:eisenstein_kriterium}
+Seien $R$ ein Integritätsring, $\mathfrak{p} \subseteq R$ ein Primideal und $f = a_n X^n + \dots + a_0 \in R[X]$ ein Polynom vom Grad $n\geq1$. Wir setzen
+\[
+\overline{f} := f_{R/\mathfrak{p}}=\overline{a_n}X^n+\ldots+\overline{a_0} \in (R / \mathfrak{p})[X].
+\]
+Es gelte eine der folgenden Aussagen:
+\begin{itemize}
+    \item[(I)] $a_n \notin \mathfrak{p}$ und $\overline{f}$ lässt sich in $(R / \mathfrak{p})[X]$ nicht als Produkt zweier nichtkonstanter Polynome schreiben.
+    \item[(II)] $f$ ist ein $\mathfrak{p}$-Eisensteinpolynom.
+\end{itemize}
+Dann lässt sich $f$ nicht als Produkt zweier nicht-konstanter Polynome aus $R[X]$ schreiben.
+\end{bem}
+
+\begin{proof}
+Wir zeigen die Aussage per Kontraposition.
+Seien $g, h \in R[X]$ nichtkonstant mit $f = gh$. Dann gilt:
+\[
+1 < \deg g, \deg h < n.
+\]
+Wir unterscheiden nun nach den beiden Fällen (I) und (II).
+
+(I) Es ist $a_n = \ell(g) \ell(h)$, weil $R$ ein Integritätsring ist. Aufgrund von $a_n \notin \mathfrak{p}$ erhalten wir $\ell(g) \notin \mathfrak{p}$ und $\ell(h) \notin \mathfrak{p}$.
+    % \[
+    % \ell(g) \notin \mathfrak{p}, \quad \ell(h) \notin \mathfrak{p}.
+    % \]
+Es ergibt sich $\deg\overline{g}=\deg g$, $\deg\overline{h}=\deg h$, weswegen
+$\overline{f}=\overline{g}\overline{h}$ eine Zerlegung von $\overline{f}$ in ein Produkt
+zweier nichtkonstanter Polynome ist.
+
+(II) Wir setzen $k := \Quot(R / \mathfrak{p})$ und nehmen im Folgenden an, dass $f$ ein $\mathfrak{p}$-Eisensteinpolynom ist. Wir erhalten in $(R / \mathfrak{p})[X]$ die Gleichung
+\[
+ \overline{g} \cdot \overline{h} = \overline{f} = \overline{a_n} X^n
+\]
+hat. Wir betrachten diese Gleichung in $k[X] \supseteq (R / \mathfrak{p})[X]$. Der Ring $k[X]$ ist ein Hauptidealring nach \ref{folg:polynomring_hir}. $X$ ist ein Primelement in $k[X]$ und der einzige Primteiler von $\overline{a_n}X^n$. Daher ist $X$ der einzige Primteiler von $\overline{g}$ und $\overline{h}$ in $k[X]$. Es existieren daher $B, C \in k$ sowie $r, s \in \NN_0$, sodass gilt:
+\[
+\overline{g} = B X^r, \quad \overline{h} = C X^s \quad \text{ und } r + s = n.
+\]
+Damit liegen die Koeffizienten $B$ und $C$ schon in $R / \mathfrak{p}$, das heißt, es gibt $b, c \in R$ mit $B = \overline{b}$ und $C = \overline{c}$. Wegen $\deg g,\deg h<n$ sind auch $\deg \overline{g},\deg \overline{h}<n$, d.h. $r, s \geq 1$. Somit ist $\overline{g}(0) = 0$ und $\overline{h}(0) = 0$. Daraus ergibt sich $g(0) \in \mathfrak{p}$ und $h(0) \in \mathfrak{p}$ und schließlich $a_0 = g(0) h(0) \in \mathfrak{p}^2$, was im Widerspruch dazu steht, dass $f$ ein $\mathfrak{p}$-Eisensteinpolynom ist. 
+\end{proof}
+
+\begin{satz}[Irreduzibilitätskriterien]\label{satz:irreduzibilitaetskriterien}
+Sei $R$ ein faktorieller Ring, $K = \Quot(R)$ und $\mathfrak{p} \subseteq R$ ein Primideal. Sei $f = a_n X^n + \dots + a_0 \in R[X]$ ein Polynom vom Grad $n\geq 1$. Es gelte eine der beiden Aussagen:
+\begin{itemize}
+    \item[(I)] (\textit{Reduktionskriterium}) $a_n \notin \mathfrak{p}$ und $f$ ist irreduzibel in $(R / \mathfrak{p})[X]$.
+    \item[(II)] (\textit{Eisensteinkriterium}) $f$ ist ein $\mathfrak{p}$-Eisensteinpolynom.
+\end{itemize}
+Dann ist $f$ irreduzibel in $K[X]$. Ist $f$ außerdem primitiv, so ist $f$ irreduzibel in $R[X]$.
+\end{satz}
+
+\begin{proof}
+Falls (I) oder (II) gilt, lässt sich $f$ nach \ref{bem:eisenstein_kriterium} nicht als Produkt zweier nicht-konstanter Polynome in $R[X]$ schreiben. Aus \ref{bem:irreduzibilitaet_polynomringe} folgt, dass $f$ irreduzibel in $K[X]$ ist und dass $f$ irreduzibel in $R[X]$ ist, falls $f$ prim ist.
+\end{proof}
+
+\begin{anm}\label{anm:reduktionskriterium_hir}
+\begin{itemize}
+\item Das Reduktionskriterium wird häufig angewandt, wenn $R$ ein Hauptidealring und $p\in R$ ein Primelement ist. Dann ist $(p)$ ein maximales Ideal in $R$ nach \ref{folg:irreduzibel_primelement_maximal}, also ist $R / \mathfrak{p}$ ein Körper und damit $(R / \mathfrak{p})[X]$ faktoriell.
+\item Eine weitere Anwendung des Reduktionskriteriums ist wie folgt gegeben. Sei $R = k[X_1, \dots, X_n]$, wobei $k$ ein Körper ist und sei $p = X_n$ (dies ist ein Primelement). Dann gilt: $R / (p) = k[X_1, \dots, X_{n-1}]$, das Problem ist um eine Variable reduziert.
+
+\end{itemize}
+\end{anm}
+
+\begin{bsp}\label{bsp:irreduzibilitaet_polynome}
+\begin{itemize}
+    \item[(a)] Sei $R = \ZZ$, $f = X^3 + 7X^2 + 4X - 15 \in \ZZ[X]$. Dieses Polynom ist irreduzibel in $\ZZ[X]$ und in $\QQ[X]$,
+    \begin{denn}
+    Wir wenden das Reduktionskriterium mit $\mathfrak{p} = (2)$ an. Es ist \[\overline{f} = X^3 + X^2 + \overline{1} \in \mathbb{F}_2[X]\] irreduzibel. Andernfalls hätte $\overline{f}$ wegen $\deg(\overline{f}) = 3$ einen Teiler vom Grad 1, also eine Nullstelle in $\mathbb{F}_2$. Es ist jedoch $\overline{f}(0) = \overline{1}$ und $\overline{f}(1) = \overline{1}$. Da $f$ primitiv ist, folgt aus dem Reduktionskriterium die Behauptung. 
+    \end{denn}
+    \item[(b)] Sei $f = X^3 + 5X + 5 \in \ZZ[X]$. Dieses Polynom ist irreduzibel in $\ZZ[X]$ und $\QQ[X]$, da $f$ ein $5$-Eisensteinpolynom ist.
+
+    \item[(c)] Sei $p$ eine Primzahl. Dann ist das Polynom
+    \[
+    \Phi_p = X^{p-1} + X^{p-2} + \dots + 1 = \frac{X^p - 1}{X - 1} \in \ZZ[X]
+    \]
+    (das im späteren Verlauf der Vorlesung eine Rolle spielen wird) irreduzibel in $\ZZ[X]$ und $\QQ[X]$.
+    \begin{denn} Das Polynom $\Phi_p$ ist genau dann irreduzibel, wenn $\Phi_p(X+1)$ irreduzibel ist.
+Es ist
+\begin{align*}
+\Phi_p(X+1) &= \frac{(X+1)^p - 1}{X} = \frac{X^p + \binom{p}{1} X^{p-1} + \dots + \binom{p}{p-2} X^2 + \binom{p}{p-1} X}{X}\\
+&= X^{p-1} + \binom{p}{1} X^{p-2} + \dots + \binom{p}{p-2} X + \binom{p}{p-1}.
+\end{align*}
+Hierbei teilt $p$ jeden der Binomialkoeffizienten $\binom{p}{i}$ für $i = 1, \dots, p-1$, denn \[\binom{p}{i} = \frac{p \cdot (p-1) \cdot \dots \cdot (p-i+1)}{1 \cdot 2 \cdot \dots \cdot i} \in \NN\] und $p$ teilt jeweils den Zähler, aber nicht den Nenner.
+Außerdem teilt $p$ nicht den Binomialkoeffizienten $\binom{p}{p-1}=p$.
+Somit ist $\Phi_p(X+1)$ ein primitives $p$-Eisensteinpolynom und daher irreduzibel in $\ZZ[X]$ und $\QQ[X]$.
+    \end{denn}
+    \item[(d)] Sei $R$ ein faktorieller Ring und $p\in R$ ein Primelement.
+    Dann ist das Polynom \[f=X^n-p\in R[X]\] aufgrund des Eisensteinkriteriums irreduzibel in $R[X]$ und in $\Quot(R)[X]$. Insbesondere ist für eine Primzahl $p$ das Polynom $X^n-p\in\ZZ[X]$ irreduzibel in $\QQ[X]$. Dies verschärft die Aussage aus \ref{bsp:diskrete_bewertung_auf_Q}(b), in der gezeigt wurde, dass es keine rationale Nullstelle besitzt. Ein weiterer Spezialfall ergibt sich, wenn $k$  
+    ein Körper, $R = k[t]$ und \[f = X^n - t \in R[X]\]
+    ist. Es ist $t$ ein Primelement in $R$, also ist $f$ irreduzibel in $R[X]$ und in $\Quot(R)[X] = k(t)[X]$.
+\end{itemize}
+\end{bsp}
+
+\section{Endliche und algebraische Körpererweiterungen}
+
+\begin{defini}\label{def:erweiterungskörper}
+Seien $L$ ein Körper und $K \subseteq L$ ein Teilkörper. Dann nennen wir $L$ einen \defn{Erweiterungskörper} von $K$ und $L|K$ eine \defn{Körpererweiterung}. Über die Inklusion $K\hookrightarrow L$ wird $L$ zu einer kommutativen $K$-Algebra. Die Dimension
+\[[L : K] := \dim_K L \in \NN \cup \{\infty\}\] 
+heißt der \defn{Grad} der Körpererweiterung $L|K$.
+$L|K$ heißt \defn{endlich}, falls $[L : K] < \infty$ gilt.
+\end{defini}
+
+\begin{notation}
+Für den Rest des Abschnitts sei $L|K$ eine Körpererweiterung.
+\end{notation}
+
+\begin{bsp}\label{bsp:koerpererweiterungen}
+\begin{itemize}
+    \item[(a)] $\CC|\RR$ ist eine Körpererweiterung mit $[\CC : \RR] = 2$.
+    \item[(b)] $\RR|\QQ$ ist eine Körpererweiterung mit $[\RR : \QQ] = \infty$, denn wäre $[\RR : \QQ]=n \in \NN$, dann wäre $\RR\cong\QQ^n$ abzählbar, was ein Widerspruch ist.
+    \item[(c)] Sei $K$ ein Körper, $R = K[X]$ und $K(X) = \Quot(K[X])$ (der Körper der rationalen Funktionen über $K$ in der Variablen $X$). Dann ist $K(X)|K$ eine Körpererweiterung mit $[K(X) : K] = \infty$, denn $(X^i)_{i \in \NN_0}$ ist eine unendliche $K$-linear unabhängige Familie von Elementen aus $K(X)$
+\end{itemize}
+\end{bsp}
+
+\begin{bem}\label{bem:triviale_erweiterung}
+Die folgenden Aussagen sind äquivalent:
+\begin{itemize}
+    \item[(i)] $[L : K] = 1$.
+    \item[(ii)] $L = K$.
+\end{itemize}
+\begin{proof}
+"`(i)"' $\Rightarrow$ (ii): Sei $x \in L$. Dann ist $(1, x)$ wegen $[L:K]=1$ linear abhängig über $K$. Somit existieren $a,b\in K$ mit $(a,b)\neq(0,0)$ und $a+bx=0$. Wäre $b=0$, dann würde $a=0$ folgen, was ein Widerspruch wäre. Also ist $b\neq0$ und deshalb
+$x=-b^{-1}a\in K$.
+
+"`(ii)"' $\Rightarrow$ (i): Dies ist trivial.
+\end{proof}
+\end{bem}
+
+\begin{satz}[Gradsatz]\label{satz:gradsatz}
+Sei $M|L|K$ eine Körpererweiterung ($L$ heißt dann auch ein \defn{Zwischenkörper} von $M|K$). Dann gilt:
+\[
+[M : K] = [M : L] \cdot [L : K].
+\]
+\end{satz}
+\begin{proof}
+Seien zunächst $M|L$ und $L|K$ endlich. Dann gilt:
+    \[
+    M \cong L^{[M:L]} \quad \text{als } L\text{-VR (also auch als $K$-VR)}, \quad L \cong K^{[L:K]} \quad \text{als } K\text{-VR}.
+    \]
+    Daher ergibt sich:
+    \[
+    M \cong \left(K^{[L:K]}\right)^{[M:L]} \cong K^{[L:K] \cdot [M:L]} \quad \text{als } K\text{-VR}.
+    \]
+    und daraus die Gradformel. Ist $[L : K] = \infty$, dann existieren unendlich viele $K$-linear unabhängige Elemente in $L$. Daher existieren auch in $M$ unendlich viele $K$-linear unabhängige Elemente. Somit ist $[M : K] = \infty$.
+    Ist $[M : L] = \infty$, dann existieren unendlich viele $L$-linear unabhängige Elemente in $M$. Diese Elemente sind auch $K$-linear unabhängig. Somit ist $[M : K] = \infty$.
+\end{proof}
+
+\begin{anm}
+Ist $(x_i)_{i\in I}$ eine Basis von $M$ als $L$-Vektorraum und $(y_j)_{j\in J}$ eine Basis von $L$ als $K$-Vektorraum,
+dann ist $(x_iy_j)_{(i,j)\in I\times J}$ eine Basis von $M$ als $K$-Vektorraum.
+\end{anm}
+
+\begin{folgerung}\label{folgerung:primzahl_zwischenkörper}
+Sei $M|L|K$ eine Körpererweiterung, wobei $[M : K]$ eine Primzahl ist. Dann gilt: $L = K$ oder $L = M$.
+\end{folgerung}
+
+\begin{proof}
+Es gilt $[M : K] \overset{\ref{satz:gradsatz}}{=} [M : L] \cdot [L : K]$. Da $[M : K]$ eine Primzahl ist, folgt, dass entweder $[M : L] = 1$ oder $[L : K] = 1$. Im ersten Fall ist $M = L$, und im zweiten Fall ist $L = K$, jeweils wegen \ref{bem:triviale_erweiterung}.
+\end{proof}
+
+\begin{defini}\label{def:algebraisch_unabhängig}
+Sei $\alpha\in L$. Das Element $\alpha$ heißt \defn{algebraisch über $K$}, falls $(\alpha)$ algebraisch abhängig über $K$ ist. Dies ist äquivalent dazu, dass eine der folgenden Bedingungen gilt (vgl. \ref {satz:ue_polynomrings}):
+\begin{itemize}
+    \item Es existiert ein $f \in K[X]$, $f \neq 0$ mit $f(\alpha) = 0$ .
+    \item Der $K$-Algebrenhomomorphismus $\Phi_\alpha : K[X] \to L, \quad f \mapsto f(\alpha)$ ist nicht injektiv.
+\end{itemize}
+Andernfalls heißt $\alpha$ \defn{transzendent} über $K$.
+\end{defini}
+
+\begin{bsp}\label{bsp:algebraisch_transzendent}
+\begin{itemize}
+    \item[(a)] $\sqrt{2} \in \RR$ ist algebraisch über $\QQ$, denn für $f(X) = X^2 - 2 \in \QQ[X]$ ist $f(\sqrt{2})=0$.
+    \item[(b)] $\pi$ ist transzendent über $\QQ$ (Satz von Lindemann, 1882).
+    \item[(c)] $\pi$ ist algebraisch über $\RR$, denn für $f(X) = X - \pi \in \RR[X]$ ist $f(\pi)=0$.
+\end{itemize}
+\end{bsp}
+
+\begin{defini}\label{def:algebraische_koerpererweiterung}
+$L|K$ heißt \defn{algebraisch}, falls jedes Element aus $L$ algebraisch über $K$ ist.
+\end{defini}
+
+\begin{bsp}\label{bsp:algebraische_erweiterung}
+\begin{itemize}
+    \item[(a)] $\CC|\RR$ ist algebraisch, denn $\alpha = a + bi \in \CC$ mit $a, b \in \RR$ ist Nullstelle von $X^2-2aX+(a^2+b^2)\in\RR[X]$.
+    \item[(b)] Es bezeichne $K(X)$ den Körper der rationalen Funktionen über $K$ in der Variablen $X$. Die Körpererweiterung $K(X)|K$ ist nicht algebraisch, da die Variable $X$ algebraisch unabhängig über $K$, also transzendent über $K$ ist.
+\end{itemize}
+\end{bsp}
+
+\begin{defini}\label{def:erzeugte_unterkoerper}
+Seien $\alpha_1, \dots, \alpha_n \in L$. Dann heißt
+\[
+K(\alpha_1, \dots, \alpha_n) := \Quot(K[\alpha_1, \dots, \alpha_n]) \subseteq L
+\]
+der \defn{von $\alpha_1, \dots, \alpha_n$ über $K$ erzeugte Teilkörper} von $L$ ("`\defn{$K$ adjungiert $\alpha_1,\ldots,\alpha_n)$}"'). Die Körpererweiterung $L|K$ heißt \defn{endlich erzeugt}, falls es $\beta_1, \dots, \beta_n \in L$ mit $L = K(\beta_1, \dots, \beta_n)$ gibt. Sie heißt \defn{einfach}, falls ein $\beta\in L$ mit $L = K(\beta)$ existiert.
+\end{defini}
+
+\begin{anm}
+\begin{itemize}
+\item Es ist
+\begin{align*}
+K[\alpha_1,\ldots,\alpha_n]&=\{f(\alpha_1,\ldots,\alpha_n)\mid f\in K[X_1,\ldots,X_n]\}\\
+K(\alpha_1,\ldots,\alpha_n)&=\left\{\frac{f(\alpha_1,\ldots,\alpha_n)}{g(\alpha_1,\ldots,\alpha_n)} \mid f,g\in K[X_1,\ldots,X_n], g(\alpha_1,\ldots,\alpha_n)\neq 0\right\},
+\end{align*}
+insbesondere gilt für $\alpha\in L$:
+    \[K[\alpha] = \{f(\alpha) \mid f \in K[X]\}, \quad K(\alpha) = \left\{\frac{f(\alpha)}{g(\alpha)} \mid f, g \in K[X], g(\alpha) \neq 0 \right\}.\]
+    \item $K[\alpha_1, \dots, \alpha_n]$ ist der kleinste Unterring von $L$, der $K$ und $\alpha_1, \dots, \alpha_n$ enthält.
+    \item $K(\alpha_1, \dots, \alpha_n)$ ist der kleinste Teilkörper von $L$, der $K$ und $\alpha_1, \dots, \alpha_n$ enthält.
+\end{itemize}
+\end{anm}
+
+\begin{satz}\label{satz:minimalpolynom}
+Sei $\alpha \in L$ algebraisch über $K$ und $\Phi_\alpha : K[X] \to L$, $f \mapsto f(\alpha)$. Dann gilt:
+\begin{itemize}
+    \item[(a)] Es gibt genau ein normiertes Polynom kleinsten Grades $\mipo_K\alpha \in K[X]$ mit $(\mipo_K\alpha)(\alpha) = 0$. Das Polynom $\mipo_K\alpha$ heißt das \defn{Minimalpolynom} von $\alpha$ über $K$
+    \item[(b)] $\mipo_K\alpha$ ist irreduzibel.
+     \item[(c)] $\ker \Phi_\alpha = (\mipo_K\alpha)$. Insbesondere gilt für $f\in K[X]$: 
+     \[
+     f(\alpha)=0\iff \mipo_k\alpha\mid f.
+     \]
+    \item[(d)] $\image \Phi_\alpha = K[\alpha]$.
+    \item[(e)] $K[\alpha]$ ist ein Körper, d.h. $K[\alpha] = K(\alpha)$.
+    \item[(f)] Es existiert ein eindeutig bestimmter $K$-Algebrenisomorphismus
+    \[
+    \overline{\Phi_\alpha}\colon K[X] / (\mipo_K\alpha) \to K(\alpha) \quad \text{mit } \overline{\Phi_\alpha}(\overline{X})=\alpha.
+    \]
+    \item[(g)] Die Familie $(1, \alpha, \alpha^2, \dots, \alpha^{\deg(\mipo_K\alpha)-1})$ ist eine $K$-Basis von $K(\alpha)$, insbesondere ist $K(\alpha)|K$ eine endliche Körpererweiterung. Ihr Grad $[K(\alpha) : K]=:\deg_K\alpha$ heißt der \defn{Grad von $\alpha$ über $K$}.
+    \item[(h)] $\deg_K\alpha = \deg \mipo_K\alpha$.
+\end{itemize}
+\end{satz}
+
+\begin{proof}
+(a), (c) Da $\alpha$ algebraisch über $K$ ist, ist $\ker \Phi_\alpha \neq (0)$. Weil $K[X]$ ein Hauptidealring ist, existiert ein eindeutig bestimmtes normiertes Polynom $\mipo_K\alpha \in K[X]$ mit $\ker \Phi_\alpha = (\mipo_K\alpha)$. Unter allen normierten Polynomen in $\ker \Phi_\alpha$ ist $\mipo_K\alpha$ das eindeutig bestimmte Polynom kleinsten Grades.
+
+(d) Dies folgt direkt aus der Definition.
+
+(b), (e), (f): Nach der universellen Eigenschaft des Polynomrings ist $\Phi_\alpha: K[X] \to L$ der eindeutig bestimmte $K$-Algebrenhomomorphismus mit $\Phi_\alpha(X) = \alpha$. Daraus erhalten wir aus dem Homomorphiesatz einen eindeutig bestimmten $K$-Algebrenisomorphismus
+\[
+\overline{\Phi_\alpha}\colon K[X] / (f) \to K[\alpha] \quad \text{mit } \overline{\Phi_\alpha}(\overline{X}) = \alpha
+\]
+
+Da $K[\alpha]\subseteq L$ nullteilerfrei ist, ist $K[X] / (\mipo_K\alpha)$ nullteilerfrei. Somit ist $\mipo_K\alpha$ prim und daher irreduzibel. Weil $K[X]$ ein Hauptidealring ist, ist $(\mipo_K\alpha)$ wegen \ref{folg:irreduzibel_primelement_maximal} ein maximales Ideal, also $K[X] / (\mipo_K\alpha)$ ein Körper. Daher ist $K[\alpha]$ ein Körper und insbesondere gilt $K[\alpha] = K(\alpha)$.
+
+(g), (h): Nach \ref{folgerung:polynomring-modul} ist $(\overline{1}, \overline{X}, \overline{X}^2, \dots, \overline{X}^{\deg(\mipo_K\alpha)-1})$ eine $K$-Basis von $K[X] / (\mipo_K\alpha)$. Somit ist \[(\Phi_\alpha(\overline{1}),\Phi_\alpha(\overline{X}),\ldots,\Phi_\alpha(\overline{X}^{\deg(\mipo_K\alpha)-1})) =(1,\alpha, \alpha^2, \dots, \alpha^{\deg(\mipo_K\alpha)-1})\] eine $K$-Basis von $K(\alpha)$. Daher folgt 
+\[[K(\alpha) : K] = \dim_K K(\alpha) = \deg(\mipo_K\alpha).\]
+\end{proof}
+
+\begin{bem}\label{bem:minpol_char}
+Sei $\alpha\in L$ algebraisch über $K$ und $f\in K[X]$ ein normiertes Polynom.
+Dann sind äquivalent:
+\begin{enumerate}[label=(\roman*)]
+\item $f=\mipo_K(\alpha)$.
+\item $f(\alpha)=0$ und $f$ ist irreduzibel.
+\item $f(\alpha)=0$ und $\deg f=\deg_K\alpha$.
+\end{enumerate}
+\end{bem}
+\begin{proof}
+"`(i)$\Rightarrow$(ii)"' folgt aus \ref{satz:minimalpolynom}.
+
+"`(ii)$\Rightarrow$(iii)"' Aus $f(\alpha)=0$ folgt mit \ref{satz:minimalpolynom}(c),
+dass $\mipo_K\alpha\mid f$ gilt. Aus der Irreduzibilität von $f$ folgt $\deg(f)=\deg_K\alpha$.
+
+"`(iii)$\Rightarrow$(i)"' Aus $f(\alpha)=0$ ergibt sich mit \ref{satz:minimalpolynom}(c),
+dass $\mipo_K\alpha\mid f$ gilt. Da $f$ als normiertes Polynom vom Nullpolynom verschieden ist, erhalten wir
+\[\deg_K\alpha=\deg\mipo_K\alpha\leq\deg f=\deg_K\alpha,\]
+also $\deg f=\deg \mipo_K\alpha$. Da $f$ und $\mipo_K\alpha$ beide normiert sind, 
+folgt $f=\mipo_K(\alpha)$.
+\end{proof}
+
+\begin{anm}
+Das Minimalpolynom $\mipo_K \alpha$ stimmt mit dem Minimalpolynom (aus der linearen Algebra) des $K$-Vektorraum-Endomorphismus
+\[
+h: L \to L, \quad x \mapsto \alpha x
+\]
+überein.
+\begin{denn}
+Wegen $\mu_\alpha(1) = \alpha$ gilt 
+\[
+\mu_\alpha=0\iff \alpha=0
+\]
+und für $g \in K[X]$ ist $g(\mu_\alpha) = \mu_{g(\alpha)}$, und somit erhalten wir
+\[
+g(\mu_\alpha)=0\iff \mu_{g(\alpha)}=0 \iff g(\alpha)=0.
+\]
+\end{denn}
+\end{anm}
+
+\begin{bsp}\label{bsp:minimalpolynom_beispiel}
+Es ist $\sqrt{3}\in\RR$ algebraisch über $\QQ$, denn es ist $f(\sqrt{3}) = 0$ für $f = X^2 - 3 \in \QQ[X]$.
+Das Polynom $f$ ist irreduzibel nach dem Eisensteinkriterium, somit ist $f = \mipo_\QQ(\sqrt{3})$ wegen \ref{bem:minpol_char}.
+Per Definition ist
+\begin{align*}
+\QQ[\sqrt{3}]&=\{g(\sqrt{3}) \ \ | \ g \in \QQ[X]\}, \\
+\quad \QQ(\sqrt{3}) &= \left\{\frac{g(\sqrt{3})}{h(\sqrt{3})} \;\middle|\; g, h \in \QQ[X], h(\sqrt{3}) \neq 0 \right\}.
+\end{align*}
+Nach Satz \ref{satz:minimalpolynom} ist $\QQ[\sqrt{3}]=\QQ(\sqrt{3})$, $\QQ[\sqrt{3}]$ ist ein Körper und $(1, \sqrt{3})$ ist eine $\QQ$-Basis von $\QQ(\sqrt{3})$. Somit ist
+\[
+\QQ(\sqrt{3}) = \{a + b\sqrt{3} \mid a, b \in \QQ\}.
+\]
+Beispielsweise ist
+\[\frac{1}{\sqrt{3}} = \frac{1}{3} \cdot \sqrt{3}.\]
+Wegen Satz \ref{satz:minimalpolynom} ist $\QQ[X] / (X^2 - 3) \cong \QQ(\sqrt{3})$ als $\QQ$-Algebra.
+\end{bsp}
+
+\begin{bsp}\label{bsp:invers_koerpererweiterung}
+Sei $\alpha \in L\setminus\{0\}$ algebraisch über $K$. Wie findet man ein $\alpha^{-1} \in K(\alpha)$?
+Sei \[f = X^n + c_{n-1} X^{n-1} + \dots + c_0 \in K[X]\] das Minimalpolynom von $\alpha$ über $K$.
+Für $n = 1$ ist $f = X + c_0$. Aus $f(\alpha) = 0$ folgt dann $\alpha + c_0 = 0$, also $\alpha = -c_0$ und deshalb \[\alpha^{-1} = -c_0^{-1} \in K \subseteq K[\alpha].\]
+Im Fall $n \geq 2$ ist $c_0 \neq 0$, da $f$ irreduzibel ist (ist $c_0=0$ wäre $f$ durch $X$ teilbar). Dann ist
+\[
+0 = \alpha^{-1} f(\alpha) = \alpha^{-1} \big(\alpha^n + c_{n-1} \alpha^{n-1} + \dots + c_0 \big).
+\]
+Das ergibt
+\[
+-c_0 \alpha^{-1} = \alpha^{n-1} + c_{n-1} \alpha^{n-2} + \dots + c_1
+\]
+und schließlich
+\[
+\alpha^{-1} = -c_0^{-1} \big(\alpha^{n-1} + c_{n-1} \alpha^{n-2} + \dots + c_1\big) \in K[\alpha].
+\]
+\end{bsp}
+
+\begin{satz}\label{satz:endl_erweiterung_aquivalenzen}
+Es sind äquivalent:
+\begin{itemize}
+    \item[(i)] $L|K$ ist endlich.
+    \item[(ii)] $L$ wird über $K$ von endlich vielen algebraischen Elementen erzeugt, d.h. es existieren Elemente $\alpha_1, \dots, \alpha_n \in L$, die algebraisch über $K$ sind, sodass $L = K(\alpha_1, \dots, \alpha_n)$ ist.
+    \item[(iii)] $L|K$ ist eine endlich erzeugte algebraische Körpererweiterung, d.h. $L|K$ ist algebraisch und es existieren $\alpha_1, \dots, \alpha_n \in L$ mit $L = K(\alpha_1, \dots, \alpha_n)$.
+\end{itemize}
+Insbesondere ist jede endliche Körpererweiterung algebraisch. In diesem Fall ist $L = K[\alpha_1, \dots, \alpha_n]$ mit $\alpha_1, \dots, \alpha_n$ wie in (ii) oder (iii).
+\end{satz}
+
+\begin{proof}
+"`(i) $\Rightarrow$ (ii)"': Sei $L|K$ endlich mit $n = [L : K]$ und sei $\alpha \in L$. Die $n+1$ Elemente $1, \alpha, \alpha^2, \dots, \alpha^n$ sind dann linear abhängig über $K$.
+    Es existieren also $c_0, \dots, c_n \in K$, nicht alle gleich $0$, sodass
+    \[
+    c_n \alpha^n + \dots + c_1 \alpha + c_0 = 0
+    \]
+    ist. Daher ist $\alpha$ algebraisch über $K$. Somit ist $L|K$ algebraisch.
+    Da $L|K$ endlich ist, existiert eine endliche $K$-Basis $(\alpha_1, \dots, \alpha_n)$ von $L$. Dann gilt:
+    \[
+    L = K\alpha_1 + \ldots + K\alpha_n \subseteq K(\alpha_1, \ldots, \alpha_n) \subseteq L,
+    \]
+    also $L = K(\alpha_1, \ldots, \alpha_n)$.
+
+"`(iii) $\Rightarrow$ (ii)"': Sei $L|K$ algebraisch, und seien $\alpha_1, \dots, \alpha_n \in L$ mit $L = K(\alpha_1, \dots, \alpha_n)$. Daraus folgt, dass $\alpha_1, \dots, \alpha_n$ algebraisch über $K$ sind. 
+
+"`(ii) $\Rightarrow$ (i)"':
+Wir beweisen durch vollständige Induktion nach $n$ die folgende Aussage: Sind $\alpha_1, \dots, \alpha_n\in L$ algebraisch über $K$, dann ist $K(\alpha_1,\ldots,\alpha_n)=K[\alpha_1,\ldots,\alpha_n]$ und $K(\alpha_1, \dots, \alpha_n)|K$ endlich. Für $n = 1$ ergibt sich die Aussage aus Satz \ref{satz:minimalpolynom}. Es sei nun $n>1$.
+Nach Induktionsvoraussetzung ist $K(\alpha_1, \dots, \alpha_{n-1})=K[\alpha_1, \dots, \alpha_{n-1}]$ und $K(\alpha_1, \dots, \alpha_{n-1}) | K$ ist endlich. Wir erhalten aus \ref{satz:minimalpolynom}, dass
+\[
+K[\alpha_1, \ldots, \alpha_n] = (K[\alpha_1, \ldots, \alpha_{n-1}])[\alpha_{n}]=K(\alpha_1,\ldots,\alpha_{n-1})[\alpha_n]
+\]
+ein Körper ist. Somit ist $K[\alpha_1, \ldots, \alpha_n]=K(\alpha_1, \ldots, \alpha_n)$ und 
+$K(\alpha_1, \ldots, \alpha_n)|K(\alpha_1, \ldots, \alpha_{n-1})$ ist endlich. Nach \ref{satz:gradsatz} ist
+\[
+[K(\alpha_1, \dots, \alpha_n) : K] = [K(\alpha_1, \dots, \alpha_n) : K(\alpha_1, \dots, \alpha_{n-1})] \cdot [K(\alpha_1, \dots, \alpha_{n-1}) : K].
+\]
+Da beide Faktoren endlich sind, ist $K(\alpha_1, \dots, \alpha_n)|K$ endlich.
+\end{proof}
+
+\begin{anm}
+Es gibt algebraische Körpererweiterungen, die nicht endlich sind (vgl. \ref{bsp:algebraischer_abschluss}).
+\end{anm}
+
+\begin{defini}\label{def:erweiterung_koerper_kleinst}
+Sei $S \subseteq L$. Wir setzen
+\[
+K[S] := \{f(\alpha_1, \dots, \alpha_n) \mid n \in \NN, \alpha_1, \dots, \alpha_n \in S\}:=\bigcup_{n\in\NN,\alpha_1,\ldots,\alpha_n\in S}K[\alpha_1,\ldots,\alpha_n] \subseteq L
+\]
+und
+\[
+K(S) := \Quot(K[S]) \subseteq L
+\]
+\end{defini}
+
+\begin{anm}
+\begin{itemize}
+\item $K[S]$ ist der kleinste Unterring von $L$, der $K$ und $S$ enthält.
+\item $K(S)$ ist der kleinste Teilkörper von $L$, der $K$ und $S$ enthält.
+\item Es ist
+\[
+K(S) = \bigcup_{T \subseteq S \text{ endlich}} K(T).
+\]
+\begin{denn}
+Die Inklusion "`$\supseteq$"' ist klar. Zum Nachweis von "`$\subseteq$"' sei $x \in K(S)$. Dann existieren $m,n \in \NN$, $\alpha_1, \dots, \alpha_m \in S$, $\beta_1, \dots, \beta_n \in S$ sowie $f\in K[X_1, \dots, X_m]$, $g\in K[X_1, \dots, X_n]$ mit
+\[
+x = \frac{f(\alpha_1, \dots, \alpha_m)}{g(\beta_1, \dots, \beta_n)}.
+\]
+Somit gilt $x \in K(T)$ für die endliche Menge $T := \{\alpha_1, \dots, \alpha_m, \beta_1, \dots, \beta_n\}\subseteq S$.
+\end{denn}
+\end{itemize}
+\end{anm}
+
+\begin{satz}\label{satz:algebraische_erweiterung_äquivalenz}
+Es sind äquivalent:
+\begin{itemize}
+    \item[(i)] $L|K$ ist algebraisch.
+    \item[(ii)] $L$ wird über $K$ von algebraischen Elementen erzeugt, d.h. es existiert eine Teilmenge $S \subseteq L$, sodass $L = K(S)$ ist und alle Elemente aus $S$ algebraisch über $K$ sind.
+    \item[(iii)] Jede endlich erzeugte Zwischenerweiterung $M|K$ von $L|K$ ist endlich.
+\end{itemize}
+\end{satz}
+
+\begin{proof}
+"`(i) $\Rightarrow$ (iii)"': Sei $M = K(\alpha_1, \dots, \alpha_n)$ mit $\alpha_1, \dots, \alpha_n \in L$. Da $L|K$ algebraisch ist, sind $\alpha_1,\ldots,\alpha_n$ algebraisch über $K$. Nach Satz \ref{satz:endl_erweiterung_aquivalenzen} ist $M|K$ endlich.
+
+"`(iii) $\Rightarrow$ (ii)"': Es ist
+\[L = K(L) = \bigcup_{T \subseteq L \text{ endlich}} K(T).
+\]
+Für jede endliche Teilmenge $T \subseteq L$ ist $K(T)|K$ endlich nach (iii), also algebraisch nach Satz \ref{satz:endl_erweiterung_aquivalenzen}.
+Deshalb sind alle Elemente von $T$ algebraisch über $K$. Somit sind alle Elemente von $L$ algebraisch über $K$. Die Behauptung folgt, indem wir $S:=L$ setzen.
+
+"`(ii) $\Rightarrow$ (i)"': Sei $S \subseteq L$ mit $L = K(S)$, sodass alle Elemente von $S$ algebraisch über $K$ sind. Dann ist
+\[
+L = \bigcup_{T \subseteq S \text{ endlich}} K(T).
+\]
+Für $T \subseteq S$ endlich ist $K(T)|K$ algebraisch nach Satz \ref{satz:endl_erweiterung_aquivalenzen},  also sind alle Elemente aus $K(T)$ algebraisch über $K$. Somit ist $L|K$ algebraisch.
+\end{proof}
+
+\begin{satz}\label{satz:alpha_algebraisch_ueber_k}
+Sei $M|L|K$ eine Körpererweiterung und $\alpha \in M$. Dann gilt:
+\begin{itemize}
+    \item[(a)] Ist $\alpha$ algebraisch über $L$ und $L|K$ algebraisch, dann ist $\alpha$ algebraisch über $K$.
+    \item[(b)] $M|K$ ist genau dann algebraisch, wenn $M|L$ und $L|K$ algebraisch sind.
+\end{itemize}
+\end{satz}
+
+\begin{proof}
+(a) Sei $\mipo_L \alpha = X^n + c_{n-1} X^{n-1} + \dots + c_0 \in L[X]$. Dann ist $\alpha$ algebraisch über $K(c_0, \ldots, c_{n-1})$, da $X^n + c_{n-1} X^{n-1} + \dots + c_0$ ein Polynom in $K(c_0, \dots, c_{n-1})[X]$ ist, das $\alpha$ als Nullstelle hat. Nach Satz \ref{satz:minimalpolynom} ist $K(c_0, \ldots, c_{n-1})(\alpha)|K(c_0,\ldots,c_{n-1})$ endlich, und nach Satz \ref{satz:endl_erweiterung_aquivalenzen}
+ist $K(c_0,\ldots,c_{n-1})|K$ endlich. Aus dem Gradsatz \ref{satz:gradsatz} erhalten wir, dass dann auch
+ $K(c_0, \dots, c_{n-1})(\alpha)|K$ endlich und damit nach \ref{satz:endl_erweiterung_aquivalenzen} algebraisch ist. Also ist $\alpha$ algebraisch über $K$.
+
+(b) "`$\Rightarrow$"' Sei $M|K$ algebraisch. Dann ist jedes Element aus $M$ algebraisch über $K$. Daraus folgt, dass jedes Element aus $M$ algebraisch über $L$ ist, und jedes Element aus $L$ algebraisch über $K$ ist. Somit sind $M|L$ und $L|K$ algebraisch.
+
+"`$\Leftarrow$"' Sei $M|L$ algebraisch, $L|K$ algebraisch, und $\alpha \in M$. Dann ist $\alpha$ algebraisch über $L$. Nach Teil (a) ist $\alpha$ dann auch algebraisch über $K$. Somit ist $M|K$ algebraisch.
+\end{proof}
+
+\begin{bem}\label{bem:algebraischer_abschluss}
+Wir setzen $M := \{\alpha \in L \mid \alpha \text{ ist algebraisch über } K\}$. Dann gilt:
+\begin{itemize}
+    \item[(a)] $M$ ist ein Teilkörper von $L$, der sogenannte \textbf{algebraische Abschluss} von $K$ in $L$.
+    \item[(b)] $M|K$ ist algebraisch.
+\end{itemize}
+\end{bem}
+
+\begin{proof}
+(a) Seien $\alpha, \beta \in M$. Dann ist $K(\alpha, \beta)|K$ algebraisch nach \ref{satz:endl_erweiterung_aquivalenzen}, da $\alpha$ und $\beta$ algebraisch über $K$ sind. Insbesondere ist $\alpha - \beta \in K(\alpha, \beta)$ algebraisch über $K$, also ist $\alpha - \beta \in M$. Analog folgt $\alpha \cdot \beta^{-1} \in M$, falls $\beta \neq 0$ ist.
+
+(b) ist klar, da alle Elemente von $M$ per Definition algebraisch über $K$ sind.
+\end{proof}
+
+\begin{bsp}\label{bsp:algebraischer_abschluss}
+Seien $K = \QQ$ und $L = \CC$. Der algebraische Abschluss von $\QQ$ in $\CC$ ist
+\[
+\QQalg := \{\alpha \in \CC \mid \alpha \text{ algebraisch über } \QQ\}.
+\]
+$\QQalg|\QQ$ ist nach \ref{bem:algebraischer_abschluss} eine algebraische Erweiterung.
+$\QQalg$ heißt der \defn{Körper der algebraischen Zahlen}.
+Es ist $[\QQalg : \QQ] = \infty$, 
+\begin{denn}
+Ist $n\in\NN$ und $p$ eine Primzahl, so ist $f:= X^n - p \in \QQ[X]$ irreduzibel vom Grad $n$ nach dem Eisensteinkriterium. Aufgrund des Fundamentalsatzes der Algebra existiert ein $\alpha \in \CC$ mit $f(\alpha) = 0$, also $\alpha \in \QQalg$
+und $\QQ(\alpha)\subseteq\QQalg$. Wegen $[\QQ(\alpha) : \QQ] = \deg f=n$ folgt $[\QQalg : \QQ] \geq n$. Da $n$ beliebig gewählt war, folgt die Behauptung.
+\end{denn}
+$\QQalg$ ist abzählbar, 
+\begin{denn} 
+Die Menge
+\[
+P = \{f \in \QQ[X] \mid f \text{ irreduzibel und normiert}\}
+\]
+ist abzählbar, da $\QQ[X]$ abzählbar ist. $\QQalg$ ist als Menge aller Nullstellen in $\CC$ aller Polynome aus $\QQ[X]$
+dann auch abzählbar.
+\end{denn}
+Insbesondere existieren in $\CC$ überabzählbar viele Elemente, die transzendent über $\QQ$ sind.
+\end{bsp}
+
+\begin{anm}
+Sind $A,B$ $K$-Algebren, so bezeichnen wir im Folgenden die Menge der $K$-Homomorphismen von $A$ nach $B$ mit $\Hom_K(A, B)$ und die Menge der $K$-Endo- bzw. Automorphismen von $A$ mit $\End_K(A)$ bzw. $\Aut_K(A)$. Sind $L|K$ und $M|K$ Körpererweiterungen, dann ist
+\[
+\Hom_K(L, M) := \{\varphi \colon L \to M \mid \varphi \text{ ist ein Körperhomomorphismus mit } \varphi|_K = \operatorname{id}_K\},
+\]
+entsprechend für $\End_K(L)$ und $\Aut_K(L)$, vgl. \ref{bsp:algebrenhomomorphismus}.
+\end{anm}
+
+\begin{bem}\label{bem:k-algebra_homomorphismen}
+Seien $A, B$ $K$-Algebren, $f \in K[X]$, $\varphi \in \Hom_K(A, B)$ und $\alpha \in A$. Dann gilt:
+\begin{itemize}
+    \item[(a)] $f(\varphi(\alpha)) = \varphi(f(\alpha))$.
+    \item[(b)] $f(\alpha) = 0 \Rightarrow f(\varphi(\alpha)) = 0$.
+\end{itemize}
+Insbesondere operiert $\Aut_K(A)$ auf der Menge der Nullstellen von $f$ in $A$ durch $\varphi.\beta=\varphi(\beta)$.
+\end{bem}
+
+\begin{proof}
+(a) ist ein Spezialfall einer Aussage aus \ref{anm:poly_r_alg_kom}, und (b) folgt direkt aus (a).
+\end{proof}
+
+\begin{bem}\label{bem:end_ist_aut}
+Sei $L|K$ algebraisch. Dann gilt: $\End_K(L) = \Aut_K(L)$.
+\end{bem}
+
+\begin{proof}
+Sei $\varphi \in \End_K(L)$. $\varphi$ ist injektiv, da $\varphi$ ein Körperhomomorphismus ist. Es bleibt zu zeigen, dass $\varphi$ auch surjektiv ist. Sei $\alpha \in L$. Dann ist $\alpha$ algebraisch über $K$. Sei $\mathcal{N}$ die Menge der Nullstellen von $\mipo_K \alpha$ in $L$. Aus \ref{bem:k-algebra_homomorphismen} erhalten wir eine wohldefinierte Abbildung $\varphi|_{\mathcal{N}}^\mathcal{N} \colon \mathcal{N} \to \mathcal{N}$. Da $\varphi$ injektiv ist, ist $\varphi|_{\mathcal{N}}^\calN$ ebenfalls injektiv. Aus der Endlichkeit von $\mathcal{N}$ folgt, dass $\varphi|_{\mathcal{N}}^\mathcal{N}$ surjektiv ist. Also existiert ein $\beta \in \mathcal{N}\subseteq L$ mit $\varphi(\beta) = \alpha$, d.h. $\varphi$ ist surjektiv.
+\end{proof}
+
+Die nachfolgende Aussage nennen wir die "`Universelle Eigenschaft des Minimalpolynoms"'.
+Diese Bezeichnung macht streng genommen keinen Sinn, es fehlt uns aber die (kategorientheoretische) Sprache, um genau zu beschreiben, um was für eine universelle Eigenschaft es sich hier handelt.
+
+\begin{bem}[Universelle Eigenschaft des Minimalpolynoms]\label{bem:minimalpolynom_universelle_eigenschaft}
+Sei $L|K$ ein Körper und $\alpha \in L$ algebraisch über $K$. Sei $A$ eine $K$-Algebra. Dann existiert für jede Nullstelle $\beta \in A$ von $\mipo_K \alpha$ ein eindeutig bestimmter $K$-Algebrenhomomorphismus $\varphi_\beta \colon K(\alpha) \to A$ mit $\varphi_\beta(\alpha) = \beta$. Insbesondere ist die Abbildung
+\[
+\Hom_K(K(\alpha), A) \to \{\text{Nullstellen von } \mipo_K \alpha \text{ in } A\}, \quad \varphi \mapsto \varphi(\alpha)
+\]
+bijektiv.
+\end{bem}
+
+\begin{proof}[Beweis]
+Wir zeigen zunächst die Existenzaussage. Sei $\beta \in A$ eine Nullstelle von $\mipo_K \alpha$. Nach der universellen Eigenschaft des Polynomrings existiert ein eindeutig bestimmter $K$-Algebrenhomomorphismus
+\[
+\Psi_\beta \colon K[X] \to A \quad \text{mit} \quad \Phi_\beta(X) = \beta.
+\]
+Aufgrund von $(\mipo_K\alpha)(\beta) = 0$ ist $\mipo_K \alpha \in \ker \Psi_\beta$ und daher
+$(\mipo_K(\alpha))\subseteq\ker\Psi_\beta$. Es existiert daher ein eindeutig bestimmter $K$-Algebrenhomomorphismus
+\[
+\overline{\Psi_\beta} \colon K[X]/(\mipo_K \alpha) \to A \quad \text{mit} \quad \overline{\Psi_\beta}(\overline{X}) = \beta.
+\]
+Nach Satz \ref{satz:minimalpolynom}(f) existiert ein eindeutig bestimmter $K$-Algebrenisomorphismus
+\[
+\overline{\Phi_\alpha} \colon K[X]/(\mipo_K \alpha) \to K(\alpha) \quad \text{mit} \quad \overline{\Phi_\alpha}(\overline{X}) = \alpha.
+\]
+Wir setzen
+\[\varphi_\beta := \overline{\Psi_\beta} \circ \overline{\Phi_\alpha}^{-1} \colon K(\alpha) \to A.\]
+Dann ist $\varphi_\beta$ ein $K$-Algebrenhomomorphismus mit $\varphi_\beta(\alpha) = \beta$.
+
+Es verbleibt der Nachweis der Eindeutigkeitsaussage. Diese ergibt sich daraus, dass ein $K$-Algebrenhomomorphismus $\varphi \colon K(\alpha) = K[\alpha] \to A$ durch $\varphi(\alpha)$ eindeutig bestimmt ist.
+\end{proof}
+
+\begin{anm}\label{anm:automorphismen_operation}
+$\Aut_K(K(\alpha))$ operiert nach \ref{bem:k-algebra_homomorphismen} auf der Menge der Nullstellen von $\mipo_K \alpha$ in $K(\alpha)$. Diese Operation ist transitiv,
+\begin{denn}
+Für Nullstellen $\beta, \gamma$ von $\mipo_K \alpha$ in $K(\alpha)$ existieren
+wegen \ref{bem:minimalpolynom_universelle_eigenschaft} Endomorphismen $\varphi_\beta$, $\varphi_\gamma \in \End_K(K(\alpha)) \overset{\ref{bem:end_ist_aut}}{=} \Aut_K(K(\alpha))$ mit $\varphi_\beta(\alpha) = \beta$, $\varphi_\gamma(\alpha) = \gamma$. Somit gilt:
+\[
+(\varphi_\gamma \circ \varphi_\beta^{-1})(\beta) = \varphi_\gamma(\alpha) = \gamma.
+\]
+\end{denn}
+\end{anm}
+
+\begin{satz}[Fortsetzungssatz für algebraische Körpererweiterungen]\label{satz:fortsetzungssatz_algebraische_koerpererweiterungen}
+Sei $L|K$ eine algebraische Körpererweiterung und $T \subseteq L$ mit $L = K(T)$. Sei $\Omega|K$ eine Körpererweiterung mit der Eigenschaft, dass das Minimalpolynom eines jeden Elements aus $T$ über $\Omega$ in Linearfaktoren zerfällt. Dann gilt:
+\begin{itemize}
+    \item[(a)] Für jeden Zwischenkörper $L|E|K$ lässt sich jeder $K$-Algebrenhomomorphismus $\tau \colon E \to \Omega$ zu einem $K$-Algebrenhomomorphismus $\tau' \colon L \to \Omega$ fortsetzen.
+    \[
+% \xymatrix{
+% L \ar@{-}[d] \ar@{-->}[r] & \Omega \ar@{-}[dd] \\
+% E \ar[ur] \ar@{-}[dr] &  \\
+%  & K
+% }
+\xymatrix{
+L \ar@{-}[dr] \ar@{-->}[rr]^{\tau'} & & \Omega \ar@{-}[dd] \\
+ & E \ar[ur]^\tau \ar@{-}[dr] &  \\
+ & & K
+}
+\]
+    \item[(b)] Es existiert ein $K$-Algebrenhomomorphismus $\varphi \colon L \to \Omega$.
+    \item[(c)] Ist $\alpha \in L$, so existiert für jede Nullstelle $\beta \in \Omega$ von $\mipo_K \alpha$ ein $K$-Algebrenhomomorphismus $\psi \colon L \to \Omega$ mit $\psi(\alpha) = \beta$.
+\end{itemize}
+\end{satz}
+
+\begin{proof}
+(a) Sei $E$ eine Zwischenerweiterung von $L|K$, und $\tau \colon E \to \Omega$ ein $K$-Al\-ge\-bren\-homo\-morphismus. Wir setzen
+\[
+\Sigma := \{(H, \sigma) \mid L|H|E \text{ Zwischenkörper, } \sigma \in \Hom_K(H, \Omega)\text{ mit } \sigma|_E = \tau\}.
+\]
+Es ist $\Sigma \neq \emptyset$ wegen $(E, \tau) \in \Sigma$.
+
+\textbf{Schritt 1:}
+Wir definieren eine Relation $\leq$ auf $\Sigma$ durch
+\[
+(H, \sigma) \leq (H', \sigma') \iff H \subseteq H' \text{ und } \sigma'|_H = \sigma.
+\]
+$\leq$ ist eine Ordnungsrelation auf $\Sigma$,
+\begin{denn}
+\begin{itemize}
+\item $\leq$ ist reflexiv: Für $(H, \sigma) \in \Sigma$ ist $(H, \sigma) \leq (H, \sigma)$ wegen $H \subseteq H$ und $\sigma|_H = \sigma$.
+\item $\leq$ ist transitiv: Seien $(H, \sigma), (H', \sigma'), (H'', \sigma'') \in \Sigma$ mit $(H, \sigma) \leq (H', \sigma')$ und $(H', \sigma') \leq (H'', \sigma'')$. Dann gilt $H \subseteq H' \subseteq H''$, und $\sigma''|_{H'} = \sigma'$ sowie $\sigma'|_H = \sigma$ implizieren $\sigma''|_H = \sigma$. Also ist $(H, \sigma) \leq (H'', \sigma'')$.
+\item $\leq$ ist antisymmetrisch: Sei $(H, \sigma) \leq (H', \sigma')$ und $(H', \sigma') \leq (H, \sigma)$. 
+Dann ist $H\subseteq H'$ und $\sigma'|H=\sigma$ sowie $H'\subseteq H$ und $\sigma|_{H'}=\sigma'$.
+Wir erhalten $H = H'$ und $\sigma = \sigma'$, also $(H, \sigma) = (H', \sigma')$.
+\end{itemize}
+\end{denn}
+\textbf{Schritt 2:}
+Wir zeigen als nächstes, dass jede totalgeordnete Teilmenge von $\Sigma$ eine obere Schranke besitzt.
+Sei 
+\[\calX=\{(H_i, \sigma_i) \mid i \in I\} \subseteq \Sigma\]
+eine totalgeordnete Teilmenge von $\Sigma$. Wir setzen
+\[H := \bigcup_{i \in I} H_i.\]
+Dann ist $H$ ein Zwischenkörper von $L|E$, 
+\begin{denn}
+Für $a, b \in H$ existieren $i,j\in I$ mit $a\in H_i$, $b\in H_j$. Da $\calX$ totalgeordnet ist, ist $(H_i, \sigma_i) \leq (H_j, \sigma_j)$ oder $(H_j, \sigma_j) \leq (H_i, \sigma_i)$. Ohne Einschränkung gelte $(H_i, \sigma_i) \leq (H_j, \sigma_j)$. Dann ist $H_i\subseteq H_j$, weswegen $a,b\in H_j$ und deshalb $a-b\in H_j\subseteq H$ gilt.
+Analog ist $ab^{-1}\in H$ für $b\neq0$. 
+\end{denn}
+Wir definieren
+\[
+\sigma\colon H \to \Omega,\quad a\mapsto \sigma_i(a), \text{ falls }a \in H_i. 
+\]
+Dies ist wohldefiniert,
+\begin{denn}
+Für $a\in H$ mit $a \in H_i$ und $a \in H_j$ ist wie oben ohne Einschränkung  $H_i \subseteq H_j$ und $\sigma_j|_{H_i}=\sigma_i$, also $\sigma_i(a)=\sigma_j|_{H_i}(a)=\sigma_j(a)$.
+\end{denn}
+Es ist $\sigma\in\Hom_K(H,\Omega)$,
+\begin{denn}
+Für $a, b \in H$ existiert wie oben ein $j\in I$ mit $a,b\in H_j$. Es ist dann 
+\[
+\sigma(a+b)=\sigma_j(a+b)=\sigma_j(a)+\sigma_j(b)=\sigma(a)+\sigma(b),
+\]
+analog folgen die anderen Verträglichkeiten.
+\end{denn}
+
+Somit ist $(H, \sigma) \in \Sigma$. Ist $i\in I$, dann ist $H_i \subseteq H$ und $\sigma|_{H_i} = \sigma_i$ nach Konstruktion, d.h. $(H_i, \sigma_i) \leq (H, \sigma)$ und $(H, \sigma)$ ist eine obere Schranke von $\calX$ in $\Sigma$.
+
+\textbf{Schritt 3:} Aus den Schritten 1 und 2 und dem Zornschen Lemma folgt, dass 
+$\Sigma$ ein maximales Element $(M, \tau')$ besitzt. Hierbei ist $M$ ein Zwischenkörper von $L|E$ und $\tau' \colon M \to \Omega$ ein $K$-Algebrenhomomorphismus mit $\tau'|_E = \tau$. Insbesondere wird $\Omega$ zur $M$-Algebra (vgl. 6.2) via $\tau'$ und ein Erweiterungskörper von $M$. Es ist $M = L$,
+\begin{denn}
+Wir nehmen an, dass $M\subsetneqq L=K(T)$ gilt. Dann existiert ein Element $\alpha\in T$ mit $\alpha\not\in M$.
+Da $\alpha$ algebraisch über $K$ ist, ist $\alpha$ auch algebraisch über $M$ und es gilt $\mipo_M\alpha\mid\mipo_K\alpha$
+in M[X]. Nach Voraussetzung zerfällt $\operatorname{mipo}_K(\alpha)$ über $\Omega$ in Linearfaktoren. 
+Wegen \ref{anm:linfakt_teiler} zerfällt auch $\operatorname{mipo}_M(\alpha)$ über $\Omega$ in Linearfaktoren,
+insbesondere hat $\operatorname{mipo}_M(\alpha)$ eine Nullstelle in $\Omega$. Aus der universellen Eigenschaft des Minimalpolynoms \ref{bem:minimalpolynom_universelle_eigenschaft} folgt die Existenz eines 
+$M$-Algebrenhomomorphismus $\delta \colon M(\alpha) \to \Omega$, insbesondere ist $\delta|_{M'}=\tau'$, und $\delta$
+ist ein $K$-Algebrenhomomorphismus. Wir erhalten $(M,\tau')\leq(M(\alpha),\delta)$ und $(M,\tau')\neq(M(\alpha),\delta)$.
+Dies ist ein Widerspruch zur Maximalität von $(M,\tau')$.
+\end{denn}
+(b) folgt aus (a) mit $E = K$ und der Einbettung $\tau\colon K\hookrightarrow\Omega$.
+
+(c) Sei $\alpha\in L$ und $\beta\in\Omega$ eine Nullstelle von $\mipo_K(\alpha)$.
+Aus der universellen Eigenschaft des Minimalpolynoms \ref{bem:minimalpolynom_universelle_eigenschaft} erhalten wir die Existenz eines $K$-Algebrenhomomorphismus $\tau\colon K(\alpha)\to\Omega$ mit $\tau(\alpha)=\beta$.
+Wir wenden nun (a) auf $E=K(\alpha)$ an und erhalten einen $K$-Algebrenhomomorphismus $\psi \colon L \to \Omega$ mit $\psi|_{K(\alpha)} = \tau$, d.h. mit $\psi(\alpha) = \beta$.
 \end{proof}
 
 \end{document}
