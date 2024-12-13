@@ -4807,7 +4807,7 @@ Falls (I) oder (II) gilt, lässt sich $f$ nach \ref{bem:eisenstein_kriterium} ni
 
 \begin{anm}\label{anm:reduktionskriterium_hir}
 \begin{itemize}
-\item Das Reduktionskriterium wird häufig angewandt, wenn $R$ ein Hauptidealring und $p\in R$ ein Primelement ist. Dann ist $(p)$ ein maximales Ideal in $R$ nach \ref{folg:irreduzibel_primelement_maximal}, also ist $R / \mathfrak{p}$ ein Körper und damit $(R / \mathfrak{p})[X]$ faktoriell.
+\item Das Reduktionskriterium wird häufig angewandt, wenn $R$ ein Hauptidealring und $p\in R$ ein Primelement ist. Dann ist $(p)$ ein maximales Ideal in $R$ nach \ref{folg:irreduzibel_primelement_maximal}, also ist $R / (p)$ ein Körper und damit $(R /(p))[X]$ faktoriell.
 \item Eine weitere Anwendung des Reduktionskriteriums ist wie folgt gegeben. Sei $R = k[X_1, \dots, X_n]$, wobei $k$ ein Körper ist und sei $p = X_n$ (dies ist ein Primelement). Dann gilt: $R / (p) = k[X_1, \dots, X_{n-1}]$, das Problem ist um eine Variable reduziert.
 
 \end{itemize}
@@ -4843,6 +4843,8 @@ Somit ist $\Phi_p(X+1)$ ein primitives $p$-Eisensteinpolynom und daher irreduzib
 \end{itemize}
 \end{bsp}
 
+\chapter{Algebraische Körpererweiterungen}
+\setcounter{section}{7}
 \section{Endliche und algebraische Körpererweiterungen}
 
 \begin{defini}\label{def:erweiterungskörper}
@@ -5186,7 +5188,7 @@ ist $K(c_0,\ldots,c_{n-1})|K$ endlich. Aus dem Gradsatz \ref{satz:gradsatz} erha
 "`$\Leftarrow$"' Sei $M|L$ algebraisch, $L|K$ algebraisch, und $\alpha \in M$. Dann ist $\alpha$ algebraisch über $L$. Nach Teil (a) ist $\alpha$ dann auch algebraisch über $K$. Somit ist $M|K$ algebraisch.
 \end{proof}
 
-\begin{bem}\label{bem:algebraischer_abschluss}
+\begin{bem}\label{bem:rel_algebraischer_abschluss}
 Wir setzen $M := \{\alpha \in L \mid \alpha \text{ ist algebraisch über } K\}$. Dann gilt:
 \begin{itemize}
     \item[(a)] $M$ ist ein Teilkörper von $L$, der sogenannte \textbf{algebraische Abschluss} von $K$ in $L$.
@@ -5205,7 +5207,7 @@ Seien $K = \QQ$ und $L = \CC$. Der algebraische Abschluss von $\QQ$ in $\CC$ ist
 \[
 \QQalg := \{\alpha \in \CC \mid \alpha \text{ algebraisch über } \QQ\}.
 \]
-$\QQalg|\QQ$ ist nach \ref{bem:algebraischer_abschluss} eine algebraische Erweiterung.
+$\QQalg|\QQ$ ist nach \ref{bem:rel_algebraischer_abschluss} eine algebraische Erweiterung.
 $\QQalg$ heißt der \defn{Körper der algebraischen Zahlen}.
 Es ist $[\QQalg : \QQ] = \infty$, 
 \begin{denn}
