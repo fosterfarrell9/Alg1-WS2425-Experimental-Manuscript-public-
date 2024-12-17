@@ -175,6 +175,7 @@ plainpages=false,}
 \DeclareMathOperator{\image}{im}
 \DeclareMathOperator{\intern}{int}
 \DeclareMathOperator{\kgV}{kgV}
+\DeclareMathOperator{\Konj}{Konj}
 \DeclareMathOperator{\Mat}{M}
 \DeclareMathOperator{\mdeg}{mdeg}
 \DeclareMathOperator{\mipo}{mipo}
@@ -1845,7 +1846,7 @@ Die Äquivalenzklasse von $x \in M$ ist gegeben durch
 \end{enumerate}
 \end{bsp}
 
-\begin{anm}\label{anm:linkskoseten}
+\begin{anm}\label{anm:linksnebenkl_op}
 Sei $H \leq G$. Die Menge der Linksnebenklassen $G / H$ wird durch 
 \[
 G \times G / H \to G / H, \quad g . (a H) := (g a) H
@@ -2798,7 +2799,7 @@ Aus der Eindeutigkeitsaussage in der universellen Eigenschaft von $(K_1,\iota_1)
 
 \begin{bsp}\label{bsp:quotient_koerper_konstruktion}
 \begin{itemize}
-    \item[(a)] Die Konstruktion aus dem Beweis von Satz \ref{satz:existenz_quotientenkörper} liefert eine Möglichkeit, den Körper $\mathbb{Q}$ als Quotientenkörper von $\ZZ$ formal zu konstruieren.
+    \item[(a)] Die Konstruktion aus dem Beweis von Satz \ref{satz:existenz_quotientenkörper} liefert eine Möglichkeit, den Körper $\QQ$ als Quotientenkörper von $\ZZ$ formal zu konstruieren.
     In der Praxis rechnet man in $\QQ$ natürlich nicht mit dieser expliziten Konstruktion. Stattdessen verwendet man die Existenz von $\QQ=\Quot(\ZZ)$ zusammen mit (i'). 
     \item[(b)] Ist $K$ ein Körper, dann ist $K$ zusammen mit der Identität $\operatorname{id}_K \colon K \to K$ ein Quotientenkörper von $K$. Aus der expliziten Konstruktion in \ref{satz:existenz_quotientenkörper} ist dies nicht unmittelbar klar.
     Mit der universellen Eigenschaft ist es sofort einsichtig: Ist $L$ ein Körper und $\varphi \colon K \to L$ ein injektiver Ringhomomorphismus, dann existiert genau ein Körperhomomorphismus $\Phi$, sodass folgendes Diagramm kommutiert:
@@ -2953,7 +2954,7 @@ Wir zeigen (a) und (b) zusammen.
 
 "`$\Rightarrow$"' Sei $\varphi_K \colon \ZZ \to K$ der kanonische Homomorphismus aus der universellen Eigenschaft von $\ZZ$. Dann ist $\operatorname{im} \varphi_K \subseteq K$ ein Unterring von $K$ und somit nullteilerfrei. Außerdem gilt $1_K \in P$, also $\operatorname{im} \varphi_K \subseteq P$. Folglich ist $\Quot(\operatorname{im} \varphi_K) \subseteq P$, und daher $\Quot(\operatorname{im} \varphi_K) = P$.
 \begin{itemize}
-\item Ist $\operatorname{char} K = 0$, so ist $\ker\varphi_K=0$ und daher nach dem Homomorphiesatz $\mathbb{Z} \cong \operatorname{im} \varphi_K$, also $\mathbb{Q} \cong \Quot(\operatorname{im} \varphi_K) = P$.
+\item Ist $\operatorname{char} K = 0$, so ist $\ker\varphi_K=0$ und daher nach dem Homomorphiesatz $\mathbb{Z} \cong \operatorname{im} \varphi_K$, also $\QQ \cong \Quot(\operatorname{im} \varphi_K) = P$.
 \item Ist $\operatorname{char} K = p > 0$, so ist $\ker\varphi_K=p\ZZ$ und deshalb nach dem Homomorphiesatz $\mathbb{F}_p \cong \operatorname{im} \varphi_K$. Wir erhalten $\FF_p = \Quot(\FF_p) \cong \Quot(\operatorname{im} \varphi_K) = P$
 
 \end{itemize}
@@ -4769,7 +4770,7 @@ Dann lässt sich $f$ nicht als Produkt zweier nicht-konstanter Polynome aus $R[X
 Wir zeigen die Aussage per Kontraposition.
 Seien $g, h \in R[X]$ nichtkonstant mit $f = gh$. Dann gilt:
 \[
-1 < \deg g, \deg h < n.
+1 \leq \deg g, \deg h < n.
 \]
 Wir unterscheiden nun nach den beiden Fällen (I) und (II).
 
@@ -5056,7 +5057,7 @@ Wegen Satz \ref{satz:minimalpolynom} ist $\QQ[X] / (X^2 - 3) \cong \QQ(\sqrt{3})
 \end{bsp}
 
 \begin{bsp}\label{bsp:invers_koerpererweiterung}
-Sei $\alpha \in L\setminus\{0\}$ algebraisch über $K$. Wie findet man ein $\alpha^{-1} \in K(\alpha)$?
+Sei $\alpha \in L\setminus\{0\}$ algebraisch über $K$. Wie findet man $\alpha^{-1} \in K(\alpha)=K[\alpha]$?
 Sei \[f = X^n + c_{n-1} X^{n-1} + \dots + c_0 \in K[X]\] das Minimalpolynom von $\alpha$ über $K$.
 Für $n = 1$ ist $f = X + c_0$. Aus $f(\alpha) = 0$ folgt dann $\alpha + c_0 = 0$, also $\alpha = -c_0$ und deshalb \[\alpha^{-1} = -c_0^{-1} \in K \subseteq K[\alpha].\]
 Im Fall $n \geq 2$ ist $c_0 \neq 0$, da $f$ irreduzibel ist (ist $c_0=0$ wäre $f$ durch $X$ teilbar). Dann ist
@@ -5084,7 +5085,7 @@ Insbesondere ist jede endliche Körpererweiterung algebraisch. In diesem Fall is
 \end{satz}
 
 \begin{proof}
-"`(i) $\Rightarrow$ (ii)"': Sei $L|K$ endlich mit $n = [L : K]$ und sei $\alpha \in L$. Die $n+1$ Elemente $1, \alpha, \alpha^2, \dots, \alpha^n$ sind dann linear abhängig über $K$.
+"`(i) $\Rightarrow$ (iii)"': Sei $L|K$ endlich mit $n = [L : K]$ und sei $\alpha \in L$. Die $n+1$ Elemente $1, \alpha, \alpha^2, \dots, \alpha^n$ sind dann linear abhängig über $K$.
     Es existieren also $c_0, \dots, c_n \in K$, nicht alle gleich $0$, sodass
     \[
     c_n \alpha^n + \dots + c_1 \alpha + c_0 = 0
@@ -5238,36 +5239,81 @@ entsprechend für $\End_K(L)$ und $\Aut_K(L)$, vgl. \ref{bsp:algebrenhomomorphis
 Seien $A, B$ $K$-Algebren, $f \in K[X]$, $\varphi \in \Hom_K(A, B)$ und $\alpha \in A$. Dann gilt:
 \begin{itemize}
     \item[(a)] $f(\varphi(\alpha)) = \varphi(f(\alpha))$.
-    \item[(b)] $f(\alpha) = 0 \Rightarrow f(\varphi(\alpha)) = 0$.
+    \item[(b)] $f(\alpha) = 0 \implies f(\varphi(\alpha)) = 0$.
 \end{itemize}
-Insbesondere operiert $\Aut_K(A)$ auf der Menge der Nullstellen von $f$ in $A$ durch $\varphi.\beta=\varphi(\beta)$.
+Insbesondere operieren $\End_K(A)$ und $\Aut_K(A)$ auf der Menge der Nullstellen von $f$ in $A$ durch \[\varphi.\beta=\varphi(\beta).\]
 \end{bem}
 
 \begin{proof}
 (a) ist ein Spezialfall einer Aussage aus \ref{anm:poly_r_alg_kom}, und (b) folgt direkt aus (a).
 \end{proof}
 
+\begin{defini}\label{def:konjugierte}
+Es sei $\alpha\in L$ algebraisch über $K$ und es sei $A$ eine $K$-Algebra.
+Wir setzen
+\[
+\Konj_A\alpha:=\{ \beta\in A \mid \mipo_K(\beta) = 0\}
+\]
+und nennen dies die Menge der $\defn{Konjugierten}$ von $\alpha$ in $A$.
+\end{defini}
+
+\begin{anm}\label{anm:konjugierte}
+\begin{itemize}
+\item Diese Definition von Konjugierten ist eine utilitaristische Vorlesungsdefinition, die man so in der Literatur nicht finden wird. Wir werden im weiteren Verlauf meist Zusatzbedingungen an $A$ stellen, um in einem konkreten Kontext gewinnbringende Informationen zu erhalten. Typischerweise wird bei uns eine Körpererweiterung gegeben sein, innerhalb derer wir uns Konjugierte ansehen.
+\item Aufgrund von \ref{bem:k-algebra_homomorphismen} gibt es eine operieren $\End_K(A)$ und $\Aut_K(A)$ auf $\Konj_A\alpha$ durch
+\[\varphi.\beta=\varphi(\beta).\]
+\item Ist $\varphi\in\Hom_K(L,A)$, so ist $\varphi(\alpha)\in\Konj_A\alpha$ wegen \ref{bem:k-algebra_homomorphismen}. Insbesondere erhalten wir eine wohldefinierte Abbildung
+\[
+\Hom_K(L,A)\to \Konj_A\alpha, \quad \varphi\mapsto\varphi(\alpha).
+\]
+\end{itemize}
+\end{anm}
+
+\begin{bsp}\label{bsp:konjugierte}
+Es bezeichne $\alpha=\sqrt[4]{2}\in\RR$ die eindeutig bestimmte positive reelle Zahl mit $\alpha^4=2$.
+Es ist $\mipo_\QQ\alpha=X^4-2\in\QQ[X]$ wegen \ref{bem:minpol_char}, denn dieses Polynom ist als $2$-Eisensteinpolynom irreduzibel und hat $\alpha$ als Nullstelle. Über $\QQalg$ ist
+\[
+\mipo_\QQ\alpha=X^4-2=(X - \sqrt[4]{2})(X + \sqrt[4]{2})(X - i\sqrt[4]{2})(X + i\sqrt[4]{2}),
+\]
+d.h.
+\[
+\Konj_{\QQalg}\alpha=\{\sqrt[4]{2},-\sqrt[4]{2},i\sqrt[4]{2},-i\sqrt[4]{2}\}.
+\]
+Über $\RR$ ist hingegen
+\[
+\mipo_\QQ\alpha = (X - \sqrt[4]{2})(X + \sqrt[4]{2})(X^2+\sqrt{2}),
+\]
+wobei der Faktor $X^2+\sqrt{2}$ keine reelle Nullstelle hat, d.h.
+\[
+\Konj_{\RR}\alpha=\{\sqrt[4]{2},-\sqrt[4]{2}\}.
+\]
+\end{bsp}
+
 \begin{bem}\label{bem:end_ist_aut}
 Sei $L|K$ algebraisch. Dann gilt: $\End_K(L) = \Aut_K(L)$.
 \end{bem}
 
 \begin{proof}
-Sei $\varphi \in \End_K(L)$. $\varphi$ ist injektiv, da $\varphi$ ein Körperhomomorphismus ist. Es bleibt zu zeigen, dass $\varphi$ auch surjektiv ist. Sei $\alpha \in L$. Dann ist $\alpha$ algebraisch über $K$. Sei $\mathcal{N}$ die Menge der Nullstellen von $\mipo_K \alpha$ in $L$. Aus \ref{bem:k-algebra_homomorphismen} erhalten wir eine wohldefinierte Abbildung $\varphi|_{\mathcal{N}}^\mathcal{N} \colon \mathcal{N} \to \mathcal{N}$. Da $\varphi$ injektiv ist, ist $\varphi|_{\mathcal{N}}^\calN$ ebenfalls injektiv. Aus der Endlichkeit von $\mathcal{N}$ folgt, dass $\varphi|_{\mathcal{N}}^\mathcal{N}$ surjektiv ist. Also existiert ein $\beta \in \mathcal{N}\subseteq L$ mit $\varphi(\beta) = \alpha$, d.h. $\varphi$ ist surjektiv.
+Sei $\varphi \in \End_K(L)$. $\varphi$ ist injektiv, da $\varphi$ ein Körperhomomorphismus ist. Es bleibt zu zeigen, dass $\varphi$ auch surjektiv ist. Sei $\alpha \in L$. Dann ist $\alpha$ algebraisch über $K$. Aus \ref{anm:konjugierte} erhalten wir durch Einschränkung von $\varphi$ eine Abbildung
+\[
+\varphi\colon\Konj_L\alpha \to\Konj_L\alpha, \quad \beta\mapsto\varphi(\beta).
+\]
+Diese ist weiterhin injektiv, und da $\Konj_L\alpha$ endlich ist, ist sie auch surjektiv.
+Also existiert ein $\beta \in \Konj_L\alpha\subseteq L$ mit $\varphi(\beta) = \alpha$.
 \end{proof}
 
 Die nachfolgende Aussage nennen wir die "`Universelle Eigenschaft des Minimalpolynoms"'.
 Diese Bezeichnung macht streng genommen keinen Sinn, es fehlt uns aber die (kategorientheoretische) Sprache, um genau zu beschreiben, um was für eine universelle Eigenschaft es sich hier handelt.
 
-\begin{bem}[Universelle Eigenschaft des Minimalpolynoms]\label{bem:minimalpolynom_universelle_eigenschaft}
-Sei $L|K$ ein Körper und $\alpha \in L$ algebraisch über $K$. Sei $A$ eine $K$-Algebra. Dann existiert für jede Nullstelle $\beta \in A$ von $\mipo_K \alpha$ ein eindeutig bestimmter $K$-Algebrenhomomorphismus $\varphi_\beta \colon K(\alpha) \to A$ mit $\varphi_\beta(\alpha) = \beta$. Insbesondere ist die Abbildung
+\begin{satz}[Universelle Eigenschaft des Minimalpolynoms]\label{satz:minimalpolynom_universelle_eigenschaft}
+Sei $L|K$ eine Körpererweiterung und $\alpha \in L$ algebraisch über $K$. Sei $A$ eine $K$-Algebra. Dann existiert für jedes $\beta \in\Konj_A\alpha$ ein eindeutig bestimmter $K$-Algebrenhomomorphismus $\varphi_\beta \colon K(\alpha) \to A$ mit $\varphi_\beta(\alpha) = \beta$. Insbesondere ist die Abbildung
 \[
-\Hom_K(K(\alpha), A) \to \{\text{Nullstellen von } \mipo_K \alpha \text{ in } A\}, \quad \varphi \mapsto \varphi(\alpha)
+\Hom_K(K(\alpha), A) \to \Konj_A\alpha, \quad \varphi \mapsto \varphi(\alpha)
 \]
 bijektiv.
-\end{bem}
-
+\end{satz}
 \begin{proof}[Beweis]
-Wir zeigen zunächst die Existenzaussage. Sei $\beta \in A$ eine Nullstelle von $\mipo_K \alpha$. Nach der universellen Eigenschaft des Polynomrings existiert ein eindeutig bestimmter $K$-Algebrenhomomorphismus
+Wir zeigen zunächst die Existenzaussage. Sei $\beta \in\Konj_A\alpha$. Nach der universellen Eigenschaft des Polynomrings existiert ein eindeutig bestimmter $K$-Algebrenhomomorphismus
 \[
 \Psi_\beta \colon K[X] \to A \quad \text{mit} \quad \Phi_\beta(X) = \beta.
 \]
@@ -5288,39 +5334,55 @@ Es verbleibt der Nachweis der Eindeutigkeitsaussage. Diese ergibt sich daraus, d
 \end{proof}
 
 \begin{anm}\label{anm:automorphismen_operation}
-$\Aut_K(K(\alpha))$ operiert nach \ref{bem:k-algebra_homomorphismen} auf der Menge der Nullstellen von $\mipo_K \alpha$ in $K(\alpha)$. Diese Operation ist transitiv,
+\begin{itemize}
+\item Die Bijektion aus \ref{satz:minimalpolynom_universelle_eigenschaft}
+\[
+\Hom_K(K(\alpha), A) \to \Konj_A\alpha, \quad \varphi \mapsto \varphi(\alpha)
+\] ist sogar ein Isomorphismus von $\End_K(A)$- und $Aut_K(A)$-Mengen, denn
+für $\psi\in\End_K(A)$ bzw. $\psi\in\Aut_K(A)$, $\varphi\in\Hom_K(K(\alpha),A)$ ist
+\[
+\psi.(\varphi(\alpha))=\psi(\varphi(\alpha))=(\psi\circ\varphi)(\alpha)=(\psi.\varphi)(\alpha).
+\]
+
+\item $\Aut_K(K(\alpha))$ operiert nach \ref{anm:konjugierte} auf $\Konj_{K(\alpha)}\alpha$. Diese Operation ist transitiv,
 \begin{denn}
-Für Nullstellen $\beta, \gamma$ von $\mipo_K \alpha$ in $K(\alpha)$ existieren
-wegen \ref{bem:minimalpolynom_universelle_eigenschaft} Endomorphismen $\varphi_\beta$, $\varphi_\gamma \in \End_K(K(\alpha)) \overset{\ref{bem:end_ist_aut}}{=} \Aut_K(K(\alpha))$ mit $\varphi_\beta(\alpha) = \beta$, $\varphi_\gamma(\alpha) = \gamma$. Somit gilt:
+Für $\beta, \gamma\in \Konj_{K(\alpha)}\alpha$ existieren
+wegen \ref{satz:minimalpolynom_universelle_eigenschaft} $\varphi_\beta$, $\varphi_\gamma \in \End_K(K(\alpha)) \overset{\ref{bem:end_ist_aut}}{=} \Aut_K(K(\alpha))$ mit $\varphi_\beta(\alpha) = \beta$, $\varphi_\gamma(\alpha) = \gamma$. Somit gilt:
 \[
 (\varphi_\gamma \circ \varphi_\beta^{-1})(\beta) = \varphi_\gamma(\alpha) = \gamma.
 \]
 \end{denn}
+\end{itemize}
 \end{anm}
 
 \begin{satz}[Fortsetzungssatz für algebraische Körpererweiterungen]\label{satz:fortsetzungssatz_algebraische_koerpererweiterungen}
 Sei $L|K$ eine algebraische Körpererweiterung und $T \subseteq L$ mit $L = K(T)$. Sei $\Omega|K$ eine Körpererweiterung mit der Eigenschaft, dass das Minimalpolynom eines jeden Elements aus $T$ über $\Omega$ in Linearfaktoren zerfällt. Dann gilt:
 \begin{itemize}
-    \item[(a)] Für jeden Zwischenkörper $L|E|K$ lässt sich jeder $K$-Algebrenhomomorphismus $\tau \colon E \to \Omega$ zu einem $K$-Algebrenhomomorphismus $\tau' \colon L \to \Omega$ fortsetzen.
+    \item[(a)] Für jeden Zwischenkörper $L|E|K$ lässt sich jeder $K$-Algebrenhomomorphismus $\tau \colon E \to \Omega$ zu einem $K$-Algebrenhomomorphismus $\tau' \colon L \to \Omega$ fortsetzen,
     \[
-% \xymatrix{
-% L \ar@{-}[d] \ar@{-->}[r] & \Omega \ar@{-}[dd] \\
-% E \ar[ur] \ar@{-}[dr] &  \\
-%  & K
-% }
 \xymatrix{
 L \ar@{-}[dr] \ar@{-->}[rr]^{\tau'} & & \Omega \ar@{-}[dd] \\
- & E \ar[ur]^\tau \ar@{-}[dr] &  \\
+ & E \ar[ur]_\tau \ar@{-}[dr] &  \\
  & & K
 }
 \]
+d.h. die Abbildung
+\[
+\Hom_K(L,\Omega)\to\Hom_K(E,\Omega), \quad \tau'\mapsto \tau'|_E
+\]
+ist surjektiv.
     \item[(b)] Es existiert ein $K$-Algebrenhomomorphismus $\varphi \colon L \to \Omega$.
-    \item[(c)] Ist $\alpha \in L$, so existiert für jede Nullstelle $\beta \in \Omega$ von $\mipo_K \alpha$ ein $K$-Algebrenhomomorphismus $\psi \colon L \to \Omega$ mit $\psi(\alpha) = \beta$.
+    \item[(c)] Ist $\alpha \in L$, so existiert für jedes $\beta \in \Konj_\Omega\alpha$ ein $K$-Algebrenhomomorphismus $\psi \colon L \to \Omega$ mit $\psi(\alpha) = \beta$, d.h.
+    die Abbildung
+    \[
+    \Hom_K(L,\Omega)\to \Konj_\Omega\alpha, \quad \psi\mapsto\psi(\alpha)
+    \]
+    ist surjektiv.
 \end{itemize}
 \end{satz}
 
 \begin{proof}
-(a) Sei $E$ eine Zwischenerweiterung von $L|K$, und $\tau \colon E \to \Omega$ ein $K$-Al\-ge\-bren\-homo\-morphismus. Wir setzen
+(a) Sei $E$ eine Zwischenerweiterung von $L|K$ und $\tau \colon E \to \Omega$ ein $K$-Al\-ge\-bren\-homo\-morphismus. Wir setzen
 \[
 \Sigma := \{(H, \sigma) \mid L|H|E \text{ Zwischenkörper, } \sigma \in \Hom_K(H, \Omega)\text{ mit } \sigma|_E = \tau\}.
 \]
@@ -5372,21 +5434,21 @@ analog folgen die anderen Verträglichkeiten.
 Somit ist $(H, \sigma) \in \Sigma$. Ist $i\in I$, dann ist $H_i \subseteq H$ und $\sigma|_{H_i} = \sigma_i$ nach Konstruktion, d.h. $(H_i, \sigma_i) \leq (H, \sigma)$ und $(H, \sigma)$ ist eine obere Schranke von $\calX$ in $\Sigma$.
 
 \textbf{Schritt 3:} Aus den Schritten 1 und 2 und dem Zornschen Lemma folgt, dass 
-$\Sigma$ ein maximales Element $(M, \tau')$ besitzt. Hierbei ist $M$ ein Zwischenkörper von $L|E$ und $\tau' \colon M \to \Omega$ ein $K$-Algebrenhomomorphismus mit $\tau'|_E = \tau$. Insbesondere wird $\Omega$ zur $M$-Algebra (vgl. 6.2) via $\tau'$ und ein Erweiterungskörper von $M$. Es ist $M = L$,
+$\Sigma$ ein maximales Element $(M, \tau')$ besitzt. Hierbei ist $M$ ein Zwischenkörper von $L|E$ und $\tau' \colon M \to \Omega$ ein $K$-Algebrenhomomorphismus mit $\tau'|_E = \tau$. Insbesondere wird $\Omega$ zur $M$-Algebra via $\tau'$. Es ist $M = L$,
 \begin{denn}
 Wir nehmen an, dass $M\subsetneqq L=K(T)$ gilt. Dann existiert ein Element $\alpha\in T$ mit $\alpha\not\in M$.
 Da $\alpha$ algebraisch über $K$ ist, ist $\alpha$ auch algebraisch über $M$ und es gilt $\mipo_M\alpha\mid\mipo_K\alpha$
-in M[X]. Nach Voraussetzung zerfällt $\operatorname{mipo}_K(\alpha)$ über $\Omega$ in Linearfaktoren. 
+in $M[X]$. Nach Voraussetzung zerfällt $\operatorname{mipo}_K(\alpha)$ über $\Omega$ in Linearfaktoren. 
 Wegen \ref{anm:linfakt_teiler} zerfällt auch $\operatorname{mipo}_M(\alpha)$ über $\Omega$ in Linearfaktoren,
-insbesondere hat $\operatorname{mipo}_M(\alpha)$ eine Nullstelle in $\Omega$. Aus der universellen Eigenschaft des Minimalpolynoms \ref{bem:minimalpolynom_universelle_eigenschaft} folgt die Existenz eines 
-$M$-Algebrenhomomorphismus $\delta \colon M(\alpha) \to \Omega$, insbesondere ist $\delta|_{M'}=\tau'$, und $\delta$
+insbesondere hat $\operatorname{mipo}_M(\alpha)$ eine Nullstelle in $\Omega$. Aus der universellen Eigenschaft des Minimalpolynoms \ref{satz:minimalpolynom_universelle_eigenschaft} folgt die Existenz eines 
+$M$-Algebrenhomomorphismus $\delta \colon M(\alpha) \to \Omega$, insbesondere ist $\delta|_{M}=\tau'$, und $\delta$
 ist ein $K$-Algebrenhomomorphismus. Wir erhalten $(M,\tau')\leq(M(\alpha),\delta)$ und $(M,\tau')\neq(M(\alpha),\delta)$.
-Dies ist ein Widerspruch zur Maximalität von $(M,\tau')$.
+Dies steht im Widerspruch zur Maximalität von $(M,\tau')$.
 \end{denn}
 (b) folgt aus (a) mit $E = K$ und der Einbettung $\tau\colon K\hookrightarrow\Omega$.
 
-(c) Sei $\alpha\in L$ und $\beta\in\Omega$ eine Nullstelle von $\mipo_K(\alpha)$.
-Aus der universellen Eigenschaft des Minimalpolynoms \ref{bem:minimalpolynom_universelle_eigenschaft} erhalten wir die Existenz eines $K$-Algebrenhomomorphismus $\tau\colon K(\alpha)\to\Omega$ mit $\tau(\alpha)=\beta$.
+(c) Sei $\alpha\in L$ und $\beta\in\Konj_\Omega\alpha$.
+Aus der universellen Eigenschaft des Minimalpolynoms \ref{satz:minimalpolynom_universelle_eigenschaft} erhalten wir die Existenz eines $K$-Algebrenhomomorphismus $\tau\colon K(\alpha)\to\Omega$ mit $\tau(\alpha)=\beta$.
 Wir wenden nun (a) auf $E=K(\alpha)$ an und erhalten einen $K$-Algebrenhomomorphismus $\psi \colon L \to \Omega$ mit $\psi|_{K(\alpha)} = \tau$, d.h. mit $\psi(\alpha) = \beta$.
 \end{proof}
 
