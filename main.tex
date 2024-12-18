@@ -5245,7 +5245,12 @@ Insbesondere operieren $\End_K(A)$ und $\Aut_K(A)$ auf der Menge der Nullstellen
 \end{bem}
 
 \begin{proof}
-(a) ist ein Spezialfall einer Aussage aus \ref{anm:poly_r_alg_kom}, und (b) folgt direkt aus (a).
+(a) ist ein Spezialfall einer Aussage aus \ref{anm:poly_r_alg_kom}. Aufgrund der Wichtigkeit der Aussage führen wir den Beweis dennoch durch. Sei $f=b_nX^n+\ldots+b_1X+b_0\in K[X]$. Da $\varphi$ ein $K$-Algebrenhomomorphismus ist, erhalten wir
+\[
+\varphi(f(\alpha))=\varphi(b_n\alpha^n+\ldots+b_1\alpha+b_0)=b_n\varphi(\alpha^n)+\ldots+
+b_1\varphi(\alpha)+b_0=f(\varphi(\alpha)).
+\]
+(b) folgt direkt aus (a).
 \end{proof}
 
 \begin{defini}\label{def:konjugierte}
@@ -5354,6 +5359,39 @@ wegen \ref{satz:minimalpolynom_universelle_eigenschaft} $\varphi_\beta$, $\varph
 \end{denn}
 \end{itemize}
 \end{anm}
+
+\begin{bsp}\label{bsp:ue-minpol}
+Wir haben in \ref{bsp:konjugierte} gesehen, dass die reelle Zahl $\sqrt[4]{2}$
+genau vier Konjugierte in $\QQalg$ hat:
+\[
+\Konj_{\QQalg}\sqrt[4]{2}=\{\sqrt[4]{2},-\sqrt[4]{2},i\sqrt[4]{2},-i\sqrt[4]{2}\}.
+\]
+Aufgrund von \ref{satz:minimalpolynom_universelle_eigenschaft} gibt es somit genau vier
+$\QQ$-Algebrenhomomorphismen $\varphi_i\colon\QQ(\sqrt[4]{2})\to\QQalg$, $i=1,\ldots,4$. Diese sind eindeutig bestimmt durch das Bild von $\sqrt[4]{2}$:
+\[
+\varphi_1(\sqrt[4]{2})=\sqrt[4]{2}, \quad \varphi_2(\sqrt[4]{2})=-\sqrt[4]{2},\quad \varphi_3(\sqrt[4]{2})=i\sqrt[4]{2}, \quad\varphi_4(\sqrt[4]{2})=-i\sqrt[4]{2}.
+\]
+Wir werden künftig vergleichbare Homomorphismen meist dadurch beschreiben, dass wir angeben,
+was sie auf Erzeugern machen. Dies erspart uns einiges an Schreibarbeit.
+Exemplarisch rechnen wir aus, wie $\varphi_3$ explizit auf Elementen von $\QQ(\sqrt[4]{2})$ 
+aussieht. Nach \ref{satz:minimalpolynom} ist eine $\QQ$-Basis $\QQ(\sqrt[4]{2})$ durch
+$(1,\sqrt[4]{2},(\sqrt[4]{2})^2,(\sqrt[4]{2})^3)$ gegeben. Elemente $x$ von $\QQ(\sqrt[4]{2})$
+sind dementsprechend explizit von der Form
+\[
+x=a+b\sqrt[4]{2}+c(\sqrt[4]{2})^2+d(\sqrt[4]{2})^3
+\]
+mit eindeutig bestimmten Elementen $a,b,c,d\in\QQ$. Da $\varphi_3$ ein $\QQ$-Algebrenhomomorphismus ist, erhalten wir
+\begin{align*}
+\varphi_3(x)&=\varphi_3(a+b\sqrt[4]{2}+c\sqrt[4]{2}^2+d\sqrt[4]{2}^3)
+= a+b\varphi_3(\sqrt[4]{2})+c\varphi_3(\sqrt[4]{2}^2)+d\varphi_3(\sqrt[4]{2}^3) \\
+&= a+b\varphi_3(\sqrt[4]{2})+c\varphi_3(\sqrt[4]{2})^2+d\varphi_3(\sqrt[4]{2})^3
+=a+b(i\sqrt[4]{2})+c(i\sqrt[4]{2})^2+d(i\sqrt[4]{2})^3 \\
+&=a+bi\sqrt[4]{2}-c\sqrt{2}-di(\sqrt[4]{2})^3.
+\end{align*}
+
+
+Da $\sqrt[4]{2}$ in $\RR$ nur die beiden Konjugierten $\sqrt[4]{2},-\sqrt[4]{2}$ hat, gibt es nur zwei $\QQ$-Algebrenhomomorphismen von $\QQ(\sqrt[4]{2})$ nach $\RR$
+\end{bsp}
 
 \begin{satz}[Fortsetzungssatz für algebraische Körpererweiterungen]\label{satz:fortsetzungssatz_algebraische_koerpererweiterungen}
 Sei $L|K$ eine algebraische Körpererweiterung und $T \subseteq L$ mit $L = K(T)$. Sei $\Omega|K$ eine Körpererweiterung mit der Eigenschaft, dass das Minimalpolynom eines jeden Elements aus $T$ über $\Omega$ in Linearfaktoren zerfällt. Dann gilt:
