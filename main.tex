@@ -5367,7 +5367,7 @@ genau vier Konjugierte in $\QQalg$ hat:
 \Konj_{\QQalg}\sqrt[4]{2}=\{\sqrt[4]{2},-\sqrt[4]{2},i\sqrt[4]{2},-i\sqrt[4]{2}\}.
 \]
 Aufgrund von \ref{satz:minimalpolynom_universelle_eigenschaft} gibt es somit genau vier
-$\QQ$-Algebrenhomomorphismen $\varphi_i\colon\QQ(\sqrt[4]{2})\to\QQalg$, $i=1,\ldots,4$. Diese sind eindeutig bestimmt durch das Bild von $\sqrt[4]{2}$:
+$\QQ$-Algebrenhomomorphismen $\varphi_j\colon\QQ(\sqrt[4]{2})\to\QQalg$, $j=1,\ldots,4$. Diese sind eindeutig bestimmt durch das Bild von $\sqrt[4]{2}$:
 \[
 \varphi_1(\sqrt[4]{2})=\sqrt[4]{2}, \quad \varphi_2(\sqrt[4]{2})=-\sqrt[4]{2},\quad \varphi_3(\sqrt[4]{2})=i\sqrt[4]{2}, \quad\varphi_4(\sqrt[4]{2})=-i\sqrt[4]{2}.
 \]
@@ -5489,6 +5489,289 @@ Dies steht im Widerspruch zur Maximalität von $(M,\tau')$.
 Aus der universellen Eigenschaft des Minimalpolynoms \ref{satz:minimalpolynom_universelle_eigenschaft} erhalten wir die Existenz eines $K$-Algebrenhomomorphismus $\tau\colon K(\alpha)\to\Omega$ mit $\tau(\alpha)=\beta$.
 Wir wenden nun (a) auf $E=K(\alpha)$ an und erhalten einen $K$-Algebrenhomomorphismus $\psi \colon L \to \Omega$ mit $\psi|_{K(\alpha)} = \tau$, d.h. mit $\psi(\alpha) = \beta$.
 \end{proof}
+
+\section{Zerfällungskörper und algebraischer Abschluss}
+
+\begin{notation}
+In diesem Abschnitt sei $K$ stets ein Körper.  
+\end{notation}
+
+Sei $f \in K[X]$ nichtkonstant. Unser Ziel ist es im Folgenden, eine Körpererweiterung $L|K$ zu konstruieren, sodass $f$ eine Nullstelle in $L$ hat und $f$ bzw. über $L$ sogar in Linearfaktoren zerfällt. Dies wollen wir anschließend für Familien von Polynomen verallgemeinern.
+
+\begin{satz}\label{satz:zerfall_poly}
+Sei $f \in K[X]$ mit $\deg f \geq 1$. Dann existiert eine endliche Körpererweiterung $L|K$, sodass $f$ eine Nullstelle in $L$ hat.
+\end{satz}
+
+\begin{proof}
+Ohne Einschränkung sei das Polynom $f$ irreduzibel und normiert. Wir setzen
+$L:=K[X]/(f)$. Da $K[X]$ ein Hauptidealring ist und $f$ irreduzibel ist,  ist $(f)$ nach \ref{folg:irreduzibel_primelement_maximal} ein maximales Ideal und folglich $L$ ein Körper.
+Wir betrachten den $K$-Algebrenhomomorphismus 
+\[
+\varphi \colon K\hookrightarrow K[X] \overset{\pi}{\to} K[X]/(f)=L, \quad a \mapsto a + (f),
+\]
+wobei $\pi$ die kanonische Projektion bezeichnet. Die Abbildung $\varphi$ ist injektiv, da sie ein Körperhomomorphismus ist. Dadurch wird $L$ zum Erweiterungskörper von $K$
+mit $[L:K]\overset{\ref{folgerung:polynomring-modul}}{=}\deg f<\infty$. 
+Wir setzen $\alpha := \pi(X) = \overline{X}\in L$. Dann gilt:
+\[
+f(\alpha) = f(\pi(X)) \overset{\ref{bem:k-algebra_homomorphismen}}{=} \pi(f(X)) = 0.
+\]
+\end{proof}
+
+\begin{defini}\label{def:zerfall_koerper}
+Sei $\mathcal{F} = (f_i)_{i \in I}$ eine Familie von nichtkonstanten Polynomen aus $K[X]$. Ein Erweiterungskörper $Z$ von $K$ heißt \defn{Zerfällungskörper} von $\mathcal{F}$ über $K$, wenn gilt:
+\begin{itemize}
+    \item[(Z1)] Jedes $f_i$ zerfällt über $Z$ in Linearfaktoren.
+    \item[(Z2)] $Z|K$ wird von den Nullstellen der $f_i$, $i \in I$, in $Z$ erzeugt.
+\end{itemize}
+\end{defini}
+
+\begin{anm}\label{anm:zerfkp_produkt}
+\begin{itemize}
+\item Wegen (Z2) und \ref{satz:algebraische_erweiterung_äquivalenz} ist $Z|K$ algebraisch. 
+\item Ist $\calF$ eine endliche Familie, so ist $Z|K$ wegen \ref{satz:endl_erweiterung_aquivalenzen} endlich. 
+\item Für $\mathcal{F} = \{f_1, \dots, f_n\}$ endlich gilt: Jeder Zerfällungskörper von $f_1, \dots, f_n$ ist ein Zerfällungskörper von $f_1\cdot\ldots\cdot f_n$ und umgekehrt.
+\end{itemize}
+\end{anm}
+
+\begin{bsp}\label{bsp:zerfall_koerper}
+\begin{itemize}
+    \item[(a)] $Z := \QQ(\sqrt{2}, \sqrt{3})$ ist ein Zerfällungskörper der Familie $(X^2-2, X^2-3)$ über $\QQ$, denn über $Z$ ist 
+    \[
+    X^2-2 = (X-\sqrt{2})(X+\sqrt{2}) \quad \text{und} \quad X^2-3 = (X-\sqrt{3})(X+\sqrt{3}),
+    \]
+    und es gilt $Z = \QQ(\sqrt{2}, \sqrt{3})=\QQ(\sqrt{2},-\sqrt{2},\sqrt{3},-\sqrt{3})$.
+    \item[(b)] Der Teilkörper $\QQ(\sqrt[4]{2})$ von $\RR$ ist kein Zerfällungskörper von $X^4-2$ über $\QQ$, denn $X^4-2$ zerfällt über $\RR$ nicht in Linearfaktoren, also erst recht nicht über $\QQ(\sqrt[4]{2})$ (vgl. \ref{bsp:konjugierte}).
+\end{itemize}
+\end{bsp}
+
+\begin{bem}\label{bem:realisierung_zerfall_koerper}
+Sei $\calF=(f_i)_{i\in I}$ eine Familie nichtkonstanter Polynome aus $K[X]$ und $L|K$ eine Körpererweiterung, sodass alle Polynome aus $\calF$ über $L$ in Linearfaktoren zerfallen. Dann existiert genau ein Zwischenkörper $L|Z|K$, der ein Zerfällungskörper von $\calF$ ist, nämlich
+\[
+Z = K\big(\{\text{Nullstellen sämtlicher } f_i \text{ in } L\}\big).
+\]
+\end{bem}
+
+\begin{proof}
+Zum Nachweis der Existenz definieren wir $Z$ wie oben.  
+Dann zerfallen alle $f_i$ über $L$ in Linearfaktoren, also auch über $Z$, da $Z$ alle Nullstellen der $f_i$ enthält. Außerdem wird $Z$ über $K$ von allen Nullstellen der $f_i$ erzeugt, also ist $Z$ ein Zerfällungskörper von $\calF$.
+
+Um die Eindeutigkeit nachzuweisen, sei $L \mid E \mid K$ ein Zwischenkörper, so dass $E$ ein Zerfällungskörper von $\calF$ ist. Dann liegen alle Nullstellen der $f_i$ in $E$, also ist $Z \subseteq E$. Da $E$ von den Nullstellen der $f_i$ erzeugt wird, gilt auch $E \subseteq Z$. Somit ist $E = Z$.
+\qed
+\end{proof}
+
+\begin{anm}\label{anm:zerfkoerper_realisiert_in_C}
+Für $K = \QQ$ ist $L = \CC|\QQ$ eine Körpererweiterung, die die Voraussetzung aus \ref{bem:realisierung_zerfall_koerper} erfüllt, d.h. Zerfällungskörper von Polynomen aus $\QQ[X]$ können als Teilkörper von $\CC$ realisiert werden.  
+Beispielsweise ist ein Zerfällungskörper von $X^4 - 2$ über $\QQ$ durch $\QQ(\sqrt[4]{2}, -\sqrt[4]{2}, i\sqrt[4]{2},-i\sqrt[4]{2}) = \QQ(\sqrt[4]{2}, i)$ gegeben. Wie sieht es für andere Grundkörper $K$ aus? Die Antwort wird in den nächsten beiden Sätzen gegeben.
+\end{anm}
+
+\begin{satz}\label{satz:zerfkoerper_n_polynome}
+Seien $f_1,\dots,f_n \in K[X]$ nichtkonstant. Dann existiert ein Zerfällungskörper der endlichen Familie $\calF=(f_1,\dots,f_n)$.
+\end{satz}
+\begin{proof}
+Wegen \ref{anm:zerfkp_produkt} können wir ohne Einschränkung $n=1$, $\calF=(f)$ annehmen. 
+Aufgrund von \ref{bem:realisierung_zerfall_koerper} genügt es zu zeigen, dass es Körpererweiterung $L|K$ gibt, so dass $f$ über $L$ in Linearfaktoren zerfällt. Eine solche gibt es,
+\begin{denn}
+Dies zeigen wir durch Induktion nach $m = \deg f$. Für $m=1$ ist $f$ linear und $L=K$ erfüllt die Behauptung. Sei nun $m>1$. Aus \ref{satz:zerfall_poly} erhalten wir eine Körpererweiterung $E|K$, so dass $f$ eine Nullstelle $\alpha$ in $E$ besitzt.
+Aufgrund von \ref{bem:nullstellen-polynome} existiert ein $g\in E[X]$ mit  $f = (X - \alpha)g$, insbesondere ist $\deg g = m-1$.
+Nach Induktionsvoraussetzung existiert eine Körpererweiterung $L|E$, so dass $g$ über $L$ in Linearfaktoren zerfällt. Hieraus folgt, dass $f$ über $L$ in Linearfaktoren zerfällt.
+\end{denn}
+\end{proof}
+
+\begin{satz}[Hauptsatz über Zerfällungskörper]\label{satz:zerfkoerper_familie}
+Sei $\calF=(f_i)_{i \in I}$ eine Familie von nichtkonstanten Polynomen aus $K[X]$. Dann gilt:
+\begin{enumerate}
+\item[(a)] Es existiert ein Zerfällungskörper von $\calF$.
+\item[(b)] Je zwei Zerfällungskörper von $\calF$ sind als $K$-Algebren (unkanonisch) isomorph.
+\end{enumerate}
+\end{satz}
+
+\begin{proof}
+(a) Wir können ohne Einschränkung annehmen, daß alle $f_i$ normiert sind.
+
+\textbf{Schritt 1:} Es existiert eine kommutative Ringerweiterung $A|K$, über der jedes der $f_i$ in Linearfaktoren zerfällt,
+\begin{denn}
+Für jedes $i\in I$ setzen wir $n_i := \deg(f_i)$, führen $n_i$ Variablen $X_{i,1}, \ldots, X_{i,n_i}$ ein und betrachten den Polynomring
+\[
+F := K\bigl[(X_{i,k})_{i \in I,\,1 \leq k \leq n_i}\bigr].
+\]
+
+Sei $E \subseteq F$ die Menge der Koeffizienten der Polynome
+\[
+\tilde f_i := f_i - \prod_{k=1}^{n_i}(X - X_{i,k}) \in F[X], \quad i \in I.
+\]
+Es bezeichne $J=(E) \subseteq F$ das von $E$ erzeugte Ideal im Ring $F$. Wir setzen
+\[
+A := F/J.
+\]
+Dann ist $A$ eine kommutative $K$-Algebra mit der Eigenschaft, dass in $A[X]$ die Gleichung
+\[
+f_i = \prod_{k=1}^{n_i}(X - \overline{X}_{i,k}) \quad \text{für alle } i \in I,
+\]
+gilt, wobei $\overline{X}_{i,k}$ das Bild von $X_{i,k}$ unter der kanonischen Projektion $F \to A$ ist und wir das Bild von $f_i$ in $A[X]$ unter der koeffizientenweisen Projektionsabbildung wieder mit $f_i$ bezeichnen. Somit zerfallen über $A$ alle $f_i$ in Linearfaktoren.
+
+Es ist $A \neq 0$, was wir im Folgenden per Widerspruch zeigen. Wir nehmen dazu an, dass $A=0$ ist. Dann ist $J=F$, also $1 \in J$. Folglich gibt es $g_1,\ldots,g_r \in E$ und $h_1,\ldots,h_r \in F$ mit
+\[
+1 = h_1g_1 + \cdots + h_rg_r.
+\]
+Für jedes $m=1,\ldots,r$ existiert ein Index $\lambda_m\in I$, so dass $g_m$ ein Koeffizient des Polynoms $\tilde f_{\lambda_m}$ ist. Wir setzen $\Lambda:=\{\lambda_1,\ldots,\lambda_r\}\subseteq I$. Aufgrund von \ref{satz:zerfkoerper_n_polynome} existiert ein Zerfällungskörper $L|K$ der endlichen Familie $(f_{\lambda_1},\ldots,f_{\lambda_r})$. Für $\lambda\in\Lambda$ seien $\alpha_{\lambda,1},\ldots,\alpha_{\lambda,n_\lambda}$ die Nullstellen von $f_\lambda$ in $L$. Aus der universellen Eigenschaft des Polynomrings $F$ erhalten wir einen eindeutig bestimmten $K$-Algebrenhomomorphismus
+\[
+\Phi \colon F= K\bigl[(X_{i,k})_{i \in I,\,1 \leq k \leq n_i}\bigr] \to L
+\]
+mit den Eigenschaften
+\[
+\Phi(X_{\lambda,k}) = \alpha_{\lambda,k} \quad \text{für alle } \lambda \in \Lambda,\, k=1,\ldots,n_\lambda
+\]
+und
+\[
+\Phi(X_{i,k}) = 0 \quad \text{für alle } i \in I \setminus \Lambda,\, k=1,\ldots,n_i.
+\]
+Insbesondere wird $L$ über $\Phi$ zu einer $F$-Algebra und $\Phi$ setzt sich zu einem eindeutig bestimmten $F$-Algebrenhomomorphismus $F[X]\to L[X]$ fort, der $X$ auf $X$ abbildet und den wir wieder mit $\Phi$ bezeichnen.
+Wir erhalten für $m=1,\ldots,r$ die Gleichung
+\[
+\Phi(\tilde f_{\lambda_m})=\Phi(f_{\lambda_m}-\prod_{k=1}^{n_{\lambda_m}} (X - X_{\lambda_m,k}))= f_{\lambda_m}-\prod_{k=1}^{n_{\lambda_m}}(X-\alpha_{\lambda_m,k})=0.
+\]
+Da $g_m\in E\subseteq F$ ein Koeffizient von $\tilde{f}_{\lambda_m}$ ist, folgt $\Phi(g_m)=0$. Somit ist
+\[
+1 = \Phi(1) = \Phi(h_1g_1 + \cdots + h_rg_r) = \Phi(h_1)\Phi(g_1) + \cdots + \Phi(h_r)\Phi(g_r) = 0,
+\]
+was einen Widerspruch darstellt, denn es ist $L \neq 0$. Also ist $A \neq 0$.
+
+Da $K$ ein Körper ist, ist der $K$-Algebrenhomomorphismus $K \hookrightarrow F\to F/J=A$ injektiv, so dass $A|K$ zu einer kommutativen Ringerweiterung wird.
+\end{denn}
+\textbf{Schritt 2:} Es existiert eine Körpererweiterung $\Omega|K$, über der jedes der Polynome $f_i$ in Linearfaktoren zerfällt,
+\begin{denn}
+Nach Satz \ref{satz:maximales_ideal_existiert} existiert in $A$ ein maximales Ideal $\mathfrak{m}$. Wir setzen
+\[
+\Omega := A/\mathfrak{m}.
+\]
+Da $K$ ein Körper ist, ist $K \hookrightarrow A \to A/\mathfrak{m} = \Omega$ injektiv, d.h. $\Omega$ ist ein Erweiterungskörper von $K$. Über $\Omega$ zerfallen alle $f_i$ in Linearfaktoren.
+\end{denn}
+
+\textbf{Schritt 3:} Wegen Schritt 2 folgt (a) aus \ref{bem:realisierung_zerfall_koerper}.
+
+(b) Seien $Z_1, Z_2$ zwei Zerfällungskörper der Familie $\mathcal{F}$.  
+Da $Z_1$ von den Nullstellen der Polynome $f_i$ in $Z_1$ erzeugt wird und die $f_i$ über $Z_2$ in Linearfaktoren zerfallen, existiert nach dem Fortsetzungssatz \ref{satz:fortsetzungssatz_algebraische_koerpererweiterungen} ein $K$-Algebren\-homomorphismus
+\[
+\varphi \colon Z_1 \to Z_2.
+\]
+Analog existiert ein $K$-Algebren\-homomorphismus
+\[
+\psi \colon Z_2 \to Z_1.
+\]
+Es ist
+\[
+\psi \circ \varphi \in \operatorname{End}_K(Z_2) \overset{\ref{bem:end_ist_aut}}{=} \Aut_K(Z_2).
+\]
+Damit ist $\varphi$ surjektiv. Da $\varphi$ als Körperhomomorphismus injektiv ist,
+ist $\varphi$ ein Isomorphismus.
+\end{proof}
+
+\begin{bem}\label{bem:algebraisch_abgeschlossen}
+Die folgenden Aussagen sind äquivalent:
+\begin{enumerate}[label=(\roman*)]
+\item $K$ ist algebraisch abgeschlossen.
+\item Jedes nichtkonstante Polynom aus $K[X]$ besitzt eine Nullstelle in $K$.
+\item Jedes irreduzible Polynom aus $K[X]$ ist linear.
+\item $K$ besitzt keine nichttriviale algebraische Körpererweiterung.
+\item $K$ besitzt keine nichttriviale endliche Körpererweiterung.
+\end{enumerate}
+\end{bem}
+
+\begin{proof}
+"`(i)$\Rightarrow$(ii)"' ist klar.
+
+"`(ii)$\Rightarrow$(iii)"':  
+Wegen (ii) hat jedes Polynom aus $K[X]$ vom Grad $>1$ eine Nullstelle in $K$ und kann daher nicht irreduzibel sein.  
+
+"`(iii)$\Rightarrow$(iv)"' (per Kontraposition):  
+Angenommen, $L|K$ ist eine nichttriviale algebraische Körpererweiterung.  
+Dann existiert ein Element $\alpha \in L \setminus K$. Dessen Minimalpolynom über $K$ ist irreduzibel und nichtlinear.
+
+"`(iv)$\Rightarrow$(v)"' folgt daraus, dass nach \ref{satz:endl_erweiterung_aquivalenzen} jede endliche Körpererweiterung algebraisch ist.
+
+"`(v)$\Rightarrow$(i)"': 
+Sei $f \in K[X]$ ein nichtkonstantes Polynom. Aufgrund von \ref{satz:zerfkoerper_n_polynome} existiert ein Zerfällungskörper $Z$ von $f$ mit $Z|K$ endlich.  
+Wegen (v) muss $Z = K$ gelten, somit zerfällt $f$ über $K$ in Linearfaktoren.
+\end{proof}
+
+
+\begin{bem}\label{bem:algebraischer_abschluss}
+Sei $\Omega|K$ eine Körpererweiterung. Dann sind die folgenden Aussagen äquivalent:
+\begin{enumerate}[label=(\roman*)]
+\item $\Omega|K$ ist algebraisch und $\Omega$ ist algebraisch abgeschlossen.
+\item $\Omega$ ist ein Zerfällungskörper der Familie aller nichtkonstanten Polynome aus $K[X]$.
+\end{enumerate}
+In diesem Fall heißt $\Omega$ ein \defn{algebraischer Abschluss} von $K$.
+\end{bem}
+
+\begin{proof}
+"`(i)$\Rightarrow$(ii)"': Es sei $\calF$ die Familie aller nichtkonstanten Polynome aus
+$K[X]$. Da $\Omega$ nach Voraussetzung algebraisch abgeschlossen ist, zerfällt jedes Polynom aus $\calF$ über $\Omega$ in Linearfaktoren. Es ist
+\[
+\Omega=\{\text{Nullstellen von Polynomen aus }\calF\text{ in }\Omega\}, 
+\]
+denn jedes $\alpha\in\Omega$ ist Nullstelle von $\mipo_K\alpha\in\calF$.
+Wegen $\Omega=K(\Omega)$ ist $\Omega$ ein Zerfällungskörper von $\calF$.
+
+"`(ii)$\Rightarrow$(i)"':  
+Ist $\Omega$ ein Zerfällungskörper der Familie aller nichtkonstanten Polynome aus $K[X]$, so ist $\Omega|K$ algebraisch nach \ref{anm:zerfkp_produkt}.
+Außerdem ist $\Omega$ algebraisch abgeschlossen,
+\begin{denn}
+Sei $L|\Omega$ algebraisch. Da $\Omega|K$ algebraisch ist, ist nach \ref{satz:alpha_algebraisch_ueber_k} auch $L|K$ algebraisch.
+Damit ist jedes Element $\alpha\in L$ Nullstelle eines Polynoms aus $K[X]$; dieses zerfällt jedoch über $\Omega$ in Linearfaktoren, weswegen $\alpha\in\Omega$ ist. Somit ist $L=\Omega$ und damit $\Omega$ algebraisch abgeschlossen nach \ref{bem:algebraisch_abgeschlossen}.
+\end{denn}
+\end{proof}
+
+\begin{satz}[Hauptsatz über algebraische Abschlüsse]\label{satz:hauptsatz_alg_abschluesse}
+Es gilt:
+\begin{enumerate}[label=(\alph*)]
+\item Es existiert ein algebraischer Abschluss von $K$.
+\item Je zwei algebraische Abschlüsse von $K$ sind (unkanonisch) isomorph als $K$-Algebren.
+\end{enumerate}
+\end{satz}
+
+\begin{proof}
+(a) Aufgrund von \ref{satz:zerfkoerper_familie}(a) existiert ein Zerfällungskörper $\Omega$ der Familie aller nichtkonstanten Polynome aus $K[X]$, dieser ist nach \ref{bem:algebraischer_abschluss} ein algebraischer Abschluss von $K$.
+
+(b) Folgt aus Bemerkung \ref{bem:algebraischer_abschluss} in Verbindung mit Satz \ref{satz:zerfkoerper_familie}(b).
+\end{proof}
+
+\begin{anm}\label{anm:einbettung_alg_abschluss}
+\begin{itemize}
+\item Bei uns ergibt sich Satz \ref{satz:hauptsatz_alg_abschluesse} im Wesentlichen aus Satz \ref{satz:zerfkoerper_familie}. In der Literatur wird meist andersherum verfahren: Man zeigt erst Satz \ref{satz:hauptsatz_alg_abschluesse} und folgert daraus Satz \ref{satz:zerfkoerper_familie} (siehe Bosch, §3.4, §3.5 oder Algebra 1, WS17/18).
+\item Ist $L|K$ eine algebraische Erweiterung und $\Omega$ ein algebraischer Abschluss von $L$, so ist $\Omega$ auch ein algebraischer Abschluss von $K$. Dies ergibt sich aus \ref{bem:algebraischer_abschluss}(i) zusammen mit der Tatsache, dass $\Omega|K$ wegen \ref{satz:alpha_algebraisch_ueber_k} weiterhin algebraisch ist. 
+\item Ist $L|K$ eine algebraische Erweiterung und $\Omega$ ein algebraischer Abschluss von $K$, so existiert wegen des Fortsetzungssatzes \ref{satz:fortsetzungssatz_algebraische_koerpererweiterungen} ein $K$-Algebrenhomomorphismus
+$L\to\Omega$. Indem wir $L$ mit seinem Bild in $\Omega$ identifizieren, können wir
+$\Omega$ als Erweiterungskörper von $L$ auffassen. Als solcher ist $\Omega$ wegen \ref{bem:algebraischer_abschluss} auch ein algebraischer Abschluss von $L$, denn $\Omega|L$ ist algebraisch wegen \ref{satz:alpha_algebraisch_ueber_k}. Man beachte, dass wir in diesem Prozess eine Auswahl eines $K$-Algebrenhomomorphismus $L\to\Omega$ vornehmen müssen. 
+Es wird in der Regel mehrere von diesen geben, und keiner ist vor den anderen ausgezeichnet.
+\end{itemize}
+\end{anm}
+
+\begin{bem}\label{bem:einbettung_alg_abschluss}
+Sei $L$ ein algebraisch abgeschlossener Erweiterungskörper von $K$. Dann existiert genau ein Zwischenkörper $L|E|K$, der ein algebraischer Abschluss von $K$ ist, nämlich der algebraische Abschluss von $K$ in $L$.
+\end{bem}
+
+\begin{proof}
+Nach Satz \ref{bem:realisierung_zerfall_koerper} existiert genau ein Zwischenkörper $L|E|K$ derart, dass $E$ ein Zerfällungskörper der Familie aller nichtkonstanten Polynome aus $K[X]$ ist. Nach Bemerkung \ref{bem:algebraischer_abschluss} ist diese Eigenschaft von $E$ äquivalent dazu, dass $E$ ein algebraischer Abschluss von $K$ ist. 
+Sei $F$ der algebraische Abschluss von $K$ in $L$. Dann ist $F|K$ algebraisch und $F$ ist algebraisch abgeschlossen nach \ref{bem:algebraisch_abgeschlossen}, denn ist $M|F$
+eine algebraische Erweiterung, dann ist auch $M|K$ algebraisch und damit $M\subseteq F$,
+also $M=F$. Damit ist $F$ aufgrund von \ref{bem:algebraischer_abschluss} ein algebraischer Abschluss von $K$, also gilt $F=E$.
+\end{proof}
+
+\begin{bsp}\label{bsp:kp_alg_zahlen_in_C}
+Der Körper $\mathbb{C}$ ist aufgrund des Fundamentalsatzes der Algebra algebraisch abgeschlossen. Aus \ref{bem:einbettung_alg_abschluss} erhalten wir, dass   
+\[\QQalg = \{\alpha \in \mathbb{C} \mid \alpha \text{ ist algebraisch über } \QQ\}\] (vgl. \ref{bsp:algebraischer_abschluss}) ein algebraischer Abschluss von $\QQ$ ist. Man beachte, dass $\CC$
+kein algebraischer Abschluss von $\QQ$ ist: Die Erweiterung $\CC|\QQ$ ist nicht algebraisch.
+\end{bsp}
+
+\noindent\textbf{Ausblick:} In der Galoistheorie werden wir für sogenannte \emph{endliche Galoiserweiterungen} $L|K$ eine Korrespondenz zwischen der Menge der Zwischenkörper von $L|K$ und der Menge der Untergruppen von $\Aut_K(L)$ etablieren. Endliche Galoiserweiterungen $L|K$ erfüllen die Gleichung $[L:K] = |\Aut_K(L)|$, endliche algebraische Erweiterungen im Allgemeinen jedoch nicht.
+Für einen algebraischen Abschluss $\overline{K}$ von $K$ kann man zeigen:
+\[
+|\Aut_K(L)| \; \leq \; |\Hom_K(L,\overline{K})| \; \leq \; [L:K].
+\]
+
+Bei der ersten Ungleichung besteht Gleichheit für normale Körpererweiterungen,
+bei der zweiten Ungleichung besteht Gleichheit für separable Körpererweiterungen. Galoiserweiterungen sind Körpererweiterungen, die normal und separabel sind.
 
 \end{document}
 
