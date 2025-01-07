@@ -133,6 +133,7 @@ plainpages=false,}
 \newcommand{\calV}{\mathcal V}
 \newcommand{\calW}{\mathcal W}
 \newcommand{\calX}{\mathcal X}
+\newcommand{\calZ}{\mathcal Z}
 
 \newcommand{\fraka}{\mathfrak a}
 \newcommand{\frakb}{\mathfrak b}
@@ -160,6 +161,8 @@ plainpages=false,}
 \DeclareMathOperator{\charpoly}{charpoly}
 \DeclareMathOperator{\charact}{char}
 \DeclareMathOperator{\cont}{cont}
+\DeclareMathOperator{\degs}{\deg^{s}}
+\DeclareMathOperator{\degi}{\deg^{i}}
 \DeclareMathOperator{\diag}{diag}
 \DeclareMathOperator{\diff}{d\!}
 \DeclareMathOperator{\Diff}{Diff}
@@ -189,6 +192,7 @@ plainpages=false,}
 \DeclareMathOperator{\rel}{\, rel}
 \DeclareMathOperator{\res}{res}
 \DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\sep}{sep}
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\SL}{SL}
 \DeclareMathOperator{\SO}{SO}
@@ -556,11 +560,11 @@ Somit ist $ \psi $ ein Homomorphismus. Außerdem gilt $ \psi(e_N) = e_M $, da $ 
 \end{proof}
 
 
-\begin{satz}[Universelle Eigenschaft des Monoids $\mathbb{N}_0$ und der Gruppe $\mathbb{Z}$]\label{satz:universelle_eigenschaft_z}
+\begin{satz}[Universelle Eigenschaft des Monoids $\NN_0$ und der Gruppe $\mathbb{Z}$]\label{satz:universelle_eigenschaft_z}
 \begin{itemize}
     \item[(a)] Für jedes Monoid $M$ und jedes $x \in M$ gibt es genau einen Monoidhomomorphismus 
     \[
-    \varphi_x: \mathbb{N}_0 \to M \quad \text{mit} \quad \varphi_x(1) = x.
+    \varphi_x: \NN_0 \to M \quad \text{mit} \quad \varphi_x(1) = x.
     \]
     Dieser ist explizit gegeben durch $\varphi_x(n) := x^n$ mit
     \[
@@ -591,11 +595,11 @@ Somit ist $ \psi $ ein Homomorphismus. Außerdem gilt $ \psi(e_N) = e_M $, da $ 
 
 
 \begin{proof}
-(a) \textbf{Existenz}: Die Abbildung $\varphi_x: \mathbb{N}_0 \to M$, definiert durch $n \mapsto x^n$, ist ein Monoidhomomorphismus mit $\varphi_x(1) = x$ wegen $\varphi_x(0)=e$ und
+(a) \textbf{Existenz}: Die Abbildung $\varphi_x: \NN_0 \to M$, definiert durch $n \mapsto x^n$, ist ein Monoidhomomorphismus mit $\varphi_x(1) = x$ wegen $\varphi_x(0)=e$ und
 \[\varphi_x(n + m) = x^{n+m} = x^n \cdot x^m = \varphi_x(n) \cdot \varphi_x(m)\]
-für alle $n, m \in \mathbb{N}_0$.
+für alle $n, m \in \NN_0$.
 
-\textbf{Eindeutigkeit}: Sei $\psi: \mathbb{N}_0 \to M$ ein Monoidhomomorphismus mit $\psi(1) = x$. Per Definition gilt $\psi(0) = e$. Für $n \in \mathbb{N}$ erhalten wir, dass \[\psi(n) = \psi(1 + \cdots + 1) = \psi(1)^n = x^n = \varphi_x(n)\] ist, womit die Eindeutigkeit gezeigt ist.
+\textbf{Eindeutigkeit}: Sei $\psi: \NN_0 \to M$ ein Monoidhomomorphismus mit $\psi(1) = x$. Per Definition gilt $\psi(0) = e$. Für $n \in \NN$ erhalten wir, dass \[\psi(n) = \psi(1 + \cdots + 1) = \psi(1)^n = x^n = \varphi_x(n)\] ist, womit die Eindeutigkeit gezeigt ist.
 
 (b) \textbf{Existenz}: Man kann nachrechnen, dass  $\varphi_x(n + m) = \varphi_x(n) \cdot \varphi_x(m)$ für alle $n, m \in \mathbb{Z}$ gilt, insbesondere ist $\varphi_x$ ein Gruppenhomomorphismus.
 
@@ -2954,8 +2958,8 @@ Wir zeigen (a) und (b) zusammen.
 
 "`$\Rightarrow$"' Sei $\varphi_K \colon \ZZ \to K$ der kanonische Homomorphismus aus der universellen Eigenschaft von $\ZZ$. Dann ist $\operatorname{im} \varphi_K \subseteq K$ ein Unterring von $K$ und somit nullteilerfrei. Außerdem gilt $1_K \in P$, also $\operatorname{im} \varphi_K \subseteq P$. Folglich ist $\Quot(\operatorname{im} \varphi_K) \subseteq P$, und daher $\Quot(\operatorname{im} \varphi_K) = P$.
 \begin{itemize}
-\item Ist $\operatorname{char} K = 0$, so ist $\ker\varphi_K=0$ und daher nach dem Homomorphiesatz $\mathbb{Z} \cong \operatorname{im} \varphi_K$, also $\QQ \cong \Quot(\operatorname{im} \varphi_K) = P$.
-\item Ist $\operatorname{char} K = p > 0$, so ist $\ker\varphi_K=p\ZZ$ und deshalb nach dem Homomorphiesatz $\mathbb{F}_p \cong \operatorname{im} \varphi_K$. Wir erhalten $\FF_p = \Quot(\FF_p) \cong \Quot(\operatorname{im} \varphi_K) = P$
+\item Ist $\charact K = 0$, so ist $\ker\varphi_K=0$ und daher nach dem Homomorphiesatz $\mathbb{Z} \cong \operatorname{im} \varphi_K$, also $\QQ \cong \Quot(\operatorname{im} \varphi_K) = P$.
+\item Ist $\charact K = p > 0$, so ist $\ker\varphi_K=p\ZZ$ und deshalb nach dem Homomorphiesatz $\mathbb{F}_p \cong \operatorname{im} \varphi_K$. Wir erhalten $\FF_p = \Quot(\FF_p) \cong \Quot(\operatorname{im} \varphi_K) = P$
 
 \end{itemize}
 
@@ -5518,7 +5522,7 @@ f(\alpha) = f(\pi(X)) \overset{\ref{bem:k-algebra_homomorphismen}}{=} \pi(f(X)) 
 \end{proof}
 
 \begin{defini}\label{def:zerfall_koerper}
-Sei $\mathcal{F} = (f_i)_{i \in I}$ eine Familie von nichtkonstanten Polynomen aus $K[X]$. Ein Erweiterungskörper $Z$ von $K$ heißt \defn{Zerfällungskörper} von $\mathcal{F}$ über $K$, wenn gilt:
+Sei $\calF = (f_i)_{i \in I}$ eine Familie von nichtkonstanten Polynomen aus $K[X]$. Ein Erweiterungskörper $Z$ von $K$ heißt \defn{Zerfällungskörper} von $\calF$ über $K$, wenn gilt:
 \begin{itemize}
     \item[(Z1)] Jedes $f_i$ zerfällt über $Z$ in Linearfaktoren.
     \item[(Z2)] $Z|K$ wird von den Nullstellen der $f_i$, $i \in I$, in $Z$ erzeugt.
@@ -5529,7 +5533,7 @@ Sei $\mathcal{F} = (f_i)_{i \in I}$ eine Familie von nichtkonstanten Polynomen a
 \begin{itemize}
 \item Wegen (Z2) und \ref{satz:algebraische_erweiterung_äquivalenz} ist $Z|K$ algebraisch. 
 \item Ist $\calF$ eine endliche Familie, so ist $Z|K$ wegen \ref{satz:endl_erweiterung_aquivalenzen} endlich. 
-\item Für $\mathcal{F} = \{f_1, \dots, f_n\}$ endlich gilt: Jeder Zerfällungskörper von $f_1, \dots, f_n$ ist ein Zerfällungskörper von $f_1\cdot\ldots\cdot f_n$ und umgekehrt.
+\item Für $\calF = \{f_1, \dots, f_n\}$ endlich gilt: Jeder Zerfällungskörper von $f_1, \dots, f_n$ ist ein Zerfällungskörper von $f_1\cdot\ldots\cdot f_n$ und umgekehrt.
 \end{itemize}
 \end{anm}
 
@@ -5649,7 +5653,7 @@ Da $K$ ein Körper ist, ist $K \hookrightarrow A \to A/\mathfrak{m} = \Omega$ in
 
 \textbf{Schritt 3:} Wegen Schritt 2 folgt (a) aus \ref{bem:realisierung_zerfall_koerper}.
 
-(b) Seien $Z_1, Z_2$ zwei Zerfällungskörper der Familie $\mathcal{F}$.  
+(b) Seien $Z_1, Z_2$ zwei Zerfällungskörper der Familie $\calF$.  
 Da $Z_1$ von den Nullstellen der Polynome $f_i$ in $Z_1$ erzeugt wird und die $f_i$ über $Z_2$ in Linearfaktoren zerfallen, existiert nach dem Fortsetzungssatz \ref{satz:fortsetzungssatz_algebraische_koerpererweiterungen} ein $K$-Algebren\-homomorphismus
 \[
 \varphi \colon Z_1 \to Z_2.
@@ -5765,13 +5769,863 @@ kein algebraischer Abschluss von $\QQ$ ist: Die Erweiterung $\CC|\QQ$ ist nicht 
 \end{bsp}
 
 \noindent\textbf{Ausblick:} In der Galoistheorie werden wir für sogenannte \emph{endliche Galoiserweiterungen} $L|K$ eine Korrespondenz zwischen der Menge der Zwischenkörper von $L|K$ und der Menge der Untergruppen von $\Aut_K(L)$ etablieren. Endliche Galoiserweiterungen $L|K$ erfüllen die Gleichung $[L:K] = |\Aut_K(L)|$, endliche algebraische Erweiterungen im Allgemeinen jedoch nicht.
-Für einen algebraischen Abschluss $\overline{K}$ von $K$ und eine endliche Körpererweiterung $L|K$ kann man zeigen:
+Für einen algebraischen Abschluss $\overline{K}$ und eine endliche Körpererweiterung $L|K$ kann man zeigen:
 \[
 |\Aut_K(L)| \; \leq \; |\Hom_K(L,\overline{K})| \; \leq \; [L:K].
 \]
 
 Bei der ersten Ungleichung besteht Gleichheit für normale Körpererweiterungen,
 bei der zweiten Ungleichung besteht Gleichheit für separable Körpererweiterungen. Galoiserweiterungen sind Körpererweiterungen, die normal und separabel sind.
+
+\section{Normale Körpererweiterungen}
+
+\begin{defini}\label{def:normale_koerpererw}
+Sei $L|K$ eine Körpererweiterung und $\alpha \in L$. Das Element $\alpha$ heißt \defn{normal in $L|K$}, wenn
+$\alpha$ algebraisch über $K$ ist und $\mipo_K\alpha$ über $L$ in Linearfaktoren zerfällt.
+Die Erweiterung $L|K$ heißt \defn{normal}, wenn jedes Element aus $L$ normal in $L|K$ ist.
+\end{defini}
+
+\begin{anm}
+\begin{itemize}
+\item Ist $L|K$ normal, so ist $L|K$ auch algebraisch.
+\item Der Begriff von in $L|K$ normalen Elementen ist eine Vorlesungsnotation. In der Literatur ist dieser Begriff so nicht zu finden.
+\end{itemize}
+\end{anm}
+
+\begin{bsp}\label{bsp:normalitaet_haengt_von_L_ab}
+Die Eigenschaft von Elementen, normal in $L|K$ zu sein, hängt von $L$ ab:
+
+Es bezeichne $\alpha=\sqrt[4]{2}\in\RR$ die eindeutig bestimmte positive reelle Zahl mit $\alpha^4=2$. Wie in \ref{bsp:konjugierte} ist  $\mipo_\QQ\alpha=X^4-2$.
+Über $\QQalg$ ist
+\[
+\mipo_\QQ\alpha = (X - \sqrt[4]{2})(X + \sqrt[4]{2})(X - i\sqrt[4]{2})(X + i\sqrt[4]{2}),
+\]
+d.\,h. $\alpha$ ist normal in $\QQalg|\QQ$. Über $\QQ(\sqrt[4]{2})$ zerfällt $\mipo_\QQ\alpha$ jedoch nicht in Linearfaktoren, denn $\QQ(\sqrt[4]{2}) \subseteq \mathbb{R}$ und über $\RR$ ist
+\[
+\mipo_\QQ\alpha = (X - \sqrt[4]{2})(X + \sqrt[4]{2})(X^2+\sqrt{2}),
+\]
+wobei der Faktor $X^2+\sqrt{2}$ nicht in Linearfaktoren zerfällt, da er keine reelle Nullstelle hat.
+Somit ist $\alpha$ nicht normal in $\QQ(\sqrt[4]{2})|\QQ$ und die Erweiterung $\QQ(\sqrt[4]{2})|\QQ$ ist nicht normal.
+\end{bsp}
+
+\begin{satz}\label{satz:normal_aequiv}
+Sei $L|K$ eine Körpererweiterung. Dann sind die folgenden Aussagen äquivalent:
+\begin{enumerate}
+\item[(i)] $L|K$ ist normal.
+\item[(ii)] $L$ wird über $K$ von einer Menge von in $L|K$ normalen Elementen erzeugt, d.\,h. es existiert eine Menge $T \subseteq L$, so dass alle Elemente aus $T$ normal in $L|K$ sind und $L = K(T)$ gilt.
+\item[(iii)] $L|K$ ist algebraisch und jedes irreduzible Polynom aus $K[X]$, das in $L$ eine Nullstelle hat, zerfällt über $L$ in Linearfaktoren.
+\item[(iv)] Es existiert eine Familie $\calF$ nichtkonstanter Polynome aus $K[X]$, so dass $L$ ein Zerfällungskörper von $\calF$ ist.
+\end{enumerate}
+\end{satz}
+
+\begin{proof}
+"`(i)$\Rightarrow$(ii)"': Wir setzen $T:=L$.
+
+"`(ii)$\Rightarrow$(iii)"': Sei $L = K(T)$, wobei alle Elemente aus $T$ normal in $L|K$ sind.
+Damit sind alle Elemente aus $T$ algebraisch über $K$ und $L|K$ ist algebraisch nach \ref{satz:algebraische_erweiterung_äquivalenz}. Sei $f \in K[X]$ irreduzibel und habe eine Nullstelle $\alpha \in L$. Insbesondere ist $f = c\mipo_K\alpha$ für ein $c\in K$ wegen \ref{bem:minpol_char}. Aufgrund von \ref{bem:nullstellen-polynome} existiert ein Polynom $g \in L[X]$ mit $f = (X-\alpha)g$. Ist $g$ konstant, sind wir fertig. Im Folgenden sei das Polynom $g$ nichtkonstant. Sei $Z$ ein Zerfällungskörper von $f$ über $L$ und sei $\beta\in Z$ eine
+Nullstelle von $g$. Das Minimalpolynom eines jeden Elements aus $T$ zerfällt über $L$ und damit auch über $Z$ in Linearfaktoren. Nach dem Fortsetzungssatz \ref{satz:fortsetzungssatz_algebraische_koerpererweiterungen} existiert ein $K$-Algebren\-homomorphismus $\varphi \colon L \to Z$ mit $\varphi(\alpha) = \beta$.
+Es ist $\varphi(L) \subseteq L$,
+\begin{denn}
+Wegen $L = K(T)$ genügt es zu zeigen, dass $\varphi(T) \subseteq L$ gilt.  
+Sei $\vartheta \in T$ und $h = \mipo_K\vartheta$. Wegen \ref{bem:k-algebra_homomorphismen} ist $\varphi(\vartheta)$ eine Nullstelle von $h$ in $Z$. Da $\vartheta$ normal in $L|K$ ist, zerfällt $h$ über $L$ in Linearfaktoren, somit ist $\varphi(\vartheta) \in L$.    
+\end{denn}
+Wir erhalten $\beta = \varphi(\alpha) \in L$, d.h. $f$ zerfällt über $L$ in Linearfaktoren.
+
+"`(iii)$\Rightarrow$(i)"':  
+Sei $\alpha \in L$. Das irreduzible Polynom $\mipo_K\alpha$ besitzt in $L$ eine Nullstelle, also zerfällt es nach (ii) über $L$ in Linearfaktoren. Folglich ist $\alpha$ normal in $L|K$.
+
+"`(ii)$\Rightarrow$(iv)"':  
+Sei $L=K(T)$, wobei alle Elemente aus $T$ normal in $L|K$ seien.  
+Dann ist $L$ ein Zerfällungskörper der Familie $(\mipo_K\alpha)_{\alpha \in T}$, da jedes dieser Minimalpolynome über $L$ in Linearfaktoren zerfällt.
+
+"`(iv)$\Rightarrow$(ii)"':  
+Sei $L$ ein Zerfällungskörper der Familie $\calF=(f_i)_{i \in I}$.  
+Wir setzen \[T := \{\text{Nullstellen von } f_i \text{ in } L \mid i\in I\}.\] Dann ist $L = K(T)$ und alle Elemente aus $T$ sind normal in $L|K$, da die $f_i$ über $L$ in Linearfaktoren zerfallen.
+\end{proof}
+
+\begin{bsp}\label{bsp:normale_erweiterungen}
+\begin{enumerate}[label=(\alph*)]
+\item $\QQ(\sqrt{2})|\QQ$ ist normal, da $\sqrt{2}$ normal in $\QQ(\sqrt{2})|\QQ$ ist.
+Über $\QQ(\sqrt{2})$ ist nämlich 
+\[
+\mipo_\QQ\sqrt{2}=X^2-2=(X-\sqrt{2})(X+\sqrt{2}).
+\]
+\item $\QQ(\sqrt[4]{2})|\QQ$ ist nicht normal, denn das Polynom $f=X^4-2\in\QQ[X]$ hat eine Nullstelle in $\QQ(\sqrt[4]{2})$, zerfällt über $\QQ(\sqrt[4]{2})$ jedoch nicht in Linearfaktoren (vgl. \ref{bsp:normalitaet_haengt_von_L_ab}). 
+\item $\QQ(\sqrt[4]{2},i)|\QQ$ ist normal, da $\QQ(\sqrt[4]{2},i)$ ein Zerfällungskörper
+des Polynoms $X^4-2\in\QQ[X]$ ist (vgl. \ref{anm:zerfkoerper_realisiert_in_C}).
+\item Ist $L|K$ eine Körpererweiterung mit $[L:K] = 2$, so ist $L|K$ normal,
+\begin{denn}
+Als endliche Erweiterung ist $L|K$ ist nach \ref{satz:endl_erweiterung_aquivalenzen} algebraisch.  
+Sei $\alpha \in L$. In $L[X]$ ist $\mipo_K\alpha=(X-\alpha)g$ mit $\deg g \leq 1$,  
+also zerfällt $\mipo_K\alpha$ über $L$ in Linearfaktoren. Damit ist $\alpha$ normal in $L|K$. 
+\end{denn}
+
+\item Ist $\Omega$ ein algebraischer Abschluß von $K$, so ist $\Omega|K$ normal,  
+da $\Omega$ ein Zerfällungskörper der Familie aller nichtkonstanten Polynome aus $K[X]$ ist.
+\end{enumerate}
+\end{bsp}
+
+\begin{bsp}\label{bsp:normalitaet_nicht_transitiv}
+Normalität ist nicht transitiv in Körpertürmen $M|L|K$: 
+Es ist $\QQ(\sqrt[4]{2})|\QQ$ nicht normal (vgl. \ref{bsp:normalitaet_haengt_von_L_ab}) und es ist $[\QQ(\sqrt[4]{2}):\QQ]=4$. Außerdem ist $\sqrt{2} = (\sqrt[4]{2})^2\in \QQ(\sqrt[4]{2})$ und $[\QQ(\sqrt{2}):\QQ] = 2$.  Aus dem Gradsatz \ref{satz:gradsatz} erhalten wir
+\[4=[\QQ(\sqrt[4]{2}):\QQ] = \underbrace{[\QQ(\sqrt[4]{2}):\QQ(\sqrt{2})]}_{=2}\underbrace{[\QQ(\sqrt{2}):\QQ]}_{=2}.\]
+Aufgrund von \ref{bsp:normale_erweiterungen})b) sind die beiden Erweiterungen $\QQ(\sqrt[4]{2})|\QQ(\sqrt{2})$ und $\QQ(\sqrt{2})|\QQ$  normal, aber $\QQ(\sqrt[4]{2})|\QQ$ ist es nicht.
+\end{bsp}
+
+\begin{bem}\label{bem:normale_huelle}
+Sei $L|K$ eine algebraische Körpererweiterung und $N|L$ eine Körpererweiterung. Dann sind die folgenden Aussagen äquivalent:
+\begin{enumerate}[label=(\roman*)]
+\item $N$ ist ein Zerfällungskörper über $K$ der Familie der irreduziblen Polynome aus $K[X]$, die in $L$ eine Nullstelle haben.
+\item Für jede Teilmenge $T \subseteq L$ mit $L=K(T)$ ist $N$ ein Zerfällungskörper der Familie der Minimalpolynome über $K$ von Elementen aus $T$.
+\item Es gibt eine Teilmenge $T \subseteq L$ mit $L=K(T)$, für die $N$ ein Zerfällungskörper der Familie der Minimalpolynome über $K$ von Elementen aus $T$ ist.
+\item $N|K$ ist normal und es gibt keinen Zwischenkörper $N|E|L$ mit $N\neq E$, sodass $E|K$ normal ist.
+\end{enumerate}
+
+In diesem Fall heißt $N|L|K$ eine \defn{normale Hülle} von $L|K$.
+\end{bem}
+
+\begin{proof}
+"`(ii)$\Rightarrow$(iii)"': ist klar, wobei man beachte, dass es tatsächlich eine
+Teilmenge $T\subseteq L$ mit $L=K(T)$ gibt, nämlich $T=L$.
+
+"`(iii)$\Rightarrow$(iv)"':  
+Aus (iii) folgt mit \ref{satz:normal_aequiv} dass $N|K$ normal ist, da $N$ ein Zerfällungskörper ist.  
+Sei $N|E|L$ ein Zwischenkörper mit der Eigenschaft, dass $E|K$ normal ist. Dann zerfallen die Minimalpolynome über $K$ der Elemente aus $T$ über $E$ in Linearfaktoren. Weil $N$ wegen (iii) von den Nullstellen dieser Polynome erzeugt wird, ist $N=E$.
+
+"`(iv)$\Rightarrow$(ii)"':  
+Sei $T \subseteq L$ mit $L=K(T)$.  
+Da $N|K$ normal ist, zerfallen die Minimalpolynome über $K$ von Elementen aus $T$ über $N$ in Linearfaktoren.
+Aufgrund von \ref{bem:realisierung_zerfall_koerper} existiert ein Zwischenkörper $N|Z|K$, der ein Zerfällungskörper dieser Minimalpolynome ist. Da $Z \supseteq T$ gilt, folgt $Z \supseteq L$. Wegen (iv) muss dann $Z = N$ sein.  
+
+Zur Anbindung von (i) bemerken wir, dass die Familie der normierten irreduziblen Polynome aus $K[X]$, die in $L$ eine Nullstelle haben, genau mit der Menge der Minimalpolynome über $K$ von Elementen aus $L$ übereinstimmt. Die Implikationen "`(ii)$\Rightarrow$(i)"' und
+"`(i)$\Rightarrow$(iii)"' folgen dann jeweils, indem wir $T=L$ wählen.
+\end{proof}
+
+
+\begin{satz}\label{satz:normale_huelle_existenz}
+Sei $L|K$ eine algebraische Körpererweiterung. Dann gilt:
+\begin{enumerate}[label=(\alph*)]
+\item Es existiert eine normale Hülle von $L|K$.
+\item Je zwei normale Hüllen von $L|K$ sind als $K$-Algebren (unkanonisch) isomorph.
+\item Ist $N|L|K$ eine normale Hülle von $L|K$, dann gilt: \[N|K \text{ ist endlich } \iff L|K \text{ ist endlich.}\]
+\end{enumerate}
+\end{satz}
+
+\begin{proof}
+(a) und (b) folgen wegen \ref{bem:normale_huelle}(i) aus dem  Hauptsatz über Zerfällungskörper \ref{satz:zerfkoerper_familie}. Bei Aussage (c) ist die Implikation "`$\Rightarrow$"' klar. Zum Nachweis der
+Implikation "`$\Leftarrow$"' sei $L|K$ endlich. Dann existiert nach \ref{satz:endl_erweiterung_aquivalenzen} eine endliche Teilmenge $T \subseteq L$ von über $K$ algebraischen Elementen mit $L=K(T)$. Aufgrund von \ref{bem:normale_huelle} ist $N$ ein Zerfällungskörper der endlich vielen Minimalpolynome über $K$ von Elementen aus $T$, insbesondere ist $N|K$ endlich.
+\end{proof}
+
+\begin{anm}\label{anm:normale_huelle_realisierung}
+Ist $L=K(T)|K$ eine algebraische Körpererweiterung und $\Omega$ ein algebraischer Abschluss von $K$, dann können wir $\Omega$ wie in \ref{anm:einbettung_alg_abschluss} als Erweiterungskörper von $L$ auffassen. $\Omega$ enthält eine normale Hülle $N|L|K$ von $L|K$, nämlich 
+\[
+N=K(\{\text{Nullstellen in }\Omega \text{ der Minimalpolynome sämtlicher Elemente aus } T\}). 
+\]
+\end{anm}
+
+\begin{bsp}\label{bsp:normale_huelle}
+Die Erweiterung $\QQ(\sqrt[4]{2})|\QQ$ ist nach \ref{bsp:normalitaet_haengt_von_L_ab}
+nicht normal. Eine normale Hülle von $\QQ(\sqrt[4]{2})|\QQ$ ist durch $\QQ(\sqrt[4]{2},i)|\QQ(\sqrt[4]{2})|\QQ$ gegeben, denn $\QQ(\sqrt[4]{2},i)|$ ist ein Zerfällungskörper des Minimalpolynoms $X^4-2\in\QQ[X]$ von $\sqrt[4]{2}$ über $\QQ$, siehe \ref{anm:zerfkoerper_realisiert_in_C}. 
+\end{bsp}
+
+\begin{anm}\label{anm:normalitaet_schreibweise}
+Ist $M|L|K$ eine Körpererweiterung und $\iota\colon L\to M$ die Inklusion, so erhalten wir eine natürliche Injektion
+\[
+\End_K(L) \hookrightarrow \Hom_K(L,M), \quad \varphi \mapsto \iota\circ\varphi.
+\]
+Diese ist genau dann bijektiv, wenn sich jeder $K$-Algebrenhomomorphismus $L \to M$ zu einem $K$-Algebrenendomorphismus
+von $L$ einschränkt. In diesem Fall schreiben wir (in missbräuchlicher Notation)
+\[
+\End_K(L) = \Hom_K(L,M).
+\]
+\end{anm}
+
+\begin{satz}\label{satz:normale_erw_char}
+Sei $L|K$ eine algebraische Körpererweiterung und $\Omega$ ein algebraischer Abschluss von $K$. Dann sind die folgenden Aussagen äquivalent:
+\begin{enumerate}
+\item[(i)] $L|K$ ist normal.
+\item[(ii)] $\Aut_K(L) = \Hom_K(L,\Omega)$.
+\item[(iii)] Für jede Körpererweiterung $M|L$ ist $\Aut_K(L) = \Hom_K(L,M)$.
+\end{enumerate}
+\end{satz}
+
+\begin{proof}
+"`(i)$\Rightarrow$(iii)"':  
+Sei $M|L$ eine Körpererweiterung und $\varphi \in \Hom_K(L,M)$.  
+Es sei $\alpha \in L$. Wegen \ref{anm:konjugierte} ist $\varphi(\alpha)\in\Konj_M(\alpha)$. 
+Da $L|K$ normal ist, zerfällt $\mipo_K\alpha$ bereits über $L$ in Linearfaktoren, woraus sich
+$\Konj_M(\alpha)=\Konj_L(\alpha)$ und damit $\varphi(\alpha) \in L$ ergibt.  
+Somit ist $\varphi(L) \subseteq L$, d.\,h. $\varphi \in \Hom_K(L,L) \overset{\ref{bem:end_ist_aut}}{=} \Aut_K(L)$.
+
+"`(iii)$\Rightarrow$(ii)"':  
+$\Omega$ wird zum Erweiterungskörper von $L$ wie in \ref{anm:normale_huelle_realisierung} beschrieben.
+
+"`(ii)$\Rightarrow$(i)"':  
+Sei $\alpha \in L$. Über $\Omega$ zerfällt $\mipo_K\alpha$ in Linearfaktoren. 
+Für jede Nullstelle $\beta \in \Omega$ von $\mipo_K\alpha$ existiert nach dem Fortsetzungssatz \ref{satz:fortsetzungssatz_algebraische_koerpererweiterungen} ein $K$-Algebrenhomomorphismus $\varphi\colon L \to \Omega$ mit $\varphi(\alpha)=\beta$. Wegen (ii) ist $\beta \in L$, d.\,h. $\mipo_K\alpha$ zerfällt über $L$ in Linearfaktoren. Also ist $\alpha$ normal in $L|K$ und somit $L|K$ normal.
+\end{proof}
+
+\begin{satz}\label{satz:trans_op_normale_Erw}
+Sei $L|K$ eine algebraische Körpererweiterung und $N|K$ eine normale Körpererweiterung mit $\Hom_K(L,N)\neq\varnothing$.  
+Dann operiert $\Aut_K(N)$ transitiv auf $\Hom_K(L,N)$ durch $\sigma.\varphi=\sigma\circ\varphi$.  
+\end{satz}
+
+\begin{proof}
+Seien $\varphi, \psi \in \Hom_K(L,N)$. Wir können $N$ via $\varphi$ als Erweiterungskörper von $L$ auffassen.
+Das $N|K$ normal ist, zerfällt das Minimalpolynom über $K$ eines jeden Elements aus $L$ über $N$ in Linearfaktoren,
+und wir können den Fortsetzungssatz \ref{satz:fortsetzungssatz_algebraische_koerpererweiterungen} anwenden.
+    \[
+\xymatrix{
+N \ar@{-}[dr]_\varphi \ar@{-->}[rr]^{\sigma} & & N \ar@{-}[dd] \\
+ & L \ar[ur]_\psi \ar@{-}[dr] &  \\
+ & & K
+}
+\]
+Nach diesem existiert ein $\sigma \in \Hom_K(N,N)\overset{\ref{bem:end_ist_aut}}{=}\Aut_K(N)$ mit $\sigma \circ \varphi = \psi$, also mit $\sigma.\varphi=\psi$.
+\end{proof}
+
+\begin{folgerung}\label{folg:transitivity_on_roots}
+Sei $N|K$ eine normale Körpererweiterung und $\alpha \in N$.  
+Dann operiert $\Aut_K(N)$ transitiv auf $\Konj_N\alpha$ durch $\sigma.\beta=\sigma(\beta)$.
+\end{folgerung}
+
+\begin{proof}
+Die Existenz der Operation haben wir bereits in \ref{anm:konjugierte} festgestellt.
+Die universelle Eigenschaft des Minimalpolynoms \ref{satz:minimalpolynom_universelle_eigenschaft} liefert uns wegen
+\ref{anm:automorphismen_operation} einen Isomorphismus von $\Aut_K(N)$-Mengen
+\[
+\Hom_K(K(\alpha),N) \to \Konj_N\alpha.
+\]
+Die Behauptung folgt, da $\Aut_K(N)$ wegen Satz \ref{satz:trans_op_normale_Erw} transitiv auf $\Hom_K(K(\alpha),N)$ operiert .
+\end{proof}
+
+
+
+\begin{satz}\label{satz:normale_erw_operation}
+Sei $N|L|K$ eine algebraische Körpererweiterung und $N|K$ normal. Dann gilt:
+\begin{enumerate}
+\item[(a)] Die Einschränkungabbildung $\Aut_K(N) \to \Hom_K(L,N)$ induziert einen Isomorphismus von $\Aut_K(N)$-Mengen
+\footnote{Wie in \ref{anm:linksnebenkl_op} bezeichnet $\Aut_K(N)/\Aut_L(N)$ die Menge der Linksnebenklassen von $\Aut_L(N)$ in $\Aut_K(N)$}
+\[
+\Aut_K(N)/\Aut_L(N) \cong \Hom_K(L,N).
+\]
+\item[(b)] Ist $L|K$ normal, so ist $\Aut_L(N) \trianglelefteq \Aut_K(N)$ und die Einschränkungsabbildung
+$\Aut_K(N)\to\Aut_K(L)$ induziert einen Gruppenisomorphismus
+\[
+\Aut_K(N)/\Aut_L(N) \cong \Aut_K(L).
+\]
+\end{enumerate}
+\end{satz}
+
+\begin{proof}
+(a) $\Aut_K(N)$ operiert transitiv auf $\Hom_K(L,N)$ wie in Satz \ref{satz:trans_op_normale_Erw}.  
+Sei $\iota\colon L \to N$ die Inklusion. Dann ist
+\[
+\Stab_{\Aut_K(N)}(\iota) = \{\sigma \in \Aut_K(N) \mid \sigma \circ \iota = \iota\} 
+= \{\sigma \in \Aut_K(N) \mid \sigma|_L=\ident_L\} = \Aut_L(N).
+\]
+und wegen \ref{satz:trans_op_normale_Erw}
+\[
+\Orb_{\Aut_K(N)}\iota=\Hom_K(L,N).
+\]
+Aus \ref{folg:isom_orbit} erhalten wir einen Isomorphismus von $\Aut_K(N)$-Mengen
+\[
+\Psi\colon\Aut_K(N)/\Aut_L(N) \to \Hom_K(L,N), \quad \sigma \Aut_L(N)\mapsto \sigma.\iota=\sigma \circ \iota=\sigma|_L.
+\]
+
+(b) Ist $L|K$ normal, so gilt $\Hom_K(L,N) = \Aut_K(L)$ wegen \ref{satz:normale_erw_char}.  
+Die Abbildung
+\[
+\Phi: \Aut_K(N) \twoheadrightarrow \Aut_K(N)/\Aut_L(N) \xrightarrow[\cong]{\Psi} \Aut_K(L), \quad \sigma \mapsto \sigma|_L
+\]
+ist surjektiv und ein Gruppenhomomorphismus mit Kern $\Phi = \Aut_L(N)$.
+\end{proof}
+
+\section{Separable Körpererweiterungen}
+
+\begin{defini}\label{def:separabilitaetsgrad}
+Sei $L|K$ eine algebraische Körpererweiterung und $\Omega$ ein algebraischer Abschluss von $K$.  
+Wir setzen
+\[
+[L:K]_s := |\Hom_K(L,\Omega)| \in \NN \cup \{\infty\}
+\]
+und nennen $[L:K]_s$ den \defn{Separabilitätsgrad} von $L|K$.
+
+Falls $L|K$ endlich ist, heißt
+\[
+[L:K]_i :=\frac{[L:K]}{[L:K]_s}
+\]
+der \defn{Inseparabilitätsgrad} von $L|K$.
+\end{defini}
+
+\begin{anm}\label{anm:separabilitaetsgrad}
+\begin{itemize}
+\item $[L:K]_s$ ist unabhängig von der Wahl von $\Omega$, da je zwei algebraische Abschlüsse von $K$ als $K$-Algebren isomorph sind.
+\item Nach dem Fortsetzungssatz existiert ein $K$-Algebrenhomomorphismus $L \to \Omega$, insbesondere ist $[L:K]_s \neq 0$.
+\item Die Definition von $[L:K]_s$ ist zunächst ad hoc. Wir werden später sehen: Für $\charact(K)=0$ gilt $[L:K]_i = 1$, und für $\charact(K)=p>0$ ist $[L:K]_i$ eine $p$-Potenz. Insbesondere ist $[L:K]_i \in \NN$.
+\end{itemize}
+\end{anm}
+
+
+\textbf{Ziel:} Wir möchten $[L:K]_s$ präziser bestimmen. Der Fortsetzungssatz sichert zwar die Existenz von $K$-Algebrenhomomorphismen $L \to \Omega$, macht aber keine Aussage über deren Anzahl. Wir werden zeigen, dass stets $[L:K]_s \mid [L:K]$ gilt, mit Gleichheit, falls $L|K$ eine sogenannte separable Erweiterung ist.
+
+\begin{satz}\label{satz:sepgrad}
+Sei $L|E|K$ eine algebraische Körpererweiterung und $\Omega$ ein algebraischer Abschluss von $K$. Dann gilt:
+\begin{enumerate}
+\item[(a)] Jeder $K$-Algebrenhomomorphismus $E \to \Omega$ besitzt genau $[L:E]_s$ 
+Fortsetzungen nach $L$.
+\item[(b)] $[L:K]_s = [L:E]_s \cdot [E:K]_s$.
+\item[(c)] Ist $L|K$ endlich, dann ist $[L:K]_i = [L:E]_i \cdot [E:K]_i$.
+\end{enumerate}
+\end{satz}
+\begin{proof}
+(a) Aufgrund des Fortsetzungssatzes \ref{satz:fortsetzungssatz_algebraische_koerpererweiterungen} sind
+$\Hom_K(E,\Omega)$ und auf $\Hom_K(L,\Omega)$ beide nichtleer.
+Nach Satz \ref{satz:trans_op_normale_Erw} operiert $\Aut_K(\Omega)$ transitiv auf $\Hom_K(E,\Omega)$ und auf $\Hom_K(L,\Omega)$, da $\Omega|K$ wegen \ref{bsp:normale_erweiterungen} normal ist. Die Einschränkungsabbildung
+\[
+\res: \Hom_K(L,\Omega) \to \Hom_K(E,\Omega), \quad \tau \mapsto \tau|_E.
+\]
+ist ein Homomorphismus von $\operatorname{Aut}_K(\Omega)$-Mengen, denn für $\sigma\in\Aut_K(\Omega)$, $\tau\in\Hom_K(L,\Omega)$ ist
+\[
+\sigma.\res(\tau)=\sigma\circ(\tau|_E)=(\sigma\circ\tau)|_E=\res(\sigma.\tau).
+\]
+Aufgrund von Aufgabe 4(b) auf Blatt 5 hat jedes Element aus $\Hom_K(E,\Omega)$ gleich viele Urbilder unter $\res$, also gleich viele Fortsetzungen nach $L$. 
+Wir wählen nun einen K-Algebrenhomomorphismus $\psi\colon E\to\Omega$ aus. Dadurch wird insbesondere $\Omega$ zur $E$-Algebra. Die Fortsetzungen von $\psi$ nach $L$ sind dann genau die Elemente von $\Hom_E(L,\Omega)$. Da wir $\Omega$ nach \ref{anm:einbettung_alg_abschluss} auch als algebraischen Abschluss von $E$ ansehen können, ist
+\[
+[L:E]_s=|\Hom_E(L,\Omega)|.
+\]
+Also hat jedes Element aus $\Hom_K(E,\Omega)$ genau $[L:E]_s$ viele Fortsetzungen nach $L$.
+
+(b) Wir betrachten erneut
+\[
+\res: \Hom_K(L,\Omega) \to \Hom_K(E,\Omega), \quad \tau \mapsto \tau|_E.
+\]
+Nach (a) hat jede Faser von $\mathrm{res}$ genau $[L:E]_s$ Elemente. Somit gilt:
+\[
+[L:K]_s = |\Hom_K(L,\Omega)| = [L:E]_s \cdot |\Hom_K(E,\Omega)| = [L:E]_s [E:K]_s.
+\]
+
+(c) Ist $L|K$ endlich, so erhalten wir
+\[
+[L:K]_i=\frac{[L:K]}{[L:K]_s}=\frac{[L:E][E:K]}{}
+\]
+Dann folgt unmittelbar aus (b) die Gleichung $[L:K]_s = [L:E]_s [E:K]_s$.
+\end{proof}
+
+\textbf{Zwischenziel:} Wir wollen den Separabilitätsgrad für einfache algebraische Körpererweiterungen bestimmen.
+
+\begin{bem}\label{bem:zerfallen_von_xn-a}
+Sei $R$ ein Integritätsring, $n \in \NN$ und $a \in R\setminus\{0\}$.  
+Das Polynom $X^n - a \in R[X]$ zerfalle über $R$ in Linearfaktoren. Dann gilt:
+\begin{enumerate}
+\item[(a)] Gilt $\charact(R)\nmid n$, so besitzt $a$ genau $n$ verschiedene $n$-te Wurzeln in $R$.
+\item[(b)] Gilt $\charact(R)=p>0$ und $n = mp^r$ für $m,r\in\NN_0$, $m>1$ mit $p \nmid m$,  
+so besitzt $a$ genau $m$ verschiedene $n$-te Wurzeln in $R$.
+\item[(c)] Gilt $\charact(R)=p>0$ und $n = p^r$ für ein $r \in \NN$, so besitzt $a$ genau eine $n=p^r$-te Wurzel in $R$. Diese bezeichnen wir mit $\sqrt[p^n]{a}$.
+\end{enumerate}
+\end{bem}
+\begin{proof}
+Übung.
+\end{proof}
+
+\begin{defini}\label{def:separabel_polynom}
+Sei $K$ ein Körper und $f \in K[X]$ ein nichtkonstantes Polynom. Sei $Z|K$ ein Zerfällungskörper von $f$.  
+Dann heißt $f$ \defn{separabel}, falls $f$ genau $\deg(f)$ verschiedene Nullstellen in $Z$ hat. Äquivalent dazu ist, dass $f$ keine mehrfachen Nullstellen in $Z$ besitzt.  
+Andernfalls heißt $f$ \defn{inseparabel}.
+
+\begin{anm}
+Der Separabilitätsbegriff für Polynome ist wohldefiniert, da je zwei Zerfällungskörper von $f$ als $K$-Algebren isomorph sind.
+\end{anm}
+\end{defini}
+
+\begin{bem}\label{bem:inseparabilitaet_char_p}
+Sei $K$ ein Körper und $f \in K[X]$ irreduzibel. Dann sind folgende Aussagen äquivalent:
+\begin{enumerate}
+\item[(i)] $f$ ist inseparabel.
+\item[(ii)] $f' = 0$.
+\item[(iii)] $\operatorname{char}(K)=p>0$ und es existiert ein $g \in K[X]$ mit $f = g(X^p)$, d.h. $f$ ist von der Form
+\[
+f = \sum_{k=0}^n a_{pk} X^{p k} \quad \text{ mit } a_i \in K.
+\]
+\end{enumerate}
+\end{bem}
+
+\begin{proof}
+Sei $Z|K$ ein Zerfällungskörper von $f$.
+
+"`(i)$\Rightarrow$(ii)"': (per Kontraposition)  
+Sei $f' \neq 0$ und $\alpha \in Z$ eine Nullstelle von $f$. Da $f$ irreduzibel ist, stimmt $f$ nach \ref{bem:minpol_char}
+bis auf einen skalaren Vorfaktor mit $\mipo_K\alpha$ überein. Wegen $\deg f'<\deg f$ ist $f'(\alpha)\neq0$
+und daher $\alpha$ keine mehrfache Nullstelle von $f$ aufgrund von \ref{bem:nullstellen_und_ableitungen}. Somit ist $f$ inseparabel.
+
+"`(ii)$\Rightarrow$(i)"':  
+Da $f$ irreduzibel ist, ist $\deg f \geq 1$, also hat $f$ mindestens eine Nullstelle $\alpha \in Z$. Wegen $f' = 0$ ist $\alpha$ eine gemeinsame Nullstelle von $f$ und $f'$ und damit nach \ref{bem:nullstellen_und_ableitungen} eine mehrfache Nullstelle von $f$. Deshalb ist $f$ inseparabel.
+
+"`(ii)$\Leftrightarrow$(iii)"':  
+Sei $f=\sum_{k=0}^mb_kX^k$. Dann ist
+\[
+f'=\sum_{k=1}^m kb_kX^{k-1}.
+\]
+Aufgrund der Nullteilerfreiheit von $K$ erhalten wir
+\begin{align*}
+f'=0 & \iff \text{ Für jedes }k\in\{1,\ldots,m\}\text{ ist }k=0\text{ in }K\text{ oder }b_k=0\\
+& \iff \charact(K)=p>0\text{ und für }k=1,\ldots,m\text{ gilt: }b_k\neq0\Rightarrow p\mid k\\
+& \iff \charact(K)=p>0\text{ und }f =\sum_{k=0}^n a_{pk} X^{p k} \quad \text{ mit } a_i \in K.\\
+& \iff \charact(K)=p>0\text{ und } f=g(X^p) \text{ für ein geeignetes } g \in K[X]
+\end{align*}
+\end{proof}
+
+\begin{bsp}\label{bsp:separabilitaet_über_Q}
+\begin{enumerate}
+\item[(a)] Über $\mathbb{Q}$ ist jedes irreduzible Polynom separabel, da $\operatorname{char}(\mathbb{Q})=0$ ist.
+
+\item[(b)] Ist $p$ eine Primzahl und $f = X^p - t \in \FF_p(t)[X]$, so ist $f$ ist irreduzibel, da es ein Eisensteinpolynom ist (vgl. \ref{bsp:irreduzibilitaet_polynome}(d)) und inseparabel, da $f'=0$ ist.
+\end{enumerate}
+\end{bsp}
+
+\begin{bem}\label{bem:separabilisierung}
+Sei $K$ ein Körper und $f \in K[X]$ irreduzibel. Dann gilt:
+\begin{enumerate}
+\item[(a)] Ist $\charact(K)=p>0$, so existieren ein eindeutig bestimmtes separables Polynom $f^{\sep} \in K[X]$ und ein eindeutig bestimmtes $r\in\NN_0$ mit \[f = f^{\sep}(X^{p^r}).\]
+Es ist 
+\[
+r = \max\{m \in \mathbb{N} \mid \text{ Es existiert ein } g \in K[X]\setminus\{0\} \text{ mit } f=g(X^{p^m})\}.
+\]
+
+\item[(b)] Ist $\charact(K)=0$, dann ist $f$ separabel. Wir setzen $f^{\sep} := f$.
+\end{enumerate}
+Wir nennen $f^{\sep}$ die \defn{Separabilisierung} von $f$.  
+Die Zahl $\deg^s f:=\deg(f^{\sep})$ heißt der \defn{Separabilitätsgrad} von $f$ und die Zahl
+\[
+\deg^i f:=
+\begin{cases}
+p^r &\text{ falls } \charact K=p>0\\
+1   & \text{ falls } \charact K = 0
+\end{cases}
+\]
+heißt der \defn{Inseparabilitätsgrad} von $f$.
+\end{bem}
+
+\begin{proof}
+(b) folgt aus Bemerkung \ref{bem:inseparabilitaet_char_p}.
+
+(a) Wir zeigen zunächst die Existenzaussage. Dazu definieren wir $r$ wie oben. Dann existiert ein Polynom $g \in K[X]$ mit $f = g(X^{p^r})$. Wäre $g$ nicht separabel, so würde aufgrund von \ref{bem:inseparabilitaet_char_p} ein Polynom $h \in K[X]$ mit $g = h(X^p)$ existieren. Dann wäre aber $f = h(X^{p^{r+1}})$, im Widerspruch zur Maximalität von $r$. Somit ist $g$ separabel. Es verbleibt der Nachweis der Eindeutigkeit. Seien dazu $\tilde{f} \in K[X]$ separabel und $s \in \NN_0$ mit $f = \tilde{f}(X^{p^{s}})$. Aufgrund der Separabilität von $\tilde f$ folgt mit \ref{bem:inseparabilitaet_char_p}, dass es kein Polynom $h\in K[X]$ mit $\tilde f=h(X^p)$ gibt, d.h. mit $f=h(X^{p^{s+1}})$. Daher ist
+\[
+s = \max \{m \in \NN \mid \text{ Es existiert ein } g \in K[X] \text{ mit } f = g(X^{p^n})\} = r.
+\]
+Der Einsetzungshomomorphismus $K[X] \to K[X]$, $f \mapsto f(X^{p^r})$, ist injektiv. Daraus folgt, dass $g$ eindeutig bestimmt ist.
+\end{proof}
+
+\begin{bsp}\label{bsp:beispiel_separabel}
+Sei $f = X^5 - t \in \FF_5(t)[X]$. Dann gilt:
+\[
+f^{\sep} = X - t, \quad f = f^{\sep}(X^5), \quad \deg^s f = 1, \quad \deg^s f = 5.
+\]
+\end{bsp}
+
+\begin{bem}\label{bem:zerfall_separabel}
+Sei $K$ ein Körper, $f \in K[X]$ irreduzibel, und $Z|K$ ein Zerfällungskörper von $f$. Dann gilt:
+\begin{itemize}
+    \item[(a)] $f^{\sep}$ ist irreduzibel.
+    \item[(b)] $f^{\sep}$ zerfällt über $Z$ in Linearfaktoren und die Nullstellen von $f$ in $Z$ sind genau die $\deg^i f$-ten Wurzeln der Nullstellen von $f^{\sep}$.
+    \item[(c)] $\deg^s f$ ist die Anzahl der verschiedenen Nullstellen von $f$ in $Z$ und $\deg^i f$ ist die Vielfachheit einer jeden Nullstelle von $f$ in $Z$.
+    \item[(d)] $\deg f = \deg^s f \cdot \deg^i f$.
+\end{itemize}
+\end{bem}
+
+\begin{proof}
+Die Aussagen sind nach \ref{bem:inseparabilitaet_char_p} klar für $\charact K = 0$, denn dann ist $f^{\sep}=f$,
+$\deg^s f=\deg f$, $\deg^i f = 1$. Im Folgenden $\charact K = p > 0$ und $\deg^i f = p^r$.
+
+(a) Der Einsetzungshomomorphismus $K[X] \to K[X]$, $f \mapsto f(X^{p^r})$ bildet Nichteinheiten auf Nichteinheiten und reduzible Elemente auf reduzible Elemente ab. Wäre $f^{\sep}$ reduzibel, so wäre auch $f=f^{\sep}(X^{p^r})$ reduzibel, was im Widerspruch zur Voraussetzung steht.
+
+(b), (c) Sei $M|Z$ ein Zerfällungskörper von $f^{\sep}$ über $Z$. 
+Es seien $\alpha_1,\ldots,\alpha_n\in M$ die Nullstellen von $f^{\sep}$. Insbesondere ist $n=\deg^s f$.
+Wir erhalten
+\[
+f = f^{\sep}(X^{p^r}) = c \prod_{i=1}^n (X^{p^r} - \alpha_i)
+\]
+für ein $c\in K$. Die Nullstellen von $f$ in $Z$ sind genau durch die (nach \ref{bem:zerfallen_von_xn-a} eindeutig bestimmten) $p^r$-ten Wurzeln der $\alpha_i$ gegeben:
+\[
+\beta_1 := \sqrt[p^r]{\alpha_1}, \ldots, \beta_n:=\sqrt[p^r]{\alpha_n}.
+\]
+Damit sind
+\[
+\alpha_1=\beta_1^{p^r},\ldots,\alpha_n=\beta_n^{p^r}\in Z
+\]
+und
+\[
+f=c\prod_{i=1}^n (X^{p^r} - \beta_i^{p^r})\overset{\ref{bem:frobenius_ringhom}}{=}c\prod_{i=1}^n (X - \beta_i)^{p^r}
+\]
+Somit hat $f$ genau $\deg^s f = n$ verschiedene Nullstellen, jede davon mit Vielfachheit $\deg^i f = p^r$.
+
+(d) Wegen $f=f^{\sep}(X^{p^r})$ ist $\deg f = p^r \deg f^{\sep} = \deg^s f \cdot \deg^i f$.
+\end{proof}
+
+\begin{defini}\label{def:el_sepgrad_insepgrad}
+Sei $L|K$ eine Körpererweiterung und $\alpha \in L$ algebraisch über $K$.
+\begin{itemize}
+    \item $\deg^s_K \alpha := \deg^s \mipo_K \alpha$ heißt der \defn{Separabilitätsgrad} von $\alpha$ über $K$.
+    \item $\deg^i_K \alpha := \deg^i \mipo_K \alpha$ heißt der \defn{Inseparabilitätsgrad} von $\alpha$ über $K$.
+    \item $\alpha$ heißt \defn{separabel} über $K$ , falls $\mipo_K \alpha$ separabel ist. Jeweils äquivalent dazu sind die Bedingungen $\deg^s_K \alpha = \deg_K \alpha$ bzw. $\deg^i_K \alpha =1$. 
+\end{itemize}
+\end{defini}
+
+\begin{anm}\label{anm:inseparabilitaet_nur_pos_char}
+\begin{itemize}
+\item Falls $\charact K = 0$ ist, so ist $\mipo_K \alpha$ separabel aufgrund von \ref{bem:inseparabilitaet_char_p}
+und somit $\alpha$ separabel über $K$. Inseparable Elemente gibt es also nur in positiver Charakteristik.
+\item Sei $L|E|K$ eine Körpererweiterung und $\alpha \in L$ separabel über $K$. Dann ist $\alpha$ auch separabel über $E$,
+\begin{denn}
+Sei $Z|E$ ein Zerfällungskörper von $\mipo_K \alpha$ über $E$. Es gilt $\mipo_E \alpha \mid \mipo_K \alpha$ in $E[X]$, und $\mipo_K \alpha$ zerfällt über $Z$ in paarweise verschiedene Linearfaktoren, da es separabel ist. Also zerfällt auch $\mipo_E \alpha$ über $Z$ in paarweise verschiedene Linearfaktoren und ist somit ebenfalls separabel.
+\end{denn}
+\end{itemize}
+\end{anm}
+
+\begin{bem}\label{bem:separabilitaet_grad}
+Sei $L|K$ eine Körpererweiterung und $\alpha \in L$ algebraisch über $K$. Dann gilt:
+\begin{enumerate}
+\item[(a)] $[K(\alpha) : K]_s = \deg^s_K \alpha$,
+\item[(b)] $[K(\alpha) : K]_i = \deg^i_K \alpha$.
+\end{enumerate}
+\end{bem}
+\begin{proof}
+(a) Sei $\Omega$ ein algebraischer Abschluss von $K$. Dann wird $\Omega$ wie in \ref{anm:einbettung_alg_abschluss}
+zum Erweiterungskörper $K(\alpha)$.  Wir erhalten
+\begin{align*}
+\deg^s_K \alpha &= \deg^s \mipo_K \alpha \overset{\ref{bem:zerfall_separabel}}{=} |\{ \text{Nullstellen von } \mipo_K^ \alpha \text{ in } \Omega \}| =|\Konj_\Omega\alpha|\\
+&\overset{\ref{satz:minimalpolynom_universelle_eigenschaft}}{=}|\Hom_K(K(\alpha),\Omega)| 
+=[K(\alpha) : K]_s.
+\end{align*}
+(b) Es gilt
+\[
+\deg^i_K \alpha = \deg^i\mipo_K\alpha\overset{\ref{bem:zerfall_separabel}}=\frac{\deg \mipo_K \alpha}{\deg^s \mipo_K \alpha}=\frac{\deg_K\alpha}{\deg^s_K\alpha} \overset{\text{(a)}}{=} \frac{[K(\alpha):K]}{[K(\alpha):K]_s}=[K(\alpha):K]_i.
+\]
+\end{proof}
+
+\begin{bem}\label{bem:sep_und_insep_grad}
+Seien $L|K$ eine endliche Körpererweiterung und $\alpha_1, \dots, \alpha_n \in L$ mit $L = K(\alpha_1, \dots, \alpha_n)$. Dann gilt:
+\begin{enumerate}
+    \item[(a)] ($[L : K]_s = [L : K]$ und $[L:K]_i=1$) $\iff$ $\alpha_1, \dots, \alpha_n$ separabel über $K$
+    \item[(b)] Ist $\charact K = 0$, so ist $[L : K] = [L : K]_s$ und $[L : K]_i = 1$.
+    \item[(c)] Ist $\charact K = p > 0$, so existiert ein $r \in \NN_0$ mit $[L : K]_i = p^r$.
+\end{enumerate}
+Insbesondere sind $[L : K]_s$ und $[L:K]_i$ beides natürliche Zahlen und Teiler von $[L : K]$.
+\end{bem}
+
+\begin{proof}
+Wir setzen $K_j := K(\alpha_1, \dots, \alpha_j)$ für $j = 0, \dots, n$ und erhalten einen Körperturm $L=K_n|K_{n-1}|\ldots|K_1|K_0=K$ mit $K_j=K_{j-1}(\alpha_j)$ für $j=1,\ldots,n$. Es ist
+\begin{align*}
+[L : K] & \overset{\ref{satz:gradsatz}}{=} \prod_{j=1}^n [K_j : K_{j-1}] = \prod_{j=1}^n \deg^s_{K_{j-1}} \alpha_j, \\
+[L : K]_s & \overset{\ref{satz:sepgrad}}{=} \prod_{j=1}^n [K_j : K_{j-1}]_s \overset{\ref{bem:separabilitaet_grad}}{=} \prod_{j=1}^n \deg^s_{K_{j-1}} \alpha_j,\\
+[L : K]_i & \overset{\ref{satz:sepgrad}}{=} \prod_{j=1}^n [K_j : K_{j-1}]_i \overset{\ref{bem:separabilitaet_grad}}{=} \prod_{j=1}^n \deg^i_{K_{j-1}} \alpha_j.
+\end{align*}
+(c) Ist $\charact K = p > 0$, so sind $\deg_{K_{j-1}} \alpha_j$ alle $p$-Potenzen. Damit ist auch $[L : K]_i$ eine $p$-Potenz.
+
+(a) "`$\Rightarrow$"' (per Kontraposition): Sei eines der $\alpha_j$ inseparabel über $K$, ohne Einschränkung etwa $\alpha_1$. Aufgrund von \ref{anm:inseparabilitaet_nur_pos_char} ist dann
+\[
+[K(\alpha_1):K]_s=\deg_K^s\alpha_1<\deg_K\alpha_1=[K(\alpha_1):K].
+\]
+Es ergibt sich
+\[
+[L : K]_s = [L : K(\alpha_1)]_s[K(\alpha_1) : K]_s < [L : K(\alpha_1)][K(\alpha_1) : K] = [L:K].
+\]
+"`$\Leftarrow$"': Seien $\alpha_1, \dots, \alpha_n$ separabel über $K$. Wegen \ref{anm:inseparabilitaet_nur_pos_char} 
+ist jeweils $\alpha_j$ separabel über $K_{j-1}$ für $j=1,\ldots,n$. Wir erhalten 
+\[
+[L : K]_s = \prod_{j=1}^n \deg^s_{K_{j-1}} \alpha_j = \prod_{j=1}^n \deg_{K_{j-1}} \alpha_j = [L:K].
+\]
+
+(b) folgt aus (a), da dann $\alpha_1,\ldots,\alpha_n$ separabel über $K$ sind.
+\end{proof}
+
+\begin{defini}\label{def:separabel_vollkommen}
+Sei $L|K$ eine algebraische Körpererweiterung.
+\begin{itemize}
+    \item $L|K$ heißt \defn{separabel}, falls jedes Element von $L$ separabel über $K$ ist. Andernfalls heißt $L|K$ \defn{inseparabel}.
+    \item $K$ heißt \defn{vollkommen}, falls jede algebraische Körpererweiterung $M|K$ separabel ist.
+\end{itemize}
+\end{defini}
+
+\begin{anm}\label{anm:vollkommenheit_charakteristik}
+Nach \ref{anm:inseparabilitaet_nur_pos_char} gilt: Ist $\charact K = 0$, so ist jede algebraische Körpererweiterung von $K$ separabel, d.h. $K$ ist vollkommen. Inseparabilität ist ein Phänomen positiver Charakteristik.
+\end{anm}
+
+\begin{satz}\label{satz:char_endl_separabel}
+Sei $L|K$ eine algebraische Körpererweiterung. Dann sind äquivalent:
+\begin{enumerate}
+    \item[(i)] $L|K$ ist endlich und separabel.
+    \item[(ii)] Es existieren ein $n \in \NN_0$ und über $K$ separable Elemente $\alpha_1, \dots, \alpha_n \in L$ mit $L = K(\alpha_1, \dots, \alpha_n)$.
+    \item[(iii)] $L|K$ ist endlich und $[L : K]_s = [L : K]$ (bzw. $[L : K]_i = 1$).
+    \item[(iv)] (Satz vom primitiven Element) Es existiert ein über $K$ separables Element $\alpha \in L$ mit $L = K(\alpha)$.
+\end{enumerate}
+\end{satz}
+
+\begin{proof}
+"`(i) $\Rightarrow$ (ii)"' folgt aus \ref{satz:endl_erweiterung_aquivalenzen}.
+
+"`(ii) $\Rightarrow$ (iii)"' folgt aus \ref{satz:endl_erweiterung_aquivalenzen} und \ref{bem:sep_und_insep_grad}.
+
+"`(iii) $\Rightarrow$ (i)"' (per Kontraposition): Sei $L|K$ endlich und inseparabel. Dann existiert ein $\alpha \in L$, das über $K$ inseparabel ist. Aufgrund von \ref{satz:sepgrad} und \ref{bem:sep_und_insep_grad} ist dann
+\[
+[L : K]_s = [L:K(\alpha)]_s[K(\alpha):K]_s<[L:K(\alpha)][K(\alpha):K]=[L:K].
+\]
+
+"`(iv) $\Rightarrow$ (ii)"' ist klar.
+
+"`(i) $\Rightarrow$ (iv)"' Wir unterscheiden zwei Fälle.
+\begin{itemize}
+\item{1. Fall: $K$ ist endlich.} Wir werden später sehen, dass $L^\times$ zyklisch ist. Sei $\alpha \in L^\times$ ein Erzeuger von $L^\times$. Dann gilt $L = K(\alpha)$.
+
+\item{2. Fall: $K$ ist unendlich.} Wegen $L|K$ endlich existieren nach \ref{satz:endl_erweiterung_aquivalenzen} Elemente $\alpha_1, \dots, \alpha_m \in L$ mit $L = K(\alpha_1, \dots, \alpha_m)$. Es genügt, den Fall $m = 2$ zu betrachten, d.h.
+ohne Einschränkung sei $L = K(\alpha, \beta)$ mit $\alpha, \beta \in L$. Sei $n = [L : K]_s \overset{\text{(iii)}}{=} [L : K]$ und $\Omega$ ein algebraischer Abschluss von $K$. $\Omega$ wird wie in \ref{anm:einbettung_alg_abschluss} zum 
+Erweiterungskörper von $K$. Es sei
+\[
+  \Hom_K(L, \Omega) = \{\sigma_1, \dots, \sigma_n\}.
+\]
+Wir setzen
+\[
+P := \prod_{i,j=1\ldots,n, i\neq j} \left(\sigma_i(\alpha) - \sigma_j(\alpha)\right) + \left(\sigma_i(\beta) - \sigma_j(\beta)\right) X \in \Omega[X].
+\]
+Für $i \neq j$ ist $\sigma_i(\alpha) \neq \sigma_j(\alpha)$ oder $\sigma_i(\beta) \neq \sigma_j(\beta)$, andernfalls wäre $\sigma_i = \sigma_j$ wegen $L = K(\alpha, \beta)$. Somit ist keiner der Faktoren in obigem Produkt gleich Null
+und damit $P\neq0$. Da $|K| = \infty$ ist, existiert ein $\lambda \in K$ mit $P(\lambda) \neq 0$. Für $i \neq j$ ist
+\[
+\sigma_i(\alpha)-\sigma_j(\alpha)+\left(\sigma_i(\beta)-\sigma_j(\beta)\right)\lambda\neq 0
+\]
+und deshalb
+\[
+\sigma_i(\alpha + \lambda \beta) \neq \sigma_j(\alpha + \lambda \beta).
+\]
+Aufgrund von \ref{bem:k-algebra_homomorphismen} sind $\sigma_1(\alpha + \lambda \beta), \dots, \sigma_n(\alpha + \lambda \beta)$ deshalb paarweise verschiedene Nullstellen von $\mipo_K(\alpha + \lambda \beta)$ in $\Omega$. Wir erhalten
+\[
+[K(\alpha + \lambda \beta) : K]=\deg \mipo_K(\alpha + \lambda \beta)\geq n=[L:K]. 
+\]
+Weil das Element $\alpha+\lambda\beta$ in $L$ liegt, ist $L = K(\alpha + \lambda \beta)$.
+\end{itemize}
+\end{proof}
+
+\begin{folgerung}\label{folg:charakteristik_separabel}
+Sei $L|K$ eine endliche Körpererweiterung mit $\charact(K) \nmid [L : K]$. Dann ist $L|K$ separabel.
+\end{folgerung}
+\begin{proof}
+Die Aussage ist klar für $\charact(K)=0$. Im Folgenden sei $\charact(K)=p>0$.
+Nach Voraussetzung gilt $p \nmid [L : K] = [L : K]_s \cdot [L : K]_i$, woraus $p \nmid [L : K]_i$ folgt.
+Wegen \ref{bem:sep_und_insep_grad} ist dann $[L : K]_i = 1$, also ist $L|K$ nach \ref{satz:char_endl_separabel} separabel.
+\end{proof}
+
+\begin{folgerung}\label{folg:automorphismen_endlicher_erweiterungen}
+Sei $L|K$ eine endliche Körpererweiterung. Dann gilt:
+\begin{enumerate}
+    \item[(a)] $| \Aut_K(L) | \leq [L : K]_s \leq [L : K]$,
+    \item[(b)] $L|K$ ist normal $\iff |\Aut_K(L)| = [L : K]_s$,
+    \item[(c)] $L|K$ ist separabel $\iff [L : K]_s = [L : K]$.
+\end{enumerate}
+\end{folgerung}
+\begin{proof}
+(a) Sei $\Omega$ ein algebraischer Abschluss von $K$. Aufgrund des Fortsetzungssatzes \ref{satz:fortsetzungssatz_algebraische_koerpererweiterungen} existiert ein $K$-Algebrenhomomorphismus
+$\psi\colon L\hookrightarrow\Omega$ und somit eine Injektion
+\[
+\Aut_K(L) \hookrightarrow \Hom_K(L, \Omega), \quad \varphi\mapsto \psi\circ\varphi.
+\]
+Es folgt
+\[
+|\Aut_K(L)| \leq |\Hom_K(L, \Omega)| = [L : K]_s \underset{\ref{bem:sep_und_insep_grad}}{\leq} [L : K].
+\]
+(b) Es gilt
+\[
+L|K \text{ normal} \overset{\ref{satz:normale_erw_char}}{\iff} \Aut_K(L) = \Hom_K(L, \Omega) \iff |\Aut_K(L)| = [L : K]_s.
+\]    
+(c) ergibt sich aus der Äquivalenz \ref{satz:char_endl_separabel} (i)$\Leftrightarrow$(ii).
+\end{proof}
+
+\begin{bem}\label{bem:separabel_transitiv}
+Seien $L|E|K$ algebraische Körpererweiterungen. Dann sind die folgenden Aussagen äquivalent:
+\begin{enumerate}
+    \item[(i)] $L|E$ ist separabel und $E|K$ ist separabel,
+    \item[(ii)] $L|K$ ist separabel.
+\end{enumerate}
+\end{bem}
+\begin{proof}
+"`(ii)$\Rightarrow$(i)"': Sei $L|K$ separabel. Nach Definition ist dann auch $E|K$ separabel und wegen
+\ref{anm:inseparabilitaet_nur_pos_char} ist auch $L|E$ separabel.
+
+"`(i)$\Rightarrow$(ii)"': Sei $\alpha \in L$ mit $\mipo_E(\alpha) = \sum_{i=0}^n b_i X^i \in E[X]$. 
+Wir setzen $M := K(b_0, \dots, b_n) \subseteq E$. Es ist $\mipo_M(\alpha)$ irreduzibel in $E[X]$ und 
+daher auch irreduzibel in $M[X]$. Es folgt $\mipo_E(\alpha) = \mipo_M(\alpha)$. 
+Da $\alpha$ separabel über $E$ ist, ist $\mipo_E(\alpha)=\mipo_M(\alpha)$ separabel und damit $\alpha$ auch separabel über $M$. Nach "`(ii) $\Rightarrow$ (i)"' ist $M|K$ separabel, da $E|K$ separabel ist. Wir erhalten
+\[
+[M(\alpha):K]_s=[M(\alpha):M]_s[M:K]_s=[M(\alpha):M][M:K]=[M(\alpha):K],
+\]
+weswegen $M(\alpha)|K$ separabel ist. Damit ist $\alpha$ separabel über $K$ und somit $L|K$ separabel.
+\end{proof}
+
+\begin{satz}\label{satz:separabel_eigenschaften}
+Sei $L|K$ eine algebraische Körpererweiterung. Dann sind äquivalent:
+\begin{enumerate}
+    \item[(i)] $L|K$ ist separabel.
+    \item[(ii)] Es existiert eine Teilmenge $T \subseteq L$ von über $K$ separablen Elementen mit $L = K(T)$.
+    \item[(iii)] Für jede Zwischenerweiterung $L|E|K$ mit $E|K$ endlich ist $E|K$ separabel.
+\end{enumerate}
+\end{satz}
+
+\begin{proof}
+"`(i) $\Rightarrow$ (ii)"': Wir setzen $T := L$.
+
+"`(ii) $\Rightarrow$ (iii)"': Sei $L|E|K$ eine Zwischenerweiterung mit $E|K$ endlich. Dann existieren $\alpha_1, \dots, \alpha_n \in L$ mit $E = K(\alpha_1, \dots, \alpha_n)$. Für jedes $i = 1, \dots, n$ existiert eine endliche Teilmenge $S_i \subseteq T$ mit $\alpha_i \in K(S_i)$. Wir setzen 
+\[
+S := \bigcup_{i=1}^n S_i\subseteq T
+\]
+erhalten
+\[
+E = K(\alpha_1, \dots, \alpha_n) \subseteq K\left(\bigcup_{i=1}^n S_i\right)=K(S).
+\]
+Da alle Elemente aus der endlichen Menge $S$ separabel über $K$ sind, ist $K(S)|K$ separabel nach \ref{satz:char_endl_separabel}. Damit ist $E|K$ separabel.
+
+"`(iii) $\Rightarrow$ (i)"': Sei $\alpha \in L$. Dann ist $\alpha \in K(\alpha)$ und $L|K(\alpha)|K$ ist eine Zwischenerweiterung mit $K(\alpha)|K$ endlich, weswegen nach (iii) die Erweiterung $K(\alpha)|K$ separabel ist. Also ist $\alpha$ separabel über $K$.
+\end{proof}
+
+\begin{bem}\label{bem:separabler_abschluss}
+Sei $L|K$ eine algebraische Körpererweiterung. Dann gilt:
+\[
+K^{\sep, L} := \{\alpha \in L \mid \alpha \text{ separabel über } K\}
+\]
+ist ein Zwischenkörper von $L|K$, der \defn{separable Abschluss von $K$ in $L$}. Die Erweiterung $K^{\sep, L}|K$ ist separabel.
+\end{bem}
+\begin{proof}
+Es gilt 
+\[
+K(K^{\sep, L}) \underset{\ref{satz:separabel_eigenschaften}}{\subseteq} K^{\sep, L}\subseteq K(K^{\sep, L})
+\]
+und damit
+\[
+K(K^{\sep, L}) = K^{\sep, L},
+\]
+weswegen $K^{\sep, L}$ ein Zwischenkörper von $L|K$ ist. Nach Konstruktion ist $K^{\sep, L}|K$ separabel.
+\end{proof}
+
+\begin{anm}
+\begin{itemize}
+\item Ist $L$ ein algebraischer Abschluss von $K$, so nennt man $K^{\sep,\Omega}$ einen \defn{separablen Abschluss von $K$}.
+
+\item Man kann zeigen: Ist $L|K$ eine endliche Körpererweiterung, dann gilt:
+\[
+[L : K]_s = [K^{\sep, L} : K], \quad [L : K^{\sep, L}]_s = 1, \quad [L : K]_i = [L : K^{\sep, L}].
+\]
+\end{itemize}
+\end{anm}
+
+\chapter{Galoistheorie}
+\setcounter{section}{11}
+\section{Der Hauptsatz der Galoistheorie}
+
+\paragraph{Notation.} In diesem Abschnitt sei $L|K$ stets eine algebraische Körpererweiterung.  
+Es sei $\calU(L|K)$ die Menge der Untergruppen von $\Aut_K(L)$ und $\calZ(L|K)$ die Menge der Zwischenkörper von $L|K$. Sowohl auf $\calU(L|K)$ als auch auf $\calZ(L|K)$ ist durch "`$\subseteq$"' eine Ordnungsrelation gegeben.
+
+\begin{defini}\label{def:fixkoerper_galoiserw}
+Für eine Untergruppe $U\in \calU(L|K)$ heißt 
+\[
+\calF_L(U) := \{ \alpha \in L \mid \sigma(\alpha) = \alpha \text{ für alle } \sigma \in U \}\in \calZ(L|K)
+\]
+der \defn{Fixkörper} von $U$.  
+$L|K$ heißt \defn{galoissch} (\defn{Galoiserweiterung}), falls $\calF_L(\Aut_K(L)) = K$ gilt.
+\end{defini}
+
+\begin{anm}\label{anm:fixkp_ist_kp}
+Man verifiziert leicht, dass $\calF_L(U)$ tatsächlich ein Zwischenkörper von $L|K$ ist. 
+\end{anm}
+
+\begin{satz}\label{satz:char_galoissch}
+Die folgenden Aussagen sind äquivalent:
+\begin{enumerate}
+    \item[(i)] $L|K$ ist endlich galoissch.
+    \item[(ii)] $L|K$ ist endlich, normal und separabel.
+    \item[(iii)] $L|K$ ist endlich und $|\Aut_K(L)| = [L : K]$.
+    \item[(iv)] $L|K$ ist ein Zerfällungskörper endlich vieler separabler Polynome.
+    \item[(v)] $L|K$ ist Zerfällungskörper eines separablen Polynoms.
+    \item[(vi)] Es existiert eine endliche Untergruppe $H \in \calU(L|K)$ mit $K = \calF_L(H)$.  
+\end{enumerate}
+Im Fall (vi) ist dann $H = \Aut_K(L)$.
+\end{satz}
+
+\begin{proof}
+"`(iii) $\Rightarrow$ (v)"': Sei $L|K$ endlich separabel. Aufgrund des Satzes vom primitiven Element \ref{satz:char_endl_separabel} gibt es ein über $K$ separables Element $\alpha \in L$ mit $L = K(\alpha)$.  Da $L|K$ normal ist, zerfällt $\mipo_K \alpha$ über $L$ in Linearfaktoren und $L$ wird von den Nullstellen von $\mipo_K(\alpha)$ erzeugt. Also ist $L$ ein Zerfällungskörper des separablen Polynoms $\mipo_K \alpha$.
+
+"`(v) $\Rightarrow$ (iv)"' ist klar.
+
+"`(iv) $\Rightarrow$ (ii)"': $L|K$ ist separabel nach \ref{satz:char_endl_separabel}, da es von den Nullstellen endlich vieler separabler Polynome erzeugt wird, und $L|K$ ist normal nach \ref{satz:normal_aequiv}, da ein Zerfällungskörper vorliegt.
+
+"`(ii) $\Leftrightarrow$ (iii)"': Nach \ref{folg:automorphismen_endlicher_erweiterungen} gelten für $L|K$ endlich
+die Ungleichungen 
+\[| \Aut_K(L) | \leq [L : K]_s \leq [L : K]\]
+sowie
+\begin{align*}
+L|K \text{ normal und separabel } &\iff |\Aut_K(L)| = [L : K]_s \text{ und } [L:K]_s = [L : K] \\
+& \iff |\Aut_K(L)| = [L : K]_s.
+\end{align*}
+"`(ii) $\Rightarrow$ (i)"': Sei $\alpha \in L\setminus K$. Da $L|K$ normal und separabel ist, zerfällt $\mipo_K\alpha$
+über $L$ in paarweise verschiedene Linearfaktoren und wegen $\alpha\not\in K$ ist $\deg\mipo_K\alpha\geq2$.
+Deshalb existiert eine Nullstelle $\beta\neq\alpha$ von $\mipo_K\alpha$ in $L$. Aufgrund von \ref{satz:trans_op_normale_Erw}
+operiert $\Aut_K(L)$ transitiv auf $\Konj_\alpha L$, somit existiert ein $\sigma\in\Aut_K(L)$ mit $\sigma(\alpha)=\beta\neq \alpha$, und es ist $\alpha\not\in\calF_L(\Aut_K(L))$. Insgesamt erhalten wir $\calF(\Aut_K(L)) = K$,
+d.h. $L|K$ ist galoissch.
+
+"`(i) $\Rightarrow$ (vi)"': Wir setzen $H := \Aut_K(L)$. Aus \ref{folg:automorphismen_endlicher_erweiterungen} erhalten wir $|H| \leq [L : K]$, also ist $H$ endlich. Außerdem ist wegen (i) $\calF_L(H)=\calF_L(\Aut_K(L)) = K$.
+
+"`(vi) $\Rightarrow$ (ii)"': Sei $H \leq \Aut_K(L)$ eine endliche Untergruppe mit $\calF_L(H) = K$.
+Die Körpererweiterung $L|K$ ist normal und separabel,
+\begin{denn}
+Sei $\alpha \in L$. Wir setzen
+\[
+M := \{\sigma(\alpha) \mid \sigma \in H\}.
+\]
+Dann ist $M$ endlich, etwa $M = \{\alpha, \beta_1, \ldots,\beta_n\}$ für ein $n \in \NN_0$. Wir setzen
+\[
+f:= (X - \alpha) \prod_{i=1}^n (X - \beta_i) = \sum_{i=0}^{n+1} c_i X^i \in L[X].
+\]
+Jedes $\sigma \in H$ induziert eine injektive und damit bijektive Selbstabbildung von $M$. Diese permutiert die Nullstellen von $f$ und wir erhalten
+\[
+f = (X - \sigma(\alpha)) \prod_{i=1}^n (X - \sigma(\beta_i)) = \sum_{i=0}^n \sigma(c_i) X^i \quad \text{für alle } \sigma \in H.
+\]
+Somit ist $f\in \calF_L(H)[X] = K[X]$. Aufgrund von \ref{bem:k-algebra_homomorphismen}
+sind $\alpha, \beta_1, \dots, \beta_n$ paarweise verschiedene Nullstellen von $\mipo_K \alpha$. Es ergibt sich
+$\deg f_\alpha \leq \deg \mipo_K \alpha$. Da $f(\alpha)=0$ ist und $f$ normiert ist, ist $f=\mipo_K\alpha$.
+Somit zerfällt $\mipo_K\alpha$ über $L$ in $n+1\leq|H|$ paarweise verschiedene Linearfaktoren, d.h. $\alpha$ ist
+normal in $L|K$ und separabel über $K$.
+\end{denn}
+$L|K$ ist endlich,
+\begin{denn}
+Sei $E \in \calZ(L|K)$ mit $E|K$ endlich. Da $L|K$ separabel ist, ist wegen \ref{bem:separabel_transitiv} die
+Erweiterung $E|K$ endlich separabel. Aufgrund des Satzes vom primitiven Element gibt es ein $\alpha \in E$ mit $E = K(\alpha)$. Aus der obigen Rechnung erhalten wir
+\[
+[E : K] = \deg\mipo_K\alpha \leq |H|.
+\]
+Somit ist $L|K$ endlich (andernfalls gäbe es nämlich eine endliche Zwischenerweiterung $E|K$ vom Grad $>|H|$)
+und $[L:K]\le|H|$. Damit folgt
+\[
+|H| \leq |\Aut_K(L)| \underset{\ref{folg:automorphismen_endlicher_erweiterungen}}{\leq} [L : K] \leq |H|,
+\]
+und somit $H = \Aut_K(L)$.
+\end{denn}
+\end{proof}
+
+\begin{satz}\label{satz:galoistheorie_zerfaellt}
+Die folgenden Aussagen sind äquivalent:
+\begin{enumerate}
+    \item[(i)] $L|K$ ist galoissch.
+    \item[(ii)] $L|K$ ist normal und separabel.
+    \item[(iii)] $L|K$ ist Zerfällungskörper einer Familie von separablen Polynomen aus $K[X]$.
+\end{enumerate}
+\end{satz}
+
+\begin{proof}
+"`(ii) $\Rightarrow$ (iii)"': Sei $L|K$ normal und separabel. Dann ist $L$ Zerfällungskörper einer Familie $\calF$ von Polynomen aus $K[X]$. Wir können ohne Einschränkung annehmen, dass jedes der Polynome aus $\calF$ irreduzibel 
+und normiert ist. Insbesondere ist jedes der Polynome auf $\calF$ das Minimalpolynom über $K$ eines Elements aus $L$
+und damit separabel.
+
+"`(iii) $\Rightarrow$ (i)"': Sei $L|K$ Zerfällungskörper einer Familie $\calF$ separabler Polynome.
+Nach \ref{satz:normal_aequiv} ist $L|K$ normal, und da $L$ von den Nullstellen der Polynome aus $\calF$ erzeugt wird,
+ist $L|K$ separabel nach \ref{satz:separabel_eigenschaften}.
+\end{proof}
+
 
 \end{document}
 
