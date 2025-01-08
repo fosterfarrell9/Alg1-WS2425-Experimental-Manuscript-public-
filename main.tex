@@ -5861,7 +5861,7 @@ also zerfällt $\mipo_K\alpha$ über $L$ in Linearfaktoren. Damit ist $\alpha$ n
 \end{denn}
 
 \item Ist $\Omega$ ein algebraischer Abschluß von $K$, so ist $\Omega|K$ normal,  
-da $\Omega$ ein Zerfällungskörper der Familie aller nichtkonstanten Polynome aus $K[X]$ ist.
+da $\Omega$ nach \ref{bem:algebraischer_abschluss} ein Zerfällungskörper der Familie aller nichtkonstanten Polynome aus $K[X]$ ist.
 \end{enumerate}
 \end{bsp}
 
@@ -5912,7 +5912,10 @@ Sei $L|K$ eine algebraische Körpererweiterung. Dann gilt:
 \end{satz}
 
 \begin{proof}
-(a) und (b) folgen wegen \ref{bem:normale_huelle}(i) aus dem  Hauptsatz über Zerfällungskörper \ref{satz:zerfkoerper_familie}. Bei Aussage (c) ist die Implikation "`$\Rightarrow$"' klar. Zum Nachweis der
+(a) und (b) folgen wegen \ref{bem:normale_huelle}(i) aus dem  Hauptsatz über Zerfällungskörper \ref{satz:zerfkoerper_familie}: Hierzu betrachten wir die Familie $\calF$ aller irreduziblen Polynome aus $K[X]$, die in $L$ eine Nullstelle haben. Diese können wir auch als eine Familie von Polynomen in $L[X]$ auffassen. Analog zu den Überlegungen in \ref{bem:normale_huelle}
+ergibt sich, dass eine normale Hülle von $L|K$ dasselbe ist wie ein Zerfällungskörper von $\calF$ über $L$. Aus \ref{satz:zerfkoerper_familie} ergibt sich dann, dass je zwei normale Hüllen von $L|K$ sogar als $L$-Algebren isomorph sind.
+
+Bei Aussage (c) ist die Implikation "`$\Rightarrow$"' klar. Zum Nachweis der
 Implikation "`$\Leftarrow$"' sei $L|K$ endlich. Dann existiert nach \ref{satz:endl_erweiterung_aquivalenzen} eine endliche Teilmenge $T \subseteq L$ von über $K$ algebraischen Elementen mit $L=K(T)$. Aufgrund von \ref{bem:normale_huelle} ist $N$ ein Zerfällungskörper der endlich vielen Minimalpolynome über $K$ von Elementen aus $T$, insbesondere ist $N|K$ endlich.
 \end{proof}
 
