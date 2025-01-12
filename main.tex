@@ -21,7 +21,6 @@
 \usepackage{color, graphicx, float, parskip, enumitem}
 \usepackage{fancyhdr, titlesec}
 \usepackage{tikz} % Include the TikZ package for drawing
-%\usepackage[on,german]{mampf}
 %\setmampfurl{https://mampf.mathi.uni-heidelberg.de}
 
 \sloppy
@@ -171,6 +170,7 @@ plainpages=false,}
 \DeclareMathOperator{\End}{End}
 \DeclareMathOperator{\Fix}{Fix}
 \DeclareMathOperator{\Frob}{Frob}
+\DeclareMathOperator{\Gal}{Gal}
 \DeclareMathOperator{\ggT}{ggT}
 \DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\Hom}{Hom}
@@ -6159,7 +6159,7 @@ Sei $Z|K$ ein Zerfällungskörper von $f$.
 "`(i)$\Rightarrow$(ii)"': (per Kontraposition)  
 Sei $f' \neq 0$ und $\alpha \in Z$ eine Nullstelle von $f$. Da $f$ irreduzibel ist, stimmt $f$ nach \ref{bem:minpol_char}
 bis auf einen skalaren Vorfaktor mit $\mipo_K\alpha$ überein. Wegen $\deg f'<\deg f$ ist $f'(\alpha)\neq0$
-und daher $\alpha$ keine mehrfache Nullstelle von $f$ aufgrund von \ref{bem:nullstellen_und_ableitungen}. Somit ist $f$ inseparabel.
+und daher $\alpha$ keine mehrfache Nullstelle von $f$ aufgrund von \ref{bem:nullstellen_und_ableitungen}. Somit ist $f$ separabel.
 
 "`(ii)$\Rightarrow$(i)"':  
 Da $f$ irreduzibel ist, ist $\deg f \geq 1$, also hat $f$ mindestens eine Nullstelle $\alpha \in Z$. Wegen $f' = 0$ ist $\alpha$ eine gemeinsame Nullstelle von $f$ und $f'$ und damit nach \ref{bem:nullstellen_und_ableitungen} eine mehrfache Nullstelle von $f$. Deshalb ist $f$ inseparabel.
@@ -6182,7 +6182,7 @@ f'=0 & \iff \text{ Für jedes }k\in\{1,\ldots,m\}\text{ ist }k=0\text{ in }K\tex
 \begin{enumerate}
 \item[(a)] Über $\mathbb{Q}$ ist jedes irreduzible Polynom separabel, da $\operatorname{char}(\mathbb{Q})=0$ ist.
 
-\item[(b)] Ist $p$ eine Primzahl und $f = X^p - t \in \FF_p(t)[X]$, so ist $f$ ist irreduzibel, da es ein Eisensteinpolynom ist (vgl. \ref{bsp:irreduzibilitaet_polynome}(d)) und inseparabel, da $f'=0$ ist.
+\item[(b)] Ist $p$ eine Primzahl und $f = X^p - t \in \FF_p(t)[X]$, so ist $f$ irreduzibel, da es ein Eisensteinpolynom ist (vgl. \ref{bsp:irreduzibilitaet_polynome}(d)) und inseparabel, da $f'=0$ ist.
 \end{enumerate}
 \end{bsp}
 
@@ -6388,7 +6388,7 @@ Erweiterungskörper von $K$. Es sei
 \]
 Wir setzen
 \[
-P := \prod_{i,j=1\ldots,n, i\neq j} \left(\sigma_i(\alpha) - \sigma_j(\alpha)\right) + \left(\sigma_i(\beta) - \sigma_j(\beta)\right) X \in \Omega[X].
+P := \prod_{i,j=1,\ldots,n,\ i\neq j} \left(\sigma_i(\alpha) - \sigma_j(\alpha)\right) + \left(\sigma_i(\beta) - \sigma_j(\beta)\right) X \in \Omega[X].
 \]
 Für $i \neq j$ ist $\sigma_i(\alpha) \neq \sigma_j(\alpha)$ oder $\sigma_i(\beta) \neq \sigma_j(\beta)$, andernfalls wäre $\sigma_i = \sigma_j$ wegen $L = K(\alpha, \beta)$. Somit ist keiner der Faktoren in obigem Produkt gleich Null
 und damit $P\neq0$. Da $|K| = \infty$ ist, existiert ein $\lambda \in K$ mit $P(\lambda) \neq 0$. Für $i \neq j$ ist
@@ -6518,4 +6518,3 @@ weswegen $K^{\sep, L}$ ein Zwischenkörper von $L|K$ ist. Nach Konstruktion ist 
 \end{anm}
 
 \end{document}
-
