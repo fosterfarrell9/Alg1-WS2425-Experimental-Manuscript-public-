@@ -6517,4 +6517,635 @@ weswegen $K^{\sep, L}$ ein Zwischenkörper von $L|K$ ist. Nach Konstruktion ist 
 \end{itemize}
 \end{anm}
 
+\chapter{Galoistheorie}
+\setcounter{section}{11}
+\section{Der Hauptsatz der Galoistheorie}
+
+\begin{notation}
+In diesem Abschnitt sei $L|K$ stets eine algebraische Körpererweiterung. Wir setzen
+\begin{align*}
+\calU(L|K) & := \{ \text{Untergruppen von }\Aut_K(L)\}, \\
+\calZ(L|K) & := \{ \text{Zwischenkörper von } L|K \}
+\end{align*}
+Sowohl auf $\calU(L|K)$ als auch auf $\calZ(L|K)$ ist durch "`$\subseteq$"' eine Ordnungsrelation gegeben.
+\end{notation}
+
+\begin{defini}\label{def:fixkoerper_galoiserw}
+Für eine Untergruppe $U\in \calU(L|K)$ heißt 
+\[
+\calF_L(U) := \{ \alpha \in L \mid \sigma(\alpha) = \alpha \text{ für alle } \sigma \in U \}\in \calZ(L|K)
+\]
+der \defn{Fixkörper} von $U$.  
+$L|K$ heißt \defn{galoissch} (\defn{Galoiserweiterung}), falls $\calF_L(\Aut_K(L)) = K$ gilt. Dies ist äquivalent dazu, dass
+für $x\in L$ aus $\sigma(x)=x$ für alle $\sigma\in\Aut_K(L)$ stets $x\in K$ folgt.
+\end{defini}
+
+\begin{anm}\label{anm:fixkp_ist_kp}
+Man verifiziert leicht, dass $\calF_L(U)$ tatsächlich ein Zwischenkörper von $L|K$ ist. 
+\end{anm}
+
+\begin{satz}\label{satz:char_endl_galoissch}
+Die folgenden Aussagen sind äquivalent:
+\begin{enumerate}
+    \item[(i)] $L|K$ ist endlich galoissch.
+    \item[(ii)] $L|K$ ist endlich, normal und separabel.
+    \item[(iii)] $L|K$ ist endlich und $|\Aut_K(L)| = [L : K]$.
+    \item[(iv)] $L|K$ ist ein Zerfällungskörper endlich vieler separabler Polynome.
+    \item[(v)] $L|K$ ist Zerfällungskörper eines separablen Polynoms.
+    \item[(vi)] Es existiert eine endliche Untergruppe $H \in \calU(L|K)$ mit $K = \calF_L(H)$.  
+\end{enumerate}
+Im Fall (vi) ist dann $H = \Aut_K(L)$.
+\end{satz}
+
+\begin{proof}
+"`(ii) $\Rightarrow$ (v)"': Sei $L|K$ endlich separabel. Aufgrund des Satzes vom primitiven Element \ref{satz:char_endl_separabel} gibt es ein über $K$ separables Element $\alpha \in L$ mit $L = K(\alpha)$.  Da $L|K$ normal ist, zerfällt $\mipo_K \alpha$ über $L$ in Linearfaktoren und $L$ wird von den Nullstellen von $\mipo_K(\alpha)$ erzeugt. Also ist $L$ ein Zerfällungskörper des separablen Polynoms $\mipo_K \alpha$.
+
+"`(v) $\Rightarrow$ (iv)"' ist klar.
+
+"`(iv) $\Rightarrow$ (ii)"': $L|K$ ist separabel nach \ref{satz:char_endl_separabel}, da es von den Nullstellen endlich vieler separabler Polynome erzeugt wird, und $L|K$ ist normal nach \ref{satz:normal_aequiv}, da ein Zerfällungskörper vorliegt.
+
+"`(ii) $\Leftrightarrow$ (iii)"': Nach \ref{folg:automorphismen_endlicher_erweiterungen} gelten für $L|K$ endlich
+die Ungleichungen 
+\[| \Aut_K(L) | \leq [L : K]_s \leq [L : K]\]
+sowie
+\begin{align*}
+L|K \text{ normal und separabel } &\iff |\Aut_K(L)| = [L : K]_s \text{ und } [L:K]_s = [L : K] \\
+& \iff |\Aut_K(L)| = [L : K]_s.
+\end{align*}
+"`(ii) $\Rightarrow$ (i)"': Sei $\alpha \in L\setminus K$. Da $L|K$ normal und separabel ist, zerfällt $\mipo_K\alpha$
+über $L$ in paarweise verschiedene Linearfaktoren und wegen $\alpha\not\in K$ ist $\deg\mipo_K\alpha\geq2$.
+Deshalb existiert eine Nullstelle $\beta\neq\alpha$ von $\mipo_K\alpha$ in $L$. Aufgrund von \ref{satz:trans_op_normale_Erw}
+operiert $\Aut_K(L)$ transitiv auf $\Konj_\alpha L$, somit existiert ein $\sigma\in\Aut_K(L)$ mit $\sigma(\alpha)=\beta\neq \alpha$, und es ist $\alpha\not\in\calF_L(\Aut_K(L))$. Insgesamt erhalten wir $\calF(\Aut_K(L)) = K$,
+d.h. $L|K$ ist galoissch.
+
+"`(i) $\Rightarrow$ (vi)"': Wir setzen $H := \Aut_K(L)$. Aus \ref{folg:automorphismen_endlicher_erweiterungen} erhalten wir $|H| \leq [L : K]$, also ist $H$ endlich. Außerdem ist wegen (i) $\calF_L(H)=\calF_L(\Aut_K(L)) = K$.
+
+"`(vi) $\Rightarrow$ (ii)"': Sei $H \leq \Aut_K(L)$ eine endliche Untergruppe mit $\calF_L(H) = K$.
+Die Körpererweiterung $L|K$ ist normal und separabel,
+\begin{denn}
+Sei $\alpha \in L$. Wir setzen
+\[
+M := \{\sigma(\alpha) \mid \sigma \in H\}\subseteq L.
+\]
+Dann ist $M$ endlich, etwa $M = \{\alpha, \beta_1, \ldots,\beta_n\}$ für ein $n \in \NN_0$. Wir setzen
+\[
+f:= (X - \alpha) \prod_{i=1}^n (X - \beta_i) = \sum_{i=0}^{n+1} c_i X^i \in L[X].
+\]
+Jedes $\sigma \in H$ induziert eine injektive und damit bijektive Selbstabbildung von $M$. Diese permutiert die Nullstellen von $f$ und wir erhalten
+\[
+f = (X - \sigma(\alpha)) \prod_{i=1}^n (X - \sigma(\beta_i)) = \sum_{i=0}^n \sigma(c_i) X^i \quad \text{für alle } \sigma \in H.
+\]
+Somit ist $f\in \calF_L(H)[X] = K[X]$. Aufgrund von \ref{bem:k-algebra_homomorphismen}
+sind $\alpha, \beta_1, \dots, \beta_n$ paarweise verschiedene Nullstellen von $\mipo_K \alpha$. Es ergibt sich
+$\deg f \leq \deg \mipo_K \alpha$. Da $f(\alpha)=0$ ist und $f$ normiert ist, ist $f=\mipo_K\alpha$.
+Somit zerfällt $\mipo_K\alpha$ über $L$ in $n+1\leq|H|$ paarweise verschiedene Linearfaktoren, d.h. $\alpha$ ist
+normal in $L|K$ und separabel über $K$.
+\end{denn}
+$L|K$ ist endlich und $H = \Aut_K(L)$,
+\begin{denn}
+Sei $E \in \calZ(L|K)$ mit $E|K$ endlich. Da $L|K$ separabel ist, ist wegen \ref{bem:separabel_transitiv} die
+Erweiterung $E|K$ endlich separabel. Aufgrund des Satzes vom primitiven Element gibt es ein $\alpha \in E$ mit $E = K(\alpha)$. Aus der obigen Rechnung erhalten wir
+\[
+[E : K] = \deg\mipo_K\alpha \leq |H|.
+\]
+Somit ist $L|K$ endlich (andernfalls gäbe es nämlich eine endliche Zwischenerweiterung $E|K$ vom Grad $>|H|$)
+und $[L:K]\le|H|$. Damit folgt
+\[
+|H| \leq |\Aut_K(L)| \underset{\ref{folg:automorphismen_endlicher_erweiterungen}}{\leq} [L : K] \leq |H|,
+\]
+und somit $H = \Aut_K(L)$.
+\end{denn}
+\end{proof}
+
+\begin{satz}\label{satz:char_galoissch}
+Die folgenden Aussagen sind äquivalent:
+\begin{enumerate}
+    \item[(i)] $L|K$ ist galoissch.
+    \item[(ii)] $L|K$ ist normal und separabel.
+    \item[(iii)] $L|K$ ist Zerfällungskörper einer Familie von separablen Polynomen aus $K[X]$.
+\end{enumerate}
+\end{satz}
+
+\begin{proof}
+"`(ii)$\Rightarrow$(iii)"': Sei $L|K$ normal und separabel. Dann ist $L$ Zerfällungskörper einer Familie $\calF$ von Polynomen aus $K[X]$. Wir können ohne Einschränkung annehmen, dass jedes der Polynome aus $\calF$ irreduzibel 
+und normiert ist. Insbesondere ist jedes der Polynome auf $\calF$ das Minimalpolynom über $K$ eines Elements aus $L$
+und damit separabel.
+
+"`(iii)$\Rightarrow$(i)"': Sei $L|K$ Zerfällungskörper einer Familie $\calF$ separabler Polynome.
+Nach \ref{satz:normal_aequiv} ist $L|K$ normal, und da $L$ von den Nullstellen der Polynome aus $\calF$ erzeugt wird, ist $L|K$ separabel nach \ref{satz:separabel_eigenschaften}.
+
+"`(ii)$\Rightarrow$(i)"': Sei $L|K$ normal und separabel und $\alpha \in L \setminus K$.
+Da $L|K$ normal ist, enthält $L$ einen Zerfällungskörper $Z$ von $\mipo_K\alpha$ über $K$.
+$Z|K$ ist endlich, normal und separabel, also galoissch nach \ref{satz:char_endl_galoissch}.
+Wir erhalten $\calF_Z(\Aut_K (Z))=K$. Wegen $\alpha\in L\setminus K$ existiert ein
+$\varphi\in\Aut_K(Z)$ mit $\varphi(\alpha)\neq\alpha$. Aufgrund des Fortsetzungssatzes
+\ref{satz:fortsetzungssatz_algebraische_koerpererweiterungen} lässt sich
+$\varphi$ zu einem Element $\Phi\in\Hom_K(L,L)\overset{\ref{bem:end_ist_aut}}{=}\Aut_K(L)$
+fortsetzen. Wegen $\Phi(\alpha)\neq\alpha$ ist $\calF_L(\Aut_K(L))=K$.
+
+"`(i)$\Rightarrow$(ii)"': Sei $L|K$ galoissch, also $\mathcal{F}(\Aut_K(L)) = K$ und sei $\alpha \in L \setminus K$. Wir setzen $E := K(\Konj_L\alpha)$. 
+Für jedes $\beta\in\Konj_L\alpha$ und jedes $\varphi\in\Hom_K(E,L)$ ist
+$\varphi(\beta)\in\Konj_L\alpha$ und somit $\varphi(E)\subseteq E$.
+Wir betrachten die Einschränkungsabbildung
+\[
+\Aut_K(L) \to \Hom_K(E,L) = \Hom_K(E)\overset{\ref{bem:end_ist_aut}}{=}\Aut_K(E), \quad \varphi \mapsto \varphi|_E.
+\]
+Für jedes $\beta \in E \setminus K$ existiert wegen (i) ein $\Phi \in \Aut_K(L)$ mit 
+$\Phi(\beta) \neq \beta$. Es folgt $\Phi|_E(\beta) \neq \beta$, was $\mathcal{F}_E(\Aut_K(E)) = K$ impliziert. Aus \ref{satz:char_endl_galoissch}
+ergibt sich, dass $E|K$ endlich galoissch ist. Damit ist $\alpha$ separabel über $K$ und $\mipo_K$ zerfällt über $E$, also auch über $L$ in Linearfaktoren. Somit ist $L|K$ normal und separabel.
+\end{proof}
+
+\begin{anm}\label{anm:galoissch_ueber_zk}
+Ist $L|K$ galoissch, und $L|E|K$ eine Zwischenkörpererweiterung, dann ist $L|E$ galoissch, da $L|E$ normal (vgl. Blatt 11, Aufgabe 2) und separabel (nach \ref{bem:separabel_transitiv}) ist. $E|K$ ist im Allgemeinen keine Galoiserweiterung, da $E|K$ im Allgemeinen nicht normal ist (vgl. Blatt 10, Aufgabe 2(iii)).
+\end{anm}
+
+\begin{defini}\label{def:galoisgruppe}
+Sei $L|K$ galoissch. Dann heißt
+\[
+\Gal(L|K) := \Aut_K(L)
+\]
+die \defn{Galoisgruppe} von $L|K$.
+\end{defini}
+
+\begin{anm}\label{anm:galois_ordnung_grad}
+\begin{itemize}
+\item Ist $E\in\calZ(L|K)$, so können wir $\Gal(L|E)$ in natürlicher Weise als Untergruppe von $\Gal(L|K)$ auffassen.
+\item Ist $L|K$ endlich galoissch, dann gilt wegen \ref{satz:char_endl_galoissch}:
+\[
+\ord(\Gal(L|K)) = [L : K],
+\]
+insbesondere ist $\Gal(L|K)$ eine endliche Gruppe.
+\end{itemize}
+\end{anm}
+
+\begin{satz}\label{satz:hauptsatz_galoistheorie}
+(Hauptsatz der endlichen Galoistheorie)  
+Sei $L|K$ endlich galoissch. Dann gilt:
+\begin{enumerate}
+\item[(a)] Die Abbildungen
+\[
+\xymatrix@R=0cm
+{
+\calU(L|K)  \ar@<1ex>[r] &  \calZ(L|K) \ar@<1ex>[l] \\
+H \ar@{|->}[r] & \calF_L(H) \\
+\Gal(L|E) & \ar@{|-{>}}[l] E
+}
+\]
+sind inklusionsumkehrende zueinander inverse Bijektionen. Inklusionsumkehrend bedeutet hierbei 
+\begin{align*}
+H_1 & \subseteq H_2 \implies \calF_L(H_1) \supseteq \calF_L(H_2), \\
+E_1 & \subseteq E_2 \implies \Gal(L|E_1)\supseteq \Gal(L|E_2).
+\end{align*}
+
+\item[(b)] Für jeden Zwischenkörper $E \in \calZ(L|K)$ ist
+\[
+[E : K] = \frac{|\Gal(L|K)|}{|\Gal(L|E)|} = (\Gal(L|K):\Gal(L|E))
+\]
+und für jede Untergruppe $H\in\calU(L|K)$ ist
+\[
+|H| = [L:\calF_L(H)].
+\]
+\item[(c)] Für jeden Zwischenkörper $E \in \calZ(L|K)$ sind äquivalent:
+    \begin{enumerate}
+        \item[(i)] $\Gal(L|E) \trianglelefteq \Gal(L|K)$,
+        \item[(ii)] $E|K$ ist normal,
+        \item[(iii)] $E|K$ ist galoissch.
+    \end{enumerate}
+    In diesem Fall induziert die Einschränkungsabbildung $\Gal(L|K) \to \Gal(E|K)$ einen
+    Gruppen\-iso\-morphimus
+    \[
+    \Gal(L|K) / \Gal(L|E) \cong \Gal(E|K).
+    \]
+\end{enumerate}
+\end{satz}
+
+\begin{proof}
+(a) Dass die Abbildungen inklusionsumkehrend sind, ergibt sich direkt aus den Definitionen des Fixkörpers bzw. der Galoisgruppe. Es verbleibt zu zeigen, dass die beiden Abbildungen invers zueinander sind. Ist $E\in\calZ(L|K)$, so ist $L|K$ galoissch nach \ref{anm:galoissch_ueber_zk}. Es ergibt sich $E=\calF_L(\Gal(L|E))$. Ist $H \in \calU(L|K)$, so ist $H$ eine Untergruppe von $\Gal(L|\calF_L(H))$, denn die Elemente aus $H$ fixieren per Definition $\calF_L(H)$. $H$ ist als Untergruppe der endlichen Gruppe $\Gal(L|K)$ selbst endlich. Aus \ref{satz:char_endl_galoissch} ergibt sich $H=\Gal(L|\calF_L(H))$.
+
+(b) Sei $E \in \calZ(L|K)$. Dann ist
+\[
+[E : K] \overset{\ref{satz:gradsatz}}{=} \frac{[L : K]}{[L : E]}\overset{\ref{anm:galois_ordnung_grad}}{=}\frac{|\Gal(L|K)|}{|\Gal(L|E)|}=(\Gal(L|K):\Gal(L|E)).
+\]
+Für $H\in\calU(L|K)$ ist
+\[
+|H|\overset{\text{(a)}}{=}|\Gal(L|\calF_L(H)|\overset{\ref{satz:char_endl_galoissch}}{=}[L:\calF_L(H)].
+\]
+
+(c) "`(i)$\Rightarrow$(ii)"': Sei $\Gal(L|E) \trianglelefteq \Gal(L|K)$. Für jedes $\sigma \in \Gal(L|K)$
+ist $\sigma(E)\subseteq E$,
+\begin{denn}
+Seien $\tau \in \Gal(L|E)$  und $\alpha \in E$. Dann ist
+\[
+(\sigma^{-1} \circ \tau \circ \sigma)(\alpha) = \alpha,
+\]
+denn $\sigma^{-1} \circ \tau \circ \sigma\in\Gal(L|E)$.
+Daraus ergibt sich $\tau(\sigma(\alpha)) = \sigma(\alpha)$, d.h. $\sigma(\alpha) \in \calF_L(\Gal(L|E)) = E$.
+Wir erhalten $\sigma(E) \subseteq E$.
+\end{denn}
+$E|K$ ist normal,
+\begin{denn}
+Sei $\Omega$ ein algebraischer Abschluss von $K$ und $\varphi\in \Hom_K(E, \Omega)$.
+Aufgrund des Fortsetzungssatzes \ref{satz:fortsetzungssatz_algebraische_koerpererweiterungen} kann $\varphi$
+zu einem Element $\sigma\in\Hom_K(L,\Omega)\overset{\ref{satz:normale_erw_char}}{=}\Gal(L|K)$ fortgesetzt werden. Wie eben gesehen ist $\sigma(E)\subseteq E$. Wir erhalten $\varphi\in\End_K(E)\overset{\ref{bem:end_ist_aut}}{=}\Aut_K(E)$.
+Aus \ref{satz:normale_erw_char} folgt, dass $E|K$ normal ist.
+\end{denn}
+"`(ii)$\Rightarrow$(i)"' folgt aus \ref{satz:normale_erw_operation}.
+
+"`(iii)$\Rightarrow$(i)"' folgt aus \ref{satz:char_endl_galoissch}, da $E|K$ wegen \ref{bem:separabel_transitiv}
+separabel ist.
+
+"`(iii)$\implies$(ii)"' folgt aus \ref{satz:char_endl_galoissch}.
+
+Der Rest der Aussage folgt aus \ref{satz:normale_erw_operation}.
+\end{proof}
+
+\begin{anm}
+\begin{itemize}
+\item Wegen des Hauptsatzes der Galoistheorie hat jede endliche Galoiserweiterung nur endlich viele Zwischenkörper.  
+\item In dieser Form gilt der Hauptsatz der Galoistheorie nicht für unendliche Erweiterungen (es gibt dann mehr Untergruppen von $\Gal(L|K)$ als Zwischenkörper von $L|K$). Man führt eine Topologie auf $\Gal(L|K)$ ein (die Krull-Topologie) und erhält eine Korrespondenz zwischen der Menge der abgeschlossenen Untergruppen von $\Gal(L|K)$ und der Menge der Zwischenkörper von $L|K$.
+\end{itemize}
+\end{anm}
+
+\begin{defini}\label{def:komposition_erweiterungen}
+Sei $L|K$ eine Körpererweiterung, $E, F$ Zwischenkörper von $L|K$.  
+\[EF := K(E \cup F)\]
+heißt das \defn{Kompositum} von $E$ und $F$ in $L$.
+
+\begin{anm}
+\begin{itemize}
+\item $EF$ ist der kleinste Zwischenkörper von $L|K$, der $E$ und $F$ enthält.
+\item Sind $E|K$ und $F|K$ (endlich) galoissch, so ist auch $EF|K$ (endlich) galoissch,
+\begin{denn}
+$EF|K$ ist separabel  nach \ref{satz:separabel_eigenschaften}, normal nach \ref{satz:normal_aequiv}, also galoissch nach \ref{satz:char_galoissch}. Sind $E|K$ und $F|K$ beide endlich, so ist $EF|K$ endlich nach \ref{satz:endl_erweiterung_aquivalenzen}.    
+\end{denn}
+\end{itemize}
+\end{anm}
+\end{defini}
+
+\begin{satz}\label{satz:transitivitaet_galois}
+(Translationssatz)  
+Seien $E, F \in \mathcal{Z}(L|K)$, sodass $E|K$ und $F|K$ endlich galoissch sind. Dann gilt:
+\begin{enumerate}
+    \item[(a)] Die Einschränkungsabbildung induziert einen Gruppenisomorphismus
+    \[
+    \Phi \colon \Gal(EF|E) \to \Gal(F|E \cap F), \quad \sigma \mapsto \sigma|_F.
+    \]
+\[
+\xymatrix{
+ & L \ar@{-}[d] & \\
+ & EF \ar@{-}[dl] \ar@{-}[dr] & \\
+E \ar@{-}[dr]& & F \ar@{-}[dl] \\
+& E\cap F \ar@{-}[d] & \\
+& K &
+}
+\]
+    \item[(b)] Die Einschränkungsabbildung induziert einen injektiven Gruppenhomomorphismus
+    \[
+    \Psi \colon \Gal(EF|K) \to \Gal(E|K) \times \Gal(F|K), \quad \sigma \mapsto (\sigma|_E, \sigma|_F).
+    \]
+    Ist $E \cap F = K$, so ist $\Psi$ ein Isomorphismus.
+\end{enumerate}
+\end{satz}
+
+\begin{proof}
+(a) $\Phi$ ist wohldefiniert, denn $EF|E$ und $F|E\cap F$ sind galoissch nach \ref{anm:galoissch_ueber_zk} und die Einschränkung eines Elements $\sigma\in\Gal(EF|E)$ nach $F$ fixiert $E\cap F$. 
+$\Phi$ ist injektiv,
+\begin{denn}
+Sei $\sigma \in \ker \Phi$. Dann ist $\sigma|_F = \ident_F$. Wegen $\sigma|_E=\ident_E$ ist 
+$\sigma = \ident_{EF}$.
+\end{denn}
+$\Phi$ ist surjektiv,
+\begin{denn}
+Es ist
+\begin{align*}
+\calF_F(\image\Phi) &= \{ \alpha \in F \mid \sigma|_F(\alpha) = \alpha \text{ für alle } \sigma \in \Gal(EF|E) \}\\  
+&= \{ \alpha\in F \ | \ \sigma(\alpha)=\alpha \text{ für alle } \sigma \in \Gal(EF|E) \}\\
+&= F \cap \calF_{EF}(\Gal(EF|E)) = F \cap E,
+\end{align*}
+woraus wir mit dem Hauptsatz der Galoistheorie
+\[
+\image\Phi=\Gal(F|\calF_F(\image\Phi))=\Gal(F|E\cap F))
+\]
+erhalten.
+\end{denn}
+\item[(b)] $\Psi$ ist injektiv,
+\begin{denn}
+Sei $\sigma \in \ker\Psi$. Dann ist $\sigma|_E = \operatorname{id}_E$ und $\sigma|_F = \operatorname{id}_F$, also $\sigma = \operatorname{id}_{EF}$.
+\end{denn}
+$\Psi$ ist surjektiv, falls $E \cap F = K$,
+\begin{denn}
+Sei $(\sigma_E, \sigma_F) \in \Gal(E|K) \times \Gal(F|K)$. Aufgrund von (a) lässt sich $\sigma_F$ zu einem
+Element $\overline{\sigma_F}\in\Gal(EF|E)\subseteq\Gal(EF|K)$ fortsetzen, und $\sigma_E$ lässt sich
+zu einem Element $\overline{\sigma_E}\in\Gal(EF|F)\subseteq\Gal(EF|K)$ fortsetzen. Es ist dann
+$\overline{\sigma_F}\circ\overline{\sigma_E}\in\Gal(EF|K)$ mit
+\[
+\Psi(\overline{\sigma_F}\circ\overline{\sigma_E})=((\overline{\sigma_F}\circ\overline{\sigma_E})|_E,(\overline{\sigma_F}\circ\overline{\sigma_E})_F)=(\sigma_E,\sigma_F).
+\]
+\end{denn}
+\end{proof}
+
+Die nächste Bemerkung liefert eine Methode, um Zwischenkörper zu berechnen. Eine weitere Methode, die sogenannte Spurmethode, wird im Übungsbetrieb behandelt.
+
+\begin{bem}\label{bem:zwischenkoerper_ausrechnen}
+Seien $L|K$ endlich galoissch, $\alpha \in L$ mit $L = K(\alpha)$ und $H\in\calU(L|K)$.  
+Wir setzen 
+\[
+f_H := \prod_{\sigma \in H} (X - \sigma(\alpha)) = \sum_{i=0}^m c_i X^i \in L[X] \quad \text{ mit }
+m=\ord(H).
+\]
+Dann gilt:
+\begin{enumerate}
+\item[(a)] $f_H = \mipo_{\calF_L(H)} \alpha$.
+\item[(b)] $\calF_L(H) = K(c_0, \dots, c_{m-1})$.
+\end{enumerate}
+
+\begin{proof}
+(b) "`$\supseteq$"' Für alle $\tau \in H$ ist
+\[
+f_H = \prod_{\sigma \in H} (X - (\tau\circ\sigma)(\alpha))=\sum_{i=0}^m\tau(c_i) X^i,
+\]
+weswegen $c_0, \dots, c_{m-1}\in\calF_L(H)$ sind. Somit ist $K(c_0, \dots, c_{m-1})\subseteq\calF_L(H)$.
+
+"`$\subseteq$"' Wegen $\ident_L\in H$ ist $f_H(\alpha) = 0$. Zudem ist $f_H\in K(c_0,\ldots,c_{m-1})[X]$,
+denn es ist $c_m=1$.
+Wir erhalten
+\begin{align*}
+[L : K(c_0, \dots, c_{m-1})]& =[K(\alpha):K(c_0, \dots, c_{m-1})]\leq \deg f_H = m  \\
+&= |H| \overset{\ref{satz:hauptsatz_galoistheorie}}{=}[L : \calF_L(H)] \leq [L : K(c_0, \dots, c_{m-1})]
+\end{align*}
+und damit
+\[
+[L : \calF_L(H)] = [L : K(c_0, \dots, c_{m-1})]
+\]
+Da wir bereits $\calF_L(H) \supseteq K(c_0, \dots, c_{m-1})$ gezeigt haben, gilt $\mathcal{F}(H) = K(c_0, \dots, c_{m-1})$.
+
+(a) Es ist
+\[
+[\calF_L(H)(\alpha):\calF_L(H)]=[L : \mathcal{F}(H)] = \ord(H) = \deg f_H
+\]
+und $f_H(\alpha) = 0$. Deswegen ist $f_H \in \calF_L(H)[X]$ das Minimalpolynom von $\alpha$ über $\calF_L(H)$.
+\end{proof}
+\end{bem}
+
+\begin{anm}
+Ein Worked Example zur Berechnung von Zwischenkörpern mit \ref{bem:zwischenkoerper_ausrechnen} befindet sich auf MaMpf.
+\end{anm}
+
+\begin{defini}\label{def:abelsch_zyklisch}
+Es sei $L|K$ eine endliche Galoiserweiterung. $L|K$ heißt \defn{abelsch} (bzw. \defn{zyklisch}), falls $\Gal(L|K)$ abelsch (bzw. zyklisch) ist.
+\end{defini}
+
+\begin{folgerung}\label{folg:abelsch_zyklisch}
+Sei $L|K$ eine endliche abelsche (bzw. zyklische) Galoiserweiterung. Dann sind für jeden Zwischenkörper $E$ von $L|K$ die Erweiterungen $L|E$ und $E|K$ endliche abelsche (bzw. zyklische) Galoiserweiterungen.
+
+\begin{proof}
+$\Gal(L|E)$ ist als Untergruppe von $\Gal(L|K)$ abelsch (bzw. zyklisch nach \ref{satz:zykl_gruppen_quot}).  
+Außerdem ist $\Gal(E|K) \trianglelefteq\Gal(L|K)$ wegen $L|K$ abelsch, also ist $E|K$ galoissch nach \ref{satz:hauptsatz_galoistheorie}. $\Gal(E|K)$ ist als Faktorgruppe von $\Gal(L|K)$ abelsch (bzw. zyklisch nach \ref{satz:zykl_gruppen_quot}).
+\end{proof}
+\end{folgerung}
+
+\begin{defini}\label{def:galoisgruppe_polynom}
+Sei $f \in K[X]$ separabel mit $\deg f \geq 1$ und $L$ ein Zerfällungskörper von $f$ über $K$.  
+\[
+\Gal(f) := \Gal(L|K)
+\]
+heißt die \defn{Galoisgruppe} von $f$ über $K$.
+\end{defini}
+
+\begin{anm}\label{anm:galgr_pol_unkan}
+Es ist üblich, von "`der"' Galoisgruppe von $f$ zu sprechen. Dies ist jedoch eine missbräuchliche Sprechweise,
+denn es muss ein Zerfällungskörper von $f$ gewählt werden, und dies hat zur Folge, dass "`die"' Galoisgruppe von
+$f$ nur bis auf unkanonische Isomorphie eindeutig ist. Für mehr Details siehe die nachfolgende Bemerkung \ref{bem:galgr_pol_unkan}.
+\end{anm}
+
+\begin{bem}\label{bem:galgr_pol_unkan}
+Sei $f \in K[X]$ separabel mit $\deg f \geq 1$ und seien $L, L'$ Zerfällungskörper von $f$ über $K$.
+Es sei $\Phi \colon L \to L'$ ein $K$-Algebrenisomorphismus. Dann gilt:
+\begin{enumerate}
+    \item[(a)] $\Phi$ induziert einen Isomorphismus
+    \[
+    \gamma_\Phi \colon \Gal(L|K) \to \Gal(L'|K), \quad \sigma \mapsto \Phi \circ \sigma \circ \Phi^{-1}.
+    \]
+    \item[(b)] Ist $L|K$ (und damit auch $L'|K$) abelsch und ist $\Psi \colon L \to L'$ ein weiterer $K$-Algebrenisomorphismus, dann ist $\gamma_\Phi = \gamma_\Psi$.
+\end{enumerate}
+Insbesondere ist $\Gal(f)$ im Allgemeinen nur bis auf unkanonische Isomorphie eindeutig bestimmt. Ist $\Gal(f)$ abelsch, so ist $\Gal(f)$ eindeutig bestimmt bis auf kanonische Isomorphie.
+\end{bem}
+\begin{proof}
+(a) Man rechnet leicht nach, dass $\gamma_\Phi^{-1}$ invers zu $\gamma_\Phi$ ist.
+
+(b) Sei $L|K$ und damit auch $L'|K$ abelsch. Es ist $\Psi^{-1} \circ \Phi \in \Gal(L|K)$. Sei $\sigma \in \Gal(L|K)$.
+DA $L|K$ abelsch ist, erhalten wir
+\[
+\Psi^{-1} \circ \Phi \circ \sigma = \sigma \circ \Psi^{-1} \circ \Phi.
+\]
+Daraus ergibt sich
+\[
+\Phi \circ \sigma \circ \Phi^{-1} = \Psi \circ \sigma \circ \Psi^{-1},
+\]
+also
+\[
+\gamma_\Phi(\sigma) = \gamma_\Psi(\sigma)
+\]
+und damit $\gamma_\Phi = \gamma_\Psi$.
+\end{proof}
+
+
+\begin{satz}\label{satz:galoisgruppe_eigenschaften}
+Sei $f \in K[X]$ separabel mit $\deg f \geq 1$ und $L$ ein Zerfällungskörper von $f$ über $K$.
+Es seien $\alpha_1, \dots, \alpha_n$ die Nullstellen von $f$ in $L$. Dann gilt:
+\begin{enumerate}
+\item[(a)] $\Gal(f) = \Gal(L|K)$ operiert treu auf $\{\alpha_1, \dots, \alpha_n\}$ durch $\sigma.\alpha=\sigma(\alpha)$.  
+Insbesondere erhalten wir einen injektiven Gruppenhomomorphismus
+\[
+\varphi \colon \Gal(f) \to S(\{\alpha_1, \dots, \alpha_n\}) \cong S_n,
+\]
+d.h. wir können $\Gal(f)$ als Untergruppe von $S_n$ auffassen.
+\item[(b)] $[L : K] = |\Gal(f)| \mid n!$
+\item[(c)] $\Gal(f)$ operiert genau dann transitiv auf $\{\alpha_1, \dots, \alpha_n\}$, wenn $f$ irreduzibel ist.
+\end{enumerate}
+Insbesondere gilt: Ist $f$ irreduzibel und $\alpha\in L$ eine Nullstelle von $f$, so ist
+\[
+\Konj_L\alpha=\Orb_{\Gal(L|K)}\alpha=\{\sigma(\alpha) \mid \sigma\in\Gal(L|K)\}. 
+\]
+\end{satz}
+
+\begin{proof}
+(a) Die Operation ist wohldefiniert nach \ref{anm:konjugierte}. Sie ist treu, denn ist $\sigma \in \Gal(f)$ mit $\sigma(\alpha_i) = \alpha_i$ für alle $i = 1, \dots, n$, so ist $\sigma=\ident_L$ wegen $L=K(\alpha_!,\ldots,\alpha_n)$. Der Rest der Aussage folgt aus  
+\ref{bem:currying}.
+    
+(b) Da $L|K$ galoissch ist, ist
+\[
+|\Gal(f)| = \ord(\Gal(L|K)) = [L : K].
+\]
+Aus (a) und dem Satz von Lagrange \ref{satz:lagrange} ergibt sich $\ord(\Gal(f)) \mid n!$.
+
+(c) "`$\Rightarrow$"' Sei $f$ irreduzibel. Dann ist $f = \mipo_K \alpha_1$.
+Da $L|K$ normal ist, operiert $\Gal(f)=\Gal(L|K)$ nach \ref{satz:trans_op_normale_Erw} transitiv auf $\{\alpha_1,\ldots,\alpha_n\}=\Konj_L\alpha_1$.
+
+"`$\Leftarrow$"' (per Kontraposition)  
+Sei $f$ reduzibel, etwa $f = g h$ mit $g, h \in K[X]$ und $\deg(g) \geq 1$, $\deg(h) \geq 1$.  
+Nach \ref{bem:k-algebra_homomorphismen} überführt $\Gal(L|K)$ Nullstellen von $g$ und in Nullstellen von $g$
+und Nullstellen von $h$ in Nullstellen von $h$. Da $f$ separabel ist, sind die Menge der Nullstellen von $g$ und $h$
+disjunkt. Folglich operiert $\Gal(L|K)$ nicht transitiv auf $\{\alpha_1, \dots, \alpha_n\}$.
+\end{proof}
+
+\begin{folgerung}\label{folg:galoisgruppe_in_sn}
+Sei $L|K$ endlich galoissch, $[L : K] = n$.  
+Dann ist $\Gal(L|K)$ isomorph zu einer Untergruppe der symmetrischen Gruppe $S_n$.
+
+\begin{proof}
+Da $L|K$ endlich separabel ist, existiert aufgrund des Satzes vom primitiven Element ein $\alpha \in L$ mit $L = K(\alpha)$. 
+Wegen $L|K$ normal ist $L$ ein Zerfällungskörper von $\mipo_K \alpha$, dieses hat $n$ Nullstellen. Die Behauptung
+ergibt sich aus \ref{satz:galoisgruppe_eigenschaften}.
+\end{proof}
+\end{folgerung}
+
+\begin{bsp}\label{bsp:galoisgruppe_qaudrat_polynom}
+Sei $K$ ein Körper mit $\charact K\neq 2$. Das Polynom $f = X^2 + a X + b \in K[X]$ habe keine Nullstelle in $K$.  
+Dann ist $f$ irreduzibel, und da $f'=2X+a\neq0$ ist, ist $f$ separabel.
+Sei $L|K$ ein Zerfällungskörper von $f$, und seien $\alpha, \beta$ die beiden Nullstellen von $f$ in $L$.
+Wir erhalten
+\[
+f = (X - \alpha)(X - \beta) = X^2 - (\alpha + \beta) X + \alpha \beta
+\]
+und deshalb $\alpha\beta=b$, was $\beta=\frac{\alpha}{\beta}$ zur Folge hat. Es ergibt sich $L=K(\alpha)$
+und $[K(\alpha):K]=2$. Es ist $\Gal(f)=\Gal(K(\alpha)|K)$ eine zyklische Gruppe der Ordnung zwei, die
+von $\sigma\colon K(\alpha)\to K(\alpha)$ mit $\sigma(\alpha)=\beta=\frac{b}{\alpha}$ erzeugt wird.
+\end{bsp}
+
+\section{Endliche Körper}
+
+\begin{satz}[Klassifikation der endlichen Körper]\label{satz:klassifikation_endliche_koerper}
+Es gilt:
+\begin{enumerate}
+    \item[(a)] Für jede Primzahl $p$ und jedes $r \in \NN$ existiert bis auf (unkanonische) Isomorphie genau ein Körper mit $p^r$ Elementen. Wir bezeichnen diesen mit $\FF_{p^r}$.
+    \item[(b)] Für jeden endlichen Körper $\FF$ existieren eine Primzahl $p$ und ein $r \in \NN$ mit $\FF \cong \FF_{p^r}$.  
+    Die Zahlen $p$ und $r$ sind eindeutig bestimmt als $p = \charact F$, $r = [\FF : \FF_p]$.
+    \item[(c)] $\FF_{p^r}$ ist ein Zerfällungskörper des separablen Polynoms $X^{p^r} - X \in \FF_p[X]$ über $\FF_p$, insbesondere ist $\FF_{p^r}|\FF_p$ endlich galoissch.
+\end{enumerate}
+\end{satz}
+
+\begin{proof}
+(a) Wir zeigen zunächst die Existenzaussage. Sei $\FF|\FF_p$ ein Zerfällungskörper von $f=X^{p^r} - X \in \FF_p[X]$ über $\FF_p$.  Wegen $f' = -1$ hat $f$ nach \ref{bem:nullstellen_und_ableitungen} keine mehrfachen Nullstellen, d.h. $f$ hat $p^r$ verschiedene Nullstellen in $\FF$. Für Nullstellen $\alpha,\beta$ von $f$ in $\FF$ ist 
+\[
+(\alpha - \beta)^{p^r} = \alpha^{p^r} - \beta^{p^r}=\alpha-\beta,
+\]
+d.h. $\alpha - \beta$ ist eine Nullstelle von $f$. Ist zudem $\beta\neq0$, so ist auch $\alpha\beta^{-1}$ eine Nullstelle
+von $f$, denn es ist
+\[
+(\alpha \beta^{-1})^{p^r} = \alpha^{p^r}\beta^{-p^r} = \alpha\beta^{-1}.
+\]
+Damit bilden die $p^r$ Nullstellen von $f$ in $\FF$ einen Teilkörper von $\FF$, dieser stimmt mit $\FF$ überein,
+da $\FF$ als Zerfällungskörper von $f$ über $\FF_p$ von den Nullstellen von $f$ in $\FF$ erzeugt wird.
+Somit ist jedes Element von $F$ eine Nullstelle von $f$, insbesondere ist $|\FF| = p^r$.
+Es verbleibt der Nachweis der Eindeutigkeit bis auf unkanonische Isomorphie.
+Sei $\FF$ ein Körper mit $p^r$ Elementen und $P$ sein Primkörper.
+Dann ist 
+\[
+p^r=|\FF| = |P|^{[\FF:P]},
+\]
+woraus $|P|\mid p^r$ folgt. Aus \ref{bem:charakteristik_und_primkoerper} erhalten wir $P\cong\FF_p$.
+Wegen $\ord(\FF^\times)=p^r-1$ ist $\alpha^{p^r-1}=1$ für alle $\alpha\in\FF^\times$ und deshalb
+$\alpha^{p^r}=\alpha$ für alle $\alpha\in\FF$, d.h. jedes $\alpha\in\FF$
+ist eine Nullstelle von $X^{p^r}-X$ in $\FF$. Somit ist $\FF$ ein Zerfällungskörper von $X^{p^r} - X$ über $\FF_p$
+und darum eindeutig bis auf unkanonische Isomorphie nach \ref{satz:zerfkoerper_familie}.
+
+(c) folgt aus (a) und \ref{satz:char_endl_galoissch}.
+
+(b) Sei $\FF$ ein endlicher Körper. Dann ist $p:=\charact(K)>0$. Aufgrund von \ref{bem:charakteristik_und_primkoerper}
+ist $\FF_p$ der Primkörper von $\FF$. Wir setzen $r:=[\FF:\FF_p]$. Dann ist $\FF$ ein $r$-dimensionaler $\FF_p$-Vektorraum,
+also  $|\FF| = p^r$. Aus (a) erhalten wir $\FF\cong\FF_{p^r}$.
+\end{proof}
+
+\begin{anm}\label{anm:zu_endl_kp}
+\begin{itemize}
+\item Für $r>1$ ist der Körper $\FF_{p^r}$ nicht isomorph zu Ring $\ZZ/p^r\ZZ$. Letzter ist kein Körper, da er nicht nullteilerfrei ist. Ebenso ist die additive Gruppe von $\FF_{p^r}$ dann nicht isomorph zur zyklischen Gruppe $\ZZ/p^r\ZZ$, sonst wäre $\charact(\FF_{p^r})=p^r$, was nicht geht.
+\item Statt "`Zerfällungskörper von $X^{p^r}-X$"' könnten wir in \ref{satz:klassifikation_endliche_koerper}(c) auch 
+"`Zerfällungskörper von $X^{p^r-1}-1$"' schreiben, denn die Nullstellenmengen beider Polynome unterscheiden sich nur um das Element $0$, was schon in $\FF_p$ liegt.
+\end{itemize}    
+\end{anm}
+
+\begin{satz}\label{satz:endl_kp_vollkommen}
+Sei $\FF$ ein endlicher Körper. Dann gilt:
+\begin{enumerate}
+\item[(a)] Jede algebraische Erweiterung von $\FF$ ist galoissch.
+\item[(b)] $\FF$ ist vollkommen.
+\end{enumerate}
+\end{satz}
+
+
+\begin{proof}
+(a) Sei $L|\FF$ eine algebraische Körpererweiterung und $\alpha \in L$. Dann ist $\FF(\alpha)|\FF$ eine endliche Körpererweiterung. Daher ist $\FF(\alpha)$ ein endlich-dimensionaler $\FF$-Vektorraum, also ist $\FF(\alpha)$ ein endlicher Körper. Wir setzen $p := \charact \FF$. Dann ist $\FF(\alpha)|\FF_p$ endlich galoissch nach \ref{satz:klassifikation_endliche_koerper}. Daher ist $\alpha$ separabel über $\FF$ und normal in $\FF(\alpha)|\FF$, also auch normal in $L|F$. Somit ist $L|F$ separabel und normal, also galoissch nach \ref{satz:char_endl_galoissch}.
+
+(b) folgt aus (a).
+\end{proof}
+
+\begin{bem}\label{bem:erw_endl_koerper}
+Es seien $p,q$ Primzahlen und $r,s\in\NN$. Dann sind äquivalent:
+\begin{enumerate}
+\item[(i)] Es gibt einen Körperhomomorphismus $\FF_{p^r} \to \FF_{q^s}$.
+\item[(ii)] $q = p$ und $r \mid s$.
+\end{enumerate}
+In diesem Fall können wir $\FF_{p^r}$ als Teilkörper von $\FF_{p^s}$ auffassen.
+\end{bem}
+\begin{proof}
+Übung.
+\end{proof}
+
+\begin{anm}
+Aus \ref{bem:erw_endl_koerper} ergibt sich insbesondere, dass $\FF_{p^r}$ für $r\leq s$ im Allgemeinen kein Teilkörper von $\FF_{p^s}$ ist.
+\end{anm}
+
+
+\begin{satz}\label{satz:galoisgr_endl_kp}
+Sei $\FF|\FF_p$ eine endliche Körpererweiterung vom Grad $n$.  
+Dann ist $\Gal(\FF|\FF_p)$ eine zyklische Gruppe der Ordnung $n$, erzeugt vom \defn{relativen Frobenius-Automorphismus}
+\[
+\Frob_\FF^r \colon \FF \to \FF, \quad \alpha \mapsto \alpha^{p^r}.
+\]
+Hierbei ist $\Frob_\FF\colon \FF \to \FF$, $\alpha \mapsto \alpha^p$, der Frobenius-Automorphismus aus \ref{bem:frobenius_hom}\footnote{Dieser ist ein Automorphismus von $\FF$, da er als Körperhomomorphismus injektiv ist und $\FF$ endlich ist.}.
+\end{satz}
+\begin{proof}
+Wir setzen $\sigma:=\Frob_\FF^r$. Aus der Fußnote in der Formulierung des Satzes ergibt sich $\sigma \in \Aut(\FF)$. 
+Wegen $\alpha^{p^r} = \alpha$ für alle $\alpha \in \FF_{p^r}$ folgt $\sigma|_{\FF_{p^r}} = \ident_{\FF_{p^r}}$, d.h. $\sigma \in \Gal(\FF|\FF_{p^r})$. Es ist
+\[
+|\Gal(\FF|\FF_{p^r})|=[\FF:\FF_{p^r}]=n
+\]
+Es genügt folglich zu zeigen, dass $\ord(\sigma)=n$ ist. Für alle $\alpha\in\FF$ ist
+\[
+\alpha=\alpha^{|\FF|}=\alpha^{(p^r)^n}=\sigma^n(\alpha),
+\]
+also ist $\sigma^n=\ident_\FF$ und deshalb $\ord(\sigma)\leq n$.
+Wäre $\ord(\sigma)<n$, dann wäre $\sigma^m=\ident_\FF$ für ein $1\leq m<n$. Dann wäre jedes Element von $\FF$
+eine Nullstelle von $X^{(p^r)^m}-X$, dieses Polynom hat jedoch nur $(p^r)^m<(p^r)^n=|\FF|$ Nullstellen.
+\end{proof}
+
+\begin{satz}\label{satz:endl_ug_einhgr_zykl}
+Sei $R$ ein nullteilerfreier kommutativer Ring und $G \subseteq R^\times$ eine endliche Untergruppe.  
+Dann ist $G$ zyklisch.
+\end{satz}
+
+\begin{proof}
+Im Fall $G=\{1\}$ ist G trivialerweise zyklisch, wir nehmen im Folgenden $G\neq\{1\}$ an.   
+Nach dem Hauptsatz für endlich erzeugte abelsche Gruppen \ref{satz:elementarteilersatz} ist 
+\[
+G \cong \ZZ/{d_1}\ZZ \times \ldots \times \ZZ/{d_s}\ZZ
+\]
+mit $d_1 \mid d_2\mid\ldots\mid d_s$. Hierbei ist $|G| = d_1 \cdot\ldots\cdot d_s$ und $d_1, \ldots, d_s > 1$.  
+Insbesondere ist $g^{d_s}=1$ für jedes $g\in G$. Somit ist jedes $g \in G$ eine Nullstelle von $f = X^{d_s} - 1 \in R[X]$.
+Wegen \ref{bem:summe-nullstellenordnung} hat $f$ höchstens $d_s$ Nullstellen. Wir erhalten
+\[  
+|G| \leq d_s \leq \ord \ord|G|,
+\]
+also $|G|=d_s$. Hieraus folgt $s=1$. Somit ist $G \cong \ZZ/d_1\ZZ_d$, also ist $G$ zyklisch.
+\end{proof}
+
+\begin{folgerung}\label{folgerung:endl_kp_einh_zyklisch}
+Sei $p$ eine Primzahl und $r \in \NN$. Dann ist $\FF_{p^r}^\times$ eine zyklische Gruppe der Ordnung $p^r - 1$.
+\end{folgerung}
+
+\begin{proof}
+Wir setzen in \ref{satz:endl_ug_einhgr_zykl} $R = \FF_{p^r}$ und $G = \FF_{p^r}^\times$.
+\end{proof}
 \end{document}
+
