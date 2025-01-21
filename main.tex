@@ -74,6 +74,7 @@
    \titlerule]
 \titleformat*{\section}{\sffamily \large \bfseries}
 \titleformat{\subsection}{\sffamily \bfseries}{\thesubsection}{1em}{}
+\definecolor{darkgreen}{rgb}{0.0, 0.5, 0.0}
 
 \RequirePackage{hyperref}
 \definecolor{ochsenblut}{rgb}{0.56,0.06,0.08}
@@ -142,6 +143,7 @@ plainpages=false,}
 \newcommand{\frakg}{\mathfrak g}
 \newcommand{\frakm}{\mathfrak m}
 \newcommand{\frakp}{\mathfrak p}
+\newcommand{\frakK}{\mathfrak K}
 \newcommand{\frakM}{\mathfrak M}
 \newcommand{\frakN}{\mathfrak N}
 \newcommand{\frakS}{\mathfrak S}
@@ -4694,7 +4696,7 @@ Die Elemente $2$ und $X$ sind beides Primelemente in $\ZZ[X]$ und sind nicht zue
 Wir erhalten aus dem Lemma von Gauß zwei weitere nützliche Aussagen, die wir so  
 auch schon vor \ref{satz:polynomring_faktoriell} hätten beweisen können. 
 
-\begin{bem}
+\begin{bem}\label{bem:pol_schon_in_Rx}
 Es sei $f\in R[X]$ normiert und es seien $g,h\in K[X]$ normiert mit $f=gh$.
 Dann liegen $g,h$ beide in $R[X]$.
 \end{bem}
@@ -5944,7 +5946,7 @@ von $L$ einschränkt. In diesem Fall schreiben wir (in missbräuchlicher Notatio
 \end{anm}
 
 \begin{satz}\label{satz:normale_erw_char}
-Sei $L|K$ eine algebraische Körpererweiterung und $\Omega$ ein algebraischer Abschluss von $K$. Dann sind die folgenden Aussagen äquivalent:
+Sei $L|K$ eine algebraische Körpererweiterung und $\Omega$ ein algebraischer Abschluss von $K$ (den wir wie in \ref{anm:einbettung_alg_abschluss} als Erweiterungskörper von $L$ auffassen). Dann sind die folgenden Aussagen äquivalent:
 \begin{enumerate}
 \item[(i)] $L|K$ ist normal.
 \item[(ii)] $\Aut_K(L) = \Hom_K(L,\Omega)$.
@@ -6593,7 +6595,7 @@ f:= (X - \alpha) \prod_{i=1}^n (X - \beta_i) = \sum_{i=0}^{n+1} c_i X^i \in L[X]
 \]
 Jedes $\sigma \in H$ induziert eine injektive und damit bijektive Selbstabbildung von $M$. Diese permutiert die Nullstellen von $f$ und wir erhalten
 \[
-f = (X - \sigma(\alpha)) \prod_{i=1}^n (X - \sigma(\beta_i)) = \sum_{i=0}^n \sigma(c_i) X^i \quad \text{für alle } \sigma \in H.
+f = (X - \sigma(\alpha)) \prod_{i=1}^{n+1} (X - \sigma(\beta_i)) = \sum_{i=0}^n \sigma(c_i) X^i \quad \text{für alle } \sigma \in H.
 \]
 Somit ist $f\in \calF_L(H)[X] = K[X]$. Aufgrund von \ref{bem:k-algebra_homomorphismen}
 sind $\alpha, \beta_1, \dots, \beta_n$ paarweise verschiedene Nullstellen von $\mipo_K \alpha$. Es ergibt sich
@@ -6970,7 +6972,7 @@ Insbesondere gilt: Ist $f$ irreduzibel und $\alpha\in L$ eine Nullstelle von $f$
 \end{satz}
 
 \begin{proof}
-(a) Die Operation ist wohldefiniert nach \ref{anm:konjugierte}. Sie ist treu, denn ist $\sigma \in \Gal(f)$ mit $\sigma(\alpha_i) = \alpha_i$ für alle $i = 1, \dots, n$, so ist $\sigma=\ident_L$ wegen $L=K(\alpha_!,\ldots,\alpha_n)$. Der Rest der Aussage folgt aus  
+(a) Die Operation ist wohldefiniert nach \ref{bem:k-algebra_homomorphismen}. Sie ist treu, denn ist $\sigma \in \Gal(f)$ mit $\sigma(\alpha_i) = \alpha_i$ für alle $i = 1, \dots, n$, so ist $\sigma=\ident_L$ wegen $L=K(\alpha_1,\ldots,\alpha_n)$. Der Rest der Aussage folgt aus  
 \ref{bem:currying}.
     
 (b) Da $L|K$ galoissch ist, ist
@@ -6979,10 +6981,10 @@ Insbesondere gilt: Ist $f$ irreduzibel und $\alpha\in L$ eine Nullstelle von $f$
 \]
 Aus (a) und dem Satz von Lagrange \ref{satz:lagrange} ergibt sich $\ord(\Gal(f)) \mid n!$.
 
-(c) "`$\Rightarrow$"' Sei $f$ irreduzibel. Dann ist $f = \mipo_K \alpha_1$.
+(c) "`$\Leftarrow$"' Sei $f$ irreduzibel. Dann ist $f = \mipo_K \alpha_1$.
 Da $L|K$ normal ist, operiert $\Gal(f)=\Gal(L|K)$ nach \ref{satz:trans_op_normale_Erw} transitiv auf $\{\alpha_1,\ldots,\alpha_n\}=\Konj_L\alpha_1$.
 
-"`$\Leftarrow$"' (per Kontraposition)  
+"`$\Rightarrow$"' (per Kontraposition)  
 Sei $f$ reduzibel, etwa $f = g h$ mit $g, h \in K[X]$ und $\deg(g) \geq 1$, $\deg(h) \geq 1$.  
 Nach \ref{bem:k-algebra_homomorphismen} überführt $\Gal(L|K)$ Nullstellen von $g$ und in Nullstellen von $g$
 und Nullstellen von $h$ in Nullstellen von $h$. Da $f$ separabel ist, sind die Menge der Nullstellen von $g$ und $h$
@@ -7111,11 +7113,7 @@ Wegen $\alpha^{p^r} = \alpha$ für alle $\alpha \in \FF_{p^r}$ folgt $\sigma|_{\
 \[
 |\Gal(\FF|\FF_{p^r})|=[\FF:\FF_{p^r}]=n
 \]
-Es genügt folglich zu zeigen, dass $\ord(\sigma)=n$ ist. Für alle $\alpha\in\FF$ ist
-\[
-\alpha=\alpha^{|\FF|}=\alpha^{(p^r)^n}=\sigma^n(\alpha),
-\]
-also ist $\sigma^n=\ident_\FF$ und deshalb $\ord(\sigma)\leq n$.
+Es genügt folglich zu zeigen, dass $\ord(\sigma)=n$ ist. 
 Wäre $\ord(\sigma)<n$, dann wäre $\sigma^m=\ident_\FF$ für ein $1\leq m<n$. Dann wäre jedes Element von $\FF$
 eine Nullstelle von $X^{(p^r)^m}-X$, dieses Polynom hat jedoch nur $(p^r)^m<(p^r)^n=|\FF|$ Nullstellen.
 \end{proof}
@@ -7147,5 +7145,808 @@ Sei $p$ eine Primzahl und $r \in \NN$. Dann ist $\FF_{p^r}^\times$ eine zyklisch
 \begin{proof}
 Wir setzen in \ref{satz:endl_ug_einhgr_zykl} $R = \FF_{p^r}$ und $G = \FF_{p^r}^\times$.
 \end{proof}
+
+\section{Einheitswurzeln}
+\begin{notation}
+In diesem Abschnitt sei $K$ stets ein Körper. Wir fixieren einen algebraischen Abschluss $\Omega$ von $K$.
+\end{notation}
+
+\begin{bem}\label{bem:separabilitaet_einheitswurzeln}
+Sei $n \in \NN$. Dann sind äquivalent:
+\begin{itemize}
+    \item[(i)] $X^n - 1 \in K[X]$ ist separabel,
+    \item[(ii)] $\charact K \nmid n$.
+\end{itemize}
+\begin{proof}
+Siehe Blatt 11, Aufgabe 3 bzw. \ref{bem:zerfallen_von_xn-a}.
+\end{proof}
+\end{bem}
+
+\begin{defini}\label{def:einheitswurzeln}
+Sei $n \in \NN$ mit $\charact K \nmid n$. Ein Element $\zeta \in \Omega$ heißt eine \defn{$n$-te Einheitswurzel (EW)}, falls $\zeta^n = 1$ ist. Die Menge der $n$-ten Einheitswurzeln in $\Omega$ wird mit $\mu_n$ bezeichnet und ist eine Untergruppe von $\Omega^\times$ (leicht nachzurechnen).
+\end{defini}
+
+\begin{anm}
+Ist $n = p^m n'$ mit $\charact K = p$ und $p\nmid n'$, dann ist $X^n - 1 = (X^{n'} - 1)^{p^m}$, d.h. die Nullstellen von $X^n - 1$ sind die $n'$-ten Einheitswurzeln in $\Omega$. Daher beschränken wir uns im Folgenden auf den Fall $\charact K \nmid n$.
+\end{anm}
+
+\begin{bem}\label{bem:struktur_einheitswurzeln}
+Gilt $\charact K \nmid n$, dann ist $\mu_n$ eine zyklische Gruppe der Ordnung $n$.
+\begin{proof}
+Es ist $X^n - 1$ separabel nach \ref{bem:separabilitaet_einheitswurzeln}, somit ist $\ord(\mu_n) = n$. Da $\mu_n$ eine endliche Untergruppe von $\Omega^\times$ ist, ist $\mu_n$ aufgrund von \ref{satz:endl_ug_einhgr_zykl} zyklisch.
+\end{proof}
+\end{bem}
+
+\begin{defini}\label{def:primitive_einheitswurzel}
+Sei $n \in \NN$ mit $\charact K \nmid n$. Ein Element $\zeta \in \mu_n$ heißt eine \defn{primitive $n$-te Einheitswurzel}, wenn $\zeta$ ein Erzeuger der zyklischen Gruppe $\mu_n$ ist.
+\end{defini}
+
+\begin{bsp}\label{bsp:primitive_einheitswurzel_q}
+Für $K = \QQ$ ist $e^{2\pi i / n}$ eine primitive $n$-te Einheitswurzel.
+\end{bsp}
+
+\begin{defini}\label{def:eulersche_phi_funktion}
+Die Abbildung 
+\[
+\varphi \colon \NN \to \NN, \quad n \mapsto \left|(\ZZ / n \ZZ)^\times\right|
+\]
+heißt die \defn{Eulersche $\varphi$-Funktion}.
+\end{defini}
+
+\begin{anm}\label{anm:Einh_mod_n}
+Es ist 
+\[
+(\ZZ / n \ZZ)^\times = \{ a \in \ZZ / n \ZZ \mid a \in \ZZ \text{ mit } \ggT(a, n) = 1 \},
+\]
+\begin{denn}
+Nach \ref{folg:ggT_hauptideal} gilt für alle $a \in \ZZ$:
+\begin{align*}
+\ggT(a, n) = 1 &\iff \text{Es existieren } u, v \in \ZZ \text{ mit } au + nv = 1  \\
+&\iff \text{Es existiert ein } u \in \ZZ \text{ mit }a \cdot u \equiv 1 \pmod{n} \\
+& \iff \overline{a} \in (\ZZ / n \ZZ)^\times.
+\end{align*}
+\end{denn}
+\end{anm}
+
+\begin{bem}\label{bem:euler_phi}
+Sei $n \in \NN$. Dann gilt:
+\begin{enumerate}
+\item[(a)] $\varphi(n) = |\{\,a \in \NN_0 \mid 0 \le a < n \text{ und } \ggT(a,n) = 1\}|$.
+\item[(b)] Sind $m,n \in \NN$ teilerfremd, so ist $\varphi(mn) = \varphi(m)\,\varphi(n).$
+\item[(c)] Ist $p$ eine Primzahl und $r \in \NN$, dann ist $\varphi\bigl(p^r\bigr) = p^{r-1}\,(p-1).$
+\item[(d)] Hat $n$ die Primfaktorzerlegung $n = p_{1}^{e_{1}}\cdot\ldots\cdot p_{r}^{e_{r}}$, so ist
+\[
+  \varphi(n) = \prod_{i=1}^{r} p_{i}^{\,e_{i}-1}\,\bigl(p_{i}-1\bigr) =n\prod_{p\text{ PZ mit }p\mid n}\left(1-\frac{1}{p}\right).
+\]
+\end{enumerate}
+\end{bem}
+
+\begin{proof}
+(a) ergibt sich direkt aus \ref{anm:Einh_mod_n}.
+
+(b) Aus dem Chinesischen Restsatz ergibt sich
+\begin{align*}
+\varphi(mn)&=\left|(\ZZ/mn\ZZ)^\times\right|\overset{\ref{satz:chinesischer_restsatz_variante}}{=}\left|(\ZZ/m\ZZ\times\ZZ/n\ZZ)^\times\right|=
+\left|(\ZZ/m\ZZ)^\times\times(\ZZ/n\ZZ)^\times\right|\\
+&=\left|(\ZZ/m\ZZ)^\times\right|\cdot\left|(\ZZ/n\ZZ)^\times\right|
+=\varphi(m)\varphi(n).
+\end{align*}
+(c) Unter den $p^r$ Zahlen $0,1,\ldots,p^r-1$ sind genau die $p^{r-1}$ Zahlen
+$0\cdot p$, $1\cdot p$, $\ldots$, $(p^{r-1}-1)\cdot p$ nicht teilerfremd zu $p^r$.
+Folglich ist
+\[
+\varphi(p^r)=p^r-p^{r-1}=p^{r-1}(p-1).
+\]
+(d) Aus (b) und (c) erhalten wir
+\begin{align*}
+\varphi(n)&=\varphi(p_1^{e_1})\cdot\ldots\cdot\varphi(p_r^{e_r})=\prod_{i=1}^{r} p_{i}^{\,e_{i}-1}\,\bigl(p_{i}-1\bigr)=\prod_{i=1}^{r} p_{i}^{\,e_{i}}\,\bigl(1-\frac{1}{p_{i}}\bigr)=n\prod_{i=1}^{r} \bigl(1-\frac{1}{p_{i}}\bigr)\\
+&=n\prod_{p\text{ PZ mit }p\mid n}\left(1-\frac{1}{p}\right).
+\end{align*}
+\end{proof}
+
+\begin{bem}\label{bem:einheiten_mod_n}
+Seien $n \in \NN, a \in \ZZ$. Dann sind äquivalent:
+\begin{itemize}
+    \item[(i)] $\overline{a}$ erzeugt die (additive) zyklische Gruppe $\ZZ / n \ZZ$.
+    \item[(ii)] $\overline{a}$ ist eine Einheit im Ring $\ZZ / n \ZZ$.
+    \item[(iii)] $\ggT(a, n) = 1$.
+\end{itemize}
+Insbesondere enthält $\ZZ / n \ZZ$ genau $\varphi(n)$ Elemente, die $\ZZ / n \ZZ$ erzeugen.
+\end{bem}
+\begin{proof}
+Es gilt:
+\begin{align*}
+\ZZ / n \ZZ = \langle \overline{a} \rangle &\iff \overline{1} \in \langle \overline{a} \rangle \iff \text{ Es existiert ein } u \in \ZZ \text{ mit } \overline{a}\overline{u} = \overline{1} \iff \overline{a}\in(\ZZ/n\ZZ)^\times\\
+&\overset{\ref{anm:Einh_mod_n}}{\iff} \ggT(a, n) = 1.    
+\end{align*}
+\end{proof}
+
+\begin{bem}\label{bem:primitive_nte_EW}
+Sei $n \in \NN$ mit $\charact(K)\nmid n$ und $\zeta \in \Omega$ eine primitive $n$-te Einheitswurzel. Dann gilt:
+\begin{itemize}
+    \item[(a)] Es gibt genau $\varphi(n)$ primitive $n$-te Einheitswurzeln in $\Omega$.
+    \item[(b)] Die primitiven $n$-ten Einheitswurzeln in $\Omega$ sind genau von der Form $\zeta^r$ mit $1 \leq r < n$ und $\ggT(r, n) = 1$.
+\end{itemize}
+\end{bem}
+\begin{proof}
+$\mu_n$ ist nach \ref{bem:struktur_einheitswurzeln} eine zyklische Gruppe der Ordnung $n$
+und $\zeta$ ist ein Erzeuger von $\mu_n$. Der eindeutig bestimmte Homomorphismus $\psi\colon \ZZ / n \ZZ \to \mu_n$  mit $\psi(\overline{1}) = \zeta$ ist ein Isomorphismus. Insbesondere gilt für $r \in \ZZ$, dass $\zeta^r$ genau dann eine primitive $n$-te Einheitswurzel ist, wenn $\overline{r}$ ein Erzeuger von $\ZZ / n \ZZ$ ist. Dies ist nach \ref{bem:einheiten_mod_n} äquivalent zu $ \ggT(r, n) = 1$.
+\end{proof}
+
+\begin{bsp}\label{bsp:10te_ew}
+Die primitiven $10$-ten Einheitswurzeln in $\CC$ sind gegeben durch:
+\[
+\zeta = e^{2\pi i / 10}, \quad \zeta^3, \quad \zeta^7, \quad \zeta^9.
+\]
+\end{bsp}
+
+\begin{bem}\label{bem:automorphismen_von_mu_n}
+Sei $n \in \NN$ mit $\charact(K)\nmid n$. Dann existiert ein kanonischer Isomorphismus:
+\[
+(\ZZ / n \ZZ)^\times \to \operatorname{Aut}(\mu_n), \quad \overline{a} \mapsto 
+\begin{cases}
+\mu_n \to \mu_n \\
+\zeta \mapsto \zeta^{\overline{a}}:=\zeta^a
+\end{cases}
+\]
+\end{bem}
+
+\begin{proof}
+Übung.
+\end{proof}
+
+\begin{bem}\label{bem:einheitswurzel_erw_gal}
+Sei $n \in \NN$ mit $\charact(K) \nmid n$ und $\zeta$ eine primitive $n$-te Einheitswurzel. Dann ist $K(\mu_n) = K(\zeta)$ und $K(\mu_n)|K$ ist eine endliche Galois-Erweiterung.
+\end{bem}
+
+\begin{proof}
+Die Aussage $K(\mu_n) = K(\zeta)$ ist klar, denn offensichtlich ist $\zeta\in K(\mu_n)$
+und $\mu_n\subseteq K(\zeta)$. Die Erweiterung $K(\mu_n)|K$ ist endlich galoissch nach \ref{satz:char_endl_galoissch}, da $K(\mu_n)$ ein Zerfällungskörper des nach \ref{bem:separabilitaet_einheitswurzeln} separablen Polynoms $X^n - 1 \in K[X]$ ist.
+\end{proof}
+
+
+
+
+\begin{satz}\label{satz:zyklotomischer_charakter}
+Sei $n \in \NN$ mit $\charact(K) \nmid n$. Dann gilt:
+\begin{itemize}
+    \item[(a)] $K(\mu_n)|K$ ist eine endliche abelsche Galoiserweiterung mit $[K(\mu_n) : K] \mid\varphi(n)$.
+    \item[(b)] $\operatorname{Gal}(K(\mu_n)|K)$ operiert treu auf $\mu_n$ durch $\sigma.\zeta =\sigma(\zeta)$, insbesondere erhalten wir einen injektiven Gruppenhomomorphismus
+    \[
+    \chi \colon \operatorname{Gal}(K(\mu_n) | K) \to \Aut(\mu_n) \cong (\ZZ / n \ZZ)^\times,
+    \]
+    sodass für jede $n$-te Einheitswurzel $\zeta \in K(\mu_n)$ und jedes $\sigma \in \operatorname{Gal}(K(\mu_n)| K)$ gilt:
+    \[
+    \sigma(\zeta) = \zeta^{\chi(\sigma)}.
+    \]
+    $\chi$ heißt der \defn{zyklotomische Charakter}.
+\end{itemize}
+\end{satz}
+
+\begin{proof} Aus \ref{bem:einheitswurzel_erw_gal} wissen wir bereits, dass $K(\mu_n)|K$
+endlich galoissch ist.
+
+(b) Die Operation ist treu, denn ist $\sigma \in \Gal(K(\mu_n)| K)$ mit $\sigma(\zeta) = \zeta$ für alle $\zeta \in \mu_n$, dann ist $\sigma = \ident_{K(\mu_n)}$. 
+Aus \ref{anm:gruppenop_treu} erhalten wir einen injektiven Gruppenhomomorphismus
+\[
+\chi \colon \operatorname{Gal}(K(\mu_n) / K) \to S(\mu_n)
+\]
+mit
+\[
+\chi(\sigma) = 
+\begin{cases}
+\mu_n \to \mu_n \\ \zeta \mapsto \sigma.\zeta) = \sigma(\zeta).
+\end{cases}
+\]
+Es ist $\image \chi\subseteq\Aut(\mu_n)$, denn für $\sigma\in\Gal(K(\mu_n)|K)$
+und $\zeta_1,\zeta_2\in\mu_n$ ist
+\[
+\chi(\sigma)(\zeta_1\zeta_2)=\sigma.(\zeta_1 \zeta_2) = \sigma(\zeta_1\zeta_2)=\sigma(\zeta_1) \sigma(\zeta_2)
+=\chi(\sigma)(\zeta_1)\chi(\sigma)(\zeta_2).
+\]
+Die Behauptung folgt nun aus \ref{bem:automorphismen_von_mu_n}.
+
+(a) Aus (a) ergibt sich, dass $\Gal(K(\mu_n)|K)$ isomorph zu einer Untergruppe der
+abelschen Gruppe $(\ZZ / n \ZZ)^\times$ ist, also selbst abelsch ist. Insbesondere gilt
+\[
+[K(\mu_n) : K] = \ord(\Gal(K(\mu_n) / K)) | \ord((\ZZ / n \ZZ)^\times) = \varphi(n),
+\]
+wobei die Teilbarkeitsbeziehung aus dem Satz von Lagrange \ref{satz:lagrange} folgt.
+\end{proof}
+
+\textbf{Ziel:} Für $K = \QQ$ ist $\chi$ ein Isomorphismus. Wir fixieren im Folgenden einen
+algebraischen Abschluss $\Omega$ von $\QQ$.
+
+
+\begin{defini}\label{def:kreisteilungspolynom}
+Sei $n \in \NN$. Der Körper $\QQ(\mu_n)$ heißt der \defn{n-te Kreisteilungskörper} und
+\[
+\Phi_n = \prod_{\zeta \text{ prim. } n\text{-te EW}} (X - \zeta) \in \QQ(\mu_n)[X]
+\]
+heißt das \defn{n-te Kreisteilungspolynom}.
+\end{defini}
+
+\begin{bsp}\label{bsp:kreisteilungspolynom_phi4}
+Die vierten Einheitswurzeln in $\QQalg$ sind durch $1,-1,i,-i$ gegeben. Davon sind $i$ und $-i$ primitiv.
+Insbesondere ist $\QQ(\mu_4)=\QQ(i)$ und 
+\[
+\Phi_4 = (X - i)(X + i) = X^2 + 1.
+\]
+\end{bsp}
+
+\begin{bem}\label{bem:eig_kreisteilungspolynom}
+Sei $n \in \NN$. Dann gilt:
+\begin{itemize}
+    \item[(a)] $\Phi_n \in \QQ[X]$.
+    \item[(b)] $\deg \Phi_n = \varphi(n)$.
+    \item[(c)] Ist $p$ eine Primzahl, so gilt $\Phi_p = X^{p-1} + X^{p-2} + \dots + X + 1$.
+\end{itemize}
+\end{bem}
+
+\begin{proof}
+(a) Sei $\sigma \in \operatorname{Gal}(\QQ(\mu_n) | \QQ)$. Dann ist $\sigma|_{\mu_n}$ ein Gruppenautomorphismus von $\mu_n$. Insbesondere permutiert $\sigma$ die primitiven $n$-ten Einheitswurzeln und fixiert damit alle Koeffizienten von $\Phi_n$. 
+Somit hat $\Phi_n$ Koeffizienten im Fixkörper von $\Gal(\QQ(\mu_n)|\QQ)$, also in $\QQ$. 
+
+(b) folgt aus \ref{bem:primitive_nte_EW}.
+
+(c) Sei $p$ eine Primzahl. Dann ist jede $p$-te Einheitswurzel außer $1$ primitiv. Daher gilt:
+\[
+\Phi_p = \frac{X^p - 1}{X - 1}=X^{p-1} + X^{p-2} + \dots + X + 1.
+\]
+\end{proof}
+
+\begin{anm}
+\ref{bem:eig_kreisteilungspolynom}(a) zeigt insbesondere, dass $\Phi_n$ unabhängig von der Wahl eines algebraischen Abschlusses von $\QQ$ ist.
+\end{anm}
+
+\begin{satz}\label{satz:irreduzibilitaet_kreisteilungspoly}
+Sei $n \in \NN$. Dann gilt:
+\begin{itemize}
+    \item[(a)] $\Phi_n \in \ZZ[X]$.
+    \item[(b)] $\Phi_n$ ist irreduzibel in $\ZZ[X]$ und in $\QQ[X]$.
+\end{itemize}
+\end{satz}
+\begin{proof}
+(a) Jede $n$-te Einheitswurzel $\zeta \in \Omega$ ist eine primitive $d$-te Einheitswurzel für genau einen Teiler $d$ von $n$, nämlich $d = \operatorname{ord}(\zeta)$. Daher gilt:
+\[
+X^n - 1 = \prod_{\zeta \text{ $n$-te EW in }\Omega} (X - \zeta) = \prod_{d \mid n} \Phi_d
+= \Phi_n \cdot \prod_{d \mid n, \ d<n} \Phi_d
+\]
+Das normierte Polynom $X^n-1$ liegt in $\ZZ[X]$, die beiden Faktoren auf der rechten Seite sind normiert und liegen wegen \ref{bem:eig_kreisteilungspolynom} in $\QQ[X]$.
+Damit liegen sie beide (und damit insbesondere $\Phi_n$) wegen \ref{bem:pol_schon_in_Rx}
+in $\ZZ[X]$.
+
+(b) Sei $\Phi_n = f g$ mit $f, g \in \ZZ[X]$ normiert und $f$ irreduzibel in $\ZZ[X]$
+(und damit auch in $\QQ[X]$ wegen \ref{bem:irreduzibilitaet_polynomringe}).
+Da $f$ irreduzibel ist, ist $\deg f\geq 1$, somit existiert eine primitive Einheitswurzel
+$\zeta\in\Omega$ mit $f(\zeta)=0$. Für jede Primzahl $p$ mit $p\nmid n$ ist $f(\zeta^p) = 0$, 
+
+\begin{denn}
+Wir nehmen an, dass eine Primzahl $p$ mit $p \nmid n$ und $f(\zeta^p) \neq 0$ existiert.  
+Wegen $p \mid n$ ist $\ggT(p, n) = 1$, weswegen $\zeta^p$ nach \ref{bem:primitive_nte_EW} eine primitive $n$-te Einheitswurzel ist. Also ist $\Phi_n(\zeta^p) = 0$ 
+und wegen $f(\zeta^p)\neq 0$ folglich $g(\zeta^p)=0$, d.h. $\zeta$ ist eine Nullstelle
+von $g(X^p)$. Da $f(\zeta)=0$ ist und $f$ irreduzibel ist, ist $f$ das Minimalpolynom von $\zeta$ über $\QQ$. Aus \ref{satz:minimalpolynom} erhalten wir, dass in $\QQ[X]$
+die Teilbarkeitsbeziehung $f|g(X^p)$ gilt. Da $f$ und $g(X^p)$ beide normiert sind, gilt dies aufgrund von \ref{folg:teilbarkeit_im_polring} schon in $\ZZ[X]$. Somit gibt es
+ein normiertes Polynom $h\in\ZZ[X]$ mit $g(X^p)=hf$. In $\FF_p[X]$ ist
+\[
+\overline{h}\cdot\overline{f}=\overline{g}(X^p)=(\overline{g}(X))^p.
+\]
+es gilt also $\overline{f}\mid(\overline{g}(X))^p$. Der Polynomring $\FF_p[X]$ ist faktoriell, folglich existiert ein Primteiler von $\overline{f}$, der $\overline{g}$ teilt.
+Deswegen ist das Polynom $\overline{\Phi_n}=\overline{f}\overline{g}$ nicht separabel.
+Allerdings teilt $\overline{\Phi_n}$ das nach \ref{bem:separabilitaet_einheitswurzeln} separable Polynom $X^n-\overline{1}\in\FF_p[X]$ und ist somit selbst separabel, was ein
+Widerspruch ist.
+\end{denn}
+Jede primitive $n$-te Einheitswurzel in $\Omega$ ist eine Nullstelle von $f$, 
+\begin{denn}
+Ist $\xi$ eine primitive $n$-te Einheitswurzel, dann existiert wegen
+\ref{bem:primitive_nte_EW} ein Element $k\in\NN$ mit $\ggT(k,n)=1$ und
+$\xi=\zeta^k$. Es ist $k=p_1\cdot\ldots\cdot p_r$ mit nicht notwendig verschiedenen Primzahlen $P_1,\ldots,p_r$ mit $p_i\nmid n$ für $i=1,\ldots,r$. Aus der obigen Überlegung
+ergibt sich induktiv $f(\zeta^{p_1})=0$, $f(\zeta^{p_1p_2})=0$, $\ldots$, 
+\[
+f(\xi)=f(\zeta^k)=f((\zeta^{p_1\cdot\ldots\cdot p_{r-1}})^{p_r})=0
+\]
+\end{denn}
+Wir erhalten $f=\Phi_n$, weswegen $\Phi_n$ irreduzibel in $\ZZ[X]$ und in $\QQ[X]$ ist. Da
+$f$ 
+\end{proof}
+
+
+\begin{folgerung}\label{folgerung:galgruppe_kreisteilungskp}
+Sei $n \in \NN$. Dann gilt:
+\begin{itemize}
+    \item[(a)] $[\QQ(\mu_n) : \QQ] = \varphi(n)$.
+    \item[(b)] Der zyklotomische Charakter \[\chi \colon \operatorname{Gal}(\QQ(\mu_n)|\QQ) \to (\ZZ / n \ZZ)^\times\] aus \ref{satz:zyklotomischer_charakter} ist (für $K = \QQ$) ein Isomorphismus.
+\end{itemize}
+\end{folgerung}
+\begin{proof}
+Sei $\zeta_n\in\Omega$ eine primitive $n$-te Einheitswurzel.
+
+(a) Da $\Phi_n$ wegen \ref{satz:irreduzibilitaet_kreisteilungspoly} irreduzibel ist, ist $\Phi_n$ nach \ref{satz:minimalpolynom} das Minimalpolynom von $\zeta_n$ über $\QQ$. Wir erhalten
+\[
+[\QQ(\mu_n) : \QQ] = [\QQ(\zeta_n) : \QQ] = \deg \Phi_n = \varphi(n),
+\]
+
+(b) Es ist
+\[
+|\Gal(\QQ(\mu_n) / \QQ)| = [\QQ(\zeta_n) : \QQ] \overset{\text{(a)}}{=} \varphi(n) = 
+|(\ZZ / n \ZZ)^\times|.
+\]
+Da $\chi$ nach \ref{satz:zyklotomischer_charakter} injektiv ist, ist $\chi$ ein Isomorphismus.
+\end{proof}
+
+\begin{defini}\label{def:kreisteilungspolynom_ueber_k}
+Sei $n \in \NN$ mit $\charact(K) \nmid n$. Das Polynom
+\[
+\Phi_{n, K} = \prod_{\zeta \text{ prim. } n\text{-te EW}} (X - \zeta) \in K[X]
+\]
+heißt das \defn{n-te Kreisteilungspolynom über $K$}.
+\end{defini}
+
+\begin{anm}
+\begin{itemize}
+\item $\Phi_{n, K} \in K[X]$ folgt analog zu \ref{bem:eig_kreisteilungspolynom}.
+\item Man kann zeigen: Ist $\psi\colon\ZZ\to K$ der kanonische Ringhomomorphismus (vgl. \ref{bem:universelle_eigenschaft_z_ring}), dann stimmt $\Phi_{n,K}$ mit $(\Phi_n)_K$
+überein (vgl. \ref{def:nullstelle_in_A}), man erhält es also aus $\Phi_n$ durch koeffizientenweises Anwenden von $\psi$.
+\item Im Gegensatz zu $\Phi_n$ ist $\Phi_{n,K}$ im Allgemeinen nicht irreduzibel.
+Beispielsweise ist 
+\[
+\Phi_{4,\QQ(i)}=(X-i)(X+i)
+\]
+reduzibel in $\QQ(i)[X]$.
+\end{itemize}
+\end{anm}
+
+
+\chapter{Fortführung der Gruppentheorie}
+\setcounter{section}{14}
+\section{Sylowgruppen}
+
+\begin{defini}\label{def:p_sylowgruppe}
+Sei $G$ eine endliche Gruppe und $p$ eine Primzahl. $G$ heißt eine \defn{$p$-Gruppe}, falls es ein $n \in \NN_0$ mit $\ord(G) = p^n$ gibt. Eine Untergruppe $H \leq G$ heißt eine \defn{$p$-Sylowgruppe} von $G$, falls $H$ eine $p$-Gruppe ist und $p \nmid (G : H)$ gilt. Dies ist äquivalent dazu, dass es ein $k \in \NN_0$ und ein $m \in \NN$ mit 
+\[
+\ord(G) = p^k \cdot m, \quad \ord(H) = p^k \quad \text{ und } p \nmid m.
+\]
+gibt.
+\end{defini}
+
+\begin{anm}\label{anm:p_sylowgruppe}
+\begin{itemize}
+    \item $\{e\}$ ist eine $p$-Gruppe für alle Primzahlen $p$.
+    \item Für jede Primzahl $p$ mit $p \mid \ord(G)$ ist $\{e\}\leq G$ eine $p$-Sylowgruppe von $G$.
+    \item Ist $p$ eine Primzahl und $H\leq G$ eine $p$-Sylowgruppe, dann ist $g H g^{-1}$ für alle $g\in G$ ebenfalls eine $p$-Sylowgruppe von $G$, denn Konjugation mit $g$ ist ein Automorphismus von $G$. Insbesondere gilt: Hat $G$ genau eine $p$-Sylowgruppe $H$, so ist $H \trianglelefteq G$.
+\end{itemize}
+\end{anm}
+
+\begin{bsp}\label{bsp:sylowgruppen_a4}
+(vgl. Blatt 3, Aufgabe 3.) Sei $G = A_4$. Dann ist $\ord(G) = 12 = 2^2 \cdot 3$. 
+$G$ besitzt genau eine 2-Sylowgruppe (mit 4 Elementen), nämlich
+\[
+V_4 = \{\ident, (1 \; 2)(3 \; 4), (1 \; 3)(2 \; 4), (1 \; 4)(2 \; 3)\}.
+\]
+$G$ besitzt vier 3-Sylowgruppen (mit jeweils 3 Elementen), nämlich
+\[
+\langle (1 \; 2 \; 3) \rangle, \quad \langle (1 \; 2 \; 4) \rangle, \quad \langle (1 \; 3 \; 4) \rangle, \quad \langle (2 \; 3 \; 4) \rangle.
+\]
+\end{bsp}
+
+\begin{bem}\label{bem:p-sylowgruppen_max}
+Sei $G$ eine endliche Gruppe und $p$ eine Primzahl, und sei $H\leq G$ eine $p$-Sylowgruppe. Ist $H'\leq G$
+eine $p$-Gruppe mit $H\leq H'$, so ist $H=H'$. Insbesondere sind die $p$-Sylowgruppen von $G$ maximale Elemente
+in der Menge der $p$-Untergruppen von $G$ bezüglich der Inklusionsrelation.
+\end{bem}
+\begin{proof}
+Sei $\ord(G) = p^k m$ mit $p \nmid m$. Dann ist $\ord(H) = p^k$.
+Da $\ord(H')$ eine $p$-Potenz ist und $\ord(H') \mid p^k m$ gilt, folgt $\ord(H') \mid p^k$.
+Aus $H\subseteq H'$ erhalten wir $\ord(H') = p^k= \ord(H)$, also $H' = H$.
+\end{proof}
+
+\begin{satz}[Sylowsätze]\label{satz:sylow}
+Sei $G$ eine endliche Gruppe und $p$ eine Primzahl. Dann gilt:
+\begin{enumerate}
+\item[(a)] $G$ besitzt eine $p$-Sylowgruppe.
+\item[(b)] Ist $H \leq G$ eine $p$-Untergruppe, dann existiert eine $p$-Sylowgruppe $S \leq G$ mit $H \subseteq S$.
+\item[(c)] Je zwei $p$-Sylowgruppen von $G$ sind konjugiert zueinander.
+\item[(d)] Für die Anzahl $s_p$ der $p$-Sylowgruppen von $G$ gilt:
+\[
+s_p\mid \ord(G), \quad s_p\equiv 1\mod p.    
+\]
+\end{enumerate}
+\end{satz}
+\begin{proof}
+(a) Wir beweisen die Aussage per Induktion nach $\ord(G)$.
+Der Fall $\ord(G) = 1$ ist trivial. Im Folgenden sei $\ord(G) > 1$. Falls $p \mid \ord(G)$ gilt, dann ist $\{e\} \leq G$ eine $p$-Sylowgruppe von $G$. Im Folgenden gelte $p \mid \ord(G)$, etwa $\ord(G) = p^n m$ mit $n \geq 1$ und $p \nmid m$.
+Sei $x_1, \dots, x_k$ ein Vertretersystem der Bahnen in $G \setminus Z(G)$ unter der Konjugationsoperation von $G$ auf $G$. Wegen \ref{folg:zentralisator_gleichung} gilt:
+\[
+\ord(G) = \ord(Z(G)) + \sum_{i=1}^n (G : Z_G(x_i)).
+\]
+\textbf{1. Fall:} $p \nmid \ord(Z(G))$. Wegen $p\mid\ord(G)$ existiert dann ein $i \in \{1, \dots, k\}$ mit
+\[
+p\nmid (G : Z_{G}(x_i)) = \frac{p^n m}{\ord(Z_{G}(x_i))}.
+\]
+Hieraus erhalten wir $p^n \mid \ord(Z_{G}(x_i))$. Aufgrund von $x_i \notin Z(G)$ ist $Z_{G}(x_i) \subsetneqq G$, was $\ord(Z_{G}(x_i)) < \ord(G)$ zur Folge hat. Nach Induktionsannahme besitzt $Z_{G}(x_i)$ eine $p$-Sylowgruppe $S$ der Ordnung $p^n$, diese ist ebenfalls eine $p$-Sylowgruppe von $G$.
+
+\textbf{2. Fall:} $p \mid \ord(Z(G))$. Da $Z(G)$ eine abelsche Gruppe ist, enthält $Z(G)$ nach dem Hauptsatz für endlich erzeugte abelsche Gruppen \ref{satz:elementarteilersatz} eine zyklische Untergruppe, deren Ordnung durch $p$ teilbar ist. 
+Insbesondere existiert ein Element $a \in Z(G)$ mit $\ord(a) = p$. Wir setzen $N := \langle a \rangle$. Wegen $a\in Z(G)$ gilt $N \trianglelefteq G$, zudem ist $\ord(N) = p$. Folglich ist
+\[
+\ord(G / N) = p^{n-1} m < \ord(G).
+\]
+Nach Induktionsvoraussetzung besitzt $G / N$ eine $p$-Sylowgruppe $Q$ der Ordnung $p^{n-1}$. Sei $\pi \colon G \to G / N$ die kanonische Projektion. Wir setzen $S := \pi^{-1}(Q) \leq G$. Dann ist
+\[
+\ord(S) = \ord(Q) \cdot \ord(N) = p^{n-1} \cdot p = p^n,
+\]
+somit ist $S \leq G$ eine $p$-Sylowgruppe von $G$.
+
+(b) Sei $X_p$ die Menge aller $p$-Sylowgruppen von $G$ und sei $\ord(G) = p^n m$ mit $p \nmid m$.
+Nach (a) ist $X_p \neq \emptyset$. Wir fixieren eine $p$-Sylowgruppe $P \in X_p$.
+
+\textbf{Schritt 1:} Die Gruppe $G$ operiert auf $X_p$ durch Konjugation, denn Konjugation erhält Untergruppenordnungen.
+Wir setzen
+\begin{align*}
+M &:= \Orb_G(P) = \{Q \in X_p \mid Q \text{ ist konjugiert zu } P\}, \\
+N_P &:= \Stab_G(P) = \{g \in G \mid gPg^{-1} = P\} \leq G.
+\end{align*}
+Aus \ref{folg:isom_orbit} erhalten wir einen Isomorphismus von $G$-Mengen $G / N_P \to M$. 
+Wegen $N_P \supseteq P$ folgt $p^n \mid \ord(N_P)$, also $p \nmid \ord(G : N_P)$ und damit auch $p \nmid |M|$.
+
+\textbf{Schritt 2:} Sei $H \leq G$ eine $p$-Untergruppe. Die Gruppe $H$ operiert auf $M$ durch Konjugation. Dabei zerfällt $M$ unter der Operation von $H$ in disjunkte Bahnen $M_i$:
+\[
+M = \bigcup_{i=1}^r M_i.
+\]
+Da $\ord(H)$ eine $p$-Potenz ist, folgt aus \ref{folg:isom_orbit}, dass jeweils $\ord(M_i)=p^{n_i}$ für ein $n_i \in \NN_0$ ist.
+Es gilt
+\[
+|M| = \sum_{i=1}^r |M_i|,
+\]
+wobei $|M_i|$ entweder $1$ oder eine echte $p$-Potenz ist. Wie wir in Schritt 1 gezeigt haben, gilt $p \nmid |M|$.
+Folglich existiert ein $k \in \{1, \dots, r\}$ mit $|M_k| = 1$. Somit existiert eine eine $p$-Sylowgruppe $S$ in $G$
+mit $M_k = \{S\}$.
+
+\textbf{Schritt 3:} Es ist $H \leq S$,
+\begin{denn}
+Wegen $M_k = \{S\}$ gilt $hSh^{-1} = S$ für alle $h \in H$. Daher gilt $H \leq N_G(S)$. Hierbei bezeichnet
+$N_G(S)$ den Normalisator von $S$ in $G$, vgl. Blatt 3, Aufgabe 4. Dieselbe Übungsaufgabe liefert auch
+$S \trianglelefteq N_G(S)$. Aus dem Isomorphiesatz \ref{satz:erster_isomorphiesatz} erhalten wir 
+\[
+HS / S \cong H / (H \cap S)
+\]
+Damit ergibt sich
+\[
+\ord(HS) = \frac{\ord(H) \ord(S)}{\ord(H \cap S)},
+\]
+weswegen $\ord(HS)$ eine $p$-Potenz, ist denn alle Ordnungen auf der rechten Seite sind $p$-Potenzen.
+Aufgrund von $S\subseteq HS$ und der Tatsache, dass $S$ eine $p$-Sylowgruppe ist, folgt aus \ref{bem:p-sylowgruppen_max}, dass $S = HS$ ist. Daraus ergibt sich $H \leq S$.
+\end{denn}
+(c) Seien $P, Q$ $p$-Sylowgruppen in $G$. Nach dem Beweis von (b), angewendet auf $H=Q$, existiert eine $p$-Sylowgruppe $S$, so dass 
+\[
+Q \subseteq S \in M = \operatorname{Orb}_G(P)
+\]
+gilt. Wegen \ref{bem:p-sylowgruppen_max} ist $Q=S$ und deshalb $P$ konjugiert zu $Q$.
+
+(d) Sei $P \in X_p$.  Aufgrund von (c) ist $M = \Orb_G(P)=X_p$. Aus \ref{folg:isom_orbit} erhalten wir
+\[
+s_p = |X_p| = |M| \mid \ord(G).
+\]
+Sei $S \in X_p$. Die Gruppe $S$ operiert auf $M = X_p$ durch Konjugation. Dabei zerfällt $M$ in disjunkte Bahnen:
+\[
+M = \bigcup_{i=1}^r M_i,
+\]
+ohne Einschränkung sei $S \in M_1$. Dann ist $M_1 = \{S\}$ und wegen \ref{folg:isom_orbit} ist für $i=1,\ldots,r$ jeweils
+$|M_i| = p^{n_i}$ für ein $n_i\in\NN_0$. Wir nehmen an, dass $|M_i| = 1$ für ein $i \neq 1$ ist, etwa $M_i = \{Q\}$. 
+Wie in Schritt 3 des Beweises von (b), angewendet auf $H=S$, $S=Q$, erhalten wir $S\leq Q$ und damit $S=Q$,
+was ein Widerspruch dazu ist, dass die Bahnen disjunkt sind.
+Somit ergibt sich
+\[
+s_p = |M| = 1 + \sum_{i=2}^r |M_i| \equiv 1 \pmod{p},
+\]
+da die Summanden $|M_i|$ für $i=2,\ldots,r$ jeweils echte $p$-Potenzen sind.
+\end{proof}
+
+\begin{anm}\label{anm:sylow_anzahlen}
+Da für die Anzahl $s_p$ der $p$-Sylowgruppen von $G$ die Kongruenz $s_p\equiv 1\mod p$ gilt und somit $s_p$ teilerfremd zu $p$ ist, lässt sich die Teilbarkeitsaussage $S_p\mid\ord(G)$ dahingehend verschärfen, dass $s_p$ den zu $p$ teilerfremden
+Anteil von $\ord(G)$ teilt. Ist also $\ord(G)=p^km$ mit $p\nmid m$, so gilt für die Anzahl der $s_p$ der $p$-Sylowgruppen
+von $G$ die Beziehung $s_p\mid m$.
+\end{anm}
+
+\begin{folgerung}\label{folgerung:satz_von_cauchy}
+Sei $G$ eine endliche Gruppe und $p$ eine Primzahl. Dann gilt:
+\begin{itemize}
+\item[(a)] (Satz von Cauchy) $p \mid \ord(G) \iff$ Es existiert ein $g \in G$ mit $\ord(g) = p$.
+\item[(b)] $G$ ist eine $p$-Gruppe $\iff$ Für alle $g \in G$ existiert ein $r \in \NN_0$ mit $\ord(g) = p^r$.
+\end{itemize}
+\begin{proof}
+(a) "`$\Leftarrow$"': Nach dem Satz von Lagrange gilt $p = \ord(g) \mid \ord(G)$.
+
+"`$\Rightarrow$"': Es gelte $p \mid \ord(G)$. Aufgrund der Sylowsätze \ref{satz:sylow} existiert eine $p$-Sylowgruppe $S \leq G$ mit $S \neq \{e\}$. Insbesondere existiert ein $s \in S$ mit $s \neq e$.
+Da die Ordnung von $S$ eine $p$-Potenz ist, existiert ein $r\in\NN$ mit $\ord(s) = p^r$. Wir setzen $g := s^{p^{r-1}} \neq 1$, dann ist $\ord(g) = p$.
+
+(b) "`$\Rightarrow$"' ergibt sich aus der Definition von $p$-Gruppen.
+
+"`$\Leftarrow$"': (per Kontraposition) Sei $G$ keine $p$-Gruppe. Dann existiert eine Primzahl $q \neq p$ mit $q \mid \ord(G)$. Aufgrund von (a) existiert dann ein $g \in G$ mit $\ord(g) = q$.
+\end{proof}
+\end{folgerung}
+
+\begin{bsp}\label{bsp:gruppe-30-elemente}
+Sei $G$ eine Gruppe mit $30$ Elementen. Dann besitzt $G$ einen nichttrivialen Normalteiler,
+\begin{denn}
+Es gilt $\ord(G) = 30 = 2 \cdot 3 \cdot 5$. Für $p \in \{2, 3, 5\}$ gilt $s_p \mid 30$ und $s_p \equiv 1 \pmod{p}$. Somit folgt
+\[
+s_2 \in \{1, 3, 5, 15\}, \quad s_3 \in \{1, 10\}, \quad s_5 \in \{1, 6\}.
+\]
+Aufgrund von \ref{anm:p_sylowgruppe} genügt es zu zeigen: $s_2 = 1$ oder $s_3 = 1$ oder $s_5 = 1$.
+Wir nehmen im Folgenden an, dass $s_2, s_3, s_5 > 1$ sind. Dann ergibt sich $s_3 = 10$ und $s_5 = 6$.
+Sind $H_1$, $H_2$ zwei verschiedene $5$-Sylowgruppen (von Ordnung $5$), dann gilt:
+\[
+H_1\cap H_2\subsetneqq H_1,\quad \ord(H_1 \cap H_2) \mid \ord(H_1) = 5 
+\]
+und somit $H_1 \cap H_2 = \{e\}$.
+Daraus folgt, dass $G$ genau $s_5 \cdot (5 - 1) = 6 \cdot 4 = 24$ Elemente von Ordnung $5$ enthält.
+Analog enthält $G$ genau $s_3 \cdot (3 - 1) = 10 \cdot 2 = 20$ Elemente von Ordnung $3$. Damit ist
+$\ord(G) > 44$, was ein Widerspruch ist.
+\end{denn}
+\end{bsp}
+
+\section{Auflösbare Gruppen}
+
+\begin{defini}\label{def:normalreihe}
+Sei $G$ eine Gruppe. Eine Kette von Untergruppen
+\[
+G = G_0 \supseteq G_1 \supseteq \dots \supseteq G_n = \{e\}
+\]
+heißt eine \defn{Normalreihe} von $G$, falls $G_{i+1} \trianglelefteq G_i$ für $i = 0, \dots, n-1$ ist. Die Faktorgruppen $G_i / G_{i+1}$ heißen die \defn{Faktoren} der Normalreihe.
+Die Gruppe $G$ heißt \defn{auflösbar}, falls $G$ eine Normalreihe besitzt, deren sämtliche Faktoren abelsch sind.
+\end{defini}
+
+\begin{bsp}\label{bsp:auflösbare-gruppen}
+\begin{enumerate}[label=(\alph*)]
+\item Jede abelsche Gruppe $G$ ist auflösbar, denn $G \supseteq \{e\}$ ist dann eine Normalreihe mit abelschen Faktoren.
+\item Die symmetrische Gruppe $S_n$ ist auflösbar für $n \leq 4$, denn:
+\begin{itemize}
+\item $S_1$ und $S_2$ sind abelsch.
+\item Für $S_3$ ist $S_3 \supseteq A_3 \supseteq \{ \ident \}$ eine Normalreihe mit abelschen Faktoren:
+\[
+S_3 / A_3 \cong \ZZ / 2 \ZZ, \quad A_3 \cong \ZZ / 3 \ZZ.
+\]
+\item Für $S_4$ ist $S_4 \supseteq A_4 \supseteq V_4 \supseteq \{\ident\}$ eine Normalreihe mit abelschen Faktoren:
+\[
+S_4 / A_4 \cong \ZZ / 2 \ZZ, \quad A_4 / V_4 \cong \ZZ / 3 \ZZ, \quad V_4 \cong \ZZ / 2 \ZZ \times \ZZ / 2 \ZZ.
+\]
+\end{itemize}
+\end{enumerate}
+\end{bsp}
+
+
+\begin{satz}\label{satz:verfeinerung_normalreihe}
+Sei $G$ eine endliche, auflösbare Gruppe. Dann lässt sich jede echt absteigende Normalreihe von $G$ mit abelschen Faktoren zu einer Normalreihe verfeinern, deren Faktoren zyklisch von Primzahlordnung sind.
+\end{satz}
+
+\begin{proof}
+Sei
+\[
+G = G_0 \supsetneqq G_1 \supsetneqq \dots \supsetneqq G_n = \{e\}
+\]
+eine echt absteigende Normalreihe von $G$. Falls $G_i / G_{i+1}$ zyklisch von Primzahlordnung für $i = 0, \dots, n-1$ ist, sind wir fertig. Andernfalls existiert ein $i \in \{0, \dots, n-1\}$, sodass $G_i / G_{i+1}$ nicht zyklisch von Primzahlordnung ist. Sei $p$ ein Primteiler von $\ord(G_i / G_{i+1})$. Nach \ref{folgerung:satz_von_cauchy} existiert eine zyklische Untergruppe $\widetilde{H}\subsetneqq G_i / G_{i+1}$ der Ordnung $p$. Wegen $G_i / G_{i+1}$ abelsch ist $\widetilde{H} \trianglelefteq G_i / G_{i+1}$.
+Sei $\pi \colon G_i \to G_i / G_{i+1}$ die kanonische Projektion und $H := \pi^{-1}(\widetilde{H})\trianglelefteq G$. Dann gilt
+\[
+G_i\supsetneqq H \supsetneqq G_{i+1}
+\]
+und es ist $G_{i+1} \trianglelefteq H$ wegen $G_{i+1} \trianglelefteq G_i$.
+Wir erhalten die verfeinerte Normalreihe
+\[
+G = G_0 \supsetneqq \dots \supsetneqq G_i\supsetneqq H \supsetneqq G_{i+1} \supsetneqq \dots \supsetneqq G_n = \{e\}.
+\]
+Hierbei ist 
+\[
+H / G_{i+1} = \pi(\pi^{-1}(\widetilde{H})) = \widetilde{H}
+\]
+zyklisch von Primzahlordnung und
+\[
+G_i / H \cong (G_i / G_{i+1}) / (H / G_{i+1})
+\]
+abelsch mit $\ord(G_i / H) < \ord(G_i / G_{i+1})$.
+Induktiv erhalten wir mit diesem Verfahren eine Normalreihe von $G$ mit zyklischen Faktoren von Primzahlordnung.
+\end{proof}
+
+\textbf{Ziel:} Wir wollen im Folgenden eine äquivalente Charakterisierung der Auflösbarkeit finden und damit zeigen, dass $S_n$ für $n\geq 5$ nicht auflösbar ist und dass $p$-Gruppen stets auflösbar sind.
+
+\begin{defini}\label{def:kommutatorgruppe}
+Sei $G$ eine Gruppe, $a, b \in G$, $H_1, H_2 \leq G$. Dann heißt
+\[ [a, b] := ab a^{-1} b^{-1} \]
+der \defn{Kommutator} von $a$ und $b$. Wir setzen
+\[
+[H_1, H_2] := \langle [h_1, h_2] \mid h_1 \in H_1, h_2 \in H_2 \rangle.
+\]
+$[G, G]$ heißt die \defn{Kommutatorgruppe} von $G$.
+\end{defini}
+
+\begin{bem}\label{bem:kommutatorgruppe}
+Sei $G$ eine Gruppe. Dann gilt:
+\begin{itemize}
+\item[(a)] $[G, G]$ besteht aus allen endlichen Produkten von Kommutatoren aus $G$.
+\item[(b)] $[G, G] \trianglelefteq G$.
+\item[(c)] $G / [G, G]$ ist abelsch.
+\item[(d)] Ist $N \trianglelefteq G$, sodass $G / N$ abelsch ist, dann gilt $N \supseteq [G, G]$.
+\end{itemize}
+\end{bem}
+
+\begin{proof}
+(a) Die Aussage ergibt sich wegen \ref{bem:erzeugnisse} daraus, dass für $a, b \in G$ gilt:
+\[
+[a, b]^{-1} = (aba^{-1}b^{-1})^{-1} = bab^{-1}a^{-1} = [b, a].
+\]
+
+(b) Seien $a, b, g \in G$. Dann ist
+\[
+g[a, b]g^{-1} = g (aba^{-1}b^{-1}) g^{-1} = (gag^{-1})(gbg^{-1})(gag^{-1})^{-1}(gbg^{-1})^{-1}
+=[gag^{-1},gbg^{-1}]\in[G,G],
+\]
+für endliche Produkte von Kommutatoren kann man analog argumentieren.
+
+(c) In $G / [G, G]$ gilt:
+\[
+\overline{a}\overline{b}\overline{a}^{-1}\overline{b}^{-1} = \overline{aba^{-1}b^{-1}} = \overline{e} \quad \text{für alle } a, b \in G,
+\]
+also $\overline{a}\overline{b} = \overline{b}\overline{a}$ für alle $a, b \in G$. Somit ist $G / [G, G]$ abelsch.
+
+(d) Sei $N \trianglelefteq G$, sodass $G / N$ abelsch ist. Für $a, b \in G$ gilt dann in $G/N$, dass
+$\overline{a}\overline{b} = \overline{b}\overline{a}$ ist. Dies liefert
+\[
+\overline{aba^{-1}b^{-1}} = \overline{e},
+\]
+also
+\[
+\overline{[a,b]}=\overline{e}
+\]
+und damit $[a,b]\in N$. Wir erhalten $[G, G] \subseteq N$.
+\end{proof}
+
+\begin{defini}\label{def:iterierter_kommutator}
+Sei $ G $ eine Gruppe. Wir definieren rekursiv:
+\[
+D^0G := G, \quad D^{i+1}G := [D^iG, D^iG] \quad \text{für } i \in \NN_0.
+\]
+$ G^{(i)} $ heißt der \defn{$i$-te iterierte Kommutator} von $ G $.
+\end{defini}
+
+\begin{satz}\label{satz:char_auflösbarkeit}
+Sei $ G $ eine Gruppe. Dann sind folgende Aussagen äquivalent:
+\begin{itemize}
+    \item[(i)] $ G $ ist auflösbar.
+    \item[(ii)] Es existiert ein $ k \in \NN_0 $ mit $D^k G = \{e\} $.
+\end{itemize}
+\end{satz}
+
+\begin{proof}
+"`(ii)$\Rightarrow$(i)"' Wegen (ii) und \ref{bem:kommutatorgruppe} ist
+\[
+G = D^0G \supseteq D^1G\supseteq \dots \supseteq D^kG = \{e\}
+\]
+eine Normalreihe von $ G $ mit abelschen Faktoren, also ist $ G $ auflösbar.
+
+"`(i)$\Rightarrow$(ii)"' Sei
+\[
+G = G_0 \supseteq G_1 \supseteq \dots \supseteq G_k = \{e\}
+\]
+eine Normalreihe von $ G $ mit abelschen Faktoren. Es gilt:
+\[
+D^iG \subseteq G_i \quad \text{für } i = 0, \dots, k,
+\]
+\begin{denn} 
+Wir zeigen dies per Induktion über $ i $. Für $i=0$ ist $D^0G =G = G_0$. Sei nun $i>0$.
+Da $G_i / G_{i+1} $ abelsch ist, erhalten wir mit \ref{bem:kommutatorgruppe}, dass $[G_i, G_i] \leq G_{i+1}$ ist.
+Aus der Induktionsvoraussetzung erhalten wir
+\[
+D^{i+1}G = [D^iG, D^iG] \subseteq [G_i, G_i] \leq G_{i+1}.
+\]
+\end{denn}
+Insbesondere gilt $D^kG \subseteq G_k = \{e\} $.
+\end{proof}
+
+\begin{satz}\label{satz:sn_nicht_aufl}
+Sei $n \geq 5$. Dann gilt:
+\begin{itemize}
+\item[(a)] $A_n$ wird von der Menge aller 3-Zyklen in $S_n$ erzeugt.
+\item[(b)] $[S_n, S_n] = A_n$.
+\item[(c)] $[A_n, A_n] = A_n$.
+\item[(d)] $D^i S_n = A_n$ für $i \geq 1$.
+\end{itemize}
+Insbesondere ist $S_n$ nicht auflösbar für $n \geq 5$.
+\begin{proof}
+(a) Jeder $3$-Zyklus liegt in $A_n$, denn sind $x_1, x_2, x_3 \in \{1, \dots, n\}$ paarweise verschieden, dann ist
+\[
+(x_1 \; x_2 \; x_3) = (x_1 \; x_2)(x_2 \; x_3) \in A_n.
+\]
+Diese Gleichung impliziert darüber hinaus, dass das Produkt zweier nicht elementfremder, verschiedener Transpositionen
+ein $3$-Zyklus ist. Jedes Produkt zweier elementfremder Transpositionen lässt sich als Produkt von $3$-Zyklen schreiben, denn sind $x_1, x_2, x_3, x_4 \in \{1, \dots, n\}$ paarweise verschieden, so ist
+\[
+(x_1 \; x_2)(x_3 \; x_4) = (x_1 \; x_3 \; x_4)(x_1 \; x_2 \; x_4).
+\]
+Da sich jedes Element aus $S_n$ als Produkt von Transpositionen schreiben lässt, folgt die Behauptung.
+
+(b) Da $S_n/A_n \cong \mathbb{Z}/2\mathbb{Z}$ abelsch ist, folgt aus \ref{bem:kommutatorgruppe}, dass $[S_n, S_n] \subseteq A_n$ ist. Seien $x_1, x_2, x_3 \in \{1, \dots, n\}$ paarweise verschieden. Dann ist
+\[
+(x_1 \; x_2 \; x_3) = [(x_1 \; x_3), (x_2 \; x_3)]\in [S_n, S_n].
+\]
+Da die Gruppe $A_n$ wegen (a) von Dreierzyklen erzeugt wird, folgt $[S_n, S_n] \subseteq A_n$ und damit $[S_n, S_n] = A_n$.
+
+(c) Offensichtlich ist $[A_n, A_n] \subseteq A_n$. Sind umgekehrt $x_1,x_2,x_3\in \{1, \dots, n\}$ paarweise verschieden,
+so können wir $x_4,x_5\in\{1,\ldots,n\}$ wählen, sodass $x_1,\ldots,x_5$ paarweise verschieden sind.
+Es ist dann
+\[
+(x_1 \; x_2 \; x_3) = [(x_1 \; x_2 \; x_4),(x_1 \; x_3 \; x_5)]\in[A_n,A_n].
+\]
+
+(d) Es ist $D^0S_n=S_n$, $D^1S_n=[S_n,S_n]\overset{\text{(b)}}{=}A_n$, $D^2S_n=[A_n,A_n]\overset{\text{(c)}}{=}A_n$
+und damit auch $D^iS_n=A_n$ für $i\geq3$.
+
+Wegen \ref{satz:char_auflösbarkeit} ist daher $S_n$ für $n\geq 5$ nicht auflösbar
+\end{proof}
+\end{satz}
+
+\begin{bem}\label{bem:auflösbar_untergr}
+Sei $G$ eine auflösbare Gruppe und $H\leq G$. Dann ist $H$ auflösbar    
+\end{bem}
+\begin{proof}
+Aufgrund von \ref{satz:char_auflösbarkeit} existiert ein $k\in\NN_0$ mit $D^kG=\{e\}$. Für alle $i\in\NN_0$ 
+gilt offenbar $D^iH\subseteq D^iG$. Insbesondere ist $D^kH=\{e\}$ und damit ist $H$ nach \ref{satz:char_auflösbarkeit}
+auflösbar.
+\end{proof}
+
+\begin{bem}\label{bem:aufloesbarkeit_lift}
+Sei $G$ eine Gruppe und $H \trianglelefteq G$. Dann sind äquivalent:
+\begin{enumerate}[label=(\roman*)]
+    \item $G$ ist auflösbar.
+    \item $H$ und $G / H$ sind auflösbar.
+\end{enumerate}
+\end{bem}
+
+\begin{proof}
+Sei $\pi \colon G \to G / H$ die kanonische Projektion. Dann gilt
+\[
+\pi(D^1 G) = \pi([G, G]) = [\pi(G), \pi(G)] = D^1(\pi(G)).
+\]
+Induktiv folgt
+\[
+\pi(D^i G) = D^i(\pi(G)) = D^i(G / H) \quad \text{für } i \geq 1.
+\]
+"`(i)$\Rightarrow$(ii)"': Sei $G$ auflösbar. Nach \ref{bem:auflösbar_untergr} ist auch $H$ auflösbar.
+Es verbleibt zu zeigen, dass $G/H$ auflösbar ist. Aufgrund von \ref{satz:char_auflösbarkeit} gibt es ein $k \in \NN_0$ mit $D^k G = \{1\}$. Also ist
+\[
+D^k(G / H) = \pi(D^k G) = \pi(\{e\}) = \{e\}.
+\]
+Damit ist $G / H$ auflösbar nach \ref{satz:char_auflösbarkeit}.
+
+"`(ii)$\Rightarrow$(i)"': Wegen (ii) und \ref{satz:char_auflösbarkeit} existiert ein $k \in \NN_0$ mit $D^k H = \{e\}$ und $D^k(G / H) = \{e\}$. Dann gilt
+\[
+\pi(D^{k} G) = D^k(G / H) = \{e\}
+\]
+und deshalb $D^{k} G \subseteq H$. Somit ist
+\[
+D^{2k} G = D^k(D^k G) \subseteq D^k H = \{e\}
+\]
+Nach \ref{satz:char_auflösbarkeit} ist $G$ daher auflösbar.
+\end{proof}
+
+\begin{satz}\label{satz:p_gruppen_aufloesbar}
+Sei $p$ eine Primzahl und $G$ eine $p$-Gruppe. 
+Dann ist $G$ auflösbar. Insbesondere existiert eine Normalreihe
+\[
+G = G_0 \supseteq G_1 \supseteq \dots \supseteq G_n = \{1\},
+\]
+so dass $G_i / G_{i+1}$ zyklisch der Ordnung $p$ ist für $i = 0, \dots, n-1$.
+\end{satz}
+
+\begin{proof}
+Wir zeigen die Auflösbarkeit von $G$ per Induktion nach $\ord(G)$.
+Der Fall $\ord(G) = 1$ ist trivial. Sei im Folgenden $\ord(G) > 1$. Falls $G$ abelsch ist, dann ist die Behauptung klar, siehe \ref{bsp:auflösbare-gruppen}.
+Andernfalls ist
+\[
+1 < \ord(Z(G)) < \ord(G),
+\]
+wobei die Aussage $1 < \ord(Z(G))$ auf Blatt 5 in Aufgabe 1 gezeigt wurde.
+Wegen \ref{bem:zentrum_eigenschaften} ist $Z(G) \trianglelefteq G$.
+Nach Induktionsvoraussetzung sind $Z(G)$ und $G / Z(G)$ auflösbar. Aus \ref{bem:aufloesbarkeit_lift} ergibt sich die Auflösbarkeit von $G$. Der Rest der Behauptung folgt aus \ref{satz:verfeinerung_normalreihe}.
+\end{proof}
+
+
 \end{document}
 
