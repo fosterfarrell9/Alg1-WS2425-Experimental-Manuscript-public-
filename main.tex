@@ -7367,11 +7367,36 @@ heißt das \defn{n-te Kreisteilungspolynom}.
 \end{defini}
 
 \begin{bsp}\label{bsp:kreisteilungspolynom_phi4}
-Die vierten Einheitswurzeln in $\QQalg$ sind durch $1,-1,i,-i$ gegeben. Davon sind $i$ und $-i$ primitiv.
+\begin{enumerate}
+\item[(a)] Die vierten Einheitswurzeln in $\QQalg$ sind durch $1,-1,i,-i$ gegeben. Davon sind $i$ und $-i$ primitiv.
 Insbesondere ist $\QQ(\mu_4)=\QQ(i)$ und 
 \[
 \Phi_4 = (X - i)(X + i) = X^2 + 1.
 \]
+\item[(b)] Die primitiven zehnten Einheitswurzeln in $\QQalg$ sind nach \ref{bsp:10te_ew}
+durch 
+\[
+\zeta = e^{2\pi i / 10}, \quad \zeta^3, \quad \zeta^7, \quad \zeta^9.
+\]
+gegeben. Insbesondere ist 
+\[
+\Phi_4=(X-\zeta)(X-\zeta^3)(X-\zeta^7)(X-\zeta^9)
+\]
+Die zehnten Einheitswurzeln in $\QQalg$ sind die Nullstellen des Polynoms
+\[
+X^{10}-1=(X^5-1)(X^5+1).
+\]
+Hierbei sind die Nullstellen von $X^5-1$ genau die fünften Einheitswurzeln.
+Aus
+\[
+X^5+1=(X+1)(X^4-X^3+X^2-X+1)
+\]
+und der Tatsache, dass $-1$ eine zweite Einheitswurzel ist, folgt, dass die primitiven zehnten Einheitswurzeln genau die Nullstellen von $X^4-X^3+X^2-X+1$ sind.
+Folglich ist
+\[
+\Phi_{10}=X^4-X^3+X^2-X+1
+\]
+\end{enumerate}
 \end{bsp}
 
 \begin{bem}\label{bem:eig_kreisteilungspolynom}
