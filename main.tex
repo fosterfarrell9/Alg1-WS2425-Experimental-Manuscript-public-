@@ -4,6 +4,8 @@
 \documentclass[a4paper, twoside, 11pt, ngerman]{report}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+%\usepackage[on,german]{mampf}
+%\setmampfurl{https://mampf.mathi.uni-heidelberg.de}
 \usepackage{amssymb, amsthm, eucal, dsfont, stmaryrd, mathtools, arcs, longtable}
 \usepackage{xpatch}
 \makeatletter
@@ -447,7 +449,7 @@ Zum Schluss zeigen wir, dass jedes Element $a\in M^{\times} $ ein Inverses in $M
 \begin{bsp}\label{bsp:einheitengruppe_weiter}
 \begin{itemize}
     \item[(a)] $ (\NN_0, +)^{\times} = \{ 0 \} $
-    \item[(b)] $ (\ZZ, +)^{\times} = \{ \pm 1 \} $
+    \item[(b)] $ (\ZZ, \cdot)^{\times} = \{ \pm 1 \} $
     \item[(c)] $ (\ZZ, +) $ ist eine abelsche Gruppe. Wenn wir in diesem Kapitel von „der Gruppe $\ZZ$” sprechen, so ist diese gemeint.
     \item[(d)] Ist $ R $ Ring, dann ist $ (M_{n \times n}(R), \cdot)^{\times} = \GL_n(R) $ (\defn{allgemeine lineare Gruppe}).
     \item[(e)] Sei $ M $ eine Menge. Dann heißt
@@ -5482,9 +5484,9 @@ $\Sigma$ ein maximales Element $(M, \tau')$ besitzt. Hierbei ist $M$ ein Zwische
 \begin{denn}
 Wir nehmen an, dass $M\subsetneqq L=K(T)$ gilt. Dann existiert ein Element $\alpha\in T$ mit $\alpha\not\in M$.
 Da $\alpha$ algebraisch über $K$ ist, ist $\alpha$ auch algebraisch über $M$ und es gilt $\mipo_M\alpha\mid\mipo_K\alpha$
-in $M[X]$. Nach Voraussetzung zerfällt $\operatorname{mipo}_K(\alpha)$ über $\Omega$ in Linearfaktoren. 
-Wegen \ref{anm:linfakt_teiler} zerfällt auch $\operatorname{mipo}_M(\alpha)$ über $\Omega$ in Linearfaktoren,
-insbesondere hat $\operatorname{mipo}_M(\alpha)$ eine Nullstelle in $\Omega$. Aus der universellen Eigenschaft des Minimalpolynoms \ref{satz:minimalpolynom_universelle_eigenschaft} folgt die Existenz eines 
+in $M[X]$. Nach Voraussetzung zerfällt $\mipo_K(\alpha)$ über $\Omega$ in Linearfaktoren. 
+Wegen \ref{anm:linfakt_teiler} zerfällt auch $\mipo_M(\alpha)$ über $\Omega$ in Linearfaktoren,
+insbesondere hat $\mipo_M(\alpha)$ eine Nullstelle in $\Omega$. Aus der universellen Eigenschaft des Minimalpolynoms \ref{satz:minimalpolynom_universelle_eigenschaft} folgt die Existenz eines 
 $M$-Algebrenhomomorphismus $\delta \colon M(\alpha) \to \Omega$, insbesondere ist $\delta|_{M}=\tau'$, und $\delta$
 ist ein $K$-Algebrenhomomorphismus. Wir erhalten $(M,\tau')\leq(M(\alpha),\delta)$ und $(M,\tau')\neq(M(\alpha),\delta)$.
 Dies steht im Widerspruch zur Maximalität von $(M,\tau')$.
@@ -6148,7 +6150,7 @@ Sei $K$ ein Körper und $f \in K[X]$ irreduzibel. Dann sind folgende Aussagen ä
 \begin{enumerate}
 \item[(i)] $f$ ist inseparabel.
 \item[(ii)] $f' = 0$.
-\item[(iii)] $\operatorname{char}(K)=p>0$ und es existiert ein $g \in K[X]$ mit $f = g(X^p)$, d.h. $f$ ist von der Form
+\item[(iii)] $\charact(K)=p>0$ und es existiert ein $g \in K[X]$ mit $f = g(X^p)$, d.h. $f$ ist von der Form
 \[
 f = \sum_{k=0}^n a_{pk} X^{p k} \quad \text{ mit } a_i \in K.
 \]
@@ -6182,7 +6184,7 @@ f'=0 & \iff \text{ Für jedes }k\in\{1,\ldots,m\}\text{ ist }k=0\text{ in }K\tex
 
 \begin{bsp}\label{bsp:separabilitaet_über_Q}
 \begin{enumerate}
-\item[(a)] Über $\mathbb{Q}$ ist jedes irreduzible Polynom separabel, da $\operatorname{char}(\mathbb{Q})=0$ ist.
+\item[(a)] Über $\mathbb{Q}$ ist jedes irreduzible Polynom separabel, da $\charact(\mathbb{Q})=0$ ist.
 
 \item[(b)] Ist $p$ eine Primzahl und $f = X^p - t \in \FF_p(t)[X]$, so ist $f$ irreduzibel, da es ein Eisensteinpolynom ist (vgl. \ref{bsp:irreduzibilitaet_polynome}(d)) und inseparabel, da $f'=0$ ist.
 \end{enumerate}
@@ -6784,7 +6786,7 @@ $EF|K$ ist separabel  nach \ref{satz:separabel_eigenschaften}, normal nach \ref{
 \end{anm}
 \end{defini}
 
-\begin{satz}\label{satz:transitivitaet_galois}
+\begin{satz}\label{satz:translationssatz}
 (Translationssatz)  
 Seien $E, F \in \mathcal{Z}(L|K)$, sodass $E|K$ und $F|K$ endlich galoissch sind. Dann gilt:
 \begin{enumerate}
@@ -6810,7 +6812,8 @@ E \ar@{-}[dr]& & F \ar@{-}[dl] \\
 \end{satz}
 
 \begin{proof}
-(a) $\Phi$ ist wohldefiniert, denn $EF|E$ und $F|E\cap F$ sind galoissch nach \ref{anm:galoissch_ueber_zk} und die Einschränkung eines Elements $\sigma\in\Gal(EF|E)$ nach $F$ fixiert $E\cap F$. 
+(a) $\Phi$ ist wohldefiniert, denn $EF|E$ und $F|E\cap F$ sind galoissch nach \ref{anm:galoissch_ueber_zk} und die Einschränkung eines Elements $\sigma\in\Gal(EF|E)$ nach $F$ fixiert $E\cap F$. Zudem ist $\sigma(F)\subseteq F$ wegen \ref{satz:normale_erw_char}
+und damit schließlich $\sigma|_F\in\Gal(F|E\cap F)$.
 $\Phi$ ist injektiv,
 \begin{denn}
 Sei $\sigma \in \ker \Phi$. Dann ist $\sigma|_F = \ident_F$. Wegen $\sigma|_E=\ident_E$ ist 
@@ -7311,11 +7314,11 @@ und $\mu_n\subseteq K(\zeta)$. Die Erweiterung $K(\mu_n)|K$ ist endlich galoissc
 Sei $n \in \NN$ mit $\charact(K) \nmid n$. Dann gilt:
 \begin{itemize}
     \item[(a)] $K(\mu_n)|K$ ist eine endliche abelsche Galoiserweiterung mit $[K(\mu_n) : K] \mid\varphi(n)$.
-    \item[(b)] $\operatorname{Gal}(K(\mu_n)|K)$ operiert treu auf $\mu_n$ durch $\sigma.\zeta =\sigma(\zeta)$, insbesondere erhalten wir einen injektiven Gruppenhomomorphismus
+    \item[(b)] $\Gal(K(\mu_n)|K)$ operiert treu auf $\mu_n$ durch $\sigma.\zeta =\sigma(\zeta)$, insbesondere erhalten wir einen injektiven Gruppenhomomorphismus
     \[
-    \chi \colon \operatorname{Gal}(K(\mu_n) | K) \to \Aut(\mu_n) \cong (\ZZ / n \ZZ)^\times,
+    \chi \colon \Gal(K(\mu_n) | K) \to \Aut(\mu_n) \cong (\ZZ / n \ZZ)^\times,
     \]
-    sodass für jede $n$-te Einheitswurzel $\zeta \in K(\mu_n)$ und jedes $\sigma \in \operatorname{Gal}(K(\mu_n)| K)$ gilt:
+    sodass für jede $n$-te Einheitswurzel $\zeta \in K(\mu_n)$ und jedes $\sigma \in \Gal(K(\mu_n)| K)$ gilt:
     \[
     \sigma(\zeta) = \zeta^{\chi(\sigma)}.
     \]
@@ -7329,7 +7332,7 @@ endlich galoissch ist.
 (b) Die Operation ist treu, denn ist $\sigma \in \Gal(K(\mu_n)| K)$ mit $\sigma(\zeta) = \zeta$ für alle $\zeta \in \mu_n$, dann ist $\sigma = \ident_{K(\mu_n)}$. 
 Aus \ref{anm:gruppenop_treu} erhalten wir einen injektiven Gruppenhomomorphismus
 \[
-\chi \colon \operatorname{Gal}(K(\mu_n) / K) \to S(\mu_n)
+\chi \colon \Gal(K(\mu_n) / K) \to S(\mu_n)
 \]
 mit
 \[
@@ -7409,7 +7412,7 @@ Sei $n \in \NN$. Dann gilt:
 \end{bem}
 
 \begin{proof}
-(a) Sei $\sigma \in \operatorname{Gal}(\QQ(\mu_n) | \QQ)$. Dann ist $\sigma|_{\mu_n}$ ein Gruppenautomorphismus von $\mu_n$. Insbesondere permutiert $\sigma$ die primitiven $n$-ten Einheitswurzeln und fixiert damit alle Koeffizienten von $\Phi_n$. 
+(a) Sei $\sigma \in \Gal(\QQ(\mu_n) | \QQ)$. Dann ist $\sigma|_{\mu_n}$ ein Gruppenautomorphismus von $\mu_n$. Insbesondere permutiert $\sigma$ die primitiven $n$-ten Einheitswurzeln und fixiert damit alle Koeffizienten von $\Phi_n$. 
 Somit hat $\Phi_n$ Koeffizienten im Fixkörper von $\Gal(\QQ(\mu_n)|\QQ)$, also in $\QQ$. 
 
 (b) folgt aus \ref{bem:primitive_nte_EW}.
@@ -7480,7 +7483,7 @@ $f$
 Sei $n \in \NN$. Dann gilt:
 \begin{itemize}
     \item[(a)] $[\QQ(\mu_n) : \QQ] = \varphi(n)$.
-    \item[(b)] Der zyklotomische Charakter \[\chi \colon \operatorname{Gal}(\QQ(\mu_n)|\QQ) \to (\ZZ / n \ZZ)^\times\] aus \ref{satz:zyklotomischer_charakter} ist (für $K = \QQ$) ein Isomorphismus.
+    \item[(b)] Der zyklotomische Charakter \[\chi \colon \Gal(\QQ(\mu_n)|\QQ) \to (\ZZ / n \ZZ)^\times\] aus \ref{satz:zyklotomischer_charakter} ist (für $K = \QQ$) ein Isomorphismus.
 \end{itemize}
 \end{folgerung}
 \begin{proof}
@@ -7679,7 +7682,7 @@ Sei $G$ eine endliche Gruppe und $p$ eine Primzahl. Dann gilt:
 \item[(b)] $G$ ist eine $p$-Gruppe $\iff$ Für alle $g \in G$ existiert ein $r \in \NN_0$ mit $\ord(g) = p^r$.
 \end{itemize}
 \begin{proof}
-(a) "`$\Leftarrow$"': Nach dem Satz von Lagrange gilt $p = \ord(g) \mid \ord(G)$.
+(a) "`$\Leftarrow$"': Nach \ref{bem:ordnung_teilt_ordG} gilt $p = \ord(g) \mid \ord(G)$.
 
 "`$\Rightarrow$"': Es gelte $p \mid \ord(G)$. Aufgrund der Sylowsätze \ref{satz:sylow} existiert eine $p$-Sylowgruppe $S \leq G$ mit $S \neq \{e\}$. Insbesondere existiert ein $s \in S$ mit $s \neq e$.
 Da die Ordnung von $S$ eine $p$-Potenz ist, existiert ein $r\in\NN$ mit $\ord(s) = p^r$. Wir setzen $g := s^{p^{r-1}} \neq 1$, dann ist $\ord(g) = p$.
@@ -7693,7 +7696,7 @@ Da die Ordnung von $S$ eine $p$-Potenz ist, existiert ein $r\in\NN$ mit $\ord(s)
 \begin{bsp}\label{bsp:gruppe-30-elemente}
 Sei $G$ eine Gruppe mit $30$ Elementen. Dann besitzt $G$ einen nichttrivialen Normalteiler,
 \begin{denn}
-Es gilt $\ord(G) = 30 = 2 \cdot 3 \cdot 5$. Für $p \in \{2, 3, 5\}$ gilt $s_p \mid 30$ und $s_p \equiv 1 \pmod{p}$. Somit folgt
+Es gilt $\ord(G) = 30 = 2 \cdot 3 \cdot 5$. Aus den Sylowsätzen erhalten wir, dass für $p \in \{2, 3, 5\}$ jeweils $s_p \equiv 1 \pmod{p}$ gilt, zudem gilt $s_2|15$, $s_3|10$ und $s_5|6$. Somit folgt
 \[
 s_2 \in \{1, 3, 5, 15\}, \quad s_3 \in \{1, 10\}, \quad s_5 \in \{1, 6\}.
 \]
@@ -7971,7 +7974,6 @@ wobei die Aussage $1 < \ord(Z(G))$ auf Blatt 5 in Aufgabe 1 gezeigt wurde.
 Wegen \ref{bem:zentrum_eigenschaften} ist $Z(G) \trianglelefteq G$.
 Nach Induktionsvoraussetzung sind $Z(G)$ und $G / Z(G)$ auflösbar. Aus \ref{bem:aufloesbarkeit_lift} ergibt sich die Auflösbarkeit von $G$. Der Rest der Behauptung folgt aus \ref{satz:verfeinerung_normalreihe}.
 \end{proof}
-
 
 \end{document}
 
