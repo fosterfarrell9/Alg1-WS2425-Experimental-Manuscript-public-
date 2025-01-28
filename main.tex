@@ -7975,5 +7975,656 @@ Wegen \ref{bem:zentrum_eigenschaften} ist $Z(G) \trianglelefteq G$.
 Nach Induktionsvoraussetzung sind $Z(G)$ und $G / Z(G)$ auflösbar. Aus \ref{bem:aufloesbarkeit_lift} ergibt sich die Auflösbarkeit von $G$. Der Rest der Behauptung folgt aus \ref{satz:verfeinerung_normalreihe}.
 \end{proof}
 
+
+\chapter{Fortführung der Galoistheorie}
+\setcounter{section}{16}
+\section{Auflösbarkeit von Gleichungen}
+
+\textbf{Ziel:} Wir wollen zeigen, dass es keine „allgemeine Lösungsformel“ (mit $+, -, \cdot, :, \sqrt{\phantom{x}}$) für Gleichungen der Form 
+\[
+a_n X^n + \dots + a_1 X + a_0 = 0, \quad a_n \neq 0, \, n \geq 5
+\]
+gibt.
+
+Dazu gehen wir grob wie folgt vor:
+\begin{itemize}
+    \item Wir formalisieren das Problem körpertheoretisch und erhalten dabei das Konzept von Polynomen, die durch Radikale auflösbar sind.
+    \item Wir übersetzen das Problem via Galoistheorie in einen gruppentheoretischen Kontext erhalten, dass wir durch Radikale auflösbare Polynome genau als diejenigen Polynome
+    mit auflösbarer Galoisgruppe charakterisieren können.
+    \item Man zeigt (das werden wir hier nicht tun), dass das allgemeine Polynom $n$-ten Grades die Galoisgruppe $S_n$ hat
+    und schließt daraus, dass es für $n \geq 5$ nicht durch Radikale auflösbar ist.
+\end{itemize}
+
+\textbf{Notation:} In diesem Abschnitt sei $K$ stets ein Körper. Wir fixieren einen algebraischen Abschluss $\Omega$ von $K$ und gehen stillschweigend davon aus, dass
+alle betrachteten Erweiterungen innerhalb von $\Omega$ liegen. Im Hinblick auf \ref{bem:realisierung_zerfall_koerper} sind Zerfällungskörper dann eindeutig bestimmt.
+
+\begin{defini}[19.1]
+Sei $L | K$ eine endliche Körpererweiterung und $f \in K[X]$ ein Polynom.
+
+\begin{itemize}
+    \item $L | K$ heißt eine \defn{einfache Radikalerweiterung}, wenn $L$ aus $K$ durch Adjunktion einer Wurzel eines Elementes aus $K$ entsteht, d.h. $L = K(\beta)$, wobei $\beta$ eine Nullstelle von $X^n - \alpha \in K[X]$ ist.
+    \item $L | K$ heißt eine \defn{Radikalerweiterung}, wenn es einen Körperturm
+    \[
+    K = K_0 \subseteq K_1 \subseteq \ldots \subseteq K_n = L
+    \]
+    gibt, so dass $K_{i+1} | K_i$ eine einfache Radikalerweiterung ist für $i = 0, \dots, n-1$.
+    \item $L | K$ heißt \defn{durch Radikale auflösbar}, wenn es eine Radikalerweiterung $E | K$ mit $L \subseteq E$ gibt.
+    \item $f$ heißt \defn{durch Radikale auflösbar}, wenn der Zerfällungskörper $L | K$ von $f$ durch Radikale auflösbar ist.
+\end{itemize}
+\end{defini}
+
+\begin{anm}\label{anm:eig_radikalerw}
+\begin{itemize}
+    \item Häufig schreibt man einfache Radikalerweiterungen kurz als „$L = K(\sqrt[n]{\alpha})$“. Dafür muss eine Nullstelle von $X^n - \alpha$ ausgewählt werden, für verschiedene Nullstellen von $X^n - \alpha$ ergeben sich im Allgemeinen verschiedene, nicht einmal isomorphe Körper.
+    \item Sind $L_1 | K$ und $L_2 | K$ Radikalerweiterungen, so ist auch $L_1 L_2 | K$ eine Radikalerweiterung. 
+    \begin{denn}
+    Es ist $L_1 L_2 = L_1(L_2)$, entsteht also aus $L_1$ durch sukzessive Adjunktion von Wurzeln, d.h. $L_1 L_2 | L_1$ ist eine Radikalerweiterung. Da $L_1|K$ eine Radikalerweiterung ist, ist auch $L_1 L_2 | K$ eine Radikalerweiterung.    
+    \end{denn}
+\end{itemize}
+\end{anm}
+
+\begin{bsp}
+Das Polynom $f = X^3 - 4X - 2 \in \QQ[X]$ ist durch Radikale auflösbar. Ist $L|\QQ$
+der Zerfällungskörper von $f$ in $\QQ^{\text{alg}}$, dann ist $L | \QQ$ durch Radikale auflösbar, aber keine Radikalerweiterung:
+
+Wegen $f(-2) = -2$, $f(-1) = 1$, $f(0) = -2$, $f(3) = 13$ hat $f$ nach dem Zwischenwertsatz drei reelle Nullstellen, somit ist $L\subseteq \RR$. Das Polynom $f$ ist ein $2$-Eisensteinpolynom und deshalb irreduzibel. Man kann zeigen, dass 
+\[
+\Gal(f) \cong S_3.
+\]
+ist.\footnote{Dafür kann man die Diskriminante des Polynoms $f$ heranziehen. Die entsprechende Theorie haben wir in dieser Vorlesung nicht behandelt; für Details siehe etwa 
+Abschnitt 14 in der Algebravorlesung aus dem WS 21/22.} Insbesondere hat $L|\QQ$ einen eindeutig bestimmten Zwischenkörper $K$, der vom Grad zwei über $\QQ$ ist (dieser korrespondiert zur Untergruppe $A_3\leq S_3)$. Man kann zeigen, dass
+\[
+K = \QQ(\sqrt{37})
+\]
+ist. Darüber hinaus gibt es drei Zwischenkörper $E_1$, $E_2$, $E_3$, die jeweils vom Grad $3$ über $\QQ$ und nicht galoissch
+über $\QQ$ sind. Wir erhalten den folgenden 
+Körperturm:
+\[
+\xymatrix{
+    L \ar@{-}[dd]_{A_3\cong\ZZ/3\ZZ}^3 \ar@{-}[drr] \ar@{-}[drrr] \ar@{-}[drrrr] \\
+    &  & E_1 \ar@{-}[ddll] & E_2 \ar@{-}[ddlll] & E_3 \ar@{-}[ddllll]\\
+    K = \QQ(\sqrt{37}) \ar@{-}[d]_{\ZZ / 2\ZZ}^2 &\\
+    \QQ & 
+}
+\]
+$L | \QQ$ ist keine Radikalerweiterung, 
+\begin{denn}
+Wir nehmen an, dass $L | \QQ$ eine Radikalerweiterung ist. 
+Dann ist eine der Erweiterungen $L|\QQ$, $L|K$, $E_1|\QQ$, $E_2|\QQ$, $E_3|\QQ$ eine einfache Radikalerweiterung.
+Wir wählen eine solche aus und schreiben sie in der Form $M|F$. Insbesondere gilt $3\mid [M:F]$. Sei $M=F(\beta)$ für eine Nullstelle $\beta$ eines Polynom $X^n - \alpha \in F[X]$. Wir erhalten
+\[
+\mipo_F(\beta) \mid (X^n - \alpha), \quad 3\mid \deg(\mipo_F(\beta)).
+\]
+Da $L|K$ normal ist, zerfällt $\mipo_F(\beta)$ über $L$ in Linearfaktoren, insbesondere
+enthält $L$ neben $\beta$ noch mindestens zwei weitere Nullstellen von $X^n-\alpha$. Diese sind von der Form
+der Form $\zeta \beta$, $\xi \beta$ für geeignete, von $1$ verschiedene $n$-te Einheitswurzeln $\zeta, \xi$ mit $\zeta \neq \xi$. Damit sind $\zeta,\xi\in L$.
+Allerdings ist $L \subseteq \RR$, und in $\RR$ existieren nur zwei Einheitswurzeln, nämlich $\pm 1$. Dies führt zu einem Widerspruch.
+\end{denn}
+Um zu zeigen, dass $L|\QQ$ durch Radikale auflösbar ist, adjungieren wir eine primitive dritte Einheitswurzel $\zeta_3$. Wir erhalten folgendes Körperdiagramm, wobei wir die $E_i$ diesmal weglassen:
+\[
+\xymatrix{
+    & L(\zeta_3) \ar@{-}[dl]  \ar@{-}[d]\\
+    L \ar@{-}[d] & K(\zeta_3)=\QQ(\zeta_3)(\sqrt{37}) \ar@{-}[dl] \ar@{-}[d] \\
+    K=\QQ(\sqrt{37}) \ar@{-}[d] & \QQ(\zeta_3) \ar@{-}[dl] \\
+    \QQ &
+}
+\]
+Werden später sehen (in \ref{satz:radikalerweiterung}), dass $L(\zeta_3) | K(\zeta_3)$ eine einfache Radikalerweiterung
+ist. Da $K(\zeta_3)|\QQ(\zeta_3)$ und $\QQ(\zeta_3)|\QQ$ beides offensichtlich einfache Radikalerweiterungen sind, ist $L(\zeta_3) | \QQ$ eine Radikalerweiterung. Somit ist $L | \QQ$ durch Radikale auflösbar.
+
+Übrigens: Die Cardano-Formel liefert als Nullstellen von $f$
+\[
+\zeta_3^k \sqrt[3]{-1 - \frac{1}{3} \sqrt{37}} + \zeta_3^{2k} \sqrt[3]{-1 + \frac{1}{3} \sqrt{37}} \quad \text{ für }k=1,2,3.
+\]
+Wie oben erwähnt, sind sie sämtlich reell.
+\end{bsp}
+
+\textbf{Zwischenziel:} Wir wollen zunächst einfache Radikalerweiterungen untersuchen.
+
+\begin{bem}\label{bem:radikalerw_zyklisch}
+Sei $ n \in \NN $ mit $\charact(K) \nmid n$ und $\mu_n \subseteq K$. Sei $\beta \in \Omega$ eine Nullstelle von $ X^n - \alpha \in K[X] $ und $ L = K(\beta) $ (insbesondere ist $ L | K $ eine einfache Radikalerweiterung). 
+Dann ist $ L | K $ eine zyklische Galoiserweiterung mit $[L : K] \mid n$.
+\end{bem}
+\begin{proof}
+Sei $\zeta_n \in K$ eine primitive $n$-te Einheitswurzel. Wir
+setzen $f := X^n - \alpha$. Dann sind die Nullstellen von $f$ durch $\beta, \zeta_n \beta, \dots, \zeta_n^{n-1} \beta$ gegeben. Somit zerfällt $f$ über $L$ in $n$ verschiedene Linearfaktoren und $L = K(\beta)$ ist der Zerfällungskörper von $f$.
+Da $f$ wegen \ref{bem:separabilitaet_einheitswurzeln} separabel ist, ist $L|K$
+nach \ref{satz:char_endl_galoissch} galoissch.
+Wir setzen
+\[
+\varphi \colon \Gal(L | K) \to \mu_n, \quad \sigma \mapsto \frac{\sigma(\beta)}{\beta}.
+\]
+Die Abbildung $\varphi$ ist wohldefiniert und ein injektiver Gruppenhomomorphismus.
+Insbesondere ist 
+\[\Gal(L | K) \cong \image \varphi \leq \mu_n \overset{\ref{bem:struktur_einheitswurzeln}}{\cong} \ZZ / n \ZZ,\]
+somit ist $\Gal(L | K)$ nach \ref{satz:zykl_gruppen_quot} zyklisch. Es gilt außerdem $[L : K] = \ord(\Gal(L | K))) \mid n$.
+\end{proof}
+
+Mit etwas mehr Aufwand kann man zeigen, dass auch die Umkehrung von \ref{bem:radikalerw_zyklisch} gilt (für Details siehe die Algebra 1-Vorlesung aus
+dem WS 21/22):
+\begin{satz}\label{satz:radikalerweiterung}
+Sei $n \in \NN$ mit $\charact K \nmid n$ und $\mu_n \subseteq K$. Sei $L | K$ eine zyklische Galoiserweiterung mit $[L : K] = n$.
+Dann existiert ein $\alpha \in K$, sodass $L$ durch Adjunktion einer Nullstelle von $X^n - \alpha \in K[X]$ entsteht, insbesondere ist $L | K$ eine einfache Radikalerweiterung.
+\end{satz}
+
+\begin{satz}\label{satz:radikal_aufloesbar}
+Sei $f \in K[X]$ separabel mit $\charact K \nmid \ord(\Gal(f))$ und sei $\Gal(f)$ auflösbar.
+Dann ist $f$ durch Radikale auflösbar.
+\end{satz}
+\begin{proof}
+Es sei $L|K$ der Zerfällungskörper von $f$ in $\Omega$. Nach \ref{satz:char_endl_galoissch} ist $L|K$ endlich galoissch. Wir setzen 
+\[
+n := \ord(\Gal(f)), \quad M := K(\mu_n).
+\]
+Insbesondere enthält $M$ nach \ref{bem:struktur_einheitswurzeln} eine primitive $n$-te Einheitswurzel $\zeta_n$ und es ist $M=K(\zeta_n)$. Wir werden zeigen, dass $L M|K$ ist eine Radikalerweiterung ist. Daraus folgt dann, dass $L|K$ durch Radikale auflösbar ist.
+Wir betrachten das folgende Körperdiagramm:
+\[
+\xymatrix{
+& LM \ar@{-}[dl] \ar@{-}[dr] & \\
+M = K(\zeta_n) \ar@{-}[dr] \ar@{-}[ddr]& & L \ar@{-}[dl] \ar@{-}[ddl]\\
+& L \cap M \ar@{-}[d] & \\
+& K &
+}
+\]
+Offenbar ist $M|K$ eine einfache Radikalerweiterung. Nach dem Translationssatz \ref{satz:translationssatz} ist $LM|M$ endlich galoissch mit
+\[
+\Gal(LM|M) \cong \Gal(L|L \cap M) \leq \Gal(L|K) = \Gal(f),
+\]
+Da $\Gal(f)$ nach Voraussetzung auflösbar ist, ist wegen \ref{bem:auflösbar_untergr} damit auch $\Gal(LM|M)$ auflösbar. Aufgrund von \ref{satz:verfeinerung_normalreihe} existiert eine Normalreihe
+\[
+\Gal(LM|M) = G_0 \supseteq G_1 \supseteq G_2 \supseteq \ldots \supseteq G_s = \{\operatorname{id}\}
+\]
+mit $G_i / G_{i+1}$ zyklisch für $i = 1, \dots, s-1$.
+Nach dem Hauptsatz der Galoistheorie \ref{satz:hauptsatz_galoistheorie} existiert ein Körperturm
+\[
+M = M_0 \subseteq M_1 \subseteq \dots \subseteq M_{s-1} \subseteq M_s = LM,
+\]
+
+wobei $LM|M_i$ jeweils galoissch mit $\Gal(LM|M_i) = G_i$ für $i = 1, \dots, s$ ist. 
+Außerdem ist $M_{i+1}|M_i$ jeweils galoissch wegen $G_{i+1} \trianglelefteq G_i$.
+Es ist
+\[
+\Gal(M_{i+1}|M_i) \cong G_i / G_{i+1} 
+\]
+und somit zyklisch der Ordnung \[r_i := (G_i : G_{i+1}) = [M_{i+1} : M_i].\]
+Aufgrund des Gradsatzes \ref{satz:gradsatz} gilt
+\[
+r_i \mid [LM : M]\mid [L : K] = n.
+\]
+Wegen $\mu_n \subseteq M$ ist damit auch $\mu_{r_i} \subseteq M \subseteq M_i$.
+Aus \ref{satz:radikalerweiterung} erhalten wir, dass jeweils die zyklische Erweiterung $M_{i+1}|M_i$ eine einfache Radikalerweiterung für $i = 0, 1, \dots, s-1$ ist.
+Daraus ergibt sich, dass $LM|M$ eine Radikalerweiterung ist. Folglich ist auch $LM|K$ eine Radikalerweiterung.
+\end{proof}
+\begin{anm}
+\begin{itemize}
+\item Satz \ref{satz:radikal_aufloesbar} geht auf Galois zurück, wurde von Abel aber bereits in Charakteristik Null für Polynome mit abelscher Galoisgruppe bewiesen.
+\item Sei $\charact K \neq 2, 3$ und $f \in K[X]$ mit $n = \deg(f) \leq 4$. 
+Aus Satz \ref{satz:radikal_aufloesbar} ergibt sich, dass $f$ durch Radikale auflösbar ist, denn $\Gal(f)$ ist aufgrund von \ref{folg:galoisgruppe_in_sn} isomorph zu einer Untergruppe von $S_n$ und $S_n$ ist für $n \leq 4$ wegen \ref{bsp:auflösbare-gruppen} auflösbar. 
+\end{itemize}
+\end{anm}
+
+\begin{satz}\label{satz:radikalaufl_gal_aufl}
+Sei $L|K$ eine durch Radikale auflösbare Körpererweiterung und $N|L|K$ die normale Hülle von $L|K$ in $\Omega$. Dann ist $\operatorname{Aut}_K(N)$ auflösbar.
+\end{satz}
+
+\begin{proof}
+Wir führen den Beweis hier nur für $\charact K = 0$, für den allgemeinen Fall siehe z.\,B.\ das Buch von Karpfinger/Meyberg. Insbesondere ist $N|K$ galoissch und es ist die Auflösbarkeit von $\Gal(N|K)$ zu zeigen.
+
+\textbf{Schritt 1:} Nach Voraussetzung ist $L|K$ durch Radikale auflösbar. Somit existiert eine Radikalerweiterung $E|K$ mit $L \subseteq E$. Sei $M|E|K$ die normale Hülle von $E|K$ in $\Omega$. Es ist $M|K$ eine galoissche Radikalerweiterung,
+\begin{denn}
+$M|K$ ist normal, und da $\charact(K)=0$ ist, ist $M|K$ galoissch.
+Aufgrund des Satzes vom primitiven Element \ref{satz:char_endl_separabel} existiert ein Element $\alpha \in E$ mit $E = K(\alpha)$. Seien $\alpha = \alpha_1, \alpha_2, \ldots, \alpha_m$ die Nullstellen von $\mipo_K \alpha$ in $\Omega$. Aus \ref{bem:normale_huelle}
+ergibt sich $M = K(\alpha_1, \ldots, \alpha_m)$. Sei $i\in\{1,\ldots,m\}$. Wegen \ref{folg:transitivity_on_roots} existiert ein $\sigma \in \Gal(M|K)$ mit $\sigma(\alpha_i) = \alpha$, dies induziert einen $K$-Algebrenisomorphismus $K(\alpha_i) \cong K(\alpha) = E$.
+Da $E|K$ eine Radikalerweiterung ist, ist auch $K(\alpha_i)|K$ eine Radikalerweiterung. Aufgrund von \ref{anm:eig_radikalerw} ist daher auch $M = K(\alpha_1, \ldots, \alpha_n)|K$ eine Radikalerweiterung.
+\end{denn}
+\textbf{Schritt 2:} Aus $L \subseteq E$ erhalten wir mit \ref{bem:normale_huelle} auch $N \subseteq M$.
+Aus dem Hauptsatz der Galoistheorie folgt, dass der Einschränkungshomomorphismus
+\[
+\Gal(M|K) \to \Gal(N|K), \quad \tau \mapsto \tau|_N
+\]
+surjektiv ist. Ist $\Gal(M|K)$ auflösbar, so ist nach \ref{bem:auflösbar_untergr} folglich auch $\Gal(N|K)$ auflösbar.
+
+\textbf{Schritt 3:} Aufgrund der Schritte 1 und 2 können wir ohne Einschränkung annehmen, dass $L|K$ eine galoissche Radikalerweiterung ist.
+Dann existiert ein Körperturm
+\[
+K = K_0 \subseteq K_1 \subseteq \ldots \subseteq K_r = L 
+\]
+mit
+\[
+K_i = K_{i-1}(\alpha_i), \quad \alpha^{n_i}\in K_{i-1} \text{ für ein geeignetes } n_i\in\NN.
+\]
+für $i=1,\ldots,n$.
+Wir setzen \[
+n := n_1 \cdot \ldots \cdot n_r.
+\]
+Es sei $\zeta \in \Omega$ eine primitive $n$-te Einheitswurzel. Dann ist $L(\zeta) = L K(\zeta)|K$ endlich galoissch als Kompositum endlicher Galoiserweiterungen und folglich ist auch $L(\zeta)|K(\zeta)$ endlich galoissch. 
+
+\textbf{Schritt 4:} Ist $\Gal(L(\zeta)|K(\zeta))$ auflösbar, so ist auch $\Gal(L|K)$ auflösbar,
+\begin{denn}
+Nach dem Hauptsatz der Galoistheorie ist
+\[
+\Gal(K(\zeta)|K) \cong \Gal(L(\zeta)|K) / \Gal(L(\zeta)|K(\zeta))
+\]
+Hierbei ist $\Gal(K(\zeta)|K)$ abelsch nach \ref{satz:zyklotomischer_charakter} und daher auflösbar nach \ref{bsp:auflösbare-gruppen}. Aus der Auflösbarkeit von $\Gal(L(\zeta)|K(\zeta))$ folgt daher mit \ref{bem:aufloesbarkeit_lift} die Auflösbarkeit von $\Gal(L(\zeta)|K)$. Wegen
+\[
+\Gal(L|K) \cong \Gal(L(\zeta)|K) / \Gal(L(\zeta)|L)
+\]
+ergibt sich aus \ref{bem:aufloesbarkeit_lift} die Auflösbarkeit von $\Gal(L(\zeta)|L)$.
+\end{denn}
+
+\textbf{Schritt 5:} Aufgrund von Schritt 4 können wir ohne Einschränkung $\zeta \in K$
+annehmen und den Körperturm 
+\[
+K = K_0 \subseteq K_1 \subseteq \ldots \subseteq K_r = L 
+\]
+aus Schritt 3 betrachten. Hierbei sind die Erweiterungen $K_i|K_{i-1}$ nun aufgrund von 
+\ref{satz:radikalerweiterung} allesamt zyklische Galoiserweiterungen. Zu dem Körperturm korrespondiert nach dem Hauptsatz der Galoistheorie eine absteigende Kette  
+\[
+G_0 = \Gal(L|K) \supseteq G_1 = \Gal(L|K_1) \supseteq \ldots \supseteq G_{r-1} = \Gal(L|K_{r-1}) \supseteq G_r = \{\operatorname{id}\}.
+\]
+von Untergruppen von $G$. Hierbei ist jeweils $G_i \trianglelefteq G_{i-1}$ und $G_{i-1}/G_i$ zyklisch. Somit ist $\Gal(L|K)$ auflösbar. 
+\end{proof}
+
+\begin{folgerung}\label{folg:pol_radaufl_galaufl}
+Sei $f \in K[X]$ separabel und durch Radikale auflösbar. Dann ist $\Gal(f)$ auflösbar.
+\end{folgerung}
+
+\begin{proof}
+Sei $N|K$ der Zerfällungskörper von $f$. Da $f$ durch Radikale auflösbar ist, ist
+$N|K$ durch Radikale auflösbar. Da $f$ separabel ist, ist $N|K$ galoissch.
+Aufgrund von \ref{satz:radikalaufl_gal_aufl} ist daher $\Gal(f) = \Gal(N|K)$
+auflösbar.
+\end{proof}
+
+\begin{folgerung}
+Sei $\charact(K) = 0$ und $f \in K[X]$ separabel. Dann sind äquivalent:
+\begin{itemize}
+    \item[(i)] $f$ ist durch Radikale auflösbar.
+    \item[(ii)] $\Gal(f)$ ist auflösbar.
+\end{itemize}
+\end{folgerung}
+
+\begin{proof}
+"`(i)$\Rightarrow$(ii)"' folgt aus \ref{satz:radikalaufl_gal_aufl}.
+
+"`(ii)$\Rightarrow$(i)"' folgt aus \ref{satz:radikal_aufloesbar}.
+\end{proof}
+
+\begin{bsp}
+Sei $f = X^5 - 4X + 2 \in \QQ[X]$. Dann ist $\Gal(f) \cong S_5$ (siehe Worked Example
+in MaMpf). Insbesondere ist $f$ nicht durch Radikale auflösbar.
+\end{bsp}
+
+Unser Ziel ist es jedoch zu zeigen, dass es keine "`allgemeine Lösungsformel"'
+ab dem Grad $\geq 5$ gibt, und nicht nur, wie im obigen Beispiel, dass es einzelne Polynome gibt, die nicht durch Radikale auflösbar sind. Dies kann man dadurch formalisieren, dass man 
+das sogenannte allgemeine Polynom $n$-ten Grades einführt.
+
+\begin{defini}
+Seien $T_1, \dots, T_n$ Variablen.
+Das Polynom
+\[
+p(X) = X^n + T_1 X^{n-1} + \dots + T_{n-1} X + T_n \in K(T_1, \dots, T_n)[X]
+\]
+heißt das \defn{allgemeine Polynom $n$-ten Grades} über $K$.
+\end{defini}
+
+Gäbe es eine "`allgemeine Lösungsformel"' für den Grad $n$, so wäre das allgemeine
+Polynom $n$-ten Grades durch Radikale auflösbar. Es gilt jedoch:
+
+\begin{satz}
+Seien $T_1, \dots, T_n$ Variablen. Dann gilt:
+\begin{itemize}
+    \item[(a)] Das allgemeine Polynom $n$-ten Grades $p(X) \in K(T_1, \dots, T_n)[X]$ ist irreduzibel und separabel.
+    \item[(b)] $\Gal(p(X)) \cong S_n$.
+\end{itemize}
+\end{satz}
+
+Diese Aussage zeigen wir hier nicht; siehe etwa die Algebravorlesung aus dem WS 2021/22 für einen Beweis. Aus \ref{folg:pol_radaufl_galaufl} und der in \ref{satz:sn_nicht_aufl} bewiesenen Aussage, dass $S_n$ für $n\geq 5$ nicht auflösbar ist, erhalten wir:
+
+\begin{folgerung}[Satz von Abel-Ruffini]
+Das allgemeine Polynom $n$-ten Grades über $K$ ist für $n \geq 5$ nicht durch Radikale auflösbar.
+\end{folgerung}
+
+\section{Konstruktionen mit Zirkel und Lineal}
+Konstruktionen mit Zirkel und Lineal finden klassischerweise im $\RR^2$ statt, was wir im Folgenden mit $\CC$ identifizieren.
+\begin{defini}
+Sei $z \in \CC$, $M \subseteq \CC$. Dann heißt $z$ \defn{mit Zirkel und Lineal aus $M$ konstruierbar}, wenn sich $M$ durch endlich viele elementare Konstruktionsschritte (EKS) zu einer Menge $M'$ mit $z \in M'$ vergrößern lässt. Dabei sind folgende EKS zulässig:
+\begin{enumerate}
+    \item[(I)] Sind $z_1, z_2, z_3, z_4 \in M$ mit $z_1 \neq z_2$ und $z_3 \neq z_4$, derart dass die Geraden $\overleftrightarrow{z_1z_2}$ und $\overleftrightarrow{z_3z_4}$ nicht parallel sind, so füge zu $M$ den Schnittpunkt dieser beiden Geraden hinzu.
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+
+  %--- Draw two crossing lines
+  % Line 1: slope = 1/2
+  \draw[thick] (-3,-1.5) -- (3,1.5);
+
+  % Line 2: slope = -1
+  \draw[thick] (-1.5,1.5) -- (1.5,-1.5);
+
+  %--- Red dot at intersection: the origin (0,0)
+  \fill[red] (0,0) circle (4pt);
+
+  %--- Place black points on the lines so they're non-equidistant from (0,0)
+
+  % On line 1: y = (1/2)*x
+  \fill (-1,-0.5)   circle (2pt) node[left]        {$z_1$};  % x=-1 => y=-0.5
+  \fill (1.6,0.8)   circle (2pt) node[above right] {$z_2$};  % x=1.6 => y=0.8
+
+  % On line 2: y = -1*x
+  \fill (-0.6,0.6)  circle (2pt) node[above]       {$z_3$};  % x=-0.6 => y=0.6
+  \fill (1,-1)      circle (2pt) node[right]       {$z_4$};  % x=1 => y=-1
+
+\end{tikzpicture}
+\end{center}
+\item[(II)] Sind $z_1, z_2, z_3, z_4, z_5 \in M$ mit $z_1 \neq z_2$ und $z_4 \neq z_5$, 
+so füge zu $M$ die Schnittpunkte zwischen der Geraden $\overleftrightarrow{z_1 z_2}$ 
+und dem Kreis um $z_3$ mit Radius $\lvert z_4 - z_5 \rvert$ hinzu.
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+
+  % 1) Horizontal line
+  \draw[thick] (-4,0) -- (4,0);
+
+  % 2) Black points z1, z2 on the line
+  \fill (-3,0) circle (2pt) node[below] {$z_1$};
+  \fill ( 3,0) circle (2pt) node[below] {$z_2$};
+
+  % 3) Circle center z3 (above the line)
+  \coordinate (Z3) at (0,2);
+  \fill (Z3) circle (2pt) node[above] {$z_3$};
+
+  % 4) Draw circle of radius 3 around z3
+  \draw[thick] (Z3) circle (3);
+
+  % 5) Intersection points (circle with y=0) in red:
+  %    (x-0)^2 + (0-2)^2 = 3^2 => x^2+4=9 => x^2=5 => x = ±sqrt(5) ~ ±2.236
+  \coordinate (I1) at (-2.236, 0);
+  \coordinate (I2) at ( 2.236, 0);
+  \coordinate (C1) at (3,2);
+
+  \fill[red] (I1) circle (4pt);
+  \fill[red] (I2) circle (4pt);
+
+  % 6) Points z4, z5 so that dist(z4,z5)=3
+  %    and neither is on the horizontal line y=0.
+  \coordinate (Z4) at (4.5, 1.5);
+  \coordinate (Z5) at (6.9, 3.3);
+
+  \fill (Z4) circle (2pt) node[below left]  {$z_4$};
+  \fill (Z5) circle (2pt) node[above right] {$z_5$};
+
+  % 7) Draw a blue line segment from z3 to the right red intersection (I2)
+  \draw[blue, thick] (Z3) -- (C1);
+
+  % 8) Draw a blue line segment from z4 to z5
+  \draw[blue, thick] (Z4) -- (Z5);  
+
+\end{tikzpicture}
+\end{center}
+\item[(III)] Sind $z_1, \ldots, z_6 \in M$ mit $z_2 \neq z_3$, $z_5 \neq z_6$ und $z_1 \neq z_4$, so füge zu $M$ die Schnittpunkte des Kreises um $z_1$ mit Radius $\lvert z_2 - z_3 \rvert$ und des Kreises um $z_4$ mit Radius $\lvert z_5 - z_6 \rvert$ hinzu.
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+
+  %--- Circle 1 (center z1, radius=2)
+  \coordinate (Z1) at (0,0);
+  \fill (Z1) circle(2pt) node[below left] {$z_1$};
+  \draw[thick] (Z1) circle (2);
+
+  %--- Circle 2 (center z4, radius=3)
+  \coordinate (Z4) at (4,0);
+  \fill (Z4) circle(2pt) node[below right] {$z_4$};
+  \draw[thick] (Z4) circle (3);
+
+  %-----------------------------------------------------
+  % Intersection points of the two circles in red
+  %   Circle 1: x^2 + y^2 = 4
+  %   Circle 2: (x - 4)^2 + y^2 = 9
+  %   => Intersection points are approximately (1.375, ±1.4524)
+  %-----------------------------------------------------
+  \coordinate (I1) at (1.375,  1.4524);
+  \coordinate (I2) at (1.375, -1.4524);
+  \coordinate (C1) at (-2,0);
+    \coordinate (C2) at (7,0);
+  \fill[red] (I1) circle(4pt);
+  \fill[red] (I2) circle(4pt);
+
+  %-----------------------------------------------------
+  % Place additional points z2, z3 (distance=2) 
+  % and z5, z6 (distance=3) to the RIGHT of both circles.
+  % We pick vectors that yield different slopes so that 
+  % the segments are not parallel.
+  %-----------------------------------------------------
+
+  %--- z2, z3, distance = 2 (radius of left circle)
+  %    z2 = (8,1); vector = (1.2,1.6) => length sqrt(1.2^2 + 1.6^2)=2
+  \coordinate (Z2) at (8,1);
+  \fill (Z2) circle (2pt) node[below left] {$z_2$};
+
+  \coordinate (Z3) at (9.2,2.6); % = (9.2,2.6)
+  \fill (Z3) circle (2pt) node[above right] {$z_3$};
+
+  %--- z5, z6, distance = 3 (radius of right circle)
+  %    z5 = (8,-1); vector = (2.4,1.8) => length=3
+  \coordinate (Z5) at (8,-1);
+  \fill (Z5) circle (2pt) node[below left] {$z_5$};
+
+  \coordinate (Z6) at (10.4,0.8); % = (10.4,0.8)
+  \fill (Z6) circle (2pt) node[above right] {$z_6$};
+
+  % Draw line segments
+  \draw[blue, thick] (Z1) -- (C1);
+  \draw[blue, thick] (Z2) -- (Z3);
+  \draw[darkgreen, thick] (Z4) -- (C2);
+  \draw[darkgreen, thick] (Z5) -- (Z6);
+\end{tikzpicture}
+\end{center}
+\end{enumerate}
+Wir setzen
+\[
+\frakK(M):=\{ z\in \CC \mid z \text{ lässt sich aus } M \text{ mit Zirkel und Lineal konstruieren }\}
+\]
+Die Zahl $z$ heißt \defn{mit Zirkel und Lineal konstruierbar}, wenn
+$z\in\frakK(\{0,1\})$ ist.
+\end{defini}
+
+\begin{bem}\label{bem:eks_gradzwei}
+Sei $M \subseteq \CC$ ein Teilkörper mit $i \in M$ und $\sigma(M) = M$, wobei $\sigma$ die komplexe Konjugation bezeichne, und sei $z \in \CC$. 
+Dann gilt: Entsteht $z$ aus $M$ durch einen EKS von Typ (I), (II) oder (III), so ist 
+\[
+[M(z) : M] \leq 2.
+\]
+\end{bem}
+\begin{proof}
+Dies kann man mit analytischer Geometrie nachrechnen, siehe das Buch von Bosch.
+\end{proof}
+
+\begin{satz}\label{satz:konstr_eukl_kp}
+Sei $M \subseteq \CC$ eine Teilmenge mit $0,1 \in M$.
+Dann ist $\frakK(M)$ ein Körper, der unter Bildung von Quadratwurzeln abgeschlossen ist, 
+d.h. ist $z \in \frakK(M)$, so ist auch $\pm \sqrt{z} \in \frakK(M)$.
+\end{satz}
+
+\begin{proof} Wir skizzieren im Folgenden die grundlegenden Beweisideen.
+\begin{itemize}
+\item Abgeschlossenheit bzgl. Addition und Substraktion ergeben sich daraus, dass
+Vektoraddition und -subtraktion mit über EKS durchführbar sind.
+\item Abgeschlossenheit bzgl. Multiplikation: Seien $z_1 = |z_1| e^{i \varphi_1}$, $z_2 = |z_2| e^{i \varphi_2}$. Dann ist 
+\[
+z_1 z_2 = |z_1| |z_2| e^{i (\varphi_1 + \varphi_2)}.
+\]
+Winkeladdition ist mit EKS durchführbar, zur Multiplikation der Beträge verwendet man den Strahlensatz.
+\item Abgeschlossenheit bzgl. multiplikativer Inversenbildung: Sei $z = |z| e^{i \varphi} \neq 0$. Dann ist 
+\[
+z^{-1} = |z|^{-1} e^{-i \varphi}.
+\]
+"`Winkelnegation"' ist mit EKS durchführbar, zur Inversion des Betrages verwendet man den Strahlensatz.
+\item Abgeschlossenheit bzgl. Wurzelziehen: Im Folgenden sei $z\neq0$. Wir setzen $P:=-|z|$.
+Wir errichten den Thaleskreis über der Strecke $\overline{P1}$, schneiden diesen mit dem Lot von $0$ auf $\overleftrightarrow{01}$ und erhalte dadurch einen Punkt $Q$. 
+Der Höhensatz liefert: 
+\[
+|Q|^2 = |z| \cdot 1,
+\]
+also ist $|Q| = \sqrt{|z|}$ und damit $\sqrt{|z|} \in \frakK(M)$.
+Ist $z = |z| e^{i \varphi}$, dann ist 
+\[
+\pm \sqrt{z} = \pm \sqrt{|z|} e^{i \frac{\varphi}{2}}.
+\]
+Winkelhalbierung ist mit EKS durchführbar, somit ist $\pm \sqrt{z} \in \frakK(M)$.
+\end{itemize}
+\end{proof}
+
+\begin{satz}\label{satz:char_konstruierbarkeit}
+Sei $z \in \CC$. Dann sind äquivalent:
+\begin{enumerate}[label=(\roman*)]
+    \item $z \in \frakK(\{0,1\})$.
+    \item Es existiert ein Körperturm
+    \[
+    \QQ = L_0 \subseteq L_1 \subseteq \dots \subseteq L_n \subseteq \CC
+    \]
+    mit $z \in L_n$ und $[L_i : L_{i-1}] = 2$ für $i = 1, \dots, n$.
+    \item Es existiert eine Galoiserweiterung $L|\QQ$ mit $z \in L$ und $[L : \QQ] = 2^r$ für ein $r \in \NN_0$.
+\end{enumerate}
+
+In diesem Fall ist $[\QQ(z) : \QQ] = 2^r$ für ein $r \in \NN_0$. Insbesondere ist
+$\frakK(\{0,1\}) | \QQ$ algebraisch.
+\end{satz}
+
+\begin{proof}
+Wir skizzieren im Folgenden die grundlegenden Beweisideen.
+
+"`(i)$\Rightarrow$(ii)"' folgt induktiv aus \ref{bem:eks_gradzwei}.
+
+"`(ii)$\Rightarrow$(i)"': Wegen $[L_i : L_{i-1}] = 2$ ist $L_i = L_{i-1}(\sqrt{z_i})$ für ein $z_i \in L_{i-1}$ für $i = 1, \dots, n$. Es ist $\frakK(\{0,1\})$ nach \ref{satz:konstr_eukl_kp} ein Körper, der unter Quadratwurzelbildung abgeschlossen ist.
+Wir erhalten $L_n \subseteq \frakK(\{0,1\})$ und deshalb $z \in \frakK(\{0,1\})$.
+
+"`(ii)$\Rightarrow$(iii)"': Es sei $L$ die normale Hülle von $L_n|\QQ$ in $\QQalg$. 
+Dann ist $L|\QQ$ eine Galoiserweiterung mit $z \in L$.
+Ist $\Hom_K(L_n,\QQalg)=\{\sigma_1,\ldots,\sigma_r\}$, so wird $L$ über $K$ durch $\sigma_i(L_n)$, $i=1,\ldots,r$ erzeugt. Da $L_n$ durch sukzessive Adjunktion von Quadratwurzeln entsteht, gilt dies auch für die Körper $\sigma_i(L_n)$ und damit für $L$.    
+Somit ist $[L:\QQ]$ eine Zweierpotenz.
+
+"`(ii)$\Rightarrow$(iii)"': Wegen (iii) ist $G := \Gal(L|\QQ)$ eine $2$-Gruppe. Nach 
+\ref{satz:p_gruppen_aufloesbar} ist $G$ auflösbar und es existiert eine Normalreihe
+\[
+G = G_0 \supseteq G_1 \supseteq \dots \supseteq G_n = \{\ident\}
+\]
+mit $G_i / G_{i+1} \cong \ZZ / 2 \ZZ$ für $i = 0, \dots, n-1$.
+Aus dem Hauptsatz der Galoistheorie erhalten wir einen  Körperturm 
+\[
+\QQ = L_0 \subseteq L_1 \subseteq \dots \subseteq L_n = L,
+\]
+mit $[L_i : L_{i-1}] = 2$ für $i = 1, \dots, n$.
+\end{proof}
+
+\begin{anm}
+Aus $[\QQ(z) : \QQ] = 2^r$ für ein $r \in \NN$ folgt im Allgemeinen nicht, dass $z \in \frakK(\{0,1\})$ ist.
+\end{anm}
+
+\begin{folgerung}\label{folg:n_eck_konstr}
+Sei $n \in \NN$ mit $n \geq 3$. Dann sind äquivalent:
+\begin{enumerate}[label=(\roman*)]
+    \item $e^{2\pi i / n} \in \frakK(\{0,1\})$, d.h. das reguläre $n$-Eck ist mit Zirkel und Lineal konstruierbar.
+    \item $\varphi(n) = 2^r$ für ein $r \in \NN_0$.
+\end{enumerate}
+\end{folgerung}
+
+\begin{proof}
+Nach \ref{satz:zyklotomischer_charakter} ist $\QQ(e^{2\pi i / n}) | \QQ$ endlich galoissch.
+Nach \ref{satz:char_konstruierbarkeit} gilt: 
+\[
+e^{2\pi i / n} \in \frakK(\{0,1\}) \iff [\QQ(e^{2\pi i / n}) : \QQ] = 2^r \text{ für ein } r \in \NN_0 \overset{\ref{folgerung:galgruppe_kreisteilungskp}}{\iff} \varphi(n)=2^r \text{ für ein } r \in \NN_0.
+\]
+\end{proof}
+
+\begin{bsp}
+\begin{enumerate}
+\item[(a)] Wegen $\varphi(7) = 6 $ ist ein regelmäßiges $7$-Eck nicht mit Zirkel und Lineal konstruierbar.
+\item[(b)] Wegen $\varphi(17) = 16 = 2^4 $ ist ein regelmäßiges $17$-Eck mit Zirkel und Lineal konstruierbar.
+\end{enumerate}
+\end{bsp}
+
+\begin{defini}
+Sei $p$ eine Primzahl. $p$ heißt eine \defn{Fermat-Primzahl}, falls es ein $r\in\NN_0$ mit
+\[
+p = 2^{(2^r)} + 1 =: F_r.
+\]
+gibt.
+\end{defini}
+
+\begin{anm}
+Die einzigen bisher bekannten Fermat-Primzahlen sind
+\[
+F_0 = 3, \; F_1 = 5, \; F_2 = 17, \; F_3 = 257, \; F_4 = 65537.
+\]
+\end{anm}
+
+\begin{satz}
+Sei $n \in \NN$ mit $n \geq 3$. Dann sind die folgenden Aussagen äquivalent:
+\begin{enumerate}
+    \item[(i)] Das regelmäßige $n$-Eck ist mit Zirkel und Lineal konstruierbar.
+    \item[(ii)] Es existieren paarweise verschiedene Fermat-Primzahlen $p_1, \dots, p_s$ sowie $m \in \NN_0$ mit
+    \[
+    n = 2^m p_1 \cdot\ldots\cdot p_s.
+    \]
+\end{enumerate}
+\end{satz}
+
+\begin{proof}
+"`(i)$\Rightarrow$(ii)"': Sei $n = 2^m p_1^{e_1} \cdot\ldots\cdot p_s^{e_s}$ mit paarweise verschiedenen ungeraden Primzahlen $p_1,\ldots,p_s$, $e_1,\ldots,e_s\in\NN$, $m\in\NN_0$.
+Dann ist
+\[
+\varphi(n) \overset{\ref{bem:euler_phi}}{=} \varphi(2^m) \varphi(p_1^{e_1}) \cdots \varphi(p_s^{e_s}) 
+= \varphi(2^m)(p_1^{e_1-1})(p_1-1) \cdot\ldots\cdot (p_s^{e_s-1}(p_s-1)).
+\]
+Wegen \ref{folg:n_eck_konstr} ist $\varphi(n) = 2^r$ für ein $r \in \NN_0$.
+Wir erhalten $e_i = 1$ für alle $i = 1, \dots, s$. Außerdem existiert für jedes $i=1,\ldots,s$ ein $k_i \in \NN_0$ mit $p_i - 1 = 2^{k_i}$, also $p_i = 2^{k_i} + 1$. Wir schreiben $k_i = 2^{u_i} v_i$ mit $2 \nmid v_i$. 
+Wegen
+\[
+2^{(2^{u_i})}\equiv-1\pmod{2^{(2^{u_i})}+1}
+\]
+ist
+\[
+2^{(2^{u_i}v_i)}=(2^{(2^{u_i})})^{v_i}\equiv(-1)^{v_i}= -1\pmod{2^{(2^{u_i})}+1}.
+\]
+Wäre $v_i > 1$, so würde
+\[
+p_i = 2^{(2^{u_i} v_i)} + 1 \equiv 0 \pmod{2^{(2^{u_i})}+1},
+\]
+folgen, was ein Widerspruch ist. Daher ist $v_i = 1$, d.h. $p_i = 2^{2^{u_i}} + 1$, und $p_i$ ist eine Fermat-Primzahl für $i = 1, \dots, s$.
+
+"`(ii)$\Rightarrow$(i)"': Ist $p$ eine Fermat-Primzahl, so $\varphi(p)=p-1$ eine Zweierpotenz.
+Ebenso ist $\varphi(2^m)$ eine Zweierpotenz. Wegen \ref{bem:euler_phi} und (ii) ist dann $\varphi(n)$ auch eine Zweierpotenz. Die Behauptung folgt schließlich aus \ref{folg:n_eck_konstr}.
+\end{proof}
+
+\begin{satz}
+\begin{enumerate}[label=(\alph*)]
+\item Das Problem der Würfelverdoppelung ("Kann man zu einem beliebigen Würfel mit Zirkel und Lineal einen Würfel mit doppeltem Volumen konstruieren?") ist unlösbar.
+\item Das Problem der Winkeldreiteilung ("Kann man einen beliebigen Winkel durch Konstruktion mit Zirkel und Lineal dreiteilen?") ist unlösbar.
+\end{enumerate}
+\end{satz}
+
+\begin{proof}
+(a) Sei die Kantenlänge des Würfels durch $1$ gegeben. Die Verdoppelung des Volumens ergibt einen Würfel mit Kantenlänge $\sqrt[3]{2}$. 
+Es gilt aber: 
+\[
+[\QQ(\sqrt[3]{2}) : \QQ] = 3 .
+\]
+und daher $\sqrt[3]{2} \notin \frakK(\{0,1\})$.
+
+(b) Sei $\varphi = 60^\circ$. Dann ist $\frac{\varphi}{3} = 20^\circ$ nicht konstruierbar mit Zirkel und Lineal, da das regelmäßige $18$-Eck wegen 
+\[
+\varphi(18) = \varphi(2 \cdot 9) = \varphi(2) \varphi(9) = 6
+\]
+nicht mit Zirkel und Lineal konstruierbar ist.
+\end{proof}
+
+\begin{satz}
+Das Problem der Quadratur des Kreises ("Kann man zu einem beliebigen Kreis ein Quadrat gleichen Flächeninhalts mit Zirkel und Lineal konstruieren?") ist unlösbar.
+\end{satz}
+
+\begin{proof}[Beweisidee]
+Wir betrachten einen Kreis mit Radius $1$ um den Ursprung. Dieser hat den Flächeninhalt $\pi$. Das flächengleiche Quadrat hat somit die Kantenlänge $\sqrt{\pi}$. Dies ist jedoch nicht mit Zirkel und Lineal konstruierbar, denn nach dem Satz von Lindemann (1881) ist $\pi$ transzendent über $\QQ$ und damit auch $\sqrt{\pi}$ transzendent über $\QQ$, was mit \ref{satz:char_konstruierbarkeit} zu $\sqrt{\pi} \notin \mathfrak{R}(\{0,1\})$ führt.
+\end{proof}
+
+
 \end{document}
 
