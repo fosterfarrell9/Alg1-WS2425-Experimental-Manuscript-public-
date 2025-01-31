@@ -7540,7 +7540,7 @@ gibt.
 \begin{anm}\label{anm:p_sylowgruppe}
 \begin{itemize}
     \item $\{e\}$ ist eine $p$-Gruppe für alle Primzahlen $p$.
-    \item Für jede Primzahl $p$ mit $p \mid \ord(G)$ ist $\{e\}\leq G$ eine $p$-Sylowgruppe von $G$.
+    \item Für jede Primzahl $p$ mit $p \nmid \ord(G)$ ist $\{e\}\leq G$ eine $p$-Sylowgruppe von $G$.
     \item Ist $p$ eine Primzahl und $H\leq G$ eine $p$-Sylowgruppe, dann ist $g H g^{-1}$ für alle $g\in G$ ebenfalls eine $p$-Sylowgruppe von $G$, denn Konjugation mit $g$ ist ein Automorphismus von $G$. Insbesondere gilt: Hat $G$ genau eine $p$-Sylowgruppe $H$, so ist $H \trianglelefteq G$.
 \end{itemize}
 \end{anm}
@@ -8036,13 +8036,13 @@ Abschnitt 14 in der Algebravorlesung aus dem WS 21/22.} Insbesondere hat $L|\QQ$
 \[
 K = \QQ(\sqrt{37})
 \]
-ist. Darüber hinaus gibt es drei Zwischenkörper $E_1$, $E_2$, $E_3$, die jeweils vom Grad $3$ über $\QQ$ und nicht galoissch
+ist. Darüber hinaus gibt es drei Zwischenkörper $M_1$, $M_2$, $M_3$, die jeweils vom Grad $3$ über $\QQ$ und nicht galoissch
 über $\QQ$ sind. Wir erhalten den folgenden 
 Körperturm:
 \[
 \xymatrix{
     L \ar@{-}[dd]_{A_3\cong\ZZ/3\ZZ}^3 \ar@{-}[drr] \ar@{-}[drrr] \ar@{-}[drrrr] \\
-    &  & E_1 \ar@{-}[ddll] & E_2 \ar@{-}[ddlll] & E_3 \ar@{-}[ddllll]\\
+    &  & M_1 \ar@{-}[ddll] & M_2 \ar@{-}[ddlll] & M_3 \ar@{-}[ddllll]\\
     K = \QQ(\sqrt{37}) \ar@{-}[d]_{\ZZ / 2\ZZ}^2 &\\
     \QQ & 
 }
@@ -8050,7 +8050,7 @@ Körperturm:
 $L | \QQ$ ist keine Radikalerweiterung, 
 \begin{denn}
 Wir nehmen an, dass $L | \QQ$ eine Radikalerweiterung ist. 
-Dann ist eine der Erweiterungen $L|\QQ$, $L|K$, $E_1|\QQ$, $E_2|\QQ$, $E_3|\QQ$ eine einfache Radikalerweiterung.
+Dann ist eine der Erweiterungen $L|\QQ$, $L|K$, $M_1|\QQ$, $M_2|\QQ$, $M_3|\QQ$ eine einfache Radikalerweiterung.
 Wir wählen eine solche aus und schreiben sie in der Form $M|F$. Insbesondere gilt $3\mid [M:F]$. Sei $M=F(\beta)$ für eine Nullstelle $\beta$ eines Polynom $X^n - \alpha \in F[X]$. Wir erhalten
 \[
 \mipo_F(\beta) \mid (X^n - \alpha), \quad 3\mid \deg(\mipo_F(\beta)).
@@ -8060,7 +8060,7 @@ enthält $L$ neben $\beta$ noch mindestens zwei weitere Nullstellen von $X^n-\al
 der Form $\zeta \beta$, $\xi \beta$ für geeignete, von $1$ verschiedene $n$-te Einheitswurzeln $\zeta, \xi$ mit $\zeta \neq \xi$. Damit sind $\zeta,\xi\in L$.
 Allerdings ist $L \subseteq \RR$, und in $\RR$ existieren nur zwei Einheitswurzeln, nämlich $\pm 1$. Dies führt zu einem Widerspruch.
 \end{denn}
-Um zu zeigen, dass $L|\QQ$ durch Radikale auflösbar ist, adjungieren wir eine primitive dritte Einheitswurzel $\zeta_3$. Wir erhalten folgendes Körperdiagramm, wobei wir die $E_i$ diesmal weglassen:
+Um zu zeigen, dass $L|\QQ$ durch Radikale auflösbar ist, adjungieren wir eine primitive dritte Einheitswurzel $\zeta_3$. Wir erhalten folgendes Körperdiagramm, wobei wir die $M_i$ diesmal weglassen:
 \[
 \xymatrix{
     & L(\zeta_3) \ar@{-}[dl]  \ar@{-}[d]\\
@@ -8158,7 +8158,7 @@ Daraus ergibt sich, dass $LM|M$ eine Radikalerweiterung ist. Folglich ist auch $
 \begin{anm}
 \begin{itemize}
 \item Satz \ref{satz:radikal_aufloesbar} geht auf Galois zurück, wurde von Abel aber bereits in Charakteristik Null für Polynome mit abelscher Galoisgruppe bewiesen.
-\item Sei $\charact K \neq 2, 3$ und $f \in K[X]$ mit $n = \deg(f) \leq 4$. 
+\item Sei $\charact K \neq 2, 3$ und $f \in K[X]$ separabel mit $n = \deg(f) \leq 4$. 
 Aus Satz \ref{satz:radikal_aufloesbar} ergibt sich, dass $f$ durch Radikale auflösbar ist, denn $\Gal(f)$ ist aufgrund von \ref{folg:galoisgruppe_in_sn} isomorph zu einer Untergruppe von $S_n$ und $S_n$ ist für $n \leq 4$ wegen \ref{bsp:auflösbare-gruppen} auflösbar. 
 \end{itemize}
 \end{anm}
