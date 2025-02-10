@@ -5319,10 +5319,13 @@ Die nachfolgende Aussage nennen wir die "`Universelle Eigenschaft des Minimalpol
 Diese Bezeichnung macht streng genommen keinen Sinn, es fehlt uns aber die (kategorientheoretische) Sprache, um genau zu beschreiben, um was für eine universelle Eigenschaft es sich hier handelt.
 
 \begin{satz}[Universelle Eigenschaft des Minimalpolynoms]\label{satz:minimalpolynom_universelle_eigenschaft}
-Sei $L|K$ eine Körpererweiterung und $\alpha \in L$ algebraisch über $K$. Sei $A$ eine $K$-Algebra. Dann existiert für jedes $\beta \in\Konj_A\alpha$ ein eindeutig bestimmter $K$-Algebrenhomomorphismus $\varphi_\beta \colon K(\alpha) \to A$ mit $\varphi_\beta(\alpha) = \beta$. Insbesondere ist die Abbildung
-\[
-\Hom_K(K(\alpha), A) \to \Konj_A\alpha, \quad \varphi \mapsto \varphi(\alpha)
-\]
+Sei $L|K$ eine Körpererweiterung und $\alpha \in L$ algebraisch über $K$. Sei $A$ eine $K$-Algebra mit Strukturhomomorphismus $\sigma: K \to A$. Dann existiert für jedes $\beta \in\Konj_A\alpha$ ein eindeutig bestimmter $K$-Algebrenhomomorphismus $\varphi_\beta \colon K(\alpha) \to A$ mit $\varphi_\beta(\alpha) = \beta$. Insbesondere ist die Abbildung
+\begin{align*}
+\Hom_K(K(\alpha), A) = 
+\{\varphi\colon K(\alpha) \to A \text{ Ringhomomorphismus mit }\varphi\vert_K = \sigma \}
+& \to \Konj_A\alpha \\
+\varphi &\mapsto \varphi(\alpha)
+\end{align*}
 bijektiv.
 \end{satz}
 \begin{proof}[Beweis]
